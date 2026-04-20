@@ -168,16 +168,16 @@ export default function HowItWorksPage() {
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               {[
-                { icon: '📊', text: 'Variance analysis with AI-written narrative' },
-                { icon: '🚨', text: 'Anomaly alerts on spend, margin & vendors' },
-                { icon: '📋', text: 'Monthly board deck auto-population' },
-                { icon: '💸', text: 'Cash flow forecasting from payment cycles' },
-                { icon: '🤖', text: 'Employee-facing AI for HR & onboarding' },
-                { icon: '⚙️', text: 'Automated status rollups for Ops & PM' },
-              ].map((item) => (
-                <div key={item.text} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '16px 20px', background: '#F4F6FF', border: '1px solid #E0E6FF', borderRadius: 10 }}>
-                  <span style={{ fontSize: 22 }}>{item.icon}</span>
-                  <span style={{ fontSize: 15, color: '#1A1C2E', fontWeight: 600, lineHeight: 1.4 }}>{item.text}</span>
+                'Variance analysis with AI-written narrative',
+                'Anomaly alerts on spend, margin & vendors',
+                'Monthly board deck auto-population',
+                'Cash flow forecasting from payment cycles',
+                'Employee-facing AI for HR & onboarding',
+                'Automated status rollups for Ops & PM',
+              ].map((text) => (
+                <div key={text} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '16px 20px', background: '#F4F6FF', border: '1px solid #E0E6FF', borderRadius: 10 }}>
+                  <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#1D44BF', flexShrink: 0 }} />
+                  <span style={{ fontSize: 15, color: '#1A1C2E', fontWeight: 600, lineHeight: 1.4 }}>{text}</span>
                 </div>
               ))}
             </div>

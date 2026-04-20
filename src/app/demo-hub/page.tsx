@@ -252,19 +252,96 @@ export default function DemoHubPage() {
           ))}
         </div>
 
-        {/* Bottom nav links */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 32, position: 'relative', animation: 'fadeUp 0.5s 0.35s ease both' }}>
-          <button className="nav-link" onClick={() => router.push('/how-it-works')}>
-            How This Works
-          </button>
-          <div style={{ width: 1, height: 14, background: 'rgba(255,255,255,0.15)' }} />
-          <button className="nav-link" onClick={() => router.push('/packages')}>
-            Packages
-          </button>
+        {/* ── Learn More section ── */}
+        <div style={{ width: '100%', maxWidth: 860, position: 'relative', animation: 'fadeUp 0.5s 0.35s ease both' }}>
+
+          {/* Divider with label */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 32 }}>
+            <div style={{ flex: 1, height: 1, background: 'rgba(255,255,255,0.08)' }} />
+            <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.25)' }}>Learn More</span>
+            <div style={{ flex: 1, height: 1, background: 'rgba(255,255,255,0.08)' }} />
+          </div>
+
+          {/* Two big cards */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
+
+            {/* How This Works */}
+            <button
+              onClick={() => router.push('/how-it-works')}
+              style={{
+                background: '#1D44BF',
+                border: 'none',
+                borderRadius: 14,
+                padding: '44px 40px',
+                cursor: 'pointer',
+                textAlign: 'left',
+                fontFamily: 'inherit',
+                transition: 'filter 0.18s, transform 0.15s',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                gap: 32,
+              }}
+              onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.filter = 'brightness(1.12)'; (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(-2px)'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.filter = 'brightness(1)'; (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(0)'; }}
+            >
+              <div>
+                <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.55)', marginBottom: 14 }}>Our Process</div>
+                <div style={{ fontSize: 42, fontWeight: 900, color: '#FFFFFF', lineHeight: 1.05, letterSpacing: '-0.02em' }}>
+                  How This<br />Works
+                </div>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.60)', lineHeight: 1.5, maxWidth: 200 }}>
+                  90-day builds. On-site scoping. AI trained on your data.
+                </span>
+                <svg width="22" height="22" fill="none" stroke="rgba(255,255,255,0.70)" strokeWidth="2.5" viewBox="0 0 24 24" style={{ flexShrink: 0 }}>
+                  <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+            </button>
+
+            {/* Packages */}
+            <button
+              onClick={() => router.push('/packages')}
+              style={{
+                background: '#E8B84B',
+                border: 'none',
+                borderRadius: 14,
+                padding: '44px 40px',
+                cursor: 'pointer',
+                textAlign: 'left',
+                fontFamily: 'inherit',
+                transition: 'filter 0.18s, transform 0.15s',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                gap: 32,
+              }}
+              onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.filter = 'brightness(1.08)'; (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(-2px)'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.filter = 'brightness(1)'; (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(0)'; }}
+            >
+              <div>
+                <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(26,28,46,0.45)', marginBottom: 14 }}>What We Offer</div>
+                <div style={{ fontSize: 42, fontWeight: 900, color: '#1A1C2E', lineHeight: 1.05, letterSpacing: '-0.02em' }}>
+                  Packages
+                </div>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <span style={{ fontSize: 13, color: 'rgba(26,28,46,0.60)', lineHeight: 1.5, maxWidth: 200 }}>
+                  Finance OS, HR OS, Ops OS, and Full Suite.
+                </span>
+                <svg width="22" height="22" fill="none" stroke="rgba(26,28,46,0.60)" strokeWidth="2.5" viewBox="0 0 24 24" style={{ flexShrink: 0 }}>
+                  <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+            </button>
+
+          </div>
         </div>
 
         {/* Footer */}
-        <div style={{ marginTop: 48, fontSize: 11, color: 'rgba(255,255,255,0.15)', letterSpacing: '0.06em', textAlign: 'center', position: 'relative' }}>
+        <div style={{ marginTop: 40, fontSize: 11, color: 'rgba(255,255,255,0.15)', letterSpacing: '0.06em', textAlign: 'center', position: 'relative' }}>
           Empire Builder OS · 783 Capital Partners · Private Demo Environment
         </div>
       </div>
