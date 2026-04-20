@@ -29,7 +29,7 @@ function TopBar() {
           Packages
         </button>
         <button onClick={() => router.push('/demo-hub')} style={{ background: '#E8B84B', border: 'none', borderRadius: 7, padding: '8px 20px', color: '#1A1C2E', fontSize: 12, fontWeight: 800, letterSpacing: '0.10em', fontFamily: 'inherit', cursor: 'pointer', textTransform: 'uppercase' }}>
-          Exit Demo
+          Exit
         </button>
       </div>
     </header>
