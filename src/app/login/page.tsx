@@ -128,7 +128,7 @@ export default function LoginPage() {
     setMounted(true);
     // If already authed, skip to dashboard
     if (document.cookie.includes('eb-auth=')) {
-      router.replace('/dashboard');
+      router.replace('/demo-hub');
     }
   }, [router]);
 
@@ -153,7 +153,7 @@ export default function LoginPage() {
     // Show branded loading overlay, then navigate
     setShowOverlay(true);
     setTimeout(() => {
-      router.push('/dashboard');
+      router.push('/demo-hub');
     }, 2200);
   };
 

@@ -86,6 +86,28 @@ export default function TopNav({ companyName }: TopNavProps) {
 
       {/* Right: badges + status */}
       <div className="flex items-center gap-3 flex-shrink-0">
+
+        {/* Exit Demo */}
+        <button
+          onClick={() => router.push('/demo-hub')}
+          className="hidden sm:flex items-center gap-1.5 cursor-pointer transition-opacity hover:opacity-80"
+          style={{
+            background: 'rgba(232,184,75,0.10)',
+            border: '1px solid rgba(232,184,75,0.28)',
+            borderRadius: 6,
+            padding: '5px 10px',
+            color: '#E8B84B',
+            fontSize: 11,
+            fontWeight: 700,
+            letterSpacing: '0.06em',
+            textTransform: 'uppercase',
+          }}
+        >
+          <svg width="11" height="11" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+            <path d="M19 12H5M12 19l-7-7 7-7" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+          <span className="hidden md:inline">Exit Demo</span>
+        </button>
         <div
           className="hidden sm:flex items-center px-2.5 py-1 rounded"
           style={{
