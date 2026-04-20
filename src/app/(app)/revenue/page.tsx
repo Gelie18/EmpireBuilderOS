@@ -19,8 +19,8 @@ import PeriodSelector, { type PeriodKey } from '@/components/ui/PeriodSelector';
 
 const BLUE   = '#1D44BF';
 const GOLD   = '#E8B84B';
-const GREEN  = '#059669';
-const RED    = '#DC2626';
+const GREEN  = '#0A8A5C';
+const RED    = '#C13333';
 const ORANGE = '#D97706';
 const PURPLE = '#7C3AED';
 const GRAY   = '#6B7280';
@@ -308,7 +308,7 @@ function ProductLineSection() {
                           borderRadius: 20,
                           fontSize:     11,
                           fontWeight:   600,
-                          background:   'rgba(5,150,105,0.10)',
+                          background:   'rgba(10,138,92,0.10)',
                           color:        GREEN,
                           whiteSpace:   'nowrap',
                         }}
@@ -357,7 +357,7 @@ function CustomerSection() {
           margin:       '16px 20px 0',
           padding:      '12px 16px',
           background:   'rgba(220,38,38,0.06)',
-          border:       `1px solid rgba(220,38,38,0.25)`,
+          border:       `1px solid rgba(193,51,51,0.25)`,
           borderRadius: 8,
           display:      'flex',
           gap:          10,
@@ -465,7 +465,7 @@ function CustomerSection() {
                         borderRadius: 20,
                         fontSize:     11,
                         fontWeight:   700,
-                        background:   'rgba(220,38,38,0.10)',
+                        background:   'rgba(193,51,51,0.10)',
                         color:        RED,
                         whiteSpace:   'nowrap',
                       }}
@@ -567,7 +567,7 @@ function RecurringSection() {
                 borderRadius: 20,
                 fontSize:     12,
                 fontWeight:   700,
-                background:   'rgba(5,150,105,0.10)',
+                background:   'rgba(10,138,92,0.10)',
                 color:        GREEN,
                 marginBottom: 16,
               }}
@@ -755,7 +755,7 @@ export default function RevenuePage() {
               gap:          6,
               padding:      '6px 14px',
               borderRadius: 20,
-              background:   'rgba(5,150,105,0.10)',
+              background:   'rgba(10,138,92,0.10)',
               border:       `1px solid rgba(5,150,105,0.25)`,
               fontSize:     12,
               fontWeight:   600,

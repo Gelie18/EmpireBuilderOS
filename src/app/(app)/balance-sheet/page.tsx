@@ -151,7 +151,7 @@ function BSRow({ label, value, type, insight }: { label: string; value: number |
         style={{
           borderTop: isTotal ? '1px solid var(--color-border2)' : undefined,
           background: isTotal
-            ? 'rgba(53,184,232,0.06)'
+            ? 'rgba(29,68,191,0.06)'
             : hovered && isClickable
             ? 'rgba(29,68,191,0.04)'
             : undefined,
@@ -249,7 +249,7 @@ export default function BalanceSheetPage() {
             {/* Total Assets */}
             <span style={{
               display: 'inline-flex', alignItems: 'center', gap: 6,
-              background: 'var(--color-blue-d)', border: '1px solid rgba(53,184,232,0.3)',
+              background: 'var(--color-blue-d)', border: '1px solid rgba(29,68,191,0.20)',
               borderRadius: 8, padding: '6px 14px',
               fontFamily: 'var(--font-condensed)', fontSize: 13, fontWeight: 700,
               color: 'var(--color-blue)', letterSpacing: '0.04em',
@@ -401,13 +401,13 @@ export default function BalanceSheetPage() {
                     padding: '10px 20px', textAlign: 'left', fontSize: 11, fontWeight: 700,
                     fontFamily: 'var(--font-condensed)', color: 'var(--color-blue)',
                     letterSpacing: '0.08em', textTransform: 'uppercase',
-                    background: 'rgba(53,184,232,0.07)', borderBottom: '1px solid var(--color-border)',
+                    background: 'rgba(29,68,191,0.07)', borderBottom: '1px solid var(--color-border)',
                   }}>Assets</th>
                   <th style={{
                     padding: '10px 20px', textAlign: 'right', fontSize: 11, fontWeight: 700,
                     fontFamily: 'var(--font-condensed)', color: 'var(--color-muted)',
                     letterSpacing: '0.06em', textTransform: 'uppercase',
-                    background: 'rgba(53,184,232,0.07)', borderBottom: '1px solid var(--color-border)',
+                    background: 'rgba(29,68,191,0.07)', borderBottom: '1px solid var(--color-border)',
                   }}>Amount</th>
                 </tr>
               </thead>

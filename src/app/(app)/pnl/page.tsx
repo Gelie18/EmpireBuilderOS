@@ -6,9 +6,9 @@ import AnomalyBanner from '@/components/dashboard/AnomalyBanner';
 import type { PnlRow } from '@/lib/data/types';
 import PeriodSelector, { type PeriodKey, PERIOD_OPTIONS } from '@/components/ui/PeriodSelector';
 
-const GREEN  = '#059669';
-const RED    = '#DC2626';
-const ORANGE = '#D97706';
+const GREEN  = '#0A8A5C';
+const RED    = '#C13333';
+const ORANGE = '#C27A10';
 const BLUE   = '#1D44BF';
 
 function fmt(n: number, compact = false): string {

@@ -243,22 +243,22 @@ const BACKLOG: BacklogItem[] = [
 // ─── Constants ────────────────────────────────────────────────────────────────
 
 const PRIORITY_META: Record<Priority, { color: string; bg: string; order: number }> = {
-  Critical: { color: '#DC2626', bg: 'rgba(220,38,38,0.09)',   order: 0 },
+  Critical: { color: '#C13333', bg: 'rgba(193,51,51,0.09)',   order: 0 },
   High:     { color: '#D97706', bg: 'rgba(217,119,6,0.09)',   order: 1 },
   Medium:   { color: '#1D44BF', bg: 'rgba(29,68,191,0.09)',   order: 2 },
   Low:      { color: '#6B7280', bg: 'rgba(107,114,128,0.08)', order: 3 },
 };
 
 const STATUS_META: Record<Status, { color: string; bg: string }> = {
-  Overdue:     { color: '#DC2626', bg: 'rgba(220,38,38,0.08)'   },
+  Overdue:     { color: '#C13333', bg: 'rgba(193,51,51,0.08)'   },
   Blocked:     { color: '#D97706', bg: 'rgba(217,119,6,0.08)'   },
   'In Progress':{ color: '#1D44BF', bg: 'rgba(29,68,191,0.08)'  },
   New:         { color: '#6B7280', bg: 'rgba(107,114,128,0.07)' },
-  Resolved:    { color: '#059669', bg: 'rgba(5,150,105,0.08)'   },
+  Resolved:    { color: '#0A8A5C', bg: 'rgba(10,138,92,0.08)'   },
 };
 
 const PHASE_META: Record<ActionPhase, { color: string; label: string }> = {
-  'Immediate':    { color: '#DC2626', label: 'Act Now' },
+  'Immediate':    { color: '#C13333', label: 'Act Now' },
   'This Week':    { color: '#D97706', label: 'This Week' },
   'This Month':   { color: '#1D44BF', label: 'This Month' },
   'Next Quarter': { color: '#6B7280', label: 'Next Quarter' },
@@ -317,7 +317,7 @@ export default function BacklogPage() {
           </div>
           <div className="flex flex-wrap gap-2 items-center">
             {critical.length > 0 && (
-              <span style={{ background: 'rgba(220,38,38,0.09)', border: '1px solid rgba(220,38,38,0.20)', color: '#DC2626', fontSize: 12, fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', padding: '5px 14px', borderRadius: 5 }}>
+              <span style={{ background: 'rgba(193,51,51,0.09)', border: '1px solid rgba(193,51,51,0.20)', color: '#C13333', fontSize: 12, fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', padding: '5px 14px', borderRadius: 5 }}>
                 ⚠ {critical.length} Critical
               </span>
             )}
@@ -332,7 +332,7 @@ export default function BacklogPage() {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
           { label: 'Total Items',     value: BACKLOG.length.toString(),  color: '#1A1C2E', accent: '#1D44BF', href: null },
-          { label: 'Overdue',         value: overdue.length.toString(),  color: '#DC2626', accent: '#DC2626', href: null },
+          { label: 'Overdue',         value: overdue.length.toString(),  color: '#C13333', accent: '#C13333', href: null },
           { label: 'Blocked',         value: blocked.length.toString(),  color: '#D97706', accent: '#D97706', href: null },
           { label: 'Total $ at Risk', value: fmt$(totalRisk$),           color: '#1A1C2E', accent: 'var(--color-gold)', href: null },
         ].map((m) => (
@@ -443,9 +443,9 @@ export default function BacklogPage() {
                       <div style={{ fontSize: 12, color: '#6B7280' }}>
                         Owner: <strong style={{ color: '#1A1C2E' }}>{item.owner}</strong>
                       </div>
-                      <div style={{ fontSize: 12, color: item.status === 'Overdue' ? '#DC2626' : '#6B7280' }}>
+                      <div style={{ fontSize: 12, color: item.status === 'Overdue' ? '#C13333' : '#6B7280' }}>
                         Due: <strong>{due}</strong>
-                        {item.agingDays > 0 && <span style={{ color: '#DC2626' }}> · {item.agingDays}d overdue</span>}
+                        {item.agingDays > 0 && <span style={{ color: '#C13333' }}> · {item.agingDays}d overdue</span>}
                       </div>
                       <div style={{ fontSize: 13, color: '#6B7280' }}>{isOpen ? '▲' : '▼'} Actions</div>
                     </div>
@@ -603,7 +603,7 @@ export default function BacklogPage() {
                     <div style={{ fontSize: 12, fontWeight: 700, color: '#1A1C2E', marginBottom: 4 }}>{cat}</div>
                     <div style={{ fontSize: 22, fontWeight: 800, color: '#1D44BF', lineHeight: 1 }}>{items.length}</div>
                     {criticals > 0 && (
-                      <div style={{ fontSize: 11, color: '#DC2626', marginTop: 2, fontWeight: 600 }}>
+                      <div style={{ fontSize: 11, color: '#C13333', marginTop: 2, fontWeight: 600 }}>
                         {criticals} critical
                       </div>
                     )}

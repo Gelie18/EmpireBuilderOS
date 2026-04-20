@@ -175,7 +175,7 @@ export default function DailyRevenuePage() {
             <Tooltip contentStyle={TOOLTIP_STYLE} formatter={(v) => [`$${Number(v).toLocaleString()}`, '']} />
             <Legend wrapperStyle={{ fontSize: 11, color: '#6B7A8D' }} />
             <Bar dataKey="DTC" stackId="a" fill="#1D44BF" radius={[0, 0, 0, 0]} />
-            <Bar dataKey="Wholesale" stackId="a" fill="#1D44BF" radius={[2, 2, 0, 0]} />
+            <Bar dataKey="Wholesale" stackId="a" fill="#E8B84B" radius={[2, 2, 0, 0]} />
             <Line type="monotone" dataKey="Budget" stroke="#D97706" strokeWidth={1.5} strokeDasharray="4 3" dot={false} />
           </ComposedChart>
         </ResponsiveContainer>

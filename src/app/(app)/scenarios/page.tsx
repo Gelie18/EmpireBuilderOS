@@ -23,8 +23,8 @@ const SCENARIO_META: Record<string, { description: string; narrative: string }> 
     narrative: 'Maintains current trajectory with marketing spend corrected to the $124K budget. ShipBob savings fully realized. No new client wins assumed.',
   },
   best: {
-    description: '$6M net new ARR from new client wins, ramping Jan–Jun 2025',
-    narrative: 'New wholesale/enterprise clients secured in Q1 2025 contribute an additional $500K/month at full ramp by June. Two sales hires support the new book of business. DTC mix improvement drives COGS down to 53%.',
+    description: '$6M net new ARR from new client wins, ramping Jan–Jun 2027',
+    narrative: 'New wholesale/enterprise clients secured in Q1 2027 contribute an additional $500K/month at full ramp by June. Two sales hires support the new book of business. DTC mix improvement drives COGS down to 53%.',
   },
   conservative: {
     description: '1% MoM growth, COGS rising to 57% from freight pressure',
@@ -32,7 +32,7 @@ const SCENARIO_META: Record<string, { description: string; narrative: string }> 
   },
   downside: {
     description: '-2% MoM revenue decline + 10% wholesale churn, COGS 60%',
-    narrative: 'Requires both revenue weakness and channel concentration risk to materialize simultaneously. If wholesale churn hits in Q1 and freight costs aren\'t renegotiated, margins compress significantly by Q2 2025.',
+    narrative: 'Requires both revenue weakness and channel concentration risk to materialize simultaneously. If wholesale churn hits in Q1 and freight costs aren\'t renegotiated, margins compress significantly by Q2 2027.',
   },
 };
 
@@ -80,7 +80,7 @@ export default function ScenariosPage() {
     <div className="flex flex-col gap-5">
 
       {/* ── Header ── */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-3">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
         <div>
           <div
             className="text-[24px] font-black uppercase tracking-[0.04em]"
@@ -89,7 +89,7 @@ export default function ScenariosPage() {
             Scenario Planning
           </div>
           <div className="text-[13px] mt-0.5" style={{ color: 'var(--color-muted)' }}>
-            Nov 2026 → Oct 2025 · 12-month forward projections from Oct actuals
+            Nov '26 → Oct '27 · 12-month forward projections from Oct actuals
           </div>
         </div>
         <div
@@ -190,7 +190,7 @@ export default function ScenariosPage() {
             className="text-[12px] font-bold uppercase tracking-[0.10em]"
             style={{ fontFamily: 'var(--font-condensed)', color: 'var(--color-muted)' }}
           >
-            {metricLabel[chartMetric]} by Scenario — Nov '24 → Oct '25
+            {metricLabel[chartMetric]} by Scenario — Nov '26 → Oct '27
           </span>
           <div className="flex gap-1.5">
             {(['revenue', 'grossProfit', 'netIncome'] as const).map((m) => (

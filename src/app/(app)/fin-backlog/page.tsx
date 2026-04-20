@@ -27,7 +27,7 @@ const KPIS = [
   { label: 'Total Backlog',     value: '$2.84M', sub: 'Contracted, unrecognized',    color: '#1D44BF' },
   { label: 'WIP Value',         value: '$847K',  sub: 'In-progress work incurred',   color: '#D97706' },
   { label: 'Unbilled Revenue',  value: '$412K',  sub: 'Earned but not invoiced',     color: '#7C3AED' },
-  { label: 'Avg Days to Bill',  value: '18 days',sub: 'Invoice cycle time',          color: '#059669' },
+  { label: 'Avg Days to Bill',  value: '18 days',sub: 'Invoice cycle time',          color: '#0A8A5C' },
 ];
 
 // ── Backlog Burn Timeline ────────────────────────────────────────────────────
@@ -52,9 +52,9 @@ const WIP_ITEMS = [
 
 // ── Unbilled Aging ───────────────────────────────────────────────────────────
 const UNBILLED = [
-  { bucket: '0–14 days',  amount: 148_000, label: 'Normal',   color: '#059669', bg: 'rgba(5,150,105,0.08)'  },
+  { bucket: '0–14 days',  amount: 148_000, label: 'Normal',   color: '#0A8A5C', bg: 'rgba(10,138,92,0.08)'  },
   { bucket: '15–30 days', amount: 164_000, label: 'Monitor',  color: '#D97706', bg: 'rgba(217,119,6,0.08)'  },
-  { bucket: '31–60 days', amount:  78_000, label: '⚠ Action', color: '#DC2626', bg: 'rgba(220,38,38,0.08)'  },
+  { bucket: '31–60 days', amount:  78_000, label: '⚠ Action', color: '#C13333', bg: 'rgba(193,51,51,0.08)'  },
   { bucket: '60+ days',   amount:  22_000, label: 'Urgent',   color: '#991B1B', bg: 'rgba(153,27,27,0.10)'  },
 ];
 
@@ -79,9 +79,9 @@ function fmtFull(n: number) {
 // ── Status badge ─────────────────────────────────────────────────────────────
 function StatusBadge({ status }: { status: string }) {
   const map: Record<string, { bg: string; color: string }> = {
-    'Blocked':  { bg: 'rgba(220,38,38,0.10)',  color: '#DC2626' },
+    'Blocked':  { bg: 'rgba(193,51,51,0.10)',  color: '#C13333' },
     'At Risk':  { bg: 'rgba(217,119,6,0.10)',  color: '#D97706' },
-    'On Track': { bg: 'rgba(5,150,105,0.10)',  color: '#059669' },
+    'On Track': { bg: 'rgba(10,138,92,0.10)',  color: '#0A8A5C' },
   };
   const s = map[status] ?? { bg: 'rgba(0,0,0,0.06)', color: '#6B7280' };
   return (
@@ -164,10 +164,10 @@ export default function FinBacklogPage() {
             </span>
             <span style={{
               display: 'inline-flex', alignItems: 'center', gap: 6,
-              background: 'rgba(220,38,38,0.08)', border: '1px solid rgba(220,38,38,0.25)',
+              background: 'rgba(193,51,51,0.08)', border: '1px solid rgba(193,51,51,0.25)',
               borderRadius: 8, padding: '6px 14px',
               fontFamily: 'var(--font-condensed)', fontSize: 13, fontWeight: 700,
-              color: '#DC2626', letterSpacing: '0.04em',
+              color: '#C13333', letterSpacing: '0.04em',
             }}>
               <span style={{ fontWeight: 400, color: 'var(--color-muted)', fontSize: 11 }}>BLOCKED</span>
               $1.11M
@@ -278,7 +278,7 @@ export default function FinBacklogPage() {
                   <tr key={i} style={{ borderBottom: '1px solid rgba(0,0,0,0.05)' }}>
                     <td style={{ padding: '9px 12px', fontWeight: 600, color: 'var(--color-text)' }}>{row.month}</td>
                     <td style={{ padding: '9px 12px', textAlign: 'right', fontFamily: 'var(--font-condensed)', color: '#1D44BF', fontWeight: 600 }}>{fmtK(row.backlog)}</td>
-                    <td style={{ padding: '9px 12px', textAlign: 'right', fontFamily: 'var(--font-condensed)', color: '#059669', fontWeight: 600 }}>{fmtK(row.revenue)}</td>
+                    <td style={{ padding: '9px 12px', textAlign: 'right', fontFamily: 'var(--font-condensed)', color: '#0A8A5C', fontWeight: 600 }}>{fmtK(row.revenue)}</td>
                     <td style={{ padding: '9px 12px', textAlign: 'right', fontFamily: 'var(--font-condensed)', color: 'var(--color-muted)', fontWeight: 500 }}>{burnRate}%</td>
                   </tr>
                 );
@@ -338,13 +338,13 @@ export default function FinBacklogPage() {
                   <td style={{ padding: '10px 14px', textAlign: 'right' }}>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 6 }}>
                       <div style={{ width: 50, height: 5, background: 'rgba(0,0,0,0.08)', borderRadius: 3, overflow: 'hidden' }}>
-                        <div style={{ width: `${item.pct}%`, height: '100%', background: item.pct >= 70 ? '#059669' : item.pct >= 40 ? '#D97706' : '#DC2626', borderRadius: 3 }} />
+                        <div style={{ width: `${item.pct}%`, height: '100%', background: item.pct >= 70 ? '#0A8A5C' : item.pct >= 40 ? '#D97706' : '#C13333', borderRadius: 3 }} />
                       </div>
                       <span style={{ fontFamily: 'var(--font-condensed)', fontWeight: 600, fontSize: 12 }}>{item.pct}%</span>
                     </div>
                   </td>
                   <td style={{ padding: '10px 14px', textAlign: 'right', fontFamily: 'var(--font-condensed)', fontWeight: 600 }}>
-                    <span style={{ color: item.days > 30 ? '#DC2626' : 'var(--color-text)' }}>
+                    <span style={{ color: item.days > 30 ? '#C13333' : 'var(--color-text)' }}>
                       {item.days > 30 && '⚠ '}{item.days}d
                     </span>
                   </td>
@@ -409,9 +409,9 @@ export default function FinBacklogPage() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8, flex: 1 }}>
             {BOTTLENECKS.map((b) => {
               const colorMap: Record<string, string> = {
-                'blocked': '#DC2626',
+                'blocked': '#C13333',
                 'at-risk': '#D97706',
-                'on-track': '#059669',
+                'on-track': '#0A8A5C',
               };
               const color = colorMap[b.status];
               return (
@@ -419,7 +419,7 @@ export default function FinBacklogPage() {
                   display: 'flex', alignItems: 'center', gap: 12,
                   padding: '11px 14px',
                   borderRadius: 8,
-                  background: b.status === 'on-track' ? 'rgba(5,150,105,0.05)' : b.status === 'blocked' ? 'rgba(220,38,38,0.05)' : 'rgba(217,119,6,0.05)',
+                  background: b.status === 'on-track' ? 'rgba(10,138,92,0.05)' : b.status === 'blocked' ? 'rgba(193,51,51,0.05)' : 'rgba(217,119,6,0.05)',
                   border: `1px solid ${color}20`,
                 }}>
                   <div style={{ width: 8, height: 8, borderRadius: '50%', background: color, flexShrink: 0 }} />

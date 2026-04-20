@@ -190,7 +190,7 @@ export default function MoMPage() {
             <Tooltip
               contentStyle={TOOLTIP_STYLE}
               formatter={(val) => [`$${Number(val).toLocaleString()}`, 'Revenue']}
-              cursor={{ stroke: 'rgba(53,184,232,0.3)', strokeWidth: 1 }}
+              cursor={{ stroke: 'rgba(29,68,191,0.20)', strokeWidth: 1 }}
             />
             <Area
               type="monotone"

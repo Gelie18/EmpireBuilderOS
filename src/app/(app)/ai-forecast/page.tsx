@@ -462,7 +462,7 @@ export default function AiForecastPage() {
   const [aiMessages, setAiMessages] = useState<{ role: 'user' | 'ai'; text: string; timestamp: string }[]>([
     {
       role: 'ai',
-      text: "I've built this forecast from your trailing 3-month actuals (Aug–Oct 2026) using a 3.1% MoM growth rate, 54.9% COGS ratio, and 35.1% OpEx ratio — adjusted for seasonal patterns. Tell me what you expect for any quarter and I'll update the model automatically. Example: \"Q1 2025 revenue grows 10% — we're launching a new product line in January.\"",
+      text: "I've built this forecast from your trailing 3-month actuals (Aug–Oct 2026) using a 3.1% MoM growth rate, 54.9% COGS ratio, and 35.1% OpEx ratio — adjusted for seasonal patterns. Tell me what you expect for any quarter and I'll update the model automatically. Example: \"Q1 2027 revenue grows 10% — we're launching a new product line in January.\"",
       timestamp: new Date().toISOString(),
     },
   ]);
@@ -548,14 +548,14 @@ export default function AiForecastPage() {
   return (
     <div className="flex flex-col gap-5">
       {/* Header */}
-      <div className="flex items-start justify-between flex-wrap gap-2">
+      <div className="flex items-center justify-between flex-wrap gap-3">
         <div>
-          <div className="text-[22px] font-black uppercase tracking-[0.04em]"
+          <div className="text-[24px] font-black uppercase tracking-[0.04em]"
             style={{ fontFamily: 'var(--font-condensed)', color: 'var(--color-text)' }}>
-            AI Forecast
+            AI Forecast Builder
           </div>
-          <div className="text-[12px] mt-0.5" style={{ color: 'var(--color-muted)' }}>
-            Trend-driven baseline · updated by natural language · cascading adjustments
+          <div className="text-[13px] mt-0.5" style={{ color: 'var(--color-muted)' }}>
+            Trend-driven baseline · natural language adjustments · cascading quarters
           </div>
         </div>
         <div className="flex gap-2 items-center flex-wrap">
@@ -577,7 +577,7 @@ export default function AiForecastPage() {
 
       {/* Methodology note */}
       <div className="px-4 py-3 leading-relaxed"
-        style={{ background: 'rgba(65,182,230,0.07)', borderLeft: '3px solid var(--color-blue)', color: 'var(--color-muted)', fontSize: 13 }}>
+        style={{ background: 'rgba(29,68,191,0.07)', borderLeft: '3px solid var(--color-blue)', color: 'var(--color-muted)', fontSize: 13 }}>
         <strong style={{ color: 'var(--color-blue)' }}>Baseline methodology:</strong> 3.1% MoM revenue growth (trailing 6-month avg), 54.9% COGS ratio, 35.1% OpEx ratio — adjusted for outdoor-apparel seasonal patterns (peak: Jul–Oct, trough: Dec–Feb). Actuals locked through October 2026.
       </div>
 
@@ -1063,7 +1063,7 @@ export default function AiForecastPage() {
                     style={{
                       borderBottom: '1px solid var(--color-border)',
                       opacity: m.isActual ? 1 : 0.8,
-                      background: m.isAdjusted ? 'rgba(255,107,53,0.05)' : m.isActual ? 'rgba(53,184,232,0.04)' : undefined,
+                      background: m.isAdjusted ? 'rgba(194,122,16,0.05)' : m.isActual ? 'rgba(29,68,191,0.04)' : undefined,
                     }}>
                     <td className="px-3 py-3 font-semibold" style={{ fontFamily: 'var(--font-condensed)', fontSize: 14 }}>
                       {m.period}

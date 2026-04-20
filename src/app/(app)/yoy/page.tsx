@@ -200,7 +200,7 @@ export default function YoYPage() {
             <Tooltip
               contentStyle={TOOLTIP_STYLE}
               formatter={(val) => [`$${Number(val).toLocaleString()}`, '']}
-              cursor={{ fill: 'rgba(53,184,232,0.06)' }}
+              cursor={{ fill: 'rgba(29,68,191,0.06)' }}
             />
             <Legend
               wrapperStyle={{ fontSize: 12, color: 'var(--color-muted)', fontFamily: 'var(--font-condensed)' }}
@@ -247,7 +247,7 @@ export default function YoYPage() {
                     key={m.month}
                     style={{
                       borderBottom: '1px solid var(--color-border)',
-                      background: isLast ? 'rgba(53,184,232,0.06)' : 'transparent',
+                      background: isLast ? 'rgba(29,68,191,0.06)' : 'transparent',
                     }}
                   >
                     <td

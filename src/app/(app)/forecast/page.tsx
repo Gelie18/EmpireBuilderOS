@@ -376,7 +376,7 @@ export default function ForecastPage() {
               {/* Boundary line between last actual and first projected */}
               <ReferenceLine
                 x={LAST_ACTUAL_MONTH}
-                stroke="rgba(255,107,53,0.5)"
+                stroke="rgba(194,122,16,0.5)"
                 strokeDasharray="4 3"
                 label={{ value: '← Actual | Projected →', fill: '#D97706', fontSize: 9, position: 'top' }}
               />

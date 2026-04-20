@@ -97,34 +97,34 @@ const PERIOD_DATA: Record<PeriodKey, {
   cashBalance: string; cashSub: string; cashDelta: string; cashDeltaColor: string; cashDeltaBg: string;
 }> = {
   current: {
-    revenue: '$1.31M', revSub: 'vs $1.27M budget', revDelta: '+3.3% vs plan', revDeltaColor: '#059669', revDeltaBg: 'rgba(5,150,105,0.10)',
-    expenses: '$1.24M', expSub: 'COGS + OpEx', expDelta: '+11.7% vs Sep', expDeltaColor: '#DC2626', expDeltaBg: 'rgba(220,38,38,0.10)',
-    netIncome: '$71.4K', niSub: 'vs $109.2K budget', niDelta: '–34.6% vs plan', niDeltaColor: '#DC2626', niDeltaBg: 'rgba(220,38,38,0.10)',
-    cashBalance: '$873.5K', cashSub: '~8.2 months runway', cashDelta: '+2.6% vs Sep', cashDeltaColor: '#059669', cashDeltaBg: 'rgba(5,150,105,0.10)',
+    revenue: '$1.31M', revSub: 'vs $1.27M budget', revDelta: '+3.3% vs plan', revDeltaColor: '#0A8A5C', revDeltaBg: 'rgba(10,138,92,0.10)',
+    expenses: '$1.24M', expSub: 'COGS + OpEx', expDelta: '+11.7% vs Sep', expDeltaColor: '#C13333', expDeltaBg: 'rgba(193,51,51,0.10)',
+    netIncome: '$71.4K', niSub: 'vs $109.2K budget', niDelta: '–34.6% vs plan', niDeltaColor: '#C13333', niDeltaBg: 'rgba(193,51,51,0.10)',
+    cashBalance: '$873.5K', cashSub: '~8.2 months runway', cashDelta: '+2.6% vs Sep', cashDeltaColor: '#0A8A5C', cashDeltaBg: 'rgba(10,138,92,0.10)',
   },
   last: {
-    revenue: '$1.27M', revSub: 'vs $1.25M budget', revDelta: '+1.8% vs plan', revDeltaColor: '#059669', revDeltaBg: 'rgba(5,150,105,0.10)',
-    expenses: '$1.10M', expSub: 'COGS + OpEx', expDelta: '+2.1% vs Aug', expDeltaColor: '#DC2626', expDeltaBg: 'rgba(220,38,38,0.10)',
-    netIncome: '$108.4K', niSub: 'vs $105K budget', niDelta: '+3.2% vs plan', niDeltaColor: '#059669', niDeltaBg: 'rgba(5,150,105,0.10)',
-    cashBalance: '$851.0K', cashSub: '~8.0 months runway', cashDelta: '+0.5% vs Aug', cashDeltaColor: '#059669', cashDeltaBg: 'rgba(5,150,105,0.10)',
+    revenue: '$1.27M', revSub: 'vs $1.25M budget', revDelta: '+1.8% vs plan', revDeltaColor: '#0A8A5C', revDeltaBg: 'rgba(10,138,92,0.10)',
+    expenses: '$1.10M', expSub: 'COGS + OpEx', expDelta: '+2.1% vs Aug', expDeltaColor: '#C13333', expDeltaBg: 'rgba(193,51,51,0.10)',
+    netIncome: '$108.4K', niSub: 'vs $105K budget', niDelta: '+3.2% vs plan', niDeltaColor: '#0A8A5C', niDeltaBg: 'rgba(10,138,92,0.10)',
+    cashBalance: '$851.0K', cashSub: '~8.0 months runway', cashDelta: '+0.5% vs Aug', cashDeltaColor: '#0A8A5C', cashDeltaBg: 'rgba(10,138,92,0.10)',
   },
   last3: {
-    revenue: '$3.82M', revSub: 'Aug–Oct 2026 total', revDelta: '+3.8% avg growth', revDeltaColor: '#059669', revDeltaBg: 'rgba(5,150,105,0.10)',
-    expenses: '$3.39M', expSub: 'COGS + OpEx combined', expDelta: '+5.1% vs prior 3M', expDeltaColor: '#DC2626', expDeltaBg: 'rgba(220,38,38,0.10)',
-    netIncome: '$247.3K', niSub: '3-month total NI', niDelta: '–8.4% vs prior 3M', niDeltaColor: '#DC2626', niDeltaBg: 'rgba(220,38,38,0.10)',
-    cashBalance: '$873.5K', cashSub: 'End of period cash', cashDelta: '+4.6% over 3M', cashDeltaColor: '#059669', cashDeltaBg: 'rgba(5,150,105,0.10)',
+    revenue: '$3.82M', revSub: 'Aug–Oct 2026 total', revDelta: '+3.8% avg growth', revDeltaColor: '#0A8A5C', revDeltaBg: 'rgba(10,138,92,0.10)',
+    expenses: '$3.39M', expSub: 'COGS + OpEx combined', expDelta: '+5.1% vs prior 3M', expDeltaColor: '#C13333', expDeltaBg: 'rgba(193,51,51,0.10)',
+    netIncome: '$247.3K', niSub: '3-month total NI', niDelta: '–8.4% vs prior 3M', niDeltaColor: '#C13333', niDeltaBg: 'rgba(193,51,51,0.10)',
+    cashBalance: '$873.5K', cashSub: 'End of period cash', cashDelta: '+4.6% over 3M', cashDeltaColor: '#0A8A5C', cashDeltaBg: 'rgba(10,138,92,0.10)',
   },
   ytd: {
-    revenue: '$12.85M', revSub: 'Jan–Oct 2026 total', revDelta: '+18.4% YoY', revDeltaColor: '#059669', revDeltaBg: 'rgba(5,150,105,0.10)',
-    expenses: '$11.32M', expSub: 'YTD COGS + OpEx', expDelta: '+19.1% YoY', expDeltaColor: '#DC2626', expDeltaBg: 'rgba(220,38,38,0.10)',
-    netIncome: '$847.2K', niSub: 'YTD net income', niDelta: '+6.2% YoY', niDeltaColor: '#059669', niDeltaBg: 'rgba(5,150,105,0.10)',
-    cashBalance: '$873.5K', cashSub: 'Current cash on hand', cashDelta: '+4.6% vs Jan', cashDeltaColor: '#059669', cashDeltaBg: 'rgba(5,150,105,0.10)',
+    revenue: '$12.85M', revSub: 'Jan–Oct 2026 total', revDelta: '+18.4% YoY', revDeltaColor: '#0A8A5C', revDeltaBg: 'rgba(10,138,92,0.10)',
+    expenses: '$11.32M', expSub: 'YTD COGS + OpEx', expDelta: '+19.1% YoY', expDeltaColor: '#C13333', expDeltaBg: 'rgba(193,51,51,0.10)',
+    netIncome: '$847.2K', niSub: 'YTD net income', niDelta: '+6.2% YoY', niDeltaColor: '#0A8A5C', niDeltaBg: 'rgba(10,138,92,0.10)',
+    cashBalance: '$873.5K', cashSub: 'Current cash on hand', cashDelta: '+4.6% vs Jan', cashDeltaColor: '#0A8A5C', cashDeltaBg: 'rgba(10,138,92,0.10)',
   },
   last12: {
-    revenue: '$15.64M', revSub: 'Trailing 12-month total', revDelta: '+18.4% vs prior 12M', revDeltaColor: '#059669', revDeltaBg: 'rgba(5,150,105,0.10)',
-    expenses: '$13.72M', expSub: 'COGS + OpEx TTM', expDelta: '+17.2% vs prior 12M', expDeltaColor: '#DC2626', expDeltaBg: 'rgba(220,38,38,0.10)',
-    netIncome: '$1.12M', niSub: 'Trailing 12-month NI', niDelta: '+8.7% vs prior 12M', niDeltaColor: '#059669', niDeltaBg: 'rgba(5,150,105,0.10)',
-    cashBalance: '$873.5K', cashSub: 'Current cash on hand', cashDelta: '+4.6% since Nov 2025', cashDeltaColor: '#059669', cashDeltaBg: 'rgba(5,150,105,0.10)',
+    revenue: '$15.64M', revSub: 'Trailing 12-month total', revDelta: '+18.4% vs prior 12M', revDeltaColor: '#0A8A5C', revDeltaBg: 'rgba(10,138,92,0.10)',
+    expenses: '$13.72M', expSub: 'COGS + OpEx TTM', expDelta: '+17.2% vs prior 12M', expDeltaColor: '#C13333', expDeltaBg: 'rgba(193,51,51,0.10)',
+    netIncome: '$1.12M', niSub: 'Trailing 12-month NI', niDelta: '+8.7% vs prior 12M', niDeltaColor: '#0A8A5C', niDeltaBg: 'rgba(10,138,92,0.10)',
+    cashBalance: '$873.5K', cashSub: 'Current cash on hand', cashDelta: '+4.6% since Nov 2025', cashDeltaColor: '#0A8A5C', cashDeltaBg: 'rgba(10,138,92,0.10)',
   },
 };
 
@@ -135,7 +135,7 @@ const REPORTS = [
   { href: '/yoy',           label: 'Year-over-Year',  sub: '+18.4% growth',      accent: 'var(--color-green)'  },
   { href: '/mom',           label: 'MoM Trend',       sub: '+3.1% Oct vs Sep',   accent: 'var(--color-blue)'   },
   { href: '/ai-forecast',   label: 'AI Forecast',     sub: '$16.8M proj. ARR',   accent: 'var(--color-blue)'   },
-  { href: '/scenarios',     label: 'Scenarios',       sub: '4 cases modeled',    accent: '#7C5CBF'             },
+  { href: '/scenarios',     label: 'Scenarios',       sub: '4 cases modeled',    accent: '#1D44BF'             },
   { href: '/daily-revenue', label: 'Daily Revenue',   sub: 'Oct 31-day view',    accent: 'var(--color-orange)' },
   { href: '/backlog',       label: 'Backlog',         sub: '10 items · $659K risk', accent: 'var(--color-red)'    },
   { href: '/market',        label: 'Market Intel',    sub: 'Above median peers', accent: 'var(--color-green)'  },
@@ -474,8 +474,8 @@ export default function DashboardPage() {
               />
               <Line type="monotone" dataKey="Net Income"
                 stroke="#1D44BF" strokeWidth={2}
-                dot={{ r: 4, fill: '#059669', strokeWidth: 0 }}
-                activeDot={{ r: 6, fill: '#059669', stroke: '#FFFFFF', strokeWidth: 2 }}
+                dot={{ r: 4, fill: '#0A8A5C', strokeWidth: 0 }}
+                activeDot={{ r: 6, fill: '#0A8A5C', stroke: '#FFFFFF', strokeWidth: 2 }}
               />
             </LineChart>
           </ResponsiveContainer>
