@@ -134,7 +134,7 @@ export default function MarketPage() {
               Market Intelligence
             </div>
             <div style={{ fontSize: 13, color: 'var(--color-muted)', marginTop: 5 }}>
-              Outdoor Footwear — DTC &amp; Wholesale Benchmark
+              B2B Industrial — Competitive Benchmark
             </div>
           </div>
 
@@ -164,31 +164,34 @@ export default function MarketPage() {
       {/* ── 2. Competitive position KPI cards ───────────────────────────────── */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {COMP_KPIS.map((kpi) => (
-          <div key={kpi.label} style={{ ...CARD, padding: '18px 20px' }}>
-            <div style={{
-              fontSize: 11, fontWeight: 700, letterSpacing: '0.09em',
-              textTransform: 'uppercase', fontFamily: 'var(--font-condensed)',
-              color: 'var(--color-muted)', marginBottom: 8,
-            }}>
-              {kpi.label}
-            </div>
-            <div style={{
-              fontFamily: 'var(--font-condensed)', fontSize: 32, fontWeight: 900,
-              color: kpi.valueColor, lineHeight: 1, letterSpacing: '-0.01em',
-            }}>
-              {kpi.value}
-            </div>
-            <div style={{ fontSize: 13, color: 'var(--color-muted)', marginTop: 6 }}>
-              {kpi.comparison}
-            </div>
-            <div style={{
-              display: 'inline-block', marginTop: 10,
-              background: kpi.badgeBg, color: kpi.badgeColor,
-              borderRadius: 6, padding: '3px 10px',
-              fontFamily: 'var(--font-condensed)', fontSize: 11, fontWeight: 700,
-              letterSpacing: '0.06em', textTransform: 'uppercase',
-            }}>
-              {kpi.badge}
+          <div key={kpi.label} style={{ ...CARD, padding: '18px 20px', position: 'relative', overflow: 'hidden' }}>
+            <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 3, background: kpi.badgeColor, borderRadius: 'var(--card-radius) var(--card-radius) 0 0' }} />
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', paddingTop: 6 }}>
+              <div style={{
+                fontSize: 11, fontWeight: 700, letterSpacing: '0.09em',
+                textTransform: 'uppercase', fontFamily: 'var(--font-condensed)',
+                color: 'var(--color-muted)', marginBottom: 8,
+              }}>
+                {kpi.label}
+              </div>
+              <div style={{
+                fontFamily: 'var(--font-condensed)', fontSize: 32, fontWeight: 900,
+                color: kpi.valueColor, lineHeight: 1, letterSpacing: '-0.01em',
+              }}>
+                {kpi.value}
+              </div>
+              <div style={{ fontSize: 13, color: 'var(--color-muted)', marginTop: 6 }}>
+                {kpi.comparison}
+              </div>
+              <div style={{
+                display: 'inline-block', marginTop: 10,
+                background: kpi.badgeBg, color: kpi.badgeColor,
+                borderRadius: 6, padding: '3px 10px',
+                fontFamily: 'var(--font-condensed)', fontSize: 11, fontWeight: 700,
+                letterSpacing: '0.06em', textTransform: 'uppercase',
+              }}>
+                {kpi.badge}
+              </div>
             </div>
           </div>
         ))}
@@ -208,7 +211,7 @@ export default function MarketPage() {
             Benchmark Comparison — Outdoor Footwear
           </span>
           <span style={{ fontSize: 11, color: 'var(--color-muted)', fontWeight: 600 }}>
-            Ridgeline vs Industry
+            Apex Industrial vs Industry
           </span>
         </div>
 
@@ -332,7 +335,7 @@ export default function MarketPage() {
                 flexShrink: 0, width: 6, height: 6, borderRadius: '50%',
                 background: 'var(--color-blue)', marginTop: 6,
               }} />
-              <span style={{ fontSize: 14, color: 'rgba(237,244,250,0.8)', lineHeight: 1.55 }}>
+              <span style={{ fontSize: 14, color: 'var(--color-text)', lineHeight: 1.55 }}>
                 {bullet}
               </span>
             </li>

@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import {
   BarChart,
   Bar,
@@ -12,6 +13,7 @@ import {
   LineChart,
   Line,
 } from 'recharts';
+import PeriodSelector, { type PeriodKey } from '@/components/ui/PeriodSelector';
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
@@ -131,17 +133,25 @@ function ProductTooltip({ active, payload, label }: {
 
 // ─── Section 1: KPI Strip ────────────────────────────────────────────────────
 
-const KPI_CARDS = [
-  { label: 'Total Revenue',  value: '$1,311,600', accent: GREEN },
-  { label: 'MRR',            value: '$297,600',   accent: BLUE  },
-  { label: 'ARR',            value: '$3,571,200', accent: BLUE  },
-  { label: 'Recurring %',    value: '22.7%',      accent: GOLD  },
-];
+const PERIOD_REV: Record<PeriodKey, { revenue: string; mrr: string; arr: string; recurring: string; label: string }> = {
+  current: { revenue: '$1.31M',   mrr: '$297.6K',     arr: '$3.57M', recurring: '22.7%', label: 'Oct 2026' },
+  last:    { revenue: '$1.27M',   mrr: '$289.4K',     arr: '$3.47M', recurring: '22.8%', label: 'Sep 2026' },
+  last3:   { revenue: '$3.82M',   mrr: '$295K avg',   arr: '$3.54M', recurring: '23.1%', label: 'Aug–Oct 2026' },
+  ytd:     { revenue: '$12.85M',  mrr: '$284K avg',   arr: '$3.41M', recurring: '22.1%', label: 'YTD 2026' },
+  last12:  { revenue: '$15.64M',  mrr: '$271K avg',   arr: '$3.25M', recurring: '20.8%', label: 'Last 12M' },
+};
 
-function KpiStrip() {
+function KpiStrip({ period }: { period: PeriodKey }) {
+  const prd = PERIOD_REV[period];
+  const cards = [
+    { label: 'Total Revenue', value: prd.revenue,   accent: GREEN },
+    { label: 'MRR',           value: prd.mrr,        accent: BLUE  },
+    { label: 'ARR',           value: prd.arr,        accent: BLUE  },
+    { label: 'Recurring %',   value: prd.recurring, accent: GOLD  },
+  ];
   return (
     <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-      {KPI_CARDS.map((k) => (
+      {cards.map((k) => (
         <div
           key={k.label}
           style={{
@@ -712,25 +722,30 @@ function TrendSection() {
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function RevenuePage() {
+  const [period, setPeriod] = useState<PeriodKey>('current');
+
   return (
     <div style={{ background: '#F3F4F6', minHeight: '100vh', padding: '28px 28px 48px' }}>
       {/* Page header */}
       <div style={{ marginBottom: 28 }}>
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
           <div>
-            <h1
-              style={{
-                fontSize:      22,
-                fontWeight:    800,
-                color:         '#1A1C2E',
-                margin:        0,
-                letterSpacing: '-0.01em',
-              }}
-            >
-              Revenue Intelligence
-            </h1>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+              <h1
+                style={{
+                  fontSize:      22,
+                  fontWeight:    800,
+                  color:         '#1A1C2E',
+                  margin:        0,
+                  letterSpacing: '-0.01em',
+                }}
+              >
+                Revenue Intelligence
+              </h1>
+              <PeriodSelector value={period} onChange={setPeriod} />
+            </div>
             <p style={{ margin: '4px 0 0', fontSize: 13, color: GRAY }}>
-              Apex Industrial Group &nbsp;·&nbsp; October 2026
+              Apex Industrial Group &nbsp;·&nbsp; {PERIOD_REV[period].label}
             </p>
           </div>
           <div
@@ -763,7 +778,7 @@ export default function RevenuePage() {
 
       {/* Content sections */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-        <KpiStrip />
+        <KpiStrip period={period} />
         <ProductLineSection />
         <CustomerSection />
         <RecurringSection />

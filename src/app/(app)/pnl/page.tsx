@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { getDemoPnlReport, getDemoAnomalies, DEMO_PNL_ROWS } from '@/lib/data/demo-data';
 import AnomalyBanner from '@/components/dashboard/AnomalyBanner';
 import type { PnlRow } from '@/lib/data/types';
+import PeriodSelector, { type PeriodKey, PERIOD_OPTIONS } from '@/components/ui/PeriodSelector';
 
 const GREEN  = '#059669';
 const RED    = '#DC2626';
@@ -172,17 +173,25 @@ function PnlRowComponent({ row, inExpense, isOpen, onToggle }: {
   );
 }
 
-// ── Top-level summary numbers ──
-const S = {
-  revActual: 1_311_600, revBudget: 1_270_000, revVar: 41_600,    revVarPct: 3.3,
-  gpActual:    591_300, gpBudget:    552_200, gpVar: 39_100,    gpVarPct: 7.1,
-  opActual:    130_600, opBudget:    139_800, opVar: -9_200,    opVarPct: -6.6,
-  niActual:     71_400, niBudget:    109_200, niVar: -37_800,   niVarPct: -34.6,
+// ── Period-aware summary numbers ──
+const PERIOD_S: Record<PeriodKey, {
+  revActual: number; revBudget: number; revVar: number; revVarPct: number;
+  gpActual: number;  gpBudget: number;  gpVar: number;  gpVarPct: number;
+  opActual: number;  opBudget: number;  opVar: number;  opVarPct: number;
+  niActual: number;  niBudget: number;  niVar: number;  niVarPct: number;
+}> = {
+  current: { revActual: 1_311_600, revBudget: 1_270_000, revVar: 41_600,    revVarPct: 3.3,  gpActual: 591_300,   gpBudget: 552_200,   gpVar: 39_100,    gpVarPct: 7.1,  opActual: 130_600,   opBudget: 139_800,   opVar: -9_200,    opVarPct: -6.6,  niActual: 71_400,   niBudget: 109_200,   niVar: -37_800,   niVarPct: -34.6 },
+  last:    { revActual: 1_272_100, revBudget: 1_248_000, revVar: 24_100,    revVarPct: 1.9,  gpActual: 570_200,   gpBudget: 552_000,   gpVar: 18_200,    gpVarPct: 3.3,  opActual: 142_300,   opBudget: 138_000,   opVar:  4_300,    opVarPct:  3.1,  niActual: 108_400,  niBudget: 105_000,   niVar: 3_400,     niVarPct: 3.2  },
+  last3:   { revActual: 3_821_400, revBudget: 3_720_000, revVar: 101_400,   revVarPct: 2.7,  gpActual: 1_718_200, gpBudget: 1_648_000, gpVar: 70_200,    gpVarPct: 4.3,  opActual: 392_100,   opBudget: 420_000,   opVar: -27_900,   opVarPct: -6.6,  niActual: 247_300,  niBudget: 310_000,   niVar: -62_700,   niVarPct: -20.2 },
+  ytd:     { revActual: 12_847_000, revBudget: 12_600_000, revVar: 247_000, revVarPct: 2.0,  gpActual: 5_781_000, gpBudget: 5_600_000, gpVar: 181_000,   gpVarPct: 3.2,  opActual: 1_312_000, opBudget: 1_400_000, opVar: -88_000,   opVarPct: -6.3,  niActual: 847_200,  niBudget: 1_020_000, niVar: -172_800,  niVarPct: -16.9 },
+  last12:  { revActual: 15_642_000, revBudget: 15_200_000, revVar: 442_000, revVarPct: 2.9,  gpActual: 7_038_900, gpBudget: 6_840_000, gpVar: 198_900,   gpVarPct: 2.9,  opActual: 1_571_200, opBudget: 1_700_000, opVar: -128_800,  opVarPct: -7.6,  niActual: 1_124_000, niBudget: 1_250_000, niVar: -126_000, niVarPct: -10.1 },
 };
 
 export default function PnlPage() {
   const anomalies   = getDemoAnomalies();
   const [openNotes, setOpenNotes] = useState<Set<string>>(new Set());
+  const [period, setPeriod] = useState<PeriodKey>('current');
+  const S = PERIOD_S[period];
   const toggle = (id: string) =>
     setOpenNotes((p) => { const n = new Set(p); n.has(id) ? n.delete(id) : n.add(id); return n; });
 
@@ -197,8 +206,11 @@ export default function PnlPage() {
           <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--color-muted)', fontFamily: 'var(--font-condensed)', marginBottom: 4 }}>
             Profit & Loss
           </div>
-          <div style={{ fontSize: 30, fontWeight: 900, letterSpacing: '0.02em', fontFamily: 'var(--font-condensed)', color: 'var(--color-text)', lineHeight: 1 }}>
-            October 2026
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+            <div style={{ fontSize: 30, fontWeight: 900, letterSpacing: '0.02em', fontFamily: 'var(--font-condensed)', color: 'var(--color-text)', lineHeight: 1 }}>
+              P&amp;L Report
+            </div>
+            <PeriodSelector value={period} onChange={setPeriod} />
           </div>
           <div style={{ fontSize: 14, marginTop: 6, color: 'var(--color-muted)' }}>
             Budget vs Actuals · Click any row for AI analysis
@@ -270,7 +282,7 @@ export default function PnlPage() {
           borderBottom:  '1px solid var(--color-border)',
         }}>
           <div style={{ fontSize: 14, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', fontFamily: 'var(--font-condensed)', color: 'var(--color-text)' }}>
-            Detailed P&L — October 2026
+            Detailed P&L — {PERIOD_OPTIONS.find((p) => p.key === period)?.sublabel}
           </div>
           <div style={{ fontSize: 13, color: 'var(--color-muted)' }}>
             Click any row for AI analysis

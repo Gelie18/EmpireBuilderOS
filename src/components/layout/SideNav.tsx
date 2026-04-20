@@ -105,6 +105,7 @@ const NAV_GROUPS = [
     label: 'Overview',
     items: [
       { href: '/dashboard',     label: 'Dashboard',     icon: icons.dashboard },
+      { href: '/revenue',       label: 'Revenue Intel',  icon: icons.pnl },
     ],
   },
   {
@@ -121,7 +122,6 @@ const NAV_GROUPS = [
     label: 'Operations',
     items: [
       { href: '/daily-revenue', label: 'Daily Revenue', icon: icons.dailyrev },
-      { href: '/revenue',       label: 'Revenue Intel',  icon: icons.pnl },
       { href: '/backlog',       label: 'Ops Backlog',    icon: icons.backlog },
       { href: '/fin-backlog',   label: 'Fin. Backlog',   icon: icons.backlog },
     ],

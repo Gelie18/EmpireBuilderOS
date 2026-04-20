@@ -15,7 +15,14 @@ import {
 const COST_PER_HEAD = 4_790;
 
 // The last actual month — all projections compound from here
-const LAST_ACTUAL_MONTH = "Oct '24";
+const LAST_ACTUAL_MONTH = "Oct '26";
+
+const CARD: React.CSSProperties = {
+  background:   'var(--color-surf)',
+  borderRadius: 'var(--card-radius)',
+  boxShadow:    'var(--card-shadow)',
+  border:       '1px solid var(--color-border)',
+};
 
 const TOOLTIP_STYLE = {
   background: '#FFFFFF',
@@ -28,9 +35,40 @@ const TOOLTIP_STYLE = {
 
 // ── Page ──────────────────────────────────────────────────────────────────────
 
+// ── What-If Scenarios ─────────────────────────────────────────────────────────
+const SCENARIOS = [
+  {
+    label: '🟢 Best Case',
+    desc: 'Strong growth, normalized costs',
+    values: { 'rev-growth': 5, 'cogs-pct': 52, 'opex-pct': 18, headcount: 44 },
+  },
+  {
+    label: '🔵 Base Case',
+    desc: 'Current trajectory, marketing normalizes',
+    values: { 'rev-growth': 3, 'cogs-pct': 54.9, 'opex-pct': 19.8, headcount: 42 },
+  },
+  {
+    label: '🟡 Conservative',
+    desc: 'Slower growth, cost pressure',
+    values: { 'rev-growth': 1, 'cogs-pct': 57, 'opex-pct': 21, headcount: 42 },
+  },
+  {
+    label: '🔴 Downside',
+    desc: 'Revenue decline, overspend continues',
+    values: { 'rev-growth': -2, 'cogs-pct': 58, 'opex-pct': 23, headcount: 45 },
+  },
+];
+
 export default function ForecastPage() {
   const baseForecast = getDemoForecast();
   const [drivers, setDrivers] = useState(baseForecast.drivers);
+  const [activeScenario, setActiveScenario] = useState<string | null>(null);
+
+  // Store base driver values for net-change indicators
+  const BASE_DRIVERS = baseForecast.drivers.reduce<Record<string, number>>(
+    (acc, d) => { acc[d.id] = d.value; return acc; },
+    {}
+  );
 
   // ── The actual months are FROZEN — never recalculated ──
   // ── Only projected months (isActual === false) are recomputed ──
@@ -77,6 +115,15 @@ export default function ForecastPage() {
 
   const updateDriver = (id: string, value: number) => {
     setDrivers((prev) => prev.map((d) => (d.id === id ? { ...d, value } : d)));
+    setActiveScenario(null);
+  };
+
+  const applyScenario = (scenario: typeof SCENARIOS[0]) => {
+    setDrivers((prev) => prev.map((d) => ({
+      ...d,
+      value: scenario.values[d.id as keyof typeof scenario.values] ?? d.value,
+    })));
+    setActiveScenario(scenario.label);
   };
 
   // ── Summary metrics (projected only, so actuals don't distort the forward view) ──
@@ -101,30 +148,36 @@ export default function ForecastPage() {
             Driver Model — 12-Month Forecast
           </div>
           <div className="text-[12px] mt-0.5" style={{ color: 'var(--color-muted)' }}>
-            Actuals locked May–Oct 2026 · Projections Nov 2026–Apr 2025
+            Actuals locked May–Oct 2026 · Projections Nov 2026–Apr 2027
           </div>
         </div>
         <div className="flex gap-3 flex-wrap">
-          <div className="border px-3 py-2" style={{ background: 'var(--color-surf)', borderColor: 'var(--color-border)', borderRadius: 'var(--card-radius)', boxShadow: 'var(--card-shadow)' }}>
-            <div className="text-[13px] font-bold uppercase tracking-[0.10em]"
-              style={{ fontFamily: 'var(--font-condensed)', color: 'var(--color-muted)' }}>6M Fwd Revenue</div>
-            <div className="text-[36px] font-black"
-              style={{ fontFamily: 'var(--font-condensed)', color: 'var(--color-blue)', fontWeight: 900 }}>{formatCurrency(totalFwdRev, true)}</div>
-          </div>
-          <div className="border px-3 py-2" style={{ background: 'var(--color-surf)', borderColor: 'var(--color-border)', borderRadius: 'var(--card-radius)', boxShadow: 'var(--card-shadow)' }}>
-            <div className="text-[13px] font-bold uppercase tracking-[0.10em]"
-              style={{ fontFamily: 'var(--font-condensed)', color: 'var(--color-muted)' }}>6M Fwd Net Income</div>
-            <div className="text-[36px] font-black"
-              style={{ fontFamily: 'var(--font-condensed)', color: totalFwdNI >= 0 ? 'var(--color-green)' : 'var(--color-red)', fontWeight: 900 }}>
-              {formatCurrency(totalFwdNI, true)}
+          <div style={{ ...CARD, padding: '12px 16px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+              <div className="text-[13px] font-bold uppercase tracking-[0.10em]"
+                style={{ fontFamily: 'var(--font-condensed)', color: 'var(--color-muted)' }}>6M Fwd Revenue</div>
+              <div className="text-[36px] font-black"
+                style={{ fontFamily: 'var(--font-condensed)', color: 'var(--color-blue)', fontWeight: 900 }}>{formatCurrency(totalFwdRev, true)}</div>
             </div>
           </div>
-          <div className="border px-3 py-2" style={{ background: 'var(--color-surf)', borderColor: 'var(--color-border)', borderRadius: 'var(--card-radius)', boxShadow: 'var(--card-shadow)' }}>
-            <div className="text-[13px] font-bold uppercase tracking-[0.10em]"
-              style={{ fontFamily: 'var(--font-condensed)', color: 'var(--color-muted)' }}>Exit Run Rate</div>
-            <div className="text-[36px] font-black"
-              style={{ fontFamily: 'var(--font-condensed)', color: 'var(--color-text)', fontWeight: 900 }}>
-              {exitMonth ? formatCurrency(exitMonth.revenue * 12, true) : '—'}
+          <div style={{ ...CARD, padding: '12px 16px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+              <div className="text-[13px] font-bold uppercase tracking-[0.10em]"
+                style={{ fontFamily: 'var(--font-condensed)', color: 'var(--color-muted)' }}>6M Fwd Net Income</div>
+              <div className="text-[36px] font-black"
+                style={{ fontFamily: 'var(--font-condensed)', color: totalFwdNI >= 0 ? 'var(--color-green)' : 'var(--color-red)', fontWeight: 900 }}>
+                {formatCurrency(totalFwdNI, true)}
+              </div>
+            </div>
+          </div>
+          <div style={{ ...CARD, padding: '12px 16px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+              <div className="text-[13px] font-bold uppercase tracking-[0.10em]"
+                style={{ fontFamily: 'var(--font-condensed)', color: 'var(--color-muted)' }}>Exit Run Rate</div>
+              <div className="text-[36px] font-black"
+                style={{ fontFamily: 'var(--font-condensed)', color: 'var(--color-text)', fontWeight: 900 }}>
+                {exitMonth ? formatCurrency(exitMonth.revenue * 12, true) : '—'}
+              </div>
             </div>
           </div>
         </div>
@@ -136,7 +189,7 @@ export default function ForecastPage() {
         <span style={{ color: 'var(--color-green)', fontSize: 16 }}>🔒</span>
         <div className="text-[11px] leading-snug" style={{ color: 'var(--color-muted)' }}>
           <strong style={{ color: 'var(--color-green)' }}>Actuals locked</strong> — May through October 2026 are real P&L data and are never recalculated.
-          Sliders only affect the <strong style={{ color: 'var(--color-orange)' }}>6 projected months</strong> (Nov 2026 – Apr 2025),
+          Sliders only affect the <strong style={{ color: 'var(--color-orange)' }}>6 projected months</strong> (Nov 2026 – Apr 2027),
           compounding from Oct's actual revenue of <strong style={{ color: 'var(--color-blue)' }}>$1,311,600</strong>.
         </div>
       </div>
@@ -146,7 +199,7 @@ export default function ForecastPage() {
         <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
           <div className="text-[13px] font-bold uppercase tracking-[0.10em]"
             style={{ fontFamily: 'var(--font-condensed)', color: 'var(--color-muted)' }}>
-            Projection Drivers — Affects Nov 2026 – Apr 2025 Only
+            Projection Drivers — Affects Nov 2026 – Apr 2027 Only
           </div>
           <div className="text-[10px] px-2 py-1 font-bold uppercase"
             style={{ background: 'var(--color-orange-d)', color: 'var(--color-orange)', fontFamily: 'var(--font-condensed)' }}>
@@ -158,6 +211,8 @@ export default function ForecastPage() {
           {drivers.map((d) => {
             const isHc = d.id === 'headcount';
             const delta = isHc ? hcDelta : null;
+            const baseVal = BASE_DRIVERS[d.id] ?? d.value;
+            const diff = d.value - baseVal;
             return (
               <div key={d.id}>
                 <div className="flex justify-between mb-1.5">
@@ -202,7 +257,76 @@ export default function ForecastPage() {
                     {' '}({headcount} × {formatCurrency(COST_PER_HEAD)}/head)
                   </div>
                 )}
+                {/* Net change indicator for non-headcount drivers */}
+                {!isHc && diff !== 0 && (
+                  <div className="text-[10px] mt-1.5 px-2 py-1"
+                    style={{
+                      fontFamily: 'var(--font-condensed)',
+                      background: 'var(--color-surf2)',
+                      color: d.id === 'rev-growth'
+                        ? (diff > 0 ? 'var(--color-green)' : 'var(--color-red)')
+                        : (diff > 0 ? 'var(--color-red)' : 'var(--color-green)'),
+                    }}>
+                    {d.id === 'rev-growth' && (
+                      <>Base: {baseVal.toFixed(1)}% → Current: {d.value}% | {diff > 0 ? '+' : ''}{diff.toFixed(1)}pp change</>
+                    )}
+                    {d.id === 'cogs-pct' && (
+                      <>Every +1pp COGS = –$13K/mo gross profit {diff > 0 ? `(+${diff.toFixed(1)}pp↑)` : `(${diff.toFixed(1)}pp↓)`}</>
+                    )}
+                    {d.id === 'opex-pct' && (
+                      <>+1pp OpEx = –$13K/mo NI {diff > 0 ? `(+${diff.toFixed(1)}pp↑)` : `(${diff.toFixed(1)}pp↓)`}</>
+                    )}
+                  </div>
+                )}
               </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* ── What-If Scenarios ── */}
+      <div style={{ ...CARD, padding: '18px 20px' }}>
+        <div className="text-[13px] font-bold uppercase tracking-[0.10em] mb-4"
+          style={{ fontFamily: 'var(--font-condensed)', color: 'var(--color-muted)' }}>
+          What-If Scenarios
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          {SCENARIOS.map((scenario) => {
+            const isActive = activeScenario === scenario.label;
+            return (
+              <button
+                key={scenario.label}
+                onClick={() => applyScenario(scenario)}
+                style={{
+                  ...CARD,
+                  padding: '14px 16px',
+                  cursor: 'pointer',
+                  textAlign: 'left',
+                  border: isActive ? '2px solid #1D44BF' : '1px solid var(--color-border)',
+                  background: isActive ? 'var(--color-blue-d)' : 'var(--color-surf)',
+                  transition: 'border-color 0.15s, background 0.15s',
+                }}
+                onMouseEnter={(e) => {
+                  if (!isActive) {
+                    e.currentTarget.style.borderColor = '#1D44BF';
+                    e.currentTarget.style.background = 'var(--color-blue-d)';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!isActive) {
+                    e.currentTarget.style.borderColor = 'var(--color-border)';
+                    e.currentTarget.style.background = 'var(--color-surf)';
+                  }
+                }}
+              >
+                <div className="text-[13px] font-bold mb-1"
+                  style={{ fontFamily: 'var(--font-condensed)', color: isActive ? '#1D44BF' : 'var(--color-text)' }}>
+                  {scenario.label}
+                </div>
+                <div className="text-[11px]" style={{ color: 'var(--color-muted)', lineHeight: 1.4 }}>
+                  {scenario.desc}
+                </div>
+              </button>
             );
           })}
         </div>

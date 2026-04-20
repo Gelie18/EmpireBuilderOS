@@ -22,10 +22,10 @@ function ChatTab() {
 }
 
 const NAV_TABS = [
-  { href: '/dashboard',   label: 'Home',     icon: '◎' },
-  { href: '/pnl',         label: 'P&L',      icon: '▤' },
-  { href: '/backlog',     label: 'Backlog',   icon: '☰' },
-  { href: '/ai-forecast', label: 'Forecast', icon: '⬡' },
+  { href: '/dashboard', label: 'Home',      icon: '◎' },
+  { href: '/pnl',       label: 'P&L',       icon: '▤' },
+  { href: '/cashflow',  label: 'Cash Flow', icon: '◷' },
+  { href: '/backlog',   label: 'Backlog',   icon: '☰' },
 ];
 
 export default function MobileTabBar() {

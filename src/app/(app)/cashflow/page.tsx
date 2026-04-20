@@ -1,10 +1,12 @@
 'use client';
 
+import { useState } from 'react';
 import { getDemoCashFlow } from '@/lib/data/demo-data';
 import { formatCurrency } from '@/lib/utils';
 import {
   AreaChart, Area, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer,
 } from 'recharts';
+import PeriodSelector, { type PeriodKey } from '@/components/ui/PeriodSelector';
 
 const TOOLTIP_STYLE = {
   background:   '#FFFFFF',
@@ -95,9 +97,35 @@ function SectionHeader({ children }: { children: React.ReactNode }) {
   );
 }
 
+// ── Period-aware data ─────────────────────────────────────────────────────────
+const PERIOD_CF: Record<PeriodKey, {
+  closingBalance: number; runway: number;
+  operating: number; investing: number; financing: number;
+  label: string;
+}> = {
+  current: { closingBalance: 873_500, runway: 8.2, operating: 142_800, investing: -48_200, financing: -12_400, label: 'Oct 2026' },
+  last:    { closingBalance: 851_000, runway: 8.0, operating: 128_400, investing: -22_000, financing:       0, label: 'Sep 2026' },
+  last3:   { closingBalance: 873_500, runway: 8.2, operating: 384_200, investing: -98_400, financing: -22_000, label: 'Aug–Oct 2026' },
+  ytd:     { closingBalance: 873_500, runway: 8.2, operating: 1_284_000, investing: -248_000, financing: -87_000, label: 'YTD 2026' },
+  last12:  { closingBalance: 873_500, runway: 8.2, operating: 1_847_000, investing: -312_000, financing: -124_000, label: 'TTM' },
+};
+
+function fmtCF(n: number): string {
+  if (n === 0) return '$0';
+  const abs = Math.abs(n);
+  const formatted = abs >= 1_000_000
+    ? `$${(abs / 1_000_000).toFixed(2)}M`
+    : abs >= 1_000
+    ? `$${(abs / 1_000).toFixed(0)}K`
+    : `$${abs.toLocaleString()}`;
+  return n > 0 ? `+${formatted}` : `–${formatted}`;
+}
+
 // ── Page ─────────────────────────────────────────────────────────────────────
 export default function CashFlowPage() {
   const cf = getDemoCashFlow();
+  const [period, setPeriod] = useState<PeriodKey>('current');
+  const pcd = PERIOD_CF[period];
 
   // Build chart data: historical points only, sampled every 3 days
   const chartData = cf.dailyForecast
@@ -132,17 +160,20 @@ export default function CashFlowPage() {
           >
             Cash Flow Statement
           </div>
-          <div
-            style={{
-              fontFamily:    'var(--font-condensed)',
-              fontSize:      32,
-              fontWeight:    900,
-              lineHeight:    1,
-              color:         'var(--color-text)',
-              letterSpacing: '0.02em',
-            }}
-          >
-            Cash Flow
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+            <div
+              style={{
+                fontFamily:    'var(--font-condensed)',
+                fontSize:      32,
+                fontWeight:    900,
+                lineHeight:    1,
+                color:         'var(--color-text)',
+                letterSpacing: '0.02em',
+              }}
+            >
+              Cash Flow
+            </div>
+            <PeriodSelector value={period} onChange={setPeriod} />
           </div>
           <div
             style={{
@@ -151,49 +182,46 @@ export default function CashFlowPage() {
               marginTop: 5,
             }}
           >
-            October 2026
+            {pcd.label}
           </div>
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
           <StatBadge
             label="Cash on Hand"
-            value={formatCurrency(cf.closingBalance, true)}
+            value={formatCurrency(pcd.closingBalance, true)}
             color="var(--color-green)"
             dimColor="var(--color-green-d)"
           />
           <StatBadge
             label="Runway"
-            value={`${cf.runway.months} months`}
+            value={`${pcd.runway} months`}
             color="var(--color-blue)"
             dimColor="var(--color-blue-d)"
           />
         </div>
       </div>
 
-      {/* ── 3 KPI cards ── */}
+      {/* ── 3 KPI cards — period-aware ── */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {[
           {
-            label:  'Operating Cash Flow',
-            value:  cf.operating.total,
-            sub:    'Core business activity',
-            color:  'var(--color-green)',
-            dimColor: 'var(--color-green-d)',
+            label:    'Operating Cash Flow',
+            value:    pcd.operating,
+            sub:      'Core business activity',
+            color:    'var(--color-green)',
           },
           {
-            label:  'Investing Cash Flow',
-            value:  cf.investing.total,
-            sub:    'Capex & asset purchases',
-            color:  'var(--color-red)',
-            dimColor: 'var(--color-red-d)',
+            label:    'Investing Cash Flow',
+            value:    pcd.investing,
+            sub:      'Capex & asset purchases',
+            color:    'var(--color-red)',
           },
           {
-            label:  'Financing Cash Flow',
-            value:  cf.financing.total,
-            sub:    'Debt & equity activity',
-            color:  'var(--color-muted)',
-            dimColor: 'var(--color-surf2)',
+            label:    'Financing Cash Flow',
+            value:    pcd.financing,
+            sub:      'Debt & equity activity',
+            color:    'var(--color-muted)',
           },
         ].map((item) => (
           <div
@@ -229,9 +257,7 @@ export default function CashFlowPage() {
                   letterSpacing: '-0.01em',
                 }}
               >
-                {item.value >= 0
-                  ? `+${formatCurrency(item.value, true)}`
-                  : `–${formatCurrency(Math.abs(item.value), true)}`}
+                {fmtCF(item.value)}
               </div>
               <div style={{ fontSize: 13, color: 'var(--color-muted)' }}>{item.sub}</div>
             </div>

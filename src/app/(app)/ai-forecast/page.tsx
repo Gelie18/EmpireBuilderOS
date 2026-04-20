@@ -280,15 +280,15 @@ function buildBaseForecast(): ForecastMonth[] {
   let baseRevenue = HISTORICAL_MONTHS[5].revenue; // Oct 2026
 
   const MONTHS_LABELS = [
-    "Nov '24", "Dec '24", "Jan '25", "Feb '25", "Mar '25",
-    "Apr '25", "May '25", "Jun '25", "Jul '25", "Aug '25", "Sep '25", "Oct '25",
+    "Nov '26", "Dec '26", "Jan '27", "Feb '27", "Mar '27",
+    "Apr '27", "May '27", "Jun '27", "Jul '27", "Aug '27", "Sep '27", "Oct '27",
   ];
   const QUARTERS = [
     'Q4 2026', 'Q4 2026', // Nov, Dec
-    'Q1 2025', 'Q1 2025', 'Q1 2025', // Jan, Feb, Mar
-    'Q2 2025', 'Q2 2025', 'Q2 2025', // Apr, May, Jun
-    'Q3 2025', 'Q3 2025', 'Q3 2025', // Jul, Aug, Sep
-    'Q4 2025', // Oct
+    'Q1 2027', 'Q1 2027', 'Q1 2027', // Jan, Feb, Mar
+    'Q2 2027', 'Q2 2027', 'Q2 2027', // Apr, May, Jun
+    'Q3 2027', 'Q3 2027', 'Q3 2027', // Jul, Aug, Sep
+    'Q4 2027', // Oct
   ];
 
   // Seasonal adjustments (outdoor brand pattern)
@@ -390,7 +390,7 @@ function applyAdjustments(
 
 const avgCogsPct = HISTORICAL_MONTHS.slice(-3).reduce((s, m) => s + (m.revenue - m.grossProfit) / m.revenue, 0) / 3;
 
-const QUARTERS_AVAILABLE = ['Q4 2026', 'Q1 2025', 'Q2 2025', 'Q3 2025', 'Q4 2025'];
+const QUARTERS_AVAILABLE = ['Q4 2026', 'Q1 2027', 'Q2 2027', 'Q3 2027', 'Q4 2027'];
 
 const TOOLTIP_STYLE = {
   background: '#FFFFFF',
@@ -584,7 +584,7 @@ export default function AiForecastPage() {
       {/* Summary KPIs */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {[
-          { label: '12M Fwd Revenue',  value: formatCurrency(totalFwdRevenue, true),  color: 'var(--color-blue)',  sub: 'Nov 2026 – Oct 2025' },
+          { label: '12M Fwd Revenue',  value: formatCurrency(totalFwdRevenue, true),  color: 'var(--color-blue)',  sub: 'Nov 2026 – Oct 2027' },
           { label: '12M Fwd Net Inc.',  value: formatCurrency(totalFwdNI, true),       color: totalFwdNI >= 0 ? 'var(--color-green)' : 'var(--color-red)', sub: 'Projected' },
           { label: 'Avg NI Margin',    value: `${(totalFwdNI / totalFwdRevenue * 100).toFixed(1)}%`, color: 'var(--color-text)', sub: 'Forward 12 months' },
           { label: 'Adjustments',      value: adjustmentCount.toString(),              color: 'var(--color-orange)', sub: adjustmentCount === 0 ? 'AI baseline only' : 'User inputs applied' },
@@ -647,7 +647,7 @@ export default function AiForecastPage() {
                   return [`$${Number(val).toLocaleString()}${suffix}`, String(name)];
                 }}
               />
-              <ReferenceLine x="Oct '24" stroke="rgba(0,0,0,0.20)" strokeDasharray="4 3"
+              <ReferenceLine x="Oct '26" stroke="rgba(0,0,0,0.20)" strokeDasharray="4 3"
                 label={{ value: 'Today', fill: '#6B7A8D', fontSize: 9, position: 'top' }} />
               <Legend wrapperStyle={{ fontSize: 11, color: '#6B7A8D' }} />
               <Area type="monotone" dataKey="Revenue" stroke="#35B8E8" fill="url(#aifRevGrad)"
@@ -789,6 +789,43 @@ export default function AiForecastPage() {
 
         {/* Input area */}
         <div className="border-t" style={{ borderColor: 'var(--color-border)', background: 'var(--color-surf2)', padding: '16px 20px' }}>
+          {/* Quick Scenarios */}
+          <div className="mb-4">
+            <div className="text-[10px] font-bold uppercase tracking-[0.10em] mb-2"
+              style={{ fontFamily: 'var(--font-condensed)', color: 'var(--color-muted)' }}>
+              ✦ Quick Scenarios
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {[
+                'Add a marketing consultant at $8.5K/month',
+                'Increase ad spend by $30K — expect 2.5x ROAS on revenue',
+                'New wholesale account adds 5% revenue growth',
+                'Hire 2 account executives at market rates',
+                'One-time trade show cost of $35K',
+                'COGS pressure increases 2% from freight costs',
+              ].map((template) => (
+                <button
+                  key={template}
+                  onClick={() => setInput(template)}
+                  style={{
+                    border: '1px solid var(--color-border2)',
+                    color: 'var(--color-muted)',
+                    background: 'transparent',
+                    fontFamily: 'var(--font-condensed)',
+                    fontSize: 11,
+                    padding: '4px 10px',
+                    borderRadius: 6,
+                    cursor: 'pointer',
+                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--color-blue)'; e.currentTarget.style.color = 'var(--color-blue)'; e.currentTarget.style.background = 'var(--color-blue-d)'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--color-border2)'; e.currentTarget.style.color = 'var(--color-muted)'; e.currentTarget.style.background = 'transparent'; }}
+                >
+                  ✦ {template}
+                </button>
+              ))}
+            </div>
+          </div>
+
           {/* Quarter selector */}
           <div className="flex gap-2 mb-4 flex-wrap items-center">
             <span style={{ color: 'var(--color-muted)', fontFamily: 'var(--font-condensed)', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
@@ -927,6 +964,40 @@ export default function AiForecastPage() {
                       </span>
                     ))}
                   </div>
+                  {/* Net Impact summary */}
+                  {adj.parsedAssumptions.filter((a) => a.type !== 'note').map((a, i) => {
+                    if (a.type === 'opex_change' && a.value !== undefined) {
+                      const monthly = Math.round(Math.abs(a.value) / 3 / 1000 * 10) / 10;
+                      const niImpact = Math.round(Math.abs(a.value) / 3 / 1000 * 10) / 10;
+                      const isUp = a.value > 0;
+                      return (
+                        <div key={i} className="text-[10px] mt-1.5 px-2 py-0.5 font-bold inline-block"
+                          style={{ fontFamily: 'var(--font-condensed)', background: 'var(--color-red-d)', color: 'var(--color-red)', borderRadius: 4 }}>
+                          OpEx {isUp ? '+' : '–'}${monthly}K/mo · NI {isUp ? '–' : '+'}${niImpact}K this quarter
+                        </div>
+                      );
+                    }
+                    if (a.type === 'revenue_growth' && a.value !== undefined) {
+                      const estNI = Math.round(Math.abs(a.value) * 1300 / 1000 * 10) / 10;
+                      const isPos = a.value > 0;
+                      return (
+                        <div key={i} className="text-[10px] mt-1.5 px-2 py-0.5 font-bold inline-block"
+                          style={{ fontFamily: 'var(--font-condensed)', background: isPos ? 'var(--color-green-d)' : 'var(--color-red-d)', color: isPos ? 'var(--color-green)' : 'var(--color-red)', borderRadius: 4 }}>
+                          Revenue {isPos ? '+' : ''}{a.value}% → est. {isPos ? '+' : '–'}${estNI}K NI
+                        </div>
+                      );
+                    }
+                    if (a.type === 'one_time_cost' && a.value !== undefined) {
+                      const amtK = Math.round(a.value / 1000 * 10) / 10;
+                      return (
+                        <div key={i} className="text-[10px] mt-1.5 px-2 py-0.5 font-bold inline-block"
+                          style={{ fontFamily: 'var(--font-condensed)', background: 'var(--color-red-d)', color: 'var(--color-red)', borderRadius: 4 }}>
+                          One-time charge: –${amtK}K
+                        </div>
+                      );
+                    }
+                    return null;
+                  })}
                 </div>
                 <button
                   onClick={() => setAdjustments((prev) => prev.filter((_, i) => i !== idx))}

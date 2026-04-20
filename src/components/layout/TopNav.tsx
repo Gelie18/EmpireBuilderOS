@@ -1,5 +1,7 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+
 interface TopNavProps {
   companyName: string;
 }
@@ -43,7 +45,13 @@ function EmpireBuilderLogo() {
 }
 
 export default function TopNav({ companyName }: TopNavProps) {
-  const isLive = process.env.NEXT_PUBLIC_MODE === 'live';
+  const isLive  = process.env.NEXT_PUBLIC_MODE === 'live';
+  const router  = useRouter();
+
+  const handleLogout = () => {
+    document.cookie = 'eb-auth=; path=/; max-age=0';
+    router.push('/login');
+  };
 
   return (
     <header
@@ -113,6 +121,30 @@ export default function TopNav({ companyName }: TopNavProps) {
             {isLive ? 'Live · QBO' : 'Demo · Oct 2026'}
           </span>
         </div>
+
+        {/* Logout */}
+        <button
+          onClick={handleLogout}
+          className="hidden sm:flex items-center gap-1.5 cursor-pointer transition-opacity hover:opacity-70"
+          style={{
+            background: 'transparent',
+            border: '1px solid rgba(255,255,255,0.12)',
+            borderRadius: 6,
+            padding: '5px 10px',
+            color: 'rgba(255,255,255,0.40)',
+            fontSize: 11,
+            fontWeight: 600,
+            letterSpacing: '0.06em',
+            textTransform: 'uppercase',
+          }}
+        >
+          <svg width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" strokeLinecap="round" strokeLinejoin="round"/>
+            <polyline points="16 17 21 12 16 7" strokeLinecap="round" strokeLinejoin="round"/>
+            <line x1="21" y1="12" x2="9" y2="12" strokeLinecap="round"/>
+          </svg>
+          <span className="hidden md:inline">Log Out</span>
+        </button>
       </div>
     </header>
   );

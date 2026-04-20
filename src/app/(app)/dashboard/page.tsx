@@ -1,8 +1,10 @@
 'use client';
 
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { getDemoActionItems, getDemoMoM, getDemoKpis, getDemoAnomalies } from '@/lib/data/demo-data';
 import AnomalyBanner from '@/components/dashboard/AnomalyBanner';
+import PeriodSelector, { type PeriodKey, PERIOD_OPTIONS } from '@/components/ui/PeriodSelector';
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
 } from 'recharts';
@@ -87,6 +89,45 @@ const EXEC_METRICS = [
   },
 ];
 
+// Period-aware KPI data
+const PERIOD_DATA: Record<PeriodKey, {
+  revenue: string; revSub: string; revDelta: string; revDeltaColor: string; revDeltaBg: string;
+  expenses: string; expSub: string; expDelta: string; expDeltaColor: string; expDeltaBg: string;
+  netIncome: string; niSub: string; niDelta: string; niDeltaColor: string; niDeltaBg: string;
+  cashBalance: string; cashSub: string; cashDelta: string; cashDeltaColor: string; cashDeltaBg: string;
+}> = {
+  current: {
+    revenue: '$1.31M', revSub: 'vs $1.27M budget', revDelta: '+3.3% vs plan', revDeltaColor: '#059669', revDeltaBg: 'rgba(5,150,105,0.10)',
+    expenses: '$1.24M', expSub: 'COGS + OpEx', expDelta: '+11.7% vs Sep', expDeltaColor: '#DC2626', expDeltaBg: 'rgba(220,38,38,0.10)',
+    netIncome: '$71.4K', niSub: 'vs $109.2K budget', niDelta: '–34.6% vs plan', niDeltaColor: '#DC2626', niDeltaBg: 'rgba(220,38,38,0.10)',
+    cashBalance: '$873.5K', cashSub: '~8.2 months runway', cashDelta: '+2.6% vs Sep', cashDeltaColor: '#059669', cashDeltaBg: 'rgba(5,150,105,0.10)',
+  },
+  last: {
+    revenue: '$1.27M', revSub: 'vs $1.25M budget', revDelta: '+1.8% vs plan', revDeltaColor: '#059669', revDeltaBg: 'rgba(5,150,105,0.10)',
+    expenses: '$1.10M', expSub: 'COGS + OpEx', expDelta: '+2.1% vs Aug', expDeltaColor: '#DC2626', expDeltaBg: 'rgba(220,38,38,0.10)',
+    netIncome: '$108.4K', niSub: 'vs $105K budget', niDelta: '+3.2% vs plan', niDeltaColor: '#059669', niDeltaBg: 'rgba(5,150,105,0.10)',
+    cashBalance: '$851.0K', cashSub: '~8.0 months runway', cashDelta: '+0.5% vs Aug', cashDeltaColor: '#059669', cashDeltaBg: 'rgba(5,150,105,0.10)',
+  },
+  last3: {
+    revenue: '$3.82M', revSub: 'Aug–Oct 2026 total', revDelta: '+3.8% avg growth', revDeltaColor: '#059669', revDeltaBg: 'rgba(5,150,105,0.10)',
+    expenses: '$3.39M', expSub: 'COGS + OpEx combined', expDelta: '+5.1% vs prior 3M', expDeltaColor: '#DC2626', expDeltaBg: 'rgba(220,38,38,0.10)',
+    netIncome: '$247.3K', niSub: '3-month total NI', niDelta: '–8.4% vs prior 3M', niDeltaColor: '#DC2626', niDeltaBg: 'rgba(220,38,38,0.10)',
+    cashBalance: '$873.5K', cashSub: 'End of period cash', cashDelta: '+4.6% over 3M', cashDeltaColor: '#059669', cashDeltaBg: 'rgba(5,150,105,0.10)',
+  },
+  ytd: {
+    revenue: '$12.85M', revSub: 'Jan–Oct 2026 total', revDelta: '+18.4% YoY', revDeltaColor: '#059669', revDeltaBg: 'rgba(5,150,105,0.10)',
+    expenses: '$11.32M', expSub: 'YTD COGS + OpEx', expDelta: '+19.1% YoY', expDeltaColor: '#DC2626', expDeltaBg: 'rgba(220,38,38,0.10)',
+    netIncome: '$847.2K', niSub: 'YTD net income', niDelta: '+6.2% YoY', niDeltaColor: '#059669', niDeltaBg: 'rgba(5,150,105,0.10)',
+    cashBalance: '$873.5K', cashSub: 'Current cash on hand', cashDelta: '+4.6% vs Jan', cashDeltaColor: '#059669', cashDeltaBg: 'rgba(5,150,105,0.10)',
+  },
+  last12: {
+    revenue: '$15.64M', revSub: 'Trailing 12-month total', revDelta: '+18.4% vs prior 12M', revDeltaColor: '#059669', revDeltaBg: 'rgba(5,150,105,0.10)',
+    expenses: '$13.72M', expSub: 'COGS + OpEx TTM', expDelta: '+17.2% vs prior 12M', expDeltaColor: '#DC2626', expDeltaBg: 'rgba(220,38,38,0.10)',
+    netIncome: '$1.12M', niSub: 'Trailing 12-month NI', niDelta: '+8.7% vs prior 12M', niDeltaColor: '#059669', niDeltaBg: 'rgba(5,150,105,0.10)',
+    cashBalance: '$873.5K', cashSub: 'Current cash on hand', cashDelta: '+4.6% since Nov 2025', cashDeltaColor: '#059669', cashDeltaBg: 'rgba(5,150,105,0.10)',
+  },
+};
+
 // Quick-access report links
 const REPORTS = [
   { href: '/pnl',           label: 'P&L',            sub: 'Budget vs Actuals',   accent: 'var(--color-green)'  },
@@ -108,6 +149,8 @@ const STATUS_LABELS: Record<string, { label: string; color: string }> = {
 
 export default function DashboardPage() {
   const router = useRouter();
+  const [period, setPeriod] = useState<PeriodKey>('current');
+  const pd = PERIOD_DATA[period];
 
   return (
     <div className="flex flex-col gap-5">
@@ -156,21 +199,7 @@ export default function DashboardPage() {
             >
               ⚠ 2 Priority Actions
             </span>
-            <span
-              style={{
-                background:    'var(--color-blue-d)',
-                border:        '1px solid var(--color-border2)',
-                color:         'var(--color-blue)',
-                fontSize:      12,
-                fontWeight:    700,
-                letterSpacing: '0.05em',
-                textTransform: 'uppercase',
-                padding:       '5px 14px',
-                borderRadius:  5,
-              }}
-            >
-              Oct 2026
-            </span>
+            <PeriodSelector value={period} onChange={setPeriod} />
           </div>
         </div>
       </div>
@@ -263,9 +292,34 @@ export default function DashboardPage() {
         })}
       </div>
 
-      {/* ── 4 KPI cards — all clickable ── */}
+      {/* ── 4 KPI cards — period-aware ── */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {EXEC_METRICS.map((m) => (
+        {[
+          {
+            id: 'revenue', label: 'Revenue', href: '/mom',
+            value: pd.revenue, sub: pd.revSub, delta: pd.revDelta,
+            deltaColor: pd.revDeltaColor, deltaBg: pd.revDeltaBg,
+            valueColor: 'var(--color-text)', accentColor: 'var(--color-green)',
+          },
+          {
+            id: 'expenses', label: 'Total Expenses', href: '/pnl',
+            value: pd.expenses, sub: pd.expSub, delta: pd.expDelta,
+            deltaColor: pd.expDeltaColor, deltaBg: pd.expDeltaBg,
+            valueColor: 'var(--color-text)', accentColor: 'var(--color-red)',
+          },
+          {
+            id: 'ni', label: 'Net Income', href: '/pnl',
+            value: pd.netIncome, sub: pd.niSub, delta: pd.niDelta,
+            deltaColor: pd.niDeltaColor, deltaBg: pd.niDeltaBg,
+            valueColor: pd.niDeltaColor, accentColor: pd.niDeltaColor,
+          },
+          {
+            id: 'cash', label: 'Cash on Hand', href: '/cashflow',
+            value: pd.cashBalance, sub: pd.cashSub, delta: pd.cashDelta,
+            deltaColor: pd.cashDeltaColor, deltaBg: pd.cashDeltaBg,
+            valueColor: 'var(--color-text)', accentColor: 'var(--color-blue)',
+          },
+        ].map((m) => (
           <div
             key={m.id}
             role="button"
@@ -355,6 +409,9 @@ export default function DashboardPage() {
             </div>
           </div>
         ))}
+      </div>
+      <div style={{ fontSize: 11, color: 'var(--color-muted)', marginTop: -8 }}>
+        Showing: {PERIOD_OPTIONS.find((p) => p.key === period)?.sublabel}
       </div>
 
       {/* ── Revenue & NI Trend Chart ── */}
