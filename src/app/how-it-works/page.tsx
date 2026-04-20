@@ -8,35 +8,27 @@ function TopBar() {
   return (
     <header style={{
       position: 'sticky', top: 0, zIndex: 50,
-      background: 'rgba(26,28,46,0.95)',
-      backdropFilter: 'blur(12px)',
-      borderBottom: '1px solid rgba(255,255,255,0.08)',
-      padding: '0 24px',
-      height: 52,
+      background: 'rgba(26,28,46,0.97)',
+      backdropFilter: 'blur(16px)',
+      borderBottom: '1px solid rgba(255,255,255,0.10)',
+      padding: '0 40px',
+      height: 60,
       display: 'flex', alignItems: 'center', justifyContent: 'space-between',
     }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-        <button
-          onClick={() => router.push('/demo-hub')}
-          style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, color: 'rgba(255,255,255,0.55)', fontSize: 12, fontWeight: 600, letterSpacing: '0.06em', fontFamily: 'inherit', padding: 0, textTransform: 'uppercase' }}
-        >
-          <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-            <path d="M19 12H5M12 19l-7-7 7-7" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-          Demo Hub
-        </button>
-      </div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
-        <button
-          onClick={() => router.push('/packages')}
-          style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.45)', fontSize: 12, fontWeight: 600, letterSpacing: '0.06em', fontFamily: 'inherit', padding: 0, textTransform: 'uppercase' }}
-        >
+      <button
+        onClick={() => router.push('/demo-hub')}
+        style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, color: 'rgba(255,255,255,0.50)', fontSize: 13, fontWeight: 700, letterSpacing: '0.08em', fontFamily: 'inherit', padding: 0, textTransform: 'uppercase' }}
+      >
+        <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+          <path d="M19 12H5M12 19l-7-7 7-7" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+        Demo Hub
+      </button>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
+        <button onClick={() => router.push('/packages')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.50)', fontSize: 13, fontWeight: 700, letterSpacing: '0.08em', fontFamily: 'inherit', padding: 0, textTransform: 'uppercase' }}>
           Packages
         </button>
-        <button
-          onClick={() => router.push('/demo-hub')}
-          style={{ background: 'rgba(232,184,75,0.12)', border: '1px solid rgba(232,184,75,0.30)', borderRadius: 6, padding: '6px 14px', color: '#E8B84B', fontSize: 11, fontWeight: 700, letterSpacing: '0.08em', fontFamily: 'inherit', cursor: 'pointer', textTransform: 'uppercase' }}
-        >
+        <button onClick={() => router.push('/demo-hub')} style={{ background: '#E8B84B', border: 'none', borderRadius: 7, padding: '8px 20px', color: '#1A1C2E', fontSize: 12, fontWeight: 800, letterSpacing: '0.10em', fontFamily: 'inherit', cursor: 'pointer', textTransform: 'uppercase' }}>
           Exit Demo
         </button>
       </div>
@@ -44,43 +36,34 @@ function TopBar() {
   );
 }
 
-const STATS = [
-  { value: '80%', label: 'Automated', sub: 'Repetitive work handled by AI' },
-  { value: '20%', label: 'Human Judgement', sub: 'Strategic decisions retained by your team' },
-  { value: '10×', label: 'More Productive', sub: 'Efficiency multiplier across Finance, Ops & HR' },
-];
-
 const PHASES = [
   {
     num: '01',
     weeks: 'Weeks 1–2',
     title: 'Scope',
     subtitle: 'Map the function',
+    color: '#1D44BF',
     desc: 'We embed on-site with your team to audit existing workflows, identify automation opportunities, and produce a signed build plan. You know exactly what gets built before a single line of code is written.',
-    items: ['Workflow audit', 'Opportunity map', 'Signed build plan', 'ROI projection'],
+    items: ['On-site workflow audit', 'Full opportunity map', 'Signed build plan', 'ROI projection'],
   },
   {
     num: '02',
     weeks: 'Weeks 3–8',
     title: 'Build',
     subtitle: 'Build on your data',
+    color: '#1D44BF',
     desc: 'Our team trains AI on your actual data, wires integrations to your existing systems, and builds dashboards and automations inside your environment. No generic templates — everything is built to your workflows.',
-    items: ['AI trained on your data', 'Dashboards + alerts', 'ERP / HRIS integrations', 'Embedded build — no handoff lag'],
+    items: ['AI trained on your data', 'Dashboards + alerts live', 'ERP / HRIS integrations', 'Embedded build — no lag'],
   },
   {
     num: '03',
     weeks: 'Weeks 9–12',
-    title: 'Ship & Extend',
+    title: 'Ship',
     subtitle: 'Deploy and iterate',
-    desc: 'We go live in production, run hands-on team training, and stay in hypercare for two weeks. The final readout maps what\'s working and where we expand in Q2.',
-    items: ['Live in production', 'Team training', 'Hypercare period', 'Quarterly expansion plan'],
+    color: '#E8B84B',
+    desc: "We go live in production, run hands-on team training, and stay in hypercare for two weeks. The final readout maps what's working and where we expand next quarter.",
+    items: ['Live in production', 'Team training session', 'Two-week hypercare', 'Quarterly expansion plan'],
   },
-];
-
-const INTEGRATIONS = [
-  { category: 'Finance', tools: ['QuickBooks', 'NetSuite', 'Sage Intacct', 'Ramp'] },
-  { category: 'HR & People', tools: ['Rippling', 'Gusto', 'Workday', 'BambooHR'] },
-  { category: 'Ops & Data', tools: ['Notion', 'Slack', 'Airtable', 'Google Workspace'] },
 ];
 
 const EXAMPLES = [
@@ -89,6 +72,13 @@ const EXAMPLES = [
   'Investor updates', 'Expense coding', 'Renewal reminders',
   'KPI dashboards', 'Variance narratives', 'Board deck population',
   'Anomaly alerts', 'Vendor tracking', 'SOP maintenance',
+  'Cash flow forecasting', 'Payroll reconciliation', 'AR/AP aging',
+];
+
+const INTEGRATIONS = [
+  { category: 'Finance', color: '#1D44BF', tools: ['QuickBooks', 'NetSuite', 'Sage Intacct', 'Ramp'] },
+  { category: 'HR & People', color: '#0A8A5C', tools: ['Rippling', 'Gusto', 'Workday', 'BambooHR'] },
+  { category: 'Ops & Data', color: '#7C3AED', tools: ['Notion', 'Slack', 'Airtable', 'Google Workspace'] },
 ];
 
 export default function HowItWorksPage() {
@@ -100,64 +90,83 @@ export default function HowItWorksPage() {
   return (
     <>
       <style>{`
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(16px) } to { opacity: 1; transform: translateY(0) } }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { background: #1A1C2E !important; }
+
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(24px) } to { opacity: 1; transform: translateY(0) } }
+
+        @media (max-width: 768px) {
+          .stat-grid { grid-template-columns: 1fr !important; }
+          .two-col { grid-template-columns: 1fr !important; }
+          .phase-grid { grid-template-columns: 1fr !important; }
+          .int-grid { grid-template-columns: 1fr !important; }
+          .hero-h1 { font-size: 52px !important; }
+          .stat-val { font-size: 88px !important; }
+        }
       `}</style>
 
-      <div style={{ minHeight: '100vh', background: '#1A1C2E', color: '#FFFFFF', fontFamily: '"DM Sans", system-ui, sans-serif' }}>
+      <div style={{ background: '#1A1C2E', color: '#FFFFFF', fontFamily: '"DM Sans", system-ui, sans-serif', overflowX: 'hidden' }}>
         <TopBar />
 
-        {/* Hero */}
-        <section style={{ padding: '72px 24px 64px', textAlign: 'center', maxWidth: 720, margin: '0 auto', animation: 'fadeUp 0.6s ease both' }}>
-          <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#E8B84B', marginBottom: 16 }}>
+        {/* ── HERO ── */}
+        <section style={{ padding: '96px 40px 80px', maxWidth: 1100, margin: '0 auto', animation: 'fadeUp 0.7s ease both' }}>
+          <div style={{ fontSize: 12, fontWeight: 800, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#E8B84B', marginBottom: 24 }}>
             Empire Builder · How It Works
           </div>
-          <h1 style={{ fontSize: 42, fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.02em', marginBottom: 18 }}>
-            We automate the work your Finance,<br />
-            <span style={{ color: '#1D44BF' }}>HR & Ops teams</span> do every week
+          <h1 className="hero-h1" style={{ fontSize: 72, fontWeight: 900, lineHeight: 1.02, letterSpacing: '-0.03em', maxWidth: 900, marginBottom: 32 }}>
+            We automate the work your team does{' '}
+            <span style={{ color: '#1D44BF' }}>every single week.</span>
           </h1>
-          <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.55)', lineHeight: 1.7 }}>
-            Most companies aren't losing to competitors. They're losing to their own administrative burden.
-            We eliminate it — systematically, in 90 days.
+          <p style={{ fontSize: 20, color: 'rgba(255,255,255,0.55)', lineHeight: 1.65, maxWidth: 620, marginBottom: 44 }}>
+            Most companies aren't losing to competitors. They're losing to their own
+            administrative burden. We eliminate it — systematically, in 90 days.
           </p>
+          <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
+            <button onClick={() => router.push('/packages')} style={{ padding: '16px 36px', background: '#E8B84B', color: '#1A1C2E', border: 'none', borderRadius: 9, fontSize: 14, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', cursor: 'pointer', fontFamily: 'inherit' }}>
+              See Packages
+            </button>
+            <button onClick={() => router.push('/dashboard')} style={{ padding: '16px 36px', background: 'transparent', color: '#FFFFFF', border: '1px solid rgba(255,255,255,0.20)', borderRadius: 9, fontSize: 14, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', cursor: 'pointer', fontFamily: 'inherit' }}>
+              View Finance Demo
+            </button>
+          </div>
         </section>
 
-        {/* Stats bar */}
-        <section style={{ borderTop: '1px solid rgba(255,255,255,0.08)', borderBottom: '1px solid rgba(255,255,255,0.08)', padding: '0', background: 'rgba(255,255,255,0.02)' }}>
-          <div style={{ maxWidth: 860, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', animation: 'fadeUp 0.6s 0.1s ease both' }}>
-            {STATS.map((s, i) => (
-              <div key={s.value} style={{
-                padding: '36px 24px',
-                textAlign: 'center',
-                borderRight: i < 2 ? '1px solid rgba(255,255,255,0.08)' : 'none',
-              }}>
-                <div style={{ fontSize: 44, fontWeight: 900, color: '#1D44BF', lineHeight: 1, letterSpacing: '-0.02em' }}>{s.value}</div>
-                <div style={{ fontSize: 13, fontWeight: 700, color: '#FFFFFF', marginTop: 6, textTransform: 'uppercase', letterSpacing: '0.08em' }}>{s.label}</div>
-                <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.40)', marginTop: 4, lineHeight: 1.5 }}>{s.sub}</div>
+        {/* ── STATS BAR ── */}
+        <section style={{ background: '#1D44BF', padding: '0' }}>
+          <div className="stat-grid" style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(3,1fr)' }}>
+            {[
+              { val: '80%', label: 'Automated', sub: 'Repetitive work handled by AI' },
+              { val: '20%', label: 'Human Judgement', sub: 'Strategic decisions stay with your team' },
+              { val: '10×', label: 'More Productive', sub: 'Efficiency multiplier across Finance, Ops & HR' },
+            ].map((s, i) => (
+              <div key={s.val} style={{ padding: '56px 48px', borderRight: i < 2 ? '1px solid rgba(255,255,255,0.15)' : 'none', textAlign: 'center' }}>
+                <div className="stat-val" style={{ fontSize: 104, fontWeight: 900, color: '#FFFFFF', lineHeight: 1, letterSpacing: '-0.04em' }}>{s.val}</div>
+                <div style={{ fontSize: 16, fontWeight: 800, color: '#E8B84B', marginTop: 10, textTransform: 'uppercase', letterSpacing: '0.12em' }}>{s.label}</div>
+                <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.60)', marginTop: 6, lineHeight: 1.5 }}>{s.sub}</div>
               </div>
             ))}
           </div>
         </section>
 
-        {/* What we do */}
-        <section style={{ maxWidth: 860, margin: '0 auto', padding: '72px 24px 56px', animation: 'fadeUp 0.6s 0.15s ease both' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center' }}>
+        {/* ── WHAT WE BUILD ── */}
+        <section style={{ background: '#FFFFFF', padding: '96px 40px' }}>
+          <div className="two-col" style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center' }}>
             <div>
-              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#E8B84B', marginBottom: 14 }}>What We Build</div>
-              <h2 style={{ fontSize: 30, fontWeight: 900, lineHeight: 1.2, letterSpacing: '-0.01em', marginBottom: 16 }}>
-                AI that lives inside your existing workflows
+              <div style={{ fontSize: 12, fontWeight: 800, letterSpacing: '0.20em', textTransform: 'uppercase', color: '#1D44BF', marginBottom: 20 }}>What We Build</div>
+              <h2 style={{ fontSize: 52, fontWeight: 900, color: '#1A1C2E', lineHeight: 1.08, letterSpacing: '-0.025em', marginBottom: 24 }}>
+                AI that lives inside your existing workflows.
               </h2>
-              <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.55)', lineHeight: 1.7, marginBottom: 20 }}>
-                We don't sell software subscriptions or plug-in tools. We embed our team inside your business,
-                build custom AI on your actual data, and hand you a live system — in 90 days.
+              <p style={{ fontSize: 17, color: '#444', lineHeight: 1.75, marginBottom: 20 }}>
+                We don't sell software subscriptions or plug-in tools. We embed our team inside your
+                business, build custom AI on your actual data, and hand you a live system — in 90 days.
               </p>
-              <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.55)', lineHeight: 1.7 }}>
-                Every engagement covers a specific function: Finance, HR, or Operations. Each one is trained
-                on your data, connected to your existing platforms, and built to match how your team actually works.
+              <p style={{ fontSize: 17, color: '#444', lineHeight: 1.75 }}>
+                Every engagement covers a specific function: Finance, HR, or Operations. Each one is
+                trained on your data, connected to your existing platforms, and built to match how your
+                team actually works.
               </p>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               {[
                 { icon: '📊', text: 'Variance analysis with AI-written narrative' },
                 { icon: '🚨', text: 'Anomaly alerts on spend, margin & vendors' },
@@ -166,39 +175,49 @@ export default function HowItWorksPage() {
                 { icon: '🤖', text: 'Employee-facing AI for HR & onboarding' },
                 { icon: '⚙️', text: 'Automated status rollups for Ops & PM' },
               ].map((item) => (
-                <div key={item.text} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 16px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 8 }}>
-                  <span style={{ fontSize: 18 }}>{item.icon}</span>
-                  <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.70)', lineHeight: 1.4 }}>{item.text}</span>
+                <div key={item.text} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '16px 20px', background: '#F4F6FF', border: '1px solid #E0E6FF', borderRadius: 10 }}>
+                  <span style={{ fontSize: 22 }}>{item.icon}</span>
+                  <span style={{ fontSize: 15, color: '#1A1C2E', fontWeight: 600, lineHeight: 1.4 }}>{item.text}</span>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* 3-phase process */}
-        <section style={{ background: 'rgba(255,255,255,0.02)', borderTop: '1px solid rgba(255,255,255,0.07)', borderBottom: '1px solid rgba(255,255,255,0.07)', padding: '72px 24px' }}>
-          <div style={{ maxWidth: 860, margin: '0 auto' }}>
-            <div style={{ textAlign: 'center', marginBottom: 52 }}>
-              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#E8B84B', marginBottom: 12 }}>The Engagement Model</div>
-              <h2 style={{ fontSize: 30, fontWeight: 900, letterSpacing: '-0.01em' }}>A 90-day build. Guaranteed live.</h2>
-              <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.45)', marginTop: 10 }}>25% fee credit if the live system isn't delivered by Day 90.</p>
+        {/* ── 3-PHASE PROCESS ── */}
+        <section style={{ background: '#1A1C2E', padding: '96px 40px' }}>
+          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+            <div style={{ marginBottom: 64 }}>
+              <div style={{ fontSize: 12, fontWeight: 800, letterSpacing: '0.20em', textTransform: 'uppercase', color: '#E8B84B', marginBottom: 18 }}>The Engagement Model</div>
+              <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16 }}>
+                <h2 style={{ fontSize: 56, fontWeight: 900, color: '#FFFFFF', lineHeight: 1.05, letterSpacing: '-0.025em' }}>
+                  A 90-day build.<br />
+                  <span style={{ color: '#E8B84B' }}>Guaranteed live.</span>
+                </h2>
+                <div style={{ padding: '16px 24px', background: 'rgba(232,184,75,0.10)', border: '1px solid rgba(232,184,75,0.30)', borderRadius: 10 }}>
+                  <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.50)', marginBottom: 4 }}>Delivery guarantee</div>
+                  <div style={{ fontSize: 16, fontWeight: 700, color: '#E8B84B' }}>25% fee credit if not live by Day 90</div>
+                </div>
+              </div>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
+            <div className="phase-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 2 }}>
               {PHASES.map((phase, i) => (
-                <div key={phase.num} style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.09)', borderRadius: 12, padding: '28px 24px', position: 'relative', overflow: 'hidden' }}>
-                  {/* Accent line */}
-                  <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 3, background: `linear-gradient(90deg, #1D44BF, #E8B84B)`, opacity: 0.6 + i * 0.2 }} />
-                  <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.14em', color: 'rgba(255,255,255,0.25)', marginBottom: 4 }}>PHASE {phase.num}</div>
-                  <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.10em', color: '#E8B84B', textTransform: 'uppercase', marginBottom: 12 }}>{phase.weeks}</div>
-                  <h3 style={{ fontSize: 20, fontWeight: 900, color: '#FFFFFF', marginBottom: 4 }}>{phase.title}</h3>
-                  <div style={{ fontSize: 12, color: '#1D44BF', fontWeight: 600, marginBottom: 14, letterSpacing: '0.04em' }}>{phase.subtitle}</div>
-                  <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.50)', lineHeight: 1.65, marginBottom: 18 }}>{phase.desc}</p>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
+                <div key={phase.num} style={{
+                  background: i === 2 ? '#E8B84B' : i === 1 ? '#1D44BF' : '#0F1120',
+                  padding: '52px 44px',
+                  border: i === 0 ? '1px solid rgba(255,255,255,0.08)' : 'none',
+                }}>
+                  <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.18em', color: i === 2 ? 'rgba(26,28,46,0.50)' : 'rgba(255,255,255,0.30)', marginBottom: 6 }}>PHASE {phase.num}</div>
+                  <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.10em', textTransform: 'uppercase', color: i === 2 ? '#1A1C2E' : '#E8B84B', marginBottom: 18 }}>{phase.weeks}</div>
+                  <div style={{ fontSize: 52, fontWeight: 900, color: i === 2 ? '#1A1C2E' : '#FFFFFF', lineHeight: 1, marginBottom: 6, letterSpacing: '-0.025em' }}>{phase.title}</div>
+                  <div style={{ fontSize: 14, fontWeight: 600, color: i === 2 ? 'rgba(26,28,46,0.65)' : 'rgba(255,255,255,0.55)', marginBottom: 24 }}>{phase.subtitle}</div>
+                  <p style={{ fontSize: 15, color: i === 2 ? 'rgba(26,28,46,0.75)' : 'rgba(255,255,255,0.70)', lineHeight: 1.7, marginBottom: 28 }}>{phase.desc}</p>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                     {phase.items.map((item) => (
-                      <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                        <div style={{ width: 5, height: 5, borderRadius: '50%', background: '#1D44BF', flexShrink: 0 }} />
-                        <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.60)' }}>{item}</span>
+                      <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                        <div style={{ width: 6, height: 6, borderRadius: '50%', background: i === 2 ? '#1A1C2E' : '#E8B84B', flexShrink: 0 }} />
+                        <span style={{ fontSize: 14, fontWeight: 600, color: i === 2 ? '#1A1C2E' : 'rgba(255,255,255,0.80)' }}>{item}</span>
                       </div>
                     ))}
                   </div>
@@ -208,46 +227,41 @@ export default function HowItWorksPage() {
           </div>
         </section>
 
-        {/* What can be automated */}
-        <section style={{ maxWidth: 860, margin: '0 auto', padding: '72px 24px' }}>
-          <div style={{ textAlign: 'center', marginBottom: 40 }}>
-            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#E8B84B', marginBottom: 12 }}>What Gets Automated</div>
-            <h2 style={{ fontSize: 28, fontWeight: 900, letterSpacing: '-0.01em' }}>If your team does it every week on a schedule, we automate it.</h2>
-          </div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, justifyContent: 'center' }}>
-            {EXAMPLES.map((ex) => (
-              <span key={ex} style={{
-                fontSize: 12, fontWeight: 600, color: 'rgba(255,255,255,0.65)',
-                background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.09)',
-                borderRadius: 6, padding: '7px 14px',
-              }}>
-                {ex}
+        {/* ── WHAT GETS AUTOMATED ── */}
+        <section style={{ background: '#F4F6FF', padding: '96px 40px' }}>
+          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+            <div style={{ marginBottom: 52 }}>
+              <div style={{ fontSize: 12, fontWeight: 800, letterSpacing: '0.20em', textTransform: 'uppercase', color: '#1D44BF', marginBottom: 16 }}>What Gets Automated</div>
+              <h2 style={{ fontSize: 52, fontWeight: 900, color: '#1A1C2E', lineHeight: 1.08, letterSpacing: '-0.025em', maxWidth: 700 }}>
+                If your team does it on a schedule, we automate it.
+              </h2>
+            </div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
+              {EXAMPLES.map((ex) => (
+                <span key={ex} style={{ fontSize: 15, fontWeight: 600, color: '#1A1C2E', background: '#FFFFFF', border: '1.5px solid #D0D8FF', borderRadius: 8, padding: '10px 18px', letterSpacing: '0.01em' }}>
+                  {ex}
+                </span>
+              ))}
+              <span style={{ fontSize: 15, fontWeight: 700, color: '#FFFFFF', background: '#1D44BF', border: '1.5px solid #1D44BF', borderRadius: 8, padding: '10px 18px' }}>
+                + anything else →
               </span>
-            ))}
-            <span style={{
-              fontSize: 12, fontWeight: 700, color: '#1D44BF',
-              background: 'rgba(29,68,191,0.08)', border: '1px solid rgba(29,68,191,0.25)',
-              borderRadius: 6, padding: '7px 14px',
-            }}>
-              + anything else →
-            </span>
+            </div>
           </div>
         </section>
 
-        {/* Integrations */}
-        <section style={{ background: 'rgba(255,255,255,0.02)', borderTop: '1px solid rgba(255,255,255,0.07)', padding: '64px 24px' }}>
-          <div style={{ maxWidth: 860, margin: '0 auto' }}>
-            <div style={{ textAlign: 'center', marginBottom: 40 }}>
-              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#E8B84B', marginBottom: 12 }}>Integrations</div>
-              <h2 style={{ fontSize: 24, fontWeight: 900 }}>Built on your existing stack</h2>
-            </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
+        {/* ── INTEGRATIONS ── */}
+        <section style={{ background: '#1A1C2E', padding: '96px 40px' }}>
+          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+            <div style={{ fontSize: 12, fontWeight: 800, letterSpacing: '0.20em', textTransform: 'uppercase', color: '#E8B84B', marginBottom: 18 }}>Integrations</div>
+            <h2 style={{ fontSize: 52, fontWeight: 900, color: '#FFFFFF', letterSpacing: '-0.025em', marginBottom: 56 }}>Built on your existing stack.</h2>
+            <div className="int-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 16 }}>
               {INTEGRATIONS.map((group) => (
-                <div key={group.category} style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 10, padding: '20px 20px' }}>
-                  <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#E8B84B', marginBottom: 14 }}>{group.category}</div>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                <div key={group.category} style={{ background: '#FFFFFF', borderRadius: 12, padding: '36px 36px', overflow: 'hidden', position: 'relative' }}>
+                  <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 4, background: group.color }} />
+                  <div style={{ fontSize: 12, fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', color: group.color, marginBottom: 24 }}>{group.category}</div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
                     {group.tools.map((tool) => (
-                      <div key={tool} style={{ fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.65)' }}>{tool}</div>
+                      <div key={tool} style={{ fontSize: 18, fontWeight: 700, color: '#1A1C2E', borderBottom: '1px solid #F0F0F0', paddingBottom: 14 }}>{tool}</div>
                     ))}
                   </div>
                 </div>
@@ -256,32 +270,31 @@ export default function HowItWorksPage() {
           </div>
         </section>
 
-        {/* CTA */}
-        <section style={{ textAlign: 'center', padding: '80px 24px 96px' }}>
-          <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#E8B84B', marginBottom: 16 }}>Ready to See It Live?</div>
-          <h2 style={{ fontSize: 30, fontWeight: 900, marginBottom: 12, letterSpacing: '-0.01em' }}>Let's get your time back.</h2>
-          <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.45)', marginBottom: 32, lineHeight: 1.6 }}>
-            Explore the Finance OS demo or review the packages to find the right starting point.
-          </p>
-          <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <button
-              onClick={() => router.push('/dashboard')}
-              style={{ padding: '13px 28px', background: '#1D44BF', color: '#FFFFFF', border: 'none', borderRadius: 8, fontSize: 13, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', cursor: 'pointer', fontFamily: 'inherit' }}
-            >
-              View Finance OS Demo
-            </button>
-            <button
-              onClick={() => router.push('/packages')}
-              style={{ padding: '13px 28px', background: 'transparent', color: '#E8B84B', border: '1px solid rgba(232,184,75,0.40)', borderRadius: 8, fontSize: 13, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', cursor: 'pointer', fontFamily: 'inherit' }}
-            >
-              See Packages
-            </button>
+        {/* ── CTA ── */}
+        <section style={{ background: '#1D44BF', padding: '96px 40px', textAlign: 'center' }}>
+          <div style={{ maxWidth: 700, margin: '0 auto' }}>
+            <h2 style={{ fontSize: 64, fontWeight: 900, color: '#FFFFFF', lineHeight: 1.05, letterSpacing: '-0.03em', marginBottom: 20 }}>
+              Let's get your<br />
+              <span style={{ color: '#E8B84B' }}>time back.</span>
+            </h2>
+            <p style={{ fontSize: 18, color: 'rgba(255,255,255,0.65)', lineHeight: 1.65, marginBottom: 44 }}>
+              Explore the Finance OS demo or review the packages to find the right starting point.
+            </p>
+            <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
+              <button onClick={() => router.push('/packages')} style={{ padding: '18px 44px', background: '#E8B84B', color: '#1A1C2E', border: 'none', borderRadius: 10, fontSize: 15, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', cursor: 'pointer', fontFamily: 'inherit' }}>
+                See Packages
+              </button>
+              <button onClick={() => router.push('/dashboard')} style={{ padding: '18px 44px', background: 'transparent', color: '#FFFFFF', border: '2px solid rgba(255,255,255,0.35)', borderRadius: 10, fontSize: 15, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', cursor: 'pointer', fontFamily: 'inherit' }}>
+                View Finance Demo
+              </button>
+            </div>
           </div>
         </section>
 
         {/* Footer */}
-        <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', padding: '20px 24px', textAlign: 'center', fontSize: 11, color: 'rgba(255,255,255,0.18)', letterSpacing: '0.06em' }}>
-          Empire Builder OS · 783 Capital Partners · info@783partners.com
+        <div style={{ background: '#0F1120', padding: '24px 40px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
+          <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.25)', letterSpacing: '0.04em' }}>Empire Builder OS · 783 Capital Partners</span>
+          <a href="mailto:info@783partners.com" style={{ fontSize: 13, color: 'rgba(255,255,255,0.35)', textDecoration: 'none', letterSpacing: '0.04em' }}>info@783partners.com</a>
         </div>
       </div>
     </>
