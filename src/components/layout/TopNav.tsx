@@ -7,38 +7,39 @@ interface TopNavProps {
 }
 
 /**
- * Empire Builder logo — recreates the EMPIRE BUILDER wordmark in CSS.
- * "EMPIRE" in cobalt blue, "BUILDER" in warm gold, geometric bold style.
+ * Empire Builder logo — EMPIRE BUILDER wordmark with stylized geometric M.
+ * M is rendered as two vertical bars + circle dot above (matches brand identity).
+ * "EMPIRE" in cobalt blue, "BUILDER" in warm gold.
  */
 function EmpireBuilderLogo() {
+  const FONT = "'Barlow Condensed', 'DM Sans', system-ui, sans-serif";
   return (
-    <div className="flex flex-col leading-none select-none flex-shrink-0" aria-label="Empire Builder">
-      <span
-        style={{
-          fontFamily: '"DM Sans", system-ui, sans-serif',
-          fontWeight: 900,
-          fontSize: 15,
-          color: '#1D44BF',
-          letterSpacing: '0.12em',
-          lineHeight: 1,
-          textTransform: 'uppercase',
-        }}
-      >
-        Empire
-      </span>
-      <span
-        style={{
-          fontFamily: '"DM Sans", system-ui, sans-serif',
-          fontWeight: 900,
-          fontSize: 10,
-          color: '#E8B84B',
-          letterSpacing: '0.22em',
-          lineHeight: 1,
-          marginTop: 2,
-          textTransform: 'uppercase',
-        }}
-      >
-        Builder
+    <div
+      className="select-none flex-shrink-0"
+      style={{ display: 'flex', flexDirection: 'column', gap: 2, lineHeight: 1 }}
+      aria-label="Empire Builder"
+    >
+      {/* EMPIRE row — E + stylized M + PIRE */}
+      <div style={{ display: 'flex', alignItems: 'flex-end', gap: 0 }}>
+        <span style={{ fontFamily: FONT, fontWeight: 900, fontSize: 15, color: '#1D44BF', lineHeight: 1, letterSpacing: '0.04em' }}>
+          E
+        </span>
+        {/* Stylized M: two vertical bars + floating circle dot */}
+        <svg width="12" height="19" viewBox="0 0 12 19" style={{ marginBottom: 1, flexShrink: 0 }} aria-hidden="true">
+          {/* Left bar */}
+          <rect x="0"  y="6" width="3.2" height="12" fill="#1D44BF" rx="0.3" />
+          {/* Right bar */}
+          <rect x="8.8" y="6" width="3.2" height="12" fill="#1D44BF" rx="0.3" />
+          {/* Circle dot above */}
+          <circle cx="6" cy="2.6" r="2.6" fill="#1D44BF" />
+        </svg>
+        <span style={{ fontFamily: FONT, fontWeight: 900, fontSize: 15, color: '#1D44BF', lineHeight: 1, letterSpacing: '0.04em' }}>
+          PIRE
+        </span>
+      </div>
+      {/* BUILDER row */}
+      <span style={{ fontFamily: FONT, fontWeight: 900, fontSize: 10, color: '#E8B84B', letterSpacing: '0.22em', lineHeight: 1 }}>
+        BUILDER
       </span>
     </div>
   );
@@ -97,7 +98,7 @@ export default function TopNav({ companyName }: TopNavProps) {
             className="text-[10px] font-bold uppercase tracking-[0.08em]"
             style={{ color: '#E8B84B' }}
           >
-            Oct 2026
+            Apr 2026
           </span>
         </div>
 
@@ -116,9 +117,9 @@ export default function TopNav({ companyName }: TopNavProps) {
         )}
 
         <div className="flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: '#059669' }} />
+          <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: '#0A8A5C' }} />
           <span className="hidden sm:block text-[11px] font-medium" style={{ color: 'rgba(255,255,255,0.45)' }}>
-            {isLive ? 'Live · QBO' : 'Demo · Oct 2026'}
+            {isLive ? 'Live · QBO' : 'Demo · Apr 2026'}
           </span>
         </div>
 

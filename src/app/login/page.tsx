@@ -11,40 +11,80 @@ const CREDENTIALS = [
   { username: 'ryan',      password: 'empire2026'  },
 ];
 
-// ── Empire Builder wordmark SVG path animation ────────────────────────────────
+// ── Empire Builder wordmark with stylized geometric M ─────────────────────────
 function EmpireLogo({ scale = 1, animate = false }: { scale?: number; animate?: boolean }) {
+  const FONT = "'Barlow Condensed', system-ui, -apple-system, sans-serif";
   return (
     <div style={{ textAlign: 'center', transform: `scale(${scale})`, transformOrigin: 'center' }}>
-      <div style={{
-        fontWeight: 900,
-        fontSize: 52,
-        letterSpacing: '0.18em',
-        color: '#1D44BF',
-        lineHeight: 1,
-        textTransform: 'uppercase',
-        fontFamily: 'system-ui, -apple-system, sans-serif',
-        animation: animate ? 'fadeUp 0.7s ease both' : undefined,
-      }}>
-        Empire
+      {/* EMPIRE row — E + stylized M + PIRE */}
+      <div
+        style={{
+          display: 'inline-flex',
+          alignItems: 'flex-end',
+          justifyContent: 'center',
+          gap: 0,
+          animation: animate ? 'fadeUp 0.7s ease both' : undefined,
+        }}
+      >
+        <span style={{
+          fontFamily: FONT,
+          fontWeight: 900,
+          fontSize: 52,
+          color: '#1D44BF',
+          lineHeight: 1,
+          letterSpacing: '0.03em',
+          textTransform: 'uppercase',
+        }}>
+          E
+        </span>
+        {/* Stylized M: two vertical bars + floating circle dot */}
+        <svg
+          width="44" height="62"
+          viewBox="0 0 44 62"
+          style={{ marginBottom: 5, flexShrink: 0 }}
+          aria-hidden="true"
+        >
+          {/* Left bar — aligns to cap height */}
+          <rect x="0"  y="20" width="12" height="40" fill="#1D44BF" rx="1" />
+          {/* Right bar */}
+          <rect x="32" y="20" width="12" height="40" fill="#1D44BF" rx="1" />
+          {/* Circle dot above the gap */}
+          <circle cx="22" cy="8.5" r="8.5" fill="#1D44BF" />
+        </svg>
+        <span style={{
+          fontFamily: FONT,
+          fontWeight: 900,
+          fontSize: 52,
+          color: '#1D44BF',
+          lineHeight: 1,
+          letterSpacing: '0.03em',
+          textTransform: 'uppercase',
+        }}>
+          PIRE
+        </span>
       </div>
+
+      {/* BUILDER row */}
       <div style={{
+        fontFamily: FONT,
         fontWeight: 900,
         fontSize: 22,
         letterSpacing: '0.38em',
         color: '#E8B84B',
         lineHeight: 1,
         textTransform: 'uppercase',
-        fontFamily: 'system-ui, -apple-system, sans-serif',
-        marginTop: 4,
+        marginTop: 6,
         animation: animate ? 'fadeUp 0.7s 0.15s ease both' : undefined,
       }}>
-        Builder
+        BUILDER
       </div>
+
+      {/* Gradient accent line */}
       <div style={{
-        width: 48,
+        width: 56,
         height: 2,
         background: 'linear-gradient(90deg, #1D44BF, #E8B84B)',
-        margin: '12px auto 0',
+        margin: '14px auto 0',
         borderRadius: 2,
         animation: animate ? 'fadeUp 0.7s 0.3s ease both' : undefined,
       }} />
@@ -340,7 +380,7 @@ export default function LoginPage() {
             justifyContent: 'center',
             gap: 8,
           }}>
-            <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#059669', boxShadow: '0 0 8px rgba(5,150,105,0.6)' }} />
+            <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#0A8A5C', boxShadow: '0 0 8px rgba(10,138,92,0.6)' }} />
             <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.28)', letterSpacing: '0.06em' }}>
               SECURED · PRIVATE DEMO
             </span>
