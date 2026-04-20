@@ -12,7 +12,9 @@ const PAGE_CTX: Record<string, { label: string; chips: string[] }> = {
       'Why is net income below plan?',
       'What needs immediate attention?',
       'Cash and runway status?',
-      'What to tell the board?',
+      'What do I tell the board?',
+      'What are our biggest cost cuts?',
+      'Q4 outlook?',
     ],
   },
   '/pnl': {
@@ -20,16 +22,20 @@ const PAGE_CTX: Record<string, { label: string; chips: string[] }> = {
     chips: [
       'What drove the marketing overage?',
       'Why did gross margin expand?',
-      'Which line items need action?',
+      'Break down OpEx by category',
       'P&L vs last October?',
+      'What is our EBITDA?',
+      'Where can we cut costs?',
     ],
   },
   '/cashflow': {
     label: 'Cash Flow',
     chips: [
       'Cash position and runway?',
-      'Any AR aging concerns?',
+      'AR aging — what to collect now?',
+      'Should we extend AP terms?',
       'November cash outlook?',
+      'What is our break-even?',
       'Liquidity risks to flag?',
     ],
   },
@@ -37,18 +43,33 @@ const PAGE_CTX: Record<string, { label: string; chips: string[] }> = {
     label: 'Balance Sheet',
     chips: [
       'How is working capital trending?',
-      'Any liability concerns?',
-      'Current ratio vs benchmark?',
+      'AR aging breakdown?',
+      'Should we extend AP terms?',
       'What is tying up cash?',
+      'Inventory levels — any risk?',
+      'Tax payment status?',
     ],
   },
   '/backlog': {
-    label: 'Backlog',
+    label: 'Ops Backlog',
     chips: [
-      'What is the highest-risk backlog item?',
       'Wexler contract — next steps?',
       'AR aging action plan?',
+      'IRS payment — are we covered?',
       'Which items need this week?',
+      'Total dollar risk in backlog?',
+      'Which vendor to hold payment on?',
+    ],
+  },
+  '/fin-backlog': {
+    label: 'Financial Backlog',
+    chips: [
+      'Which WIP contracts are blocked?',
+      'Titan Energy — what is the holdup?',
+      'Bellco Systems material delay?',
+      'How much unbilled revenue is aged?',
+      'When does backlog convert to revenue?',
+      'What accelerates billing recognition?',
     ],
   },
   '/revenue': {
@@ -56,26 +77,43 @@ const PAGE_CTX: Record<string, { label: string; chips: string[] }> = {
     chips: [
       'Which product line is underperforming?',
       'Customer concentration risk?',
+      'Scheels account — any risk?',
       'MRR and ARR trend?',
-      'Recurring revenue growth?',
+      'DTC vs wholesale mix shift?',
+      'How do we grow recurring revenue?',
     ],
   },
   '/forecast': {
     label: 'Driver Model',
     chips: [
       'What is the 12-month revenue target?',
+      'Q1 2027 outlook?',
       'Key forecast assumptions?',
-      'Where are the biggest risks?',
-      'What drives the growth rate?',
+      'What breaks the forecast?',
+      'Pipeline to revenue — timing?',
+      'What drives our growth rate?',
+    ],
+  },
+  '/ai-forecast': {
+    label: 'AI Forecast',
+    chips: [
+      'Q4 revenue on track?',
+      'Q1 2027 outlook?',
+      'Where is the forecast most uncertain?',
+      'Marketing normalization impact?',
+      'Enterprise pipeline — when does it close?',
+      'Best case revenue this year?',
     ],
   },
   '/scenarios': {
     label: 'Scenarios',
     chips: [
       'Best vs downside outcome?',
-      'Enterprise pipeline impact?',
       'What breaks our runway?',
-      'Margin sensitivity to COGS?',
+      'Enterprise pipeline impact?',
+      'Margin if COGS rises 2%?',
+      'What if marketing stays at $171K?',
+      'Downside — how long is runway?',
     ],
   },
   '/market': {
@@ -83,7 +121,9 @@ const PAGE_CTX: Record<string, { label: string; chips: string[] }> = {
     chips: [
       'How do we rank vs peers?',
       'Where are we above industry median?',
-      'Biggest competitive gap?',
+      'NI margin gap — how to close it?',
+      'Biggest competitive advantage?',
+      'Freight cost vs competitors?',
       'Macro risks to monitor?',
     ],
   },
@@ -92,17 +132,32 @@ const PAGE_CTX: Record<string, { label: string; chips: string[] }> = {
     chips: [
       'YoY revenue growth summary?',
       'Why did NI margin compress?',
-      'Gross margin trend?',
-      'OpEx growth vs revenue?',
+      'Gross margin trend YoY?',
+      'OpEx growth vs revenue growth?',
+      'What improved most vs last year?',
+      'What got worse vs last year?',
     ],
   },
   '/mom': {
     label: 'Month-over-Month',
     chips: [
       'What changed most vs September?',
-      'Is the marketing spike one-time?',
+      'Is the marketing spike a trend?',
       'Revenue trend healthy?',
       'November outlook?',
+      'Which line improved most?',
+      'What explains the NI drop?',
+    ],
+  },
+  '/daily-revenue': {
+    label: 'Daily Revenue',
+    chips: [
+      'Which day drove the most revenue?',
+      'DTC vs wholesale daily split?',
+      'Email campaign impact on Oct 12?',
+      'Revenue run rate for November?',
+      'Slowest revenue days — why?',
+      'Weekend vs weekday performance?',
     ],
   },
 };
@@ -112,7 +167,9 @@ const DEFAULT_CTX = {
   chips: [
     'Net income miss — root cause?',
     'Cash and runway status?',
-    'What to tell the board?',
+    'What do I tell the board?',
+    'Q4 outlook?',
+    'Biggest cost reduction opportunity?',
     'November priorities?',
   ],
 };
@@ -303,14 +360,19 @@ export default function FloatingChat() {
         </div>
 
         {/* Quick chips */}
-        <div className="px-4 pt-3 pb-2.5 border-t" style={{ borderColor: 'rgba(0,0,0,0.08)' }}>
-          <div className="text-[10px] font-semibold uppercase tracking-[0.08em] mb-2" style={{ color: '#6B7280' }}>
-            Quick questions
+        <div className="border-t flex-shrink-0" style={{ borderColor: 'rgba(0,0,0,0.08)' }}>
+          <div className="px-4 pt-2.5 pb-1 flex items-center justify-between">
+            <div className="text-[10px] font-semibold uppercase tracking-[0.08em]" style={{ color: '#6B7280' }}>
+              Quick questions
+            </div>
+            <div className="text-[10px]" style={{ color: '#9CA3AF' }}>
+              {ctx.label}
+            </div>
           </div>
-          <div className="flex flex-wrap gap-1.5">
+          <div className="px-4 pb-3 flex flex-wrap gap-1.5" style={{ maxHeight: 92, overflowY: 'auto' }}>
             {ctx.chips.map((chip) => (
               <button key={chip} onClick={() => sendMessage(chip)}
-                className="text-[11px] px-2.5 py-1 cursor-pointer transition-all rounded"
+                className="text-[11px] px-2.5 py-1 cursor-pointer transition-all rounded whitespace-nowrap"
                 style={{ border: '1px solid rgba(0,0,0,0.10)', color: '#6B7280', background: '#F8F8FA', fontWeight: 500 }}
                 onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#1D44BF'; e.currentTarget.style.color = '#1D44BF'; e.currentTarget.style.background = 'rgba(29,68,191,0.07)'; }}
                 onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(0,0,0,0.10)'; e.currentTarget.style.color = '#6B7280'; e.currentTarget.style.background = '#F8F8FA'; }}
