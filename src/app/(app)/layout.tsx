@@ -2,6 +2,7 @@ import TopNav from '@/components/layout/TopNav';
 import SideNav from '@/components/layout/SideNav';
 import MobileTabBar from '@/components/layout/MobileTabBar';
 import FloatingChat from '@/components/chat/FloatingChat';
+import SplashScreen from '@/components/layout/SplashScreen';
 import { getAppMode, APP_CONFIG } from '@/lib/config';
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
@@ -11,6 +12,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   // h-dvh = dynamic viewport height — fixes iOS Safari 100vh bug
   return (
     <div className="h-dvh flex flex-col overflow-x-hidden" style={{ background: 'var(--color-bg)' }}>
+      <SplashScreen />
       <TopNav companyName={companyName} />
 
       {/* Body: sidenav + main */}
