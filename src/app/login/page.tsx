@@ -11,57 +11,40 @@ const CREDENTIALS = [
   { username: 'ryan',      password: 'empire2026'  },
 ];
 
-// ── Empire Builder wordmark with stylized geometric M ─────────────────────────
-// M = two solid vertical bars (CSS stretch) + circle dot above — matches brand mark.
+// ── Empire Builder wordmark ───────────────────────────────────────────────────
 function EmpireLogo({ scale = 1, animate = false }: { scale?: number; animate?: boolean }) {
-  const FONT = "'Barlow Condensed', system-ui, -apple-system, sans-serif";
   return (
     <div style={{ textAlign: 'center', transform: `scale(${scale})`, transformOrigin: 'center' }}>
-      {/* EMPIRE row: uses stretch so M bars match exact letter height */}
-      <div
-        style={{
-          display: 'inline-flex',
-          alignItems: 'stretch',
-          justifyContent: 'center',
-          overflow: 'visible',
-          paddingTop: 22,           // make room for the dot above
-          animation: animate ? 'fadeUp 0.7s ease both' : undefined,
-        }}
-      >
-        <span style={{ fontFamily: FONT, fontWeight: 900, fontSize: 52, color: '#1D44BF', lineHeight: 1, letterSpacing: '0.03em' }}>E</span>
-        {/* Stylized M — two bars + dot */}
-        <div style={{ position: 'relative', width: 46, flexShrink: 0, overflow: 'visible' }}>
-          {/* Left bar */}
-          <div style={{ position: 'absolute', top: 6, bottom: 10, left: 0,  width: 14, background: '#1D44BF' }} />
-          {/* Right bar */}
-          <div style={{ position: 'absolute', top: 6, bottom: 10, right: 0, width: 14, background: '#1D44BF' }} />
-          {/* Circle dot — floats above bars */}
-          <div style={{ position: 'absolute', top: -20, left: '50%', transform: 'translateX(-50%)', width: 20, height: 20, borderRadius: '50%', background: '#1D44BF' }} />
-        </div>
-        <span style={{ fontFamily: FONT, fontWeight: 900, fontSize: 52, color: '#1D44BF', lineHeight: 1, letterSpacing: '0.03em' }}>PIRE</span>
-      </div>
-
-      {/* BUILDER row */}
       <div style={{
-        fontFamily: FONT,
+        fontWeight: 900,
+        fontSize: 52,
+        letterSpacing: '0.18em',
+        color: '#1D44BF',
+        lineHeight: 1,
+        textTransform: 'uppercase',
+        fontFamily: 'system-ui, -apple-system, sans-serif',
+        animation: animate ? 'fadeUp 0.7s ease both' : undefined,
+      }}>
+        Empire
+      </div>
+      <div style={{
         fontWeight: 900,
         fontSize: 22,
         letterSpacing: '0.38em',
         color: '#E8B84B',
         lineHeight: 1,
         textTransform: 'uppercase',
-        marginTop: 6,
+        fontFamily: 'system-ui, -apple-system, sans-serif',
+        marginTop: 4,
         animation: animate ? 'fadeUp 0.7s 0.15s ease both' : undefined,
       }}>
-        BUILDER
+        Builder
       </div>
-
-      {/* Gradient accent line */}
       <div style={{
-        width: 56,
+        width: 48,
         height: 2,
         background: 'linear-gradient(90deg, #1D44BF, #E8B84B)',
-        margin: '14px auto 0',
+        margin: '12px auto 0',
         borderRadius: 2,
         animation: animate ? 'fadeUp 0.7s 0.3s ease both' : undefined,
       }} />
