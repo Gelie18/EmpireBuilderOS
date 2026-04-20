@@ -147,8 +147,8 @@ export default function LoginPage() {
 
     setLoading(true);
 
-    // Set auth cookie (30-day session)
-    document.cookie = `eb-auth=authenticated; path=/; max-age=${60 * 60 * 24 * 30}; SameSite=Strict`;
+    // Set auth cookie (session only — clears when browser closes)
+    document.cookie = `eb-auth=authenticated; path=/; SameSite=Strict`;
 
     // Show branded loading overlay, then navigate
     setShowOverlay(true);
