@@ -355,8 +355,8 @@ export default function ForecastPage() {
                   <stop offset="95%" stopColor="#1D44BF" stopOpacity={0} />
                 </linearGradient>
                 <linearGradient id="niGradF" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%"  stopColor="#00A651" stopOpacity={0.25} />
-                  <stop offset="95%" stopColor="#00A651" stopOpacity={0} />
+                  <stop offset="5%"  stopColor="#E8B84B" stopOpacity={0.25} />
+                  <stop offset="95%" stopColor="#E8B84B" stopOpacity={0} />
                 </linearGradient>
               </defs>
               <CartesianGrid stroke="rgba(0,0,0,0.06)" strokeDasharray="3 3" />
@@ -378,10 +378,10 @@ export default function ForecastPage() {
                 x={LAST_ACTUAL_MONTH}
                 stroke="rgba(255,107,53,0.5)"
                 strokeDasharray="4 3"
-                label={{ value: '← Actual | Projected →', fill: '#FF6B35', fontSize: 9, position: 'top' }}
+                label={{ value: '← Actual | Projected →', fill: '#D97706', fontSize: 9, position: 'top' }}
               />
               <Area type="monotone" dataKey="revenue"   stroke="#1D44BF" fill="url(#revGradF)" strokeWidth={2} dot={false} />
-              <Area type="monotone" dataKey="netIncome" stroke="#00A651" fill="url(#niGradF)"  strokeWidth={2} dot={false} />
+              <Area type="monotone" dataKey="netIncome" stroke="#E8B84B" fill="url(#niGradF)"  strokeWidth={2} dot={false} />
             </AreaChart>
           </ResponsiveContainer>
         </div>

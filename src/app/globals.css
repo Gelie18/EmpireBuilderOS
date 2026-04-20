@@ -26,13 +26,13 @@
   --color-gold-dk:  #C9962A;
   --color-gold-d:   rgba(232,184,75,0.12);
 
-  /* Status */
-  --color-green:    #059669;
-  --color-green-d:  rgba(5,150,105,0.09);
-  --color-red:      #DC2626;
-  --color-red-d:    rgba(220,38,38,0.08);
-  --color-orange:   #D97706;
-  --color-orange-d: rgba(217,119,6,0.09);
+  /* Status — toned to complement cobalt/gold palette */
+  --color-green:    #0A8A5C;
+  --color-green-d:  rgba(10,138,92,0.09);
+  --color-red:      #C13333;
+  --color-red-d:    rgba(193,51,51,0.09);
+  --color-orange:   #C27A10;
+  --color-orange-d: rgba(194,122,16,0.09);
 
   --font-body:      'DM Sans', system-ui, -apple-system, sans-serif;
   --font-condensed: 'DM Sans', system-ui, -apple-system, sans-serif;

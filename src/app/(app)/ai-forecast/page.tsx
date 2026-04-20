@@ -628,12 +628,12 @@ export default function AiForecastPage() {
             <ComposedChart data={chartData} margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
               <defs>
                 <linearGradient id="aifRevGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%"  stopColor="#35B8E8" stopOpacity={0.2} />
-                  <stop offset="95%" stopColor="#35B8E8" stopOpacity={0} />
+                  <stop offset="5%"  stopColor="#1D44BF" stopOpacity={0.2} />
+                  <stop offset="95%" stopColor="#1D44BF" stopOpacity={0} />
                 </linearGradient>
                 <linearGradient id="aifNiGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%"  stopColor="#00A651" stopOpacity={0.2} />
-                  <stop offset="95%" stopColor="#00A651" stopOpacity={0} />
+                  <stop offset="5%"  stopColor="#E8B84B" stopOpacity={0.2} />
+                  <stop offset="95%" stopColor="#E8B84B" stopOpacity={0} />
                 </linearGradient>
               </defs>
               <CartesianGrid stroke="rgba(0,0,0,0.06)" strokeDasharray="3 3" />
@@ -650,9 +650,9 @@ export default function AiForecastPage() {
               <ReferenceLine x="Oct '26" stroke="rgba(0,0,0,0.20)" strokeDasharray="4 3"
                 label={{ value: 'Today', fill: '#6B7A8D', fontSize: 9, position: 'top' }} />
               <Legend wrapperStyle={{ fontSize: 11, color: '#6B7A8D' }} />
-              <Area type="monotone" dataKey="Revenue" stroke="#35B8E8" fill="url(#aifRevGrad)"
+              <Area type="monotone" dataKey="Revenue" stroke="#1D44BF" fill="url(#aifRevGrad)"
                 strokeWidth={2} dot={false} strokeDasharray="none" />
-              <Area type="monotone" dataKey="Net Income" stroke="#00A651" fill="url(#aifNiGrad)"
+              <Area type="monotone" dataKey="Net Income" stroke="#E8B84B" fill="url(#aifNiGrad)"
                 strokeWidth={2} dot={false} />
             </ComposedChart>
           </ResponsiveContainer>

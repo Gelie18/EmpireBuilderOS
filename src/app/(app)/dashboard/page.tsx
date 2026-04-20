@@ -473,7 +473,7 @@ export default function DashboardPage() {
                 activeDot={{ r: 6, fill: '#1D44BF', stroke: '#FFFFFF', strokeWidth: 2 }}
               />
               <Line type="monotone" dataKey="Net Income"
-                stroke="#059669" strokeWidth={2}
+                stroke="#1D44BF" strokeWidth={2}
                 dot={{ r: 4, fill: '#059669', strokeWidth: 0 }}
                 activeDot={{ r: 6, fill: '#059669', stroke: '#FFFFFF', strokeWidth: 2 }}
               />
