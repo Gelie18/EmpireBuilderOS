@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { getDemoMoM } from '@/lib/data/demo-data';
 import { formatCurrency } from '@/lib/utils';
 import {
@@ -457,18 +457,9 @@ export default function AiForecastPage() {
   const baseForecast = buildBaseForecast();
 
   const [adjustments, setAdjustments] = useState<QuarterAdjustment[]>([]);
-  const [input, setInput] = useState('');
   const [targetQuarter, setTargetQuarter] = useState('Q4 2026');
-  const [aiMessages, setAiMessages] = useState<{ role: 'user' | 'ai'; text: string; timestamp: string }[]>([
-    {
-      role: 'ai',
-      text: "I've built this forecast from your trailing 3-month actuals (Aug–Oct 2026) using a 3.1% MoM growth rate, 54.9% COGS ratio, and 35.1% OpEx ratio — adjusted for seasonal patterns. Tell me what you expect for any quarter and I'll update the model automatically. Example: \"Q1 2027 revenue grows 10% — we're launching a new product line in January.\"",
-      timestamp: new Date().toISOString(),
-    },
-  ]);
   const [isProcessing, setIsProcessing] = useState(false);
   const [showTable, setShowTable] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const forecast = applyAdjustments(baseForecast, adjustments);
 
@@ -492,54 +483,49 @@ export default function AiForecastPage() {
     return { quarter: q, revenue: totalRev, netIncome: totalNI, avgMargin, hasAdj };
   }).filter(Boolean) as { quarter: string; revenue: number; netIncome: number; avgMargin: number; hasAdj: boolean }[];
 
-  const handleSend = useCallback(() => {
-    if (!input.trim() || isProcessing) return;
-
-    const userText = input.trim();
-    setInput('');
+  // Process an assumption (called from panel event or localStorage)
+  const processInput = useCallback((quarter: string, userText: string) => {
+    if (!userText.trim() || isProcessing) return;
     setIsProcessing(true);
-
-    // Add user message
-    setAiMessages((prev) => [...prev, {
-      role: 'user',
-      text: userText,
-      timestamp: new Date().toISOString(),
-    }]);
-
-    // Parse + simulate AI delay
+    setTargetQuarter(quarter);
     setTimeout(() => {
-      const assumptions = parseNaturalLanguage(userText, targetQuarter);
-
+      const assumptions = parseNaturalLanguage(userText, quarter);
       const newAdj: QuarterAdjustment = {
         id: Math.random().toString(36).slice(2, 9),
-        quarter: targetQuarter,
+        quarter,
         userText,
         parsedAssumptions: assumptions,
         timestamp: new Date().toISOString(),
       };
-
       setAdjustments((prev) => [...prev, newAdj]);
-
-      const aiReply = generateAIResponse(userText, targetQuarter, assumptions);
-      setAiMessages((prev) => [...prev, {
-        role: 'ai',
-        text: aiReply,
-        timestamp: new Date().toISOString(),
-      }]);
-
       setIsProcessing(false);
-      setTimeout(() => messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }), 50);
-    }, 800);
-  }, [input, targetQuarter, isProcessing]);
+    }, 700);
+  }, [isProcessing]);
 
-  const resetAdjustments = () => {
-    setAdjustments([]);
-    setAiMessages([{
-      role: 'ai',
-      text: "Forecast reset to AI baseline. I'm ready for new assumptions — tell me what you expect for any quarter.",
-      timestamp: new Date().toISOString(),
-    }]);
-  };
+  const resetAdjustments = () => setAdjustments([]);
+
+  // Listen for inputs from FloatingChat Forecast panel (same page)
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const { quarter, input } = (e as CustomEvent<{ quarter: string; input: string }>).detail;
+      processInput(quarter, input);
+    };
+    window.addEventListener('forecast-panel-input', handler);
+    return () => window.removeEventListener('forecast-panel-input', handler);
+  }, [processInput]);
+
+  // Pick up pending input from localStorage (panel → navigate here)
+  useEffect(() => {
+    const pending = localStorage.getItem('eb-forecast-pending');
+    if (pending) {
+      localStorage.removeItem('eb-forecast-pending');
+      try {
+        const { quarter, input } = JSON.parse(pending) as { quarter: string; input: string };
+        setTimeout(() => processInput(quarter, input), 400);
+      } catch { /* ignore malformed */ }
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const totalFwdRevenue = forecast.filter((m) => !m.isActual).reduce((s, m) => s + m.revenue, 0);
   const totalFwdNI      = forecast.filter((m) => !m.isActual).reduce((s, m) => s + m.netIncome, 0);
@@ -714,216 +700,28 @@ export default function AiForecastPage() {
         </div>
       </div>
 
-      {/* AI Chat interface */}
-      <div className="overflow-hidden"
-        style={{
-          background: 'var(--color-surf)',
-          borderRadius: 'var(--card-radius)',
-          boxShadow: 'var(--card-shadow)',
-          border: '1px solid var(--color-border)',
-        }}>
-        <div className="px-4 py-2.5 border-b flex items-center gap-2"
-          style={{ borderColor: 'var(--color-border)', background: 'var(--color-surf2)' }}>
-          <div className="w-2 h-2 rounded-full"
-            style={{ background: 'var(--color-blue)', boxShadow: '0 0 6px var(--color-blue)' }} />
-          <span style={{ fontFamily: 'var(--font-condensed)', color: 'var(--color-blue)', fontSize: 13, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.10em' }}>
-            AI Forecast Assistant
-          </span>
-          <span className="text-[10px] ml-auto" style={{ color: 'var(--color-muted)' }}>
-            Adjusting: <strong style={{ color: 'var(--color-orange)' }}>{targetQuarter}</strong>
-          </span>
-        </div>
-
-        {/* Messages — taller on all screens */}
-        <div className="flex flex-col gap-4 overflow-y-auto" style={{ padding: '20px 20px', minHeight: 200, maxHeight: 420 }}>
-          {aiMessages.map((msg, i) => (
-            <div key={i} className={`flex gap-3 ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}>
-              <div
-                className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
-                style={{
-                  background: msg.role === 'ai' ? 'var(--color-blue-d)' : 'var(--color-surf2)',
-                  border: `1px solid ${msg.role === 'ai' ? 'var(--color-blue)' : 'var(--color-border2)'}`,
-                  color: msg.role === 'ai' ? 'var(--color-blue)' : 'var(--color-muted)',
-                  fontFamily: 'var(--font-condensed)',
-                  fontSize: 11,
-                  fontWeight: 800,
-                }}
-              >
-                {msg.role === 'ai' ? 'AI' : 'ME'}
-              </div>
-              <div
-                className="max-w-[85%] leading-relaxed whitespace-pre-line"
-                style={{
-                  background:   msg.role === 'user' ? 'var(--color-blue)' : 'var(--color-surf2)',
-                  color:        msg.role === 'user' ? '#FFFFFF' : 'var(--color-text)',
-                  borderRadius: msg.role === 'user' ? '12px 12px 3px 12px' : '12px 12px 12px 3px',
-                  border:       msg.role === 'ai' ? '1px solid var(--color-border2)' : 'none',
-                  fontWeight:   msg.role === 'user' ? 600 : 400,
-                  fontSize:     14,
-                  padding:      '12px 16px',
-                }}
-              >
-                {msg.text}
-              </div>
-            </div>
-          ))}
-
-          {isProcessing && (
-            <div className="flex gap-3">
-              <div className="w-8 h-8 rounded-full flex items-center justify-center"
-                style={{ background: 'var(--color-blue-d)', border: '1px solid var(--color-blue)', color: 'var(--color-blue)', fontFamily: 'var(--font-condensed)', fontSize: 11, fontWeight: 800 }}>
-                AI
-              </div>
-              <div style={{ background: 'var(--color-surf2)', border: '1px solid var(--color-border2)', borderRadius: '12px 12px 12px 3px', padding: '12px 16px' }}>
-                <div className="flex gap-1.5 items-center">
-                  {[0, 1, 2].map((i) => (
-                    <span key={i} className="w-2 h-2 rounded-full"
-                      style={{ background: 'var(--color-blue)', animation: 'blink 1.2s infinite', animationDelay: `${i * 0.22}s` }} />
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
-          <div ref={messagesEndRef} />
-        </div>
-
-        {/* Input area */}
-        <div className="border-t" style={{ borderColor: 'var(--color-border)', background: 'var(--color-surf2)', padding: '16px 20px' }}>
-          {/* Quick Scenarios */}
-          <div className="mb-4">
-            <div className="text-[10px] font-bold uppercase tracking-[0.10em] mb-2"
-              style={{ fontFamily: 'var(--font-condensed)', color: 'var(--color-muted)' }}>
-              ✦ Quick Scenarios
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {[
-                'Add a marketing consultant at $8.5K/month',
-                'Increase ad spend by $30K — expect 2.5x ROAS on revenue',
-                'New wholesale account adds 5% revenue growth',
-                'Hire 2 account executives at market rates',
-                'One-time trade show cost of $35K',
-                'COGS pressure increases 2% from freight costs',
-              ].map((template) => (
-                <button
-                  key={template}
-                  onClick={() => setInput(template)}
-                  style={{
-                    border: '1px solid var(--color-border2)',
-                    color: 'var(--color-muted)',
-                    background: 'transparent',
-                    fontFamily: 'var(--font-condensed)',
-                    fontSize: 11,
-                    padding: '4px 10px',
-                    borderRadius: 6,
-                    cursor: 'pointer',
-                  }}
-                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--color-blue)'; e.currentTarget.style.color = 'var(--color-blue)'; e.currentTarget.style.background = 'var(--color-blue-d)'; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--color-border2)'; e.currentTarget.style.color = 'var(--color-muted)'; e.currentTarget.style.background = 'transparent'; }}
-                >
-                  ✦ {template}
-                </button>
+      {/* AI CFO panel prompt / processing status */}
+      <div className="px-4 py-3 flex items-center gap-3"
+        style={{ background: 'rgba(29,68,191,0.06)', borderLeft: '3px solid var(--color-blue)', borderRadius: 'var(--radius-sm)' }}>
+        {isProcessing ? (
+          <div className="flex items-center gap-2.5">
+            <div className="flex gap-1.5">
+              {[0, 1, 2].map((i) => (
+                <span key={i} className="w-1.5 h-1.5 rounded-full"
+                  style={{ background: 'var(--color-blue)', animation: 'blink 1.2s infinite', animationDelay: `${i * 0.22}s` }} />
               ))}
             </div>
-          </div>
-
-          {/* Quarter selector */}
-          <div className="flex gap-2 mb-4 flex-wrap items-center">
-            <span style={{ color: 'var(--color-muted)', fontFamily: 'var(--font-condensed)', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-              Quarter:
+            <span style={{ color: 'var(--color-blue)', fontSize: 13, fontWeight: 600 }}>
+              Applying assumption to {targetQuarter}…
             </span>
-            {QUARTERS_AVAILABLE.map((q) => (
-              <button
-                key={q}
-                onClick={() => setTargetQuarter(q)}
-                style={{
-                  fontFamily:  'var(--font-condensed)',
-                  fontSize:    12,
-                  fontWeight:  700,
-                  padding:     '5px 12px',
-                  borderRadius: 6,
-                  cursor:      'pointer',
-                  border:      `1px solid ${targetQuarter === q ? 'var(--color-blue)' : 'var(--color-border2)'}`,
-                  background:  targetQuarter === q ? 'var(--color-blue)' : 'transparent',
-                  color:       targetQuarter === q ? '#FFFFFF' : 'var(--color-muted)',
-                }}
-              >
-                {q}
-              </button>
-            ))}
           </div>
-
-          {/* Suggested prompts */}
-          <div className="flex flex-wrap gap-2 mb-4">
-            {[
-              `${targetQuarter} revenue grows 8% — product launch`,
-              `${targetQuarter} marketing budget up $30K`,
-              `${targetQuarter} revenue declines 5% — slowdown`,
-              `${targetQuarter} one-time cost $50K`,
-            ].map((chip) => (
-              <button
-                key={chip}
-                onClick={() => setInput(chip)}
-                style={{
-                  border:       '1px solid var(--color-border2)',
-                  color:        'var(--color-muted)',
-                  background:   'transparent',
-                  fontFamily:   'var(--font-condensed)',
-                  fontSize:     12,
-                  padding:      '5px 12px',
-                  borderRadius: 6,
-                  cursor:       'pointer',
-                }}
-                onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--color-blue)'; e.currentTarget.style.color = 'var(--color-blue)'; e.currentTarget.style.background = 'var(--color-blue-d)'; }}
-                onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--color-border2)'; e.currentTarget.style.color = 'var(--color-muted)'; e.currentTarget.style.background = 'transparent'; }}
-              >
-                {chip}
-              </button>
-            ))}
-          </div>
-
-          <div className="flex gap-3">
-            <input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && handleSend()}
-              placeholder={`Describe your ${targetQuarter} expectations in plain English...`}
-              style={{
-                flex:        1,
-                padding:     '12px 16px',
-                fontSize:    14,
-                borderRadius: 8,
-                border:      '1px solid var(--color-border2)',
-                background:  'var(--color-surf)',
-                color:       'var(--color-text)',
-                fontFamily:  'inherit',
-                outline:     'none',
-                minWidth:    0,
-              }}
-              onFocus={(e) => (e.currentTarget.style.borderColor = 'var(--color-blue)')}
-              onBlur={(e) => (e.currentTarget.style.borderColor = 'var(--color-border2)')}
-            />
-            <button
-              onClick={handleSend}
-              disabled={isProcessing}
-              style={{
-                padding:      '12px 24px',
-                fontSize:     13,
-                fontWeight:   800,
-                fontFamily:   'var(--font-condensed)',
-                textTransform: 'uppercase',
-                letterSpacing: '0.06em',
-                borderRadius: 8,
-                border:       'none',
-                cursor:       isProcessing ? 'not-allowed' : 'pointer',
-                background:   isProcessing ? 'var(--color-surf3)' : 'var(--color-blue)',
-                color:        isProcessing ? 'var(--color-muted)' : '#FFFFFF',
-                flexShrink:   0,
-              }}
-            >
-              {isProcessing ? '…' : 'Apply →'}
-            </button>
-          </div>
-        </div>
+        ) : (
+          <span style={{ color: 'var(--color-muted)', fontSize: 13, lineHeight: 1.5 }}>
+            <strong style={{ color: 'var(--color-blue)' }}>📈 Forecast Assistant</strong>
+            {' '}— open the <strong>AI CFO panel</strong> (bottom-right) and select the{' '}
+            <strong>Forecast</strong> tab to add assumptions. Outputs update here instantly.
+          </span>
+        )}
       </div>
 
       {/* Adjustment audit trail */}

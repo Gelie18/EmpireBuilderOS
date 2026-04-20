@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useChat } from '@/hooks/useChat';
 
 // ── Page-aware suggested questions — 12 per page (two sets of 6) ──────────────
@@ -15,7 +15,6 @@ const PAGE_CTX: Record<string, { label: string; allChips: string[] }> = {
       'What do I tell the board?',
       'What are our biggest cost cuts?',
       'Q4 outlook?',
-      // set 2
       'EBITDA this month?',
       'Gross margin trend?',
       'Revenue by channel breakdown?',
@@ -33,7 +32,6 @@ const PAGE_CTX: Record<string, { label: string; allChips: string[] }> = {
       'P&L vs last October?',
       'What is our EBITDA?',
       'Where can we cut costs?',
-      // set 2
       'Which line item concerns you most?',
       'Revenue beat — is it repeatable?',
       'Payroll vs revenue ratio?',
@@ -51,7 +49,6 @@ const PAGE_CTX: Record<string, { label: string; allChips: string[] }> = {
       'November cash outlook?',
       'What is our break-even?',
       'Liquidity risks to flag?',
-      // set 2
       'Operating vs investing cash flow?',
       'Largest cash outflows this month?',
       'DSO trend — improving?',
@@ -69,7 +66,6 @@ const PAGE_CTX: Record<string, { label: string; allChips: string[] }> = {
       'What is tying up cash?',
       'Inventory levels — any risk?',
       'Tax payment status?',
-      // set 2
       'Current ratio vs benchmark?',
       'Debt-to-equity position?',
       'What assets can we liquidate fast?',
@@ -87,7 +83,6 @@ const PAGE_CTX: Record<string, { label: string; allChips: string[] }> = {
       'Which items need this week?',
       'Total dollar risk in backlog?',
       'Which vendor to hold payment on?',
-      // set 2
       'Biggest single risk right now?',
       'What resolves fastest?',
       'Contracts close to expiring?',
@@ -105,7 +100,6 @@ const PAGE_CTX: Record<string, { label: string; allChips: string[] }> = {
       'How much unbilled revenue is aged?',
       'When does backlog convert to revenue?',
       'What accelerates billing recognition?',
-      // set 2
       'Total unbilled over 30 days?',
       'How do I reduce WIP cycle time?',
       'Which contract has highest margin?',
@@ -123,7 +117,6 @@ const PAGE_CTX: Record<string, { label: string; allChips: string[] }> = {
       'MRR and ARR trend?',
       'DTC vs wholesale mix shift?',
       'How do we grow recurring revenue?',
-      // set 2
       'Top 5 customers by revenue?',
       'Fastest growing channel?',
       'Churn risk in wholesale?',
@@ -141,7 +134,6 @@ const PAGE_CTX: Record<string, { label: string; allChips: string[] }> = {
       'What breaks the forecast?',
       'Pipeline to revenue — timing?',
       'What drives our growth rate?',
-      // set 2
       'Sensitivity to pricing change?',
       'Hiring impact on the model?',
       'What if wholesale slows?',
@@ -151,7 +143,7 @@ const PAGE_CTX: Record<string, { label: string; allChips: string[] }> = {
     ],
   },
   '/ai-forecast': {
-    label: 'AI Forecast',
+    label: 'AI Forecast Builder',
     allChips: [
       'Q4 revenue on track?',
       'Q1 2027 outlook?',
@@ -159,7 +151,6 @@ const PAGE_CTX: Record<string, { label: string; allChips: string[] }> = {
       'Marketing normalization impact?',
       'Enterprise pipeline — when does it close?',
       'Best case revenue this year?',
-      // set 2
       'Downside scenario — revenue impact?',
       'What moves the needle most in Q1?',
       'Seasonal patterns in the forecast?',
@@ -177,7 +168,6 @@ const PAGE_CTX: Record<string, { label: string; allChips: string[] }> = {
       'Margin if COGS rises 2%?',
       'What if marketing stays at $171K?',
       'Downside — how long is runway?',
-      // set 2
       'Revenue if we land one more enterprise deal?',
       'Impact of a 10% price increase?',
       'What if we lose Scheels?',
@@ -195,7 +185,6 @@ const PAGE_CTX: Record<string, { label: string; allChips: string[] }> = {
       'Biggest competitive advantage?',
       'Freight cost vs competitors?',
       'Macro risks to monitor?',
-      // set 2
       'Market share opportunity?',
       'Industry revenue growth rate?',
       'Where peers outperform us?',
@@ -213,7 +202,6 @@ const PAGE_CTX: Record<string, { label: string; allChips: string[] }> = {
       'OpEx growth vs revenue growth?',
       'What improved most vs last year?',
       'What got worse vs last year?',
-      // set 2
       'Customer count YoY change?',
       'EBITDA YoY comparison?',
       'Which channel grew fastest?',
@@ -231,7 +219,6 @@ const PAGE_CTX: Record<string, { label: string; allChips: string[] }> = {
       'November outlook?',
       'Which line improved most?',
       'What explains the NI drop?',
-      // set 2
       'Gross profit MoM change?',
       'Cash position change MoM?',
       'Biggest OpEx mover?',
@@ -249,7 +236,6 @@ const PAGE_CTX: Record<string, { label: string; allChips: string[] }> = {
       'Revenue run rate for November?',
       'Slowest revenue days — why?',
       'Weekend vs weekday performance?',
-      // set 2
       'Best single-day revenue record?',
       'Average daily DTC order count?',
       'Wholesale order frequency?',
@@ -300,6 +286,18 @@ const THINK_BIG_SETS: string[][] = [
     'How do we monetize our data or domain expertise?',
     'If we had to grow 30% next year with no new hires, how?',
   ],
+];
+
+// ── Forecast quick scenarios ───────────────────────────────────────────────────
+const FORECAST_QUARTERS = ['Q4 2026', 'Q1 2027', 'Q2 2027', 'Q3 2027', 'Q4 2027'];
+
+const FORECAST_SCENARIOS = [
+  'New wholesale account adds 5% revenue growth',
+  'Hire 2 account executives at market rates',
+  'Add a marketing consultant at $8.5K/month',
+  'One-time trade show cost of $35K',
+  'COGS pressure increases 2% from freight costs',
+  'Revenue declines 5% — seasonal slowdown',
 ];
 
 // ── Message formatter ─────────────────────────────────────────────────────────
@@ -377,18 +375,27 @@ function RefreshIcon({ spinning }: { spinning?: boolean }) {
   );
 }
 
+type PanelMode = 'questions' | 'thinkbig' | 'forecast';
+
 // ── Main component ────────────────────────────────────────────────────────────
 export default function FloatingChat() {
   const [open, setOpen] = useState(false);
+  const [mode, setMode] = useState<PanelMode>('questions');
   const [input, setInput] = useState('');
   const [chipSetIdx, setChipSetIdx] = useState(0);
   const [thinkBigIdx, setThinkBigIdx] = useState(0);
   const [refreshAnim, setRefreshAnim] = useState(false);
   const [thinkRefreshAnim, setThinkRefreshAnim] = useState(false);
+  const [forecastInput, setForecastInput] = useState('');
+  const [forecastQuarter, setForecastQuarter] = useState('Q4 2026');
+  const [forecastSending, setForecastSending] = useState(false);
+
   const pathname = usePathname();
+  const router = useRouter();
   const ctx = PAGE_CTX[pathname as keyof typeof PAGE_CTX] ?? DEFAULT_CTX;
   const msgsEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const forecastInputRef = useRef<HTMLInputElement>(null);
 
   const { messages, isLoading, sendMessage } = useChat({
     currentView: pathname.replace('/', '') || 'dashboard',
@@ -396,7 +403,7 @@ export default function FloatingChat() {
     highlights: [`Viewing: ${ctx.label}`],
   });
 
-  // Derive visible chips — show 6 at a time, rotating through allChips
+  // Derive visible chips
   const totalSets = Math.ceil(ctx.allChips.length / 6);
   const currentSet = chipSetIdx % totalSets;
   const visibleChips = ctx.allChips.slice(currentSet * 6, currentSet * 6 + 6);
@@ -415,12 +422,17 @@ export default function FloatingChat() {
   }, []);
 
   useEffect(() => {
-    if (open) msgsEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages, isLoading, open]);
+    if (open && mode !== 'forecast') msgsEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages, isLoading, open, mode]);
 
   useEffect(() => {
-    if (open) setTimeout(() => inputRef.current?.focus(), 220);
-  }, [open]);
+    if (open) {
+      setTimeout(() => {
+        if (mode === 'forecast') forecastInputRef.current?.focus();
+        else inputRef.current?.focus();
+      }, 220);
+    }
+  }, [open, mode]);
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') setOpen(false); };
@@ -428,10 +440,11 @@ export default function FloatingChat() {
     return () => window.removeEventListener('keydown', handler);
   }, []);
 
-  // Reset chip index when page changes
+  // Reset chip index when page changes; switch to forecast mode when on /ai-forecast
   useEffect(() => {
     setChipSetIdx(0);
     setThinkBigIdx(0);
+    if (pathname === '/ai-forecast') setMode('forecast');
   }, [pathname]);
 
   const handleSend = () => {
@@ -451,6 +464,33 @@ export default function FloatingChat() {
     setThinkBigIdx((i) => i + 1);
     setTimeout(() => setThinkRefreshAnim(false), 450);
   };
+
+  // ── Forecast submit: dispatch event to ai-forecast page or navigate there ──
+  const handleForecastSend = () => {
+    if (!forecastInput.trim() || forecastSending) return;
+    setForecastSending(true);
+
+    const payload = { quarter: forecastQuarter, input: forecastInput.trim() };
+
+    if (pathname === '/ai-forecast') {
+      // Already on the page — dispatch event directly
+      window.dispatchEvent(new CustomEvent('forecast-panel-input', { detail: payload }));
+      setForecastInput('');
+      setForecastSending(false);
+    } else {
+      // Navigate to the page; it will pick up from localStorage
+      localStorage.setItem('eb-forecast-pending', JSON.stringify(payload));
+      router.push('/ai-forecast');
+      setForecastInput('');
+      setTimeout(() => setForecastSending(false), 1500);
+    }
+  };
+
+  const MODE_TABS: { key: PanelMode; label: string; icon: string }[] = [
+    { key: 'questions', label: 'Quick Questions', icon: '❓' },
+    { key: 'thinkbig',  label: 'Think Big',        icon: '💡' },
+    { key: 'forecast',  label: 'Forecast',          icon: '📈' },
+  ];
 
   return (
     <>
@@ -476,7 +516,7 @@ export default function FloatingChat() {
           transition: 'transform 0.26s cubic-bezier(0.4,0,0.2,1)',
         }}
       >
-        {/* Header */}
+        {/* ── Header ── */}
         <div className="flex items-center gap-3 px-4 py-3.5 border-b flex-shrink-0"
           style={{ borderColor: 'rgba(0,0,0,0.08)', background: '#1A1C2E' }}>
           <div className="w-7 h-7 rounded flex items-center justify-center flex-shrink-0"
@@ -490,7 +530,7 @@ export default function FloatingChat() {
               AI CFO
             </div>
             <div className="text-[11px] mt-0.5 truncate" style={{ color: 'rgba(255,255,255,0.45)' }}>
-              Context: {ctx.label} · Oct 2026
+              {mode === 'forecast' ? `Forecast · ${forecastQuarter}` : `Context: ${ctx.label} · Oct 2026`}
             </div>
           </div>
           <button
@@ -502,156 +542,280 @@ export default function FloatingChat() {
           >✕</button>
         </div>
 
-        {/* Messages */}
-        <div className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-4 min-h-0">
-          {messages.map((msg) => (
-            <div key={msg.id} className={`flex flex-col gap-1 ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
-              <div className="text-[10px] font-bold uppercase tracking-[0.08em]" style={{ color: '#6B7280' }}>
-                {msg.role === 'user' ? 'You' : 'AI CFO'}
-              </div>
-              <div className="max-w-[92%] px-4 py-3 text-[13px]" style={{
-                background: msg.role === 'user' ? '#1D44BF' : '#F8F8FA',
-                color: msg.role === 'user' ? '#FFFFFF' : '#1A1C2E',
-                borderRadius: msg.role === 'user' ? '12px 12px 3px 12px' : '12px 12px 12px 3px',
-                border: msg.role === 'assistant' ? '1px solid rgba(0,0,0,0.08)' : 'none',
-                fontWeight: msg.role === 'user' ? 500 : 400,
-              }}>
-                {msg.role === 'assistant'
-                  ? <FormattedMessage content={msg.content} />
-                  : msg.content
-                }
-              </div>
-            </div>
-          ))}
+        {/* ── Mode tabs ── */}
+        <div className="flex border-b flex-shrink-0" style={{ borderColor: 'rgba(0,0,0,0.08)', background: '#F8F8FA' }}>
+          {MODE_TABS.map((tab) => {
+            const active = mode === tab.key;
+            return (
+              <button
+                key={tab.key}
+                onClick={() => setMode(tab.key)}
+                className="flex-1 flex items-center justify-center gap-1.5 py-2.5 text-[11px] font-bold uppercase tracking-[0.06em] cursor-pointer transition-all border-b-2"
+                style={{
+                  background: active ? '#FFFFFF' : 'transparent',
+                  color: active ? '#1D44BF' : '#6B7280',
+                  borderBottomColor: active ? '#1D44BF' : 'transparent',
+                  fontFamily: 'inherit',
+                  border: 'none',
+                  borderBottom: active ? '2px solid #1D44BF' : '2px solid transparent',
+                }}
+              >
+                <span style={{ fontSize: 13 }}>{tab.icon}</span>
+                <span className="hidden sm:inline">{tab.label}</span>
+              </button>
+            );
+          })}
+        </div>
 
-          {isLoading && (
-            <div className="flex flex-col gap-1 items-start">
-              <div className="text-[10px] font-bold uppercase tracking-[0.08em]" style={{ color: '#6B7280' }}>AI CFO</div>
-              <div className="px-4 py-3 border rounded-xl" style={{ background: '#F8F8FA', borderColor: 'rgba(0,0,0,0.08)' }}>
-                <div className="flex gap-1.5 items-center">
-                  {[0, 1, 2].map((i) => (
-                    <span key={i} className="w-1.5 h-1.5 rounded-full"
-                      style={{ background: '#1D44BF', animation: 'blink 1.2s infinite', animationDelay: `${i * 0.22}s` }} />
-                  ))}
+        {/* ── Chat messages (hidden in forecast mode) ── */}
+        {mode !== 'forecast' && (
+          <div className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-4 min-h-0">
+            {messages.map((msg) => (
+              <div key={msg.id} className={`flex flex-col gap-1 ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
+                <div className="text-[10px] font-bold uppercase tracking-[0.08em]" style={{ color: '#6B7280' }}>
+                  {msg.role === 'user' ? 'You' : 'AI CFO'}
+                </div>
+                <div className="max-w-[92%] px-4 py-3 text-[13px]" style={{
+                  background: msg.role === 'user' ? '#1D44BF' : '#F8F8FA',
+                  color: msg.role === 'user' ? '#FFFFFF' : '#1A1C2E',
+                  borderRadius: msg.role === 'user' ? '12px 12px 3px 12px' : '12px 12px 12px 3px',
+                  border: msg.role === 'assistant' ? '1px solid rgba(0,0,0,0.08)' : 'none',
+                  fontWeight: msg.role === 'user' ? 500 : 400,
+                }}>
+                  {msg.role === 'assistant'
+                    ? <FormattedMessage content={msg.content} />
+                    : msg.content
+                  }
                 </div>
               </div>
-            </div>
-          )}
-          <div ref={msgsEndRef} />
-        </div>
-
-        {/* ── Quick questions ── */}
-        <div className="border-t flex-shrink-0" style={{ borderColor: 'rgba(0,0,0,0.08)' }}>
-          <div className="px-4 pt-2.5 pb-1.5 flex items-center justify-between">
-            <div className="text-[10px] font-semibold uppercase tracking-[0.08em]" style={{ color: '#6B7280' }}>
-              Quick questions
-            </div>
-            <button
-              onClick={handleRefreshChips}
-              title={`Refresh insights (${currentSet + 1}/${totalSets})`}
-              className="flex items-center gap-1 cursor-pointer transition-all"
-              style={{
-                color: '#9CA3AF', fontSize: 10, fontWeight: 600,
-                background: 'none', border: 'none', padding: '2px 4px',
-                letterSpacing: '0.04em',
-              }}
-              onMouseEnter={(e) => { e.currentTarget.style.color = '#1D44BF'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.color = '#9CA3AF'; }}
-            >
-              <RefreshIcon spinning={refreshAnim} />
-              <span>{currentSet + 1}/{totalSets}</span>
-            </button>
-          </div>
-          <div
-            key={`chips-${currentSet}-${pathname}`}
-            className="px-4 pb-2.5 flex flex-wrap gap-1.5"
-            style={{ animation: 'eb-chip-fade 0.25s ease both' }}
-          >
-            {visibleChips.map((chip) => (
-              <button key={chip} onClick={() => sendMessage(chip)}
-                className="text-[11px] px-2.5 py-1 cursor-pointer transition-all rounded whitespace-nowrap"
-                style={{ border: '1px solid rgba(0,0,0,0.10)', color: '#6B7280', background: '#F8F8FA', fontWeight: 500 }}
-                onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#1D44BF'; e.currentTarget.style.color = '#1D44BF'; e.currentTarget.style.background = 'rgba(29,68,191,0.07)'; }}
-                onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(0,0,0,0.10)'; e.currentTarget.style.color = '#6B7280'; e.currentTarget.style.background = '#F8F8FA'; }}
-              >{chip}</button>
             ))}
-          </div>
-        </div>
 
-        {/* ── Think Outside the Box ── */}
-        <div className="border-t flex-shrink-0" style={{ borderColor: 'rgba(232,184,75,0.30)', background: 'rgba(232,184,75,0.04)' }}>
-          <div className="px-4 pt-2 pb-1.5 flex items-center justify-between">
-            <div className="flex items-center gap-1.5">
-              <span style={{ fontSize: 13 }}>💡</span>
+            {isLoading && (
+              <div className="flex flex-col gap-1 items-start">
+                <div className="text-[10px] font-bold uppercase tracking-[0.08em]" style={{ color: '#6B7280' }}>AI CFO</div>
+                <div className="px-4 py-3 border rounded-xl" style={{ background: '#F8F8FA', borderColor: 'rgba(0,0,0,0.08)' }}>
+                  <div className="flex gap-1.5 items-center">
+                    {[0, 1, 2].map((i) => (
+                      <span key={i} className="w-1.5 h-1.5 rounded-full"
+                        style={{ background: '#1D44BF', animation: 'blink 1.2s infinite', animationDelay: `${i * 0.22}s` }} />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+            <div ref={msgsEndRef} />
+          </div>
+        )}
+
+        {/* ── Forecast Assistant mode ── */}
+        {mode === 'forecast' && (
+          <div className="flex-1 overflow-y-auto flex flex-col min-h-0">
+            {/* Explainer */}
+            <div className="px-4 pt-4 pb-3 border-b" style={{ borderColor: 'rgba(0,0,0,0.08)', background: 'rgba(29,68,191,0.04)' }}>
+              <div className="text-[12px] leading-relaxed" style={{ color: '#6B7280' }}>
+                <strong style={{ color: '#1D44BF' }}>Forecast Assistant</strong> — describe your assumptions below. Results update live in the{' '}
+                <button
+                  onClick={() => { router.push('/ai-forecast'); }}
+                  style={{ color: '#1D44BF', fontWeight: 700, textDecoration: 'underline', background: 'none', border: 'none', cursor: 'pointer', fontSize: 12, padding: 0 }}
+                >
+                  AI Forecast Builder →
+                </button>
+              </div>
+            </div>
+
+            {/* Quarter selector */}
+            <div className="px-4 pt-3 pb-2">
+              <div className="text-[10px] font-bold uppercase tracking-[0.10em] mb-2" style={{ color: '#6B7280' }}>
+                Target Quarter
+              </div>
+              <div className="flex flex-wrap gap-1.5">
+                {FORECAST_QUARTERS.map((q) => {
+                  const active = forecastQuarter === q;
+                  return (
+                    <button
+                      key={q}
+                      onClick={() => setForecastQuarter(q)}
+                      style={{
+                        fontSize: 11, fontWeight: 700, padding: '4px 10px', borderRadius: 5, cursor: 'pointer',
+                        border: `1px solid ${active ? '#1D44BF' : 'rgba(0,0,0,0.12)'}`,
+                        background: active ? '#1D44BF' : 'transparent',
+                        color: active ? '#FFFFFF' : '#6B7280',
+                        fontFamily: 'inherit',
+                      }}
+                    >
+                      {q}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Quick scenario templates */}
+            <div className="px-4 pt-1 pb-3 border-b" style={{ borderColor: 'rgba(0,0,0,0.08)' }}>
+              <div className="text-[10px] font-bold uppercase tracking-[0.10em] mb-2" style={{ color: '#6B7280' }}>
+                Quick Scenarios
+              </div>
+              <div className="flex flex-col gap-1.5">
+                {FORECAST_SCENARIOS.map((s) => (
+                  <button
+                    key={s}
+                    onClick={() => setForecastInput(s)}
+                    className="text-left text-[12px] px-3 py-2 rounded cursor-pointer transition-all"
+                    style={{
+                      border: '1px solid rgba(29,68,191,0.18)',
+                      color: '#374151',
+                      background: 'rgba(29,68,191,0.04)',
+                      fontFamily: 'inherit',
+                      lineHeight: 1.4,
+                    }}
+                    onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#1D44BF'; e.currentTarget.style.background = 'rgba(29,68,191,0.09)'; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(29,68,191,0.18)'; e.currentTarget.style.background = 'rgba(29,68,191,0.04)'; }}
+                  >
+                    ✦ {s}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Forecast input */}
+            <div className="px-4 py-4">
+              <div className="text-[10px] font-bold uppercase tracking-[0.10em] mb-2" style={{ color: '#6B7280' }}>
+                Custom Assumption for {forecastQuarter}
+              </div>
+              <div className="flex flex-col gap-2">
+                <input
+                  ref={forecastInputRef}
+                  value={forecastInput}
+                  onChange={(e) => setForecastInput(e.target.value)}
+                  onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleForecastSend(); } }}
+                  placeholder={`Describe your ${forecastQuarter} assumptions...`}
+                  className="w-full px-3.5 py-3 text-[13px] border rounded outline-none"
+                  style={{ background: '#F8F8FA', borderColor: 'rgba(0,0,0,0.12)', color: '#1A1C2E', fontFamily: 'inherit' }}
+                  onFocus={(e) => (e.currentTarget.style.borderColor = '#1D44BF')}
+                  onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(0,0,0,0.12)')}
+                />
+                <button
+                  onClick={handleForecastSend}
+                  disabled={!forecastInput.trim() || forecastSending}
+                  className="w-full py-3 text-[13px] font-bold uppercase tracking-[0.06em] rounded cursor-pointer transition-all"
+                  style={{
+                    background: !forecastInput.trim() || forecastSending ? '#F0F0F0' : '#1D44BF',
+                    color: !forecastInput.trim() || forecastSending ? '#9CA3AF' : '#FFFFFF',
+                    border: 'none',
+                    fontFamily: 'inherit',
+                    opacity: !forecastInput.trim() || forecastSending ? 0.7 : 1,
+                  }}
+                >
+                  {forecastSending
+                    ? (pathname === '/ai-forecast' ? 'Applied ✓' : 'Opening Forecast Builder…')
+                    : (pathname === '/ai-forecast' ? `Apply to ${forecastQuarter} →` : `Open Forecast Builder →`)
+                  }
+                </button>
+                {pathname !== '/ai-forecast' && (
+                  <div className="text-[11px] text-center" style={{ color: '#9CA3AF' }}>
+                    Results appear in the Forecast Builder tab
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── Quick Questions chips (questions mode only) ── */}
+        {mode === 'questions' && (
+          <div className="border-t flex-shrink-0" style={{ borderColor: 'rgba(0,0,0,0.08)' }}>
+            <div className="px-4 pt-2.5 pb-1.5 flex items-center justify-between">
+              <div className="text-[10px] font-semibold uppercase tracking-[0.08em]" style={{ color: '#6B7280' }}>
+                Quick questions
+              </div>
+              <button
+                onClick={handleRefreshChips}
+                title={`Refresh insights (${currentSet + 1}/${totalSets})`}
+                className="flex items-center gap-1 cursor-pointer transition-all"
+                style={{ color: '#9CA3AF', fontSize: 10, fontWeight: 600, background: 'none', border: 'none', padding: '2px 4px', letterSpacing: '0.04em' }}
+                onMouseEnter={(e) => { e.currentTarget.style.color = '#1D44BF'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.color = '#9CA3AF'; }}
+              >
+                <RefreshIcon spinning={refreshAnim} />
+                <span>{currentSet + 1}/{totalSets}</span>
+              </button>
+            </div>
+            <div
+              key={`chips-${currentSet}-${pathname}`}
+              className="px-4 pb-2.5 flex flex-wrap gap-1.5"
+              style={{ animation: 'eb-chip-fade 0.25s ease both' }}
+            >
+              {visibleChips.map((chip) => (
+                <button key={chip} onClick={() => sendMessage(chip)}
+                  className="text-[11px] px-2.5 py-1 cursor-pointer transition-all rounded whitespace-nowrap"
+                  style={{ border: '1px solid rgba(0,0,0,0.10)', color: '#6B7280', background: '#F8F8FA', fontWeight: 500 }}
+                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#1D44BF'; e.currentTarget.style.color = '#1D44BF'; e.currentTarget.style.background = 'rgba(29,68,191,0.07)'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(0,0,0,0.10)'; e.currentTarget.style.color = '#6B7280'; e.currentTarget.style.background = '#F8F8FA'; }}
+                >{chip}</button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ── Think Big chips (thinkbig mode only) ── */}
+        {mode === 'thinkbig' && (
+          <div className="border-t flex-shrink-0" style={{ borderColor: 'rgba(232,184,75,0.30)', background: 'rgba(232,184,75,0.04)' }}>
+            <div className="px-4 pt-2.5 pb-1.5 flex items-center justify-between">
               <div className="text-[10px] font-semibold uppercase tracking-[0.08em]" style={{ color: '#C9962A' }}>
                 Think Outside the Box
               </div>
+              <button
+                onClick={handleRefreshThinkBig}
+                title="New creative angles"
+                className="flex items-center gap-1 cursor-pointer transition-all"
+                style={{ color: '#C9962A', opacity: 0.7, fontSize: 10, fontWeight: 600, background: 'none', border: 'none', padding: '2px 4px' }}
+                onMouseEnter={(e) => { e.currentTarget.style.opacity = '1'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.opacity = '0.7'; }}
+              >
+                <RefreshIcon spinning={thinkRefreshAnim} />
+              </button>
             </div>
-            <button
-              onClick={handleRefreshThinkBig}
-              title="New creative angles"
-              className="flex items-center gap-1 cursor-pointer transition-all"
-              style={{
-                color: '#C9962A', opacity: 0.7, fontSize: 10, fontWeight: 600,
-                background: 'none', border: 'none', padding: '2px 4px',
-              }}
-              onMouseEnter={(e) => { e.currentTarget.style.opacity = '1'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.opacity = '0.7'; }}
+            <div
+              key={`think-${thinkBigIdx}`}
+              className="px-4 pb-3 flex flex-col gap-1.5"
+              style={{ animation: 'eb-chip-fade 0.25s ease both' }}
             >
-              <RefreshIcon spinning={thinkRefreshAnim} />
-            </button>
+              {currentThinkBig.map((prompt) => (
+                <button key={prompt} onClick={() => sendMessage(prompt)}
+                  className="text-left text-[11px] px-3 py-1.5 cursor-pointer transition-all rounded-md w-full"
+                  style={{ border: '1px solid rgba(232,184,75,0.28)', color: '#92680A', background: 'rgba(232,184,75,0.08)', fontWeight: 500, lineHeight: 1.4 }}
+                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#E8B84B'; e.currentTarget.style.background = 'rgba(232,184,75,0.16)'; e.currentTarget.style.color = '#7A5508'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(232,184,75,0.28)'; e.currentTarget.style.background = 'rgba(232,184,75,0.08)'; e.currentTarget.style.color = '#92680A'; }}
+                >{prompt}</button>
+              ))}
+            </div>
           </div>
-          <div
-            key={`think-${thinkBigIdx}`}
-            className="px-4 pb-3 flex flex-col gap-1.5"
-            style={{ animation: 'eb-chip-fade 0.25s ease both' }}
-          >
-            {currentThinkBig.map((prompt) => (
-              <button key={prompt} onClick={() => sendMessage(prompt)}
-                className="text-left text-[11px] px-3 py-1.5 cursor-pointer transition-all rounded-md w-full"
-                style={{
-                  border: '1px solid rgba(232,184,75,0.28)',
-                  color: '#92680A',
-                  background: 'rgba(232,184,75,0.08)',
-                  fontWeight: 500, lineHeight: 1.4,
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = '#E8B84B';
-                  e.currentTarget.style.background = 'rgba(232,184,75,0.16)';
-                  e.currentTarget.style.color = '#7A5508';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(232,184,75,0.28)';
-                  e.currentTarget.style.background = 'rgba(232,184,75,0.08)';
-                  e.currentTarget.style.color = '#92680A';
-                }}
-              >{prompt}</button>
-            ))}
-          </div>
-        </div>
+        )}
 
-        {/* Input */}
-        <div className="px-4 py-3.5 border-t" style={{ borderColor: 'rgba(0,0,0,0.08)' }}>
-          <div className="flex gap-2">
-            <input
-              ref={inputRef} value={input} onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(); } }}
-              placeholder="Ask anything about your financials..."
-              className="flex-1 px-3.5 py-2.5 text-[13px] border outline-none min-w-0 rounded"
-              style={{ background: '#F8F8FA', borderColor: 'rgba(0,0,0,0.10)', color: '#1A1C2E', fontFamily: 'inherit' }}
-              onFocus={(e) => (e.currentTarget.style.borderColor = '#1D44BF')}
-              onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(0,0,0,0.10)')}
-            />
-            <button onClick={handleSend} disabled={isLoading || !input.trim()}
-              className="w-[44px] h-[44px] flex items-center justify-center flex-shrink-0 cursor-pointer border-none transition-all rounded"
-              style={{ background: isLoading || !input.trim() ? '#F0F0F0' : '#1D44BF', opacity: isLoading || !input.trim() ? 0.5 : 1 }}>
-              <svg width="16" height="16" fill="none" stroke={isLoading || !input.trim() ? '#9CA3AF' : '#FFFFFF'} strokeWidth="2.5" viewBox="0 0 24 24">
-                <line x1="22" y1="2" x2="11" y2="13" />
-                <polygon points="22 2 15 22 11 13 2 9 22 2" />
-              </svg>
-            </button>
+        {/* ── Text input (questions and thinkbig modes only) ── */}
+        {mode !== 'forecast' && (
+          <div className="px-4 py-3.5 border-t" style={{ borderColor: 'rgba(0,0,0,0.08)' }}>
+            <div className="flex gap-2">
+              <input
+                ref={inputRef} value={input} onChange={(e) => setInput(e.target.value)}
+                onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(); } }}
+                placeholder="Ask anything about your financials..."
+                className="flex-1 px-3.5 py-2.5 text-[13px] border outline-none min-w-0 rounded"
+                style={{ background: '#F8F8FA', borderColor: 'rgba(0,0,0,0.10)', color: '#1A1C2E', fontFamily: 'inherit' }}
+                onFocus={(e) => (e.currentTarget.style.borderColor = '#1D44BF')}
+                onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(0,0,0,0.10)')}
+              />
+              <button onClick={handleSend} disabled={isLoading || !input.trim()}
+                className="w-[44px] h-[44px] flex items-center justify-center flex-shrink-0 cursor-pointer border-none transition-all rounded"
+                style={{ background: isLoading || !input.trim() ? '#F0F0F0' : '#1D44BF', opacity: isLoading || !input.trim() ? 0.5 : 1 }}>
+                <svg width="16" height="16" fill="none" stroke={isLoading || !input.trim() ? '#9CA3AF' : '#FFFFFF'} strokeWidth="2.5" viewBox="0 0 24 24">
+                  <line x1="22" y1="2" x2="11" y2="13" />
+                  <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                </svg>
+              </button>
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       {/* Desktop toggle */}
