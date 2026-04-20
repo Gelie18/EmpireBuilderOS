@@ -32,12 +32,12 @@ const KPIS = [
 
 // ── Backlog Burn Timeline ────────────────────────────────────────────────────
 const BURN_DATA = [
-  { month: "Oct '26", backlog: 2_840_000, revenue: 420_000 },
-  { month: "Nov '26", backlog: 2_420_000, revenue: 485_000 },
-  { month: "Dec '26", backlog: 1_935_000, revenue: 510_000 },
-  { month: "Jan '27", backlog: 1_425_000, revenue: 380_000 },
-  { month: "Feb '27", backlog: 1_045_000, revenue: 320_000 },
-  { month: "Mar '27", backlog:   725_000, revenue: 290_000 },
+  { month: "Apr '26", backlog: 2_840_000, revenue: 420_000 },
+  { month: "May '26", backlog: 2_420_000, revenue: 485_000 },
+  { month: "Jun '26", backlog: 1_935_000, revenue: 510_000 },
+  { month: "Jul '26", backlog: 1_425_000, revenue: 380_000 },
+  { month: "Aug '26", backlog: 1_045_000, revenue: 320_000 },
+  { month: "Sep '26", backlog:   725_000, revenue: 290_000 },
 ];
 
 // ── WIP Items ────────────────────────────────────────────────────────────────
@@ -138,7 +138,7 @@ export default function FinBacklogPage() {
               Financial Backlog
             </div>
             <div style={{ fontSize: 13, color: 'var(--color-muted)', marginTop: 5 }}>
-              Contracted revenue not yet recognized · October 2026
+              Contracted revenue not yet recognized · April 2026
             </div>
           </div>
           <div className="flex flex-wrap gap-2 items-center">

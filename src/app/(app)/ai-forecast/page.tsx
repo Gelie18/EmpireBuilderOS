@@ -254,10 +254,10 @@ function parseNaturalLanguage(text: string, targetQuarter: string): ParsedAssump
 const HISTORICAL_MONTHS = getDemoMoM().months;
 
 function buildBaseForecast(): ForecastMonth[] {
-  // Last 3 months of actual data (Aug, Sep, Oct)
+  // Last 3 months of actual data (Feb, Mar, Apr)
   const actuals: ForecastMonth[] = HISTORICAL_MONTHS.slice(3).map((m) => ({
     period: m.label,
-    quarter: m.month < '2026-10' ? 'Q3 2026' : 'Q4 2026',
+    quarter: m.month < '2026-04' ? 'Q1 2026' : 'Q2 2026',
     revenue: m.revenue,
     cogs: m.revenue - m.grossProfit,
     grossProfit: m.grossProfit,
@@ -275,20 +275,20 @@ function buildBaseForecast(): ForecastMonth[] {
   const avgCogsPct = lastActuals.reduce((s, m) => s + (m.revenue - m.grossProfit) / m.revenue, 0) / 3;
   const avgOpexPct = lastActuals.reduce((s, m) => s + m.opex / m.revenue, 0) / 3;
 
-  // Project 6 quarters forward (Nov 2026 – Apr 2026) → 18 months
+  // Project 6 quarters forward (May 2026 – Apr 2027) → 12 months
   const projected: ForecastMonth[] = [];
-  let baseRevenue = HISTORICAL_MONTHS[5].revenue; // Oct 2026
+  let baseRevenue = HISTORICAL_MONTHS[5].revenue; // Apr 2026
 
   const MONTHS_LABELS = [
-    "Nov '26", "Dec '26", "Jan '27", "Feb '27", "Mar '27",
-    "Apr '27", "May '27", "Jun '27", "Jul '27", "Aug '27", "Sep '27", "Oct '27",
+    "May '26", "Jun '26", "Jul '26", "Aug '26", "Sep '26", "Oct '26",
+    "Nov '26", "Dec '26", "Jan '27", "Feb '27", "Mar '27", "Apr '27",
   ];
   const QUARTERS = [
-    'Q4 2026', 'Q4 2026', // Nov, Dec
+    'Q2 2026', 'Q2 2026', // May, Jun
+    'Q3 2026', 'Q3 2026', 'Q3 2026', // Jul, Aug, Sep
+    'Q4 2026', 'Q4 2026', 'Q4 2026', // Oct, Nov, Dec
     'Q1 2027', 'Q1 2027', 'Q1 2027', // Jan, Feb, Mar
-    'Q2 2027', 'Q2 2027', 'Q2 2027', // Apr, May, Jun
-    'Q3 2027', 'Q3 2027', 'Q3 2027', // Jul, Aug, Sep
-    'Q4 2027', // Oct
+    'Q2 2027', // Apr
   ];
 
   // Seasonal adjustments (outdoor brand pattern)
@@ -390,7 +390,7 @@ function applyAdjustments(
 
 const avgCogsPct = HISTORICAL_MONTHS.slice(-3).reduce((s, m) => s + (m.revenue - m.grossProfit) / m.revenue, 0) / 3;
 
-const QUARTERS_AVAILABLE = ['Q4 2026', 'Q1 2027', 'Q2 2027', 'Q3 2027', 'Q4 2027'];
+const QUARTERS_AVAILABLE = ['Q2 2026', 'Q3 2026', 'Q4 2026', 'Q1 2027', 'Q2 2027'];
 
 const TOOLTIP_STYLE = {
   background: '#FFFFFF',
@@ -457,7 +457,7 @@ export default function AiForecastPage() {
   const baseForecast = buildBaseForecast();
 
   const [adjustments, setAdjustments] = useState<QuarterAdjustment[]>([]);
-  const [targetQuarter, setTargetQuarter] = useState('Q4 2026');
+  const [targetQuarter, setTargetQuarter] = useState('Q2 2026');
   const [isProcessing, setIsProcessing] = useState(false);
   const [showTable, setShowTable] = useState(false);
 
@@ -533,44 +533,49 @@ export default function AiForecastPage() {
 
   return (
     <div className="flex flex-col gap-5">
-      {/* Header */}
-      <div className="flex items-center justify-between flex-wrap gap-3">
+      {/* Processing dots animation */}
+      <style>{`@keyframes aif-blink { 0%,100%{opacity:1} 50%{opacity:0.15} }`}</style>
+
+      {/* Header — matches app-wide 32px condensed style */}
+      <div className="flex items-start justify-between flex-wrap gap-2">
         <div>
-          <div className="text-[24px] font-black uppercase tracking-[0.04em]"
-            style={{ fontFamily: 'var(--font-condensed)', color: 'var(--color-text)' }}>
+          <div className="uppercase tracking-[0.04em]"
+            style={{ fontFamily: 'var(--font-condensed)', color: 'var(--color-text)', fontSize: 32, fontWeight: 900 }}>
             AI Forecast Builder
           </div>
-          <div className="text-[13px] mt-0.5" style={{ color: 'var(--color-muted)' }}>
-            Trend-driven baseline · natural language adjustments · cascading quarters
+          <div className="text-[12px] mt-0.5" style={{ color: 'var(--color-muted)' }}>
+            Trend-driven baseline · natural-language adjustments · cascading quarters
           </div>
         </div>
         <div className="flex gap-2 items-center flex-wrap">
           {adjustmentCount > 0 && (
-            <div className="px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.06em]"
-              style={{ background: 'var(--color-blue-d)', color: 'var(--color-blue)', fontFamily: 'var(--font-condensed)' }}>
+            <div className="font-bold uppercase tracking-[0.06em]"
+              style={{ background: 'var(--color-blue-d)', color: 'var(--color-blue)', fontFamily: 'var(--font-condensed)', fontSize: 13, padding: '6px 14px' }}>
               {adjustmentCount} adjustment{adjustmentCount > 1 ? 's' : ''} applied
             </div>
           )}
-          <button
-            onClick={resetAdjustments}
-            className="px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.06em] cursor-pointer"
-            style={{ background: 'var(--color-surf2)', color: 'var(--color-muted)', border: '1px solid var(--color-border)', fontFamily: 'var(--font-condensed)' }}
-          >
-            ↺ Reset
-          </button>
+          {adjustmentCount > 0 && (
+            <button
+              onClick={resetAdjustments}
+              className="font-bold uppercase tracking-[0.06em] cursor-pointer"
+              style={{ background: 'var(--color-surf2)', color: 'var(--color-muted)', border: '1px solid var(--color-border)', fontFamily: 'var(--font-condensed)', fontSize: 13, padding: '6px 14px' }}
+            >
+              ↺ Reset
+            </button>
+          )}
         </div>
       </div>
 
       {/* Methodology note */}
       <div className="px-4 py-3 leading-relaxed"
         style={{ background: 'rgba(29,68,191,0.07)', borderLeft: '3px solid var(--color-blue)', color: 'var(--color-muted)', fontSize: 13 }}>
-        <strong style={{ color: 'var(--color-blue)' }}>Baseline methodology:</strong> 3.1% MoM revenue growth (trailing 6-month avg), 54.9% COGS ratio, 35.1% OpEx ratio — adjusted for outdoor-apparel seasonal patterns (peak: Jul–Oct, trough: Dec–Feb). Actuals locked through October 2026.
+        <strong style={{ color: 'var(--color-blue)' }}>Baseline methodology:</strong> 3.1% MoM revenue growth (trailing 6-month avg), 54.9% COGS ratio, 35.1% OpEx ratio — adjusted for outdoor-apparel seasonal patterns (peak: Jul–Oct, trough: Dec–Feb). Actuals locked through April 2026.
       </div>
 
       {/* Summary KPIs */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {[
-          { label: '12M Fwd Revenue',  value: formatCurrency(totalFwdRevenue, true),  color: 'var(--color-blue)',  sub: 'Nov 2026 – Oct 2027' },
+          { label: '12M Fwd Revenue',  value: formatCurrency(totalFwdRevenue, true),  color: 'var(--color-blue)',  sub: 'May 2026 – Apr 2027' },
           { label: '12M Fwd Net Inc.',  value: formatCurrency(totalFwdNI, true),       color: totalFwdNI >= 0 ? 'var(--color-green)' : 'var(--color-red)', sub: 'Projected' },
           { label: 'Avg NI Margin',    value: `${(totalFwdNI / totalFwdRevenue * 100).toFixed(1)}%`, color: 'var(--color-text)', sub: 'Forward 12 months' },
           { label: 'Adjustments',      value: adjustmentCount.toString(),              color: 'var(--color-orange)', sub: adjustmentCount === 0 ? 'AI baseline only' : 'User inputs applied' },
@@ -633,7 +638,7 @@ export default function AiForecastPage() {
                   return [`$${Number(val).toLocaleString()}${suffix}`, String(name)];
                 }}
               />
-              <ReferenceLine x="Oct '26" stroke="rgba(0,0,0,0.20)" strokeDasharray="4 3"
+              <ReferenceLine x="Apr '26" stroke="rgba(0,0,0,0.20)" strokeDasharray="4 3"
                 label={{ value: 'Today', fill: '#6B7A8D', fontSize: 9, position: 'top' }} />
               <Legend wrapperStyle={{ fontSize: 11, color: '#6B7A8D' }} />
               <Area type="monotone" dataKey="Revenue" stroke="#1D44BF" fill="url(#aifRevGrad)"
@@ -696,33 +701,25 @@ export default function AiForecastPage() {
           ))}
         </div>
         <div className="text-[10px] mt-2" style={{ color: 'var(--color-muted)' }}>
-          Click a quarter card to set it as the target for your next assumption
+          Click a quarter to select it · Add assumptions via <strong>AI CFO → Forecast</strong> tab (bottom-right)
         </div>
       </div>
 
-      {/* AI CFO panel prompt / processing status */}
-      <div className="px-4 py-3 flex items-center gap-3"
-        style={{ background: 'rgba(29,68,191,0.06)', borderLeft: '3px solid var(--color-blue)', borderRadius: 'var(--radius-sm)' }}>
-        {isProcessing ? (
-          <div className="flex items-center gap-2.5">
-            <div className="flex gap-1.5">
-              {[0, 1, 2].map((i) => (
-                <span key={i} className="w-1.5 h-1.5 rounded-full"
-                  style={{ background: 'var(--color-blue)', animation: 'blink 1.2s infinite', animationDelay: `${i * 0.22}s` }} />
-              ))}
-            </div>
-            <span style={{ color: 'var(--color-blue)', fontSize: 13, fontWeight: 600 }}>
-              Applying assumption to {targetQuarter}…
-            </span>
+      {/* Processing indicator — only visible while applying an assumption */}
+      {isProcessing && (
+        <div className="px-4 py-3 flex items-center gap-2.5"
+          style={{ background: 'rgba(29,68,191,0.06)', borderLeft: '3px solid var(--color-blue)' }}>
+          <div className="flex gap-1.5">
+            {[0, 1, 2].map((i) => (
+              <span key={i} className="w-1.5 h-1.5 rounded-full"
+                style={{ background: 'var(--color-blue)', animation: 'aif-blink 1.2s infinite', animationDelay: `${i * 0.22}s` }} />
+            ))}
           </div>
-        ) : (
-          <span style={{ color: 'var(--color-muted)', fontSize: 13, lineHeight: 1.5 }}>
-            <strong style={{ color: 'var(--color-blue)' }}>📈 Forecast Assistant</strong>
-            {' '}— open the <strong>AI CFO panel</strong> (bottom-right) and select the{' '}
-            <strong>Forecast</strong> tab to add assumptions. Outputs update here instantly.
+          <span style={{ color: 'var(--color-blue)', fontSize: 13, fontWeight: 600 }}>
+            Applying assumption to {targetQuarter}…
           </span>
-        )}
-      </div>
+        </div>
+      )}
 
       {/* Adjustment audit trail */}
       {adjustments.length > 0 && (

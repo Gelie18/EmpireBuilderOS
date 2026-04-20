@@ -10,7 +10,7 @@ interface PnlTableProps {
   title?: string;
 }
 
-export default function PnlTable({ rows, title = 'Budget vs Actuals — October 2026' }: PnlTableProps) {
+export default function PnlTable({ rows, title = 'Budget vs Actuals — April 2026' }: PnlTableProps) {
   const [openNotes, setOpenNotes] = useState<Set<string>>(new Set());
   const toggle = (id: string) => setOpenNotes((p) => {
     const n = new Set(p); n.has(id) ? n.delete(id) : n.add(id); return n;

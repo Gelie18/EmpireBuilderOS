@@ -33,12 +33,12 @@ const BACKLOG: BacklogItem[] = [
   {
     id: 'B001',
     title: 'Apex-Wexler Contract Renewal Unsigned',
-    description: 'Master supply agreement with Wexler Distribution (our #2 revenue account) expired Oct 1. Currently operating on expired terms. 60-day window before they can renegotiate pricing.',
+    description: 'Master supply agreement with Wexler Distribution (our #2 revenue account) expired Apr 1. Currently operating on expired terms. 60-day window before they can renegotiate pricing.',
     category: 'Legal',
     priority: 'Critical',
     status: 'Overdue',
     owner: 'Sarah Chen',
-    dueDate: '2026-10-15',
+    dueDate: '2026-04-15',
     agingDays: 16,
     impact$: 480000,
     impactLabel: 'Annual contract value at risk',
@@ -47,9 +47,9 @@ const BACKLOG: BacklogItem[] = [
       'Legal to redline revised MSA — target same pricing + 2-year lock',
       'Schedule executive call with Wexler VP Procurement this week',
       'Prepare pricing concession fallback: max 3% discount to retain 2-year term',
-      'Get signed LOI by Oct 22 to stop clock on renegotiation window',
+      'Get signed LOI by Apr 22 to stop clock on renegotiation window',
     ],
-    blockers: 'Legal counsel vacation until Oct 21 — escalate to outside counsel',
+    blockers: 'Legal counsel vacation until Apr 21 — escalate to outside counsel',
   },
   {
     id: 'B002',
@@ -59,13 +59,13 @@ const BACKLOG: BacklogItem[] = [
     priority: 'Critical',
     status: 'Overdue',
     owner: 'Mike Torres',
-    dueDate: '2026-10-10',
+    dueDate: '2026-04-10',
     agingDays: 21,
     impact$: 127400,
     impactLabel: 'Cash at risk (90+ day AR)',
     actionPhase: 'Immediate',
     actions: [
-      'Escalate Hartwell Group to VP Sales for executive-level outreach by Oct 22',
+      'Escalate Hartwell Group to VP Sales for executive-level outreach by Apr 22',
       'Issue formal demand letter to Peak Supply — 10-day cure period before collections',
       'Engage factoring facility for Hartwell ($58K) — immediate 85% advance available',
       'Place all 4 accounts on credit hold until balances resolved',
@@ -75,12 +75,12 @@ const BACKLOG: BacklogItem[] = [
   {
     id: 'B003',
     title: 'Altitude Creative Invoice Not Matched to PO',
-    description: '$18,000 marketing invoice from Altitude Creative (Oct campaign) submitted without an approved PO. Spend not in budget. Requires executive approval before payment.',
+    description: '$18,000 marketing invoice from Altitude Creative (Apr campaign) submitted without an approved PO. Spend not in budget. Requires executive approval before payment.',
     category: 'Finance',
     priority: 'High',
     status: 'Blocked',
     owner: 'Jordan Lee',
-    dueDate: '2026-10-28',
+    dueDate: '2026-04-28',
     agingDays: 9,
     impact$: 18000,
     impactLabel: 'Unbudgeted spend pending approval',
@@ -88,11 +88,11 @@ const BACKLOG: BacklogItem[] = [
     actions: [
       'Request campaign performance data from Altitude Creative to justify invoice',
       'CMO to approve or reject spend within 48 hours',
-      'If approved: retroactively create PO and reclassify to Q4 marketing budget',
-      'If rejected: negotiate partial payment or defer to Q4 contingency',
+      'If approved: retroactively create PO and reclassify to Q2 marketing budget',
+      'If rejected: negotiate partial payment or defer to Q2 contingency',
       'Implement PO-required policy for all vendor spend >$5K going forward',
     ],
-    blockers: 'CMO approval pending — CMO OOO until Oct 23',
+    blockers: 'CMO approval pending — CMO OOO until Apr 23',
   },
   {
     id: 'B004',
@@ -102,7 +102,7 @@ const BACKLOG: BacklogItem[] = [
     priority: 'High',
     status: 'In Progress',
     owner: 'Jordan Lee',
-    dueDate: '2026-10-25',
+    dueDate: '2026-04-25',
     agingDays: 6,
     impact$: 13000,
     impactLabel: 'Potentially unauthorized spend',
@@ -117,12 +117,12 @@ const BACKLOG: BacklogItem[] = [
   {
     id: 'B005',
     title: 'Salesforce Enterprise Renewal: Nov 1 Deadline',
-    description: 'Salesforce Enterprise contract renews Nov 1 at $22,000/year. Auto-renews if no action taken. Opportunity to downgrade to Professional tier ($14K) given current 40% seat utilization.',
+    description: 'Salesforce Enterprise contract renews May 1 at $22,000/year. Auto-renews if no action taken. Opportunity to downgrade to Professional tier ($14K) given current 40% seat utilization.',
     category: 'Procurement',
     priority: 'High',
     status: 'New',
     owner: 'Alex Rivera',
-    dueDate: '2026-10-28',
+    dueDate: '2026-04-28',
     agingDays: 3,
     impact$: 8000,
     impactLabel: 'Annual savings opportunity',
@@ -132,7 +132,7 @@ const BACKLOG: BacklogItem[] = [
       'Get downgrade quote from Salesforce AE for Professional + 60% of seats',
       'If utilization <50%: downgrade to Professional — save $8K/year',
       'Negotiate multi-year pricing lock regardless of tier decision',
-      'Deadline: must notify Salesforce by Oct 28 to avoid auto-renewal',
+      'Deadline: must notify Salesforce by Apr 28 to avoid auto-renewal',
     ],
   },
   {
@@ -143,7 +143,7 @@ const BACKLOG: BacklogItem[] = [
     priority: 'High',
     status: 'Blocked',
     owner: 'Sarah Chen',
-    dueDate: '2026-10-22',
+    dueDate: '2026-04-22',
     agingDays: 7,
     impact$: 31200,
     impactLabel: 'Potential underpayment penalty exposure',
@@ -159,22 +159,22 @@ const BACKLOG: BacklogItem[] = [
   {
     id: 'B007',
     title: 'ShipBob Rate Card Not Updated in ERP',
-    description: 'New ShipBob fulfillment agreement (effective Oct 1) reduces per-unit cost by $0.34. ERP still billing at old rate. Creates ~$14K/month overstatement in COGS. Financial statements overstated.',
+    description: 'New ShipBob fulfillment agreement (effective Apr 1) reduces per-unit cost by $0.34. ERP still billing at old rate. Creates ~$14K/month overstatement in COGS. Financial statements overstated.',
     category: 'Operations',
     priority: 'High',
     status: 'In Progress',
     owner: 'Alex Rivera',
-    dueDate: '2026-10-31',
+    dueDate: '2026-04-30',
     agingDays: 14,
     impact$: 14000,
     impactLabel: 'Monthly COGS overstatement',
     actionPhase: 'This Week',
     actions: [
-      'IT to update ShipBob rate card in NetSuite/ERP — effective Oct 1',
-      'Reprocess October COGS transactions at corrected rate',
-      'Issue corrected financial statements for Oct reporting package',
+      'IT to update ShipBob rate card in NetSuite/ERP — effective Apr 1',
+      'Reprocess April COGS transactions at corrected rate',
+      'Issue corrected financial statements for Apr reporting package',
       'Confirm with ShipBob that new rate applies to all SKUs — request updated rate card PDF',
-      'Set calendar reminder for Nov 1 to verify new rates auto-applied',
+      'Set calendar reminder for May 1 to verify new rates auto-applied',
     ],
   },
   {
@@ -185,56 +185,56 @@ const BACKLOG: BacklogItem[] = [
     priority: 'Medium',
     status: 'New',
     owner: 'Sarah Chen',
-    dueDate: '2026-11-15',
+    dueDate: '2026-05-15',
     agingDays: 0,
     impact$: 47000,
     impactLabel: 'Revenue line under performance review',
     actionPhase: 'This Month',
     actions: [
-      'Product team to present margin improvement plan by Nov 1',
+      'Product team to present margin improvement plan by May 1',
       'Options: price increase (+12%), COGS reduction (new supplier RFP), or product discontinuation',
       'Model all three scenarios with 12-month P&L impact',
-      'Present to board with recommendation at Nov board meeting',
+      'Present to board with recommendation at May board meeting',
     ],
   },
   {
     id: 'B009',
     title: 'Q4 Budget Variance Reforecast Not Started',
-    description: 'October actuals show material variance from Q4 budget (marketing +38%, COGS –2%). Board expects reforecast at Nov meeting. Work has not started.',
+    description: 'April actuals show material variance from Q2 budget (marketing +38%, COGS –2%). Board expects reforecast at May meeting. Work has not started.',
     category: 'Finance',
     priority: 'Medium',
     status: 'New',
     owner: 'Jordan Lee',
-    dueDate: '2026-11-10',
+    dueDate: '2026-05-10',
     agingDays: 0,
     impact$: 0,
-    impactLabel: 'Board deliverable due Nov 10',
+    impactLabel: 'Board deliverable due May 10',
     actionPhase: 'This Month',
     actions: [
-      'Finance to pull October actuals by cost center — complete by Oct 25',
+      'Finance to pull April actuals by cost center — complete by Apr 25',
       'Update driver model with revised assumptions: marketing $124K/mo, COGS at new ShipBob rate',
-      'Prepare Nov–Dec revenue sensitivity: base / upside / downside',
-      'Circulate draft reforecast to CEO/CFO by Nov 5 for review',
-      'Finalize for board pack by Nov 8',
+      'Prepare May–Jun revenue sensitivity: base / upside / downside',
+      'Circulate draft reforecast to CEO/CFO by May 5 for review',
+      'Finalize for board pack by May 8',
     ],
   },
   {
     id: 'B010',
     title: 'ISO Certification Renewal: 47 Days Remaining',
-    description: 'ISO 9001:2015 certification expires Dec 7. Renewal audit requires 8-week preparation. Pre-audit documentation review not scheduled.',
+    description: 'ISO 9001:2015 certification expires Jun 7. Renewal audit requires 8-week preparation. Pre-audit documentation review not scheduled.',
     category: 'Operations',
     priority: 'Medium',
     status: 'New',
     owner: 'Mike Torres',
-    dueDate: '2026-12-07',
+    dueDate: '2026-06-07',
     agingDays: 0,
     impact$: 0,
     impactLabel: 'Key customer compliance requirement',
     actionPhase: 'This Month',
     actions: [
-      'Schedule pre-audit internal review with quality team — target Oct 28',
+      'Schedule pre-audit internal review with quality team — target Apr 28',
       'Identify documentation gaps from last certification cycle',
-      'Book external auditor for mid-November pre-assessment',
+      'Book external auditor for mid-May pre-assessment',
       'Confirm 4 key customer contracts that require ISO certification — alert if at risk',
     ],
   },
@@ -306,13 +306,13 @@ export default function BacklogPage() {
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
             <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.10em', textTransform: 'uppercase', color: '#6B7280', marginBottom: 6 }}>
-              Operations · October 2026
+              Operations · April 2026
             </div>
             <div style={{ fontSize: 28, fontWeight: 800, lineHeight: 1, color: '#1A1C2E', letterSpacing: '-0.02em' }}>
               Ops Backlog
             </div>
             <div style={{ fontSize: 14, color: '#6B7280', marginTop: 6 }}>
-              {BACKLOG.length} open items · AI-driven action plan · Updated Oct 21, 2026
+              {BACKLOG.length} open items · AI-driven action plan · Updated Apr 21, 2026
             </div>
           </div>
           <div className="flex flex-wrap gap-2 items-center">
@@ -496,16 +496,16 @@ export default function BacklogPage() {
           {/* AI Summary */}
           <div style={{ ...CARD, borderLeft: '4px solid #1D44BF', padding: '20px 24px' }}>
             <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.09em', color: '#1D44BF', marginBottom: 12 }}>
-              AI CFO Summary — October 2026 — Ops Backlog
+              AI CFO Summary — April 2026 — Ops Backlog
             </div>
             <div style={{ fontSize: 15, color: '#374151', lineHeight: 1.65 }}>
               You have <strong>10 open backlog items</strong> requiring structured resolution. The most urgent exposure is <strong>{fmt$(totalRisk$)}</strong> in combined financial risk — primarily from the Wexler contract ($480K ARR), 90-day AR ($127K), and unconfirmed Q3 tax payment ($31K).
             </div>
             <div style={{ fontSize: 15, color: '#374151', lineHeight: 1.65, marginTop: 10 }}>
-              Two items are on hard deadlines in the next 7 days: the Salesforce renewal must be actioned by Oct 28 to avoid auto-renewal, and the Altitude Creative invoice needs CMO sign-off. The ShipBob ERP update is inflating COGS by $14K/month — this should be corrected before October closes.
+              Two items are on hard deadlines in the next 7 days: the Salesforce renewal must be actioned by Apr 28 to avoid auto-renewal, and the Altitude Creative invoice needs CMO sign-off. The ShipBob ERP update is inflating COGS by $14K/month — this should be corrected before April closes.
             </div>
             <div style={{ fontSize: 15, color: '#374151', lineHeight: 1.65, marginTop: 10 }}>
-              <strong>Recommended sequencing:</strong> (1) Legal — Wexler contract now. (2) Finance — IRS tax confirmation + ShipBob ERP fix this week. (3) Collections — Hartwell + Peak escalation this week. (4) Procurement — Salesforce renewal by Oct 28. (5) Operations — ISO prep begins this month.
+              <strong>Recommended sequencing:</strong> (1) Legal — Wexler contract now. (2) Finance — IRS tax confirmation + ShipBob ERP fix this week. (3) Collections — Hartwell + Peak escalation this week. (4) Procurement — Salesforce renewal by Apr 28. (5) Operations — ISO prep begins this month.
             </div>
           </div>
 

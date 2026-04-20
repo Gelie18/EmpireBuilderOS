@@ -20,7 +20,7 @@ const PAGE_CTX: Record<string, { label: string; allChips: string[] }> = {
       'Revenue by channel breakdown?',
       'Where are we losing to plan?',
       'What improved vs last month?',
-      'November priorities?',
+      'May priorities?',
     ],
   },
   '/pnl': {
@@ -29,7 +29,7 @@ const PAGE_CTX: Record<string, { label: string; allChips: string[] }> = {
       'What drove the marketing overage?',
       'Why did gross margin expand?',
       'Break down OpEx by category',
-      'P&L vs last October?',
+      'P&L vs last April?',
       'What is our EBITDA?',
       'Where can we cut costs?',
       'Which line item concerns you most?',
@@ -46,7 +46,7 @@ const PAGE_CTX: Record<string, { label: string; allChips: string[] }> = {
       'Cash position and runway?',
       'AR aging — what to collect now?',
       'Should we extend AP terms?',
-      'November cash outlook?',
+      'May cash outlook?',
       'What is our break-even?',
       'Liquidity risks to flag?',
       'Operating vs investing cash flow?',
@@ -216,7 +216,7 @@ const PAGE_CTX: Record<string, { label: string; allChips: string[] }> = {
       'What changed most vs September?',
       'Is the marketing spike a trend?',
       'Revenue trend healthy?',
-      'November outlook?',
+      'May outlook?',
       'Which line improved most?',
       'What explains the NI drop?',
       'Gross profit MoM change?',
@@ -232,8 +232,8 @@ const PAGE_CTX: Record<string, { label: string; allChips: string[] }> = {
     allChips: [
       'Which day drove the most revenue?',
       'DTC vs wholesale daily split?',
-      'Email campaign impact on Oct 12?',
-      'Revenue run rate for November?',
+      'Email campaign impact on Apr 12?',
+      'Revenue run rate for May?',
       'Slowest revenue days — why?',
       'Weekend vs weekday performance?',
       'Best single-day revenue record?',
@@ -254,7 +254,7 @@ const DEFAULT_CTX = {
     'What do I tell the board?',
     'Q4 outlook?',
     'Biggest cost reduction opportunity?',
-    'November priorities?',
+    'May priorities?',
     'EBITDA this month?',
     'Top 3 things to fix right now?',
     'Revenue growth vs last year?',
@@ -289,7 +289,7 @@ const THINK_BIG_SETS: string[][] = [
 ];
 
 // ── Forecast quick scenarios ───────────────────────────────────────────────────
-const FORECAST_QUARTERS = ['Q4 2026', 'Q1 2027', 'Q2 2027', 'Q3 2027', 'Q4 2027'];
+const FORECAST_QUARTERS = ['Q2 2026', 'Q3 2026', 'Q4 2026', 'Q1 2027', 'Q2 2027'];
 
 const FORECAST_SCENARIOS = [
   'New wholesale account adds 5% revenue growth',
@@ -387,7 +387,7 @@ export default function FloatingChat() {
   const [refreshAnim, setRefreshAnim] = useState(false);
   const [thinkRefreshAnim, setThinkRefreshAnim] = useState(false);
   const [forecastInput, setForecastInput] = useState('');
-  const [forecastQuarter, setForecastQuarter] = useState('Q4 2026');
+  const [forecastQuarter, setForecastQuarter] = useState('Q2 2026');
   const [forecastSending, setForecastSending] = useState(false);
 
   const pathname = usePathname();
@@ -399,7 +399,7 @@ export default function FloatingChat() {
 
   const { messages, isLoading, sendMessage } = useChat({
     currentView: pathname.replace('/', '') || 'dashboard',
-    period: { type: 'month', startDate: '2026-10-01', endDate: '2026-10-31', label: 'Oct 2026' },
+    period: { type: 'month', startDate: '2026-04-01', endDate: '2026-04-30', label: 'Apr 2026' },
     highlights: [`Viewing: ${ctx.label}`],
   });
 
@@ -530,7 +530,7 @@ export default function FloatingChat() {
               AI CFO
             </div>
             <div className="text-[11px] mt-0.5 truncate" style={{ color: 'rgba(255,255,255,0.45)' }}>
-              {mode === 'forecast' ? `Forecast · ${forecastQuarter}` : `Context: ${ctx.label} · Oct 2026`}
+              {mode === 'forecast' ? `Forecast · ${forecastQuarter}` : `Context: ${ctx.label} · Apr 2026`}
             </div>
           </div>
           <button
@@ -610,113 +610,81 @@ export default function FloatingChat() {
         {/* ── Forecast Assistant mode ── */}
         {mode === 'forecast' && (
           <div className="flex-1 overflow-y-auto flex flex-col min-h-0">
-            {/* Explainer */}
-            <div className="px-4 pt-4 pb-3 border-b" style={{ borderColor: 'rgba(0,0,0,0.08)', background: 'rgba(29,68,191,0.04)' }}>
-              <div className="text-[12px] leading-relaxed" style={{ color: '#6B7280' }}>
-                <strong style={{ color: '#1D44BF' }}>Forecast Assistant</strong> — describe your assumptions below. Results update live in the{' '}
-                <button
-                  onClick={() => { router.push('/ai-forecast'); }}
-                  style={{ color: '#1D44BF', fontWeight: 700, textDecoration: 'underline', background: 'none', border: 'none', cursor: 'pointer', fontSize: 12, padding: 0 }}
-                >
-                  AI Forecast Builder →
-                </button>
-              </div>
-            </div>
 
-            {/* Quarter selector */}
-            <div className="px-4 pt-3 pb-2">
-              <div className="text-[10px] font-bold uppercase tracking-[0.10em] mb-2" style={{ color: '#6B7280' }}>
-                Target Quarter
-              </div>
-              <div className="flex flex-wrap gap-1.5">
-                {FORECAST_QUARTERS.map((q) => {
-                  const active = forecastQuarter === q;
-                  return (
-                    <button
-                      key={q}
-                      onClick={() => setForecastQuarter(q)}
-                      style={{
-                        fontSize: 11, fontWeight: 700, padding: '4px 10px', borderRadius: 5, cursor: 'pointer',
-                        border: `1px solid ${active ? '#1D44BF' : 'rgba(0,0,0,0.12)'}`,
-                        background: active ? '#1D44BF' : 'transparent',
-                        color: active ? '#FFFFFF' : '#6B7280',
-                        fontFamily: 'inherit',
-                      }}
-                    >
-                      {q}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Quick scenario templates */}
-            <div className="px-4 pt-1 pb-3 border-b" style={{ borderColor: 'rgba(0,0,0,0.08)' }}>
-              <div className="text-[10px] font-bold uppercase tracking-[0.10em] mb-2" style={{ color: '#6B7280' }}>
-                Quick Scenarios
-              </div>
-              <div className="flex flex-col gap-1.5">
-                {FORECAST_SCENARIOS.map((s) => (
-                  <button
-                    key={s}
-                    onClick={() => setForecastInput(s)}
-                    className="text-left text-[12px] px-3 py-2 rounded cursor-pointer transition-all"
+            {/* Quarter + Open Builder bar */}
+            <div className="px-3 pt-3 pb-2.5 border-b flex items-center gap-2 flex-wrap" style={{ borderColor: 'rgba(0,0,0,0.08)' }}>
+              {FORECAST_QUARTERS.map((q) => {
+                const active = forecastQuarter === q;
+                return (
+                  <button key={q} onClick={() => setForecastQuarter(q)}
                     style={{
-                      border: '1px solid rgba(29,68,191,0.18)',
-                      color: '#374151',
-                      background: 'rgba(29,68,191,0.04)',
-                      fontFamily: 'inherit',
-                      lineHeight: 1.4,
-                    }}
-                    onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#1D44BF'; e.currentTarget.style.background = 'rgba(29,68,191,0.09)'; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(29,68,191,0.18)'; e.currentTarget.style.background = 'rgba(29,68,191,0.04)'; }}
-                  >
-                    ✦ {s}
+                      fontSize: 10, fontWeight: 700, padding: '3px 8px', borderRadius: 4, cursor: 'pointer',
+                      border: `1px solid ${active ? '#1D44BF' : 'rgba(0,0,0,0.10)'}`,
+                      background: active ? '#1D44BF' : 'transparent',
+                      color: active ? '#FFFFFF' : '#9CA3AF', fontFamily: 'inherit',
+                    }}>
+                    {q}
                   </button>
+                );
+              })}
+              <button
+                onClick={() => { router.push('/ai-forecast'); setOpen(false); }}
+                style={{ marginLeft: 'auto', fontSize: 10, fontWeight: 700, color: '#1D44BF', background: 'rgba(29,68,191,0.08)', border: '1px solid rgba(29,68,191,0.20)', borderRadius: 4, padding: '3px 8px', cursor: 'pointer', fontFamily: 'inherit', whiteSpace: 'nowrap' }}
+                onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(29,68,191,0.15)'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(29,68,191,0.08)'; }}
+              >
+                Open Builder →
+              </button>
+            </div>
+
+            {/* Quick scenarios — 2-column compact grid */}
+            <div className="px-3 pt-2.5 pb-2 border-b" style={{ borderColor: 'rgba(0,0,0,0.08)' }}>
+              <div className="text-[9px] font-bold uppercase tracking-[0.10em] mb-1.5" style={{ color: '#9CA3AF' }}>Quick scenarios</div>
+              <div className="grid grid-cols-2 gap-1">
+                {FORECAST_SCENARIOS.map((s) => (
+                  <button key={s} onClick={() => setForecastInput(s)}
+                    className="text-left cursor-pointer transition-all"
+                    style={{ fontSize: 10.5, padding: '5px 8px', border: '1px solid rgba(29,68,191,0.15)', color: '#374151', background: 'rgba(29,68,191,0.03)', borderRadius: 4, fontFamily: 'inherit', lineHeight: 1.35 }}
+                    onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#1D44BF'; e.currentTarget.style.background = 'rgba(29,68,191,0.08)'; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(29,68,191,0.15)'; e.currentTarget.style.background = 'rgba(29,68,191,0.03)'; }}
+                  >{s}</button>
                 ))}
               </div>
             </div>
 
-            {/* Forecast input */}
-            <div className="px-4 py-4">
-              <div className="text-[10px] font-bold uppercase tracking-[0.10em] mb-2" style={{ color: '#6B7280' }}>
-                Custom Assumption for {forecastQuarter}
-              </div>
-              <div className="flex flex-col gap-2">
+            {/* Custom input + apply */}
+            <div className="px-3 py-3">
+              <div className="flex gap-1.5">
                 <input
                   ref={forecastInputRef}
                   value={forecastInput}
                   onChange={(e) => setForecastInput(e.target.value)}
                   onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleForecastSend(); } }}
-                  placeholder={`Describe your ${forecastQuarter} assumptions...`}
-                  className="w-full px-3.5 py-3 text-[13px] border rounded outline-none"
-                  style={{ background: '#F8F8FA', borderColor: 'rgba(0,0,0,0.12)', color: '#1A1C2E', fontFamily: 'inherit' }}
+                  placeholder={`${forecastQuarter} assumption…`}
+                  className="flex-1 px-3 py-2 text-[12px] border rounded outline-none"
+                  style={{ background: '#F8F8FA', borderColor: 'rgba(0,0,0,0.12)', color: '#1A1C2E', fontFamily: 'inherit', minWidth: 0 }}
                   onFocus={(e) => (e.currentTarget.style.borderColor = '#1D44BF')}
                   onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(0,0,0,0.12)')}
                 />
                 <button
                   onClick={handleForecastSend}
                   disabled={!forecastInput.trim() || forecastSending}
-                  className="w-full py-3 text-[13px] font-bold uppercase tracking-[0.06em] rounded cursor-pointer transition-all"
+                  className="flex-shrink-0 px-3 py-2 text-[11px] font-bold uppercase rounded cursor-pointer"
                   style={{
                     background: !forecastInput.trim() || forecastSending ? '#F0F0F0' : '#1D44BF',
                     color: !forecastInput.trim() || forecastSending ? '#9CA3AF' : '#FFFFFF',
-                    border: 'none',
-                    fontFamily: 'inherit',
-                    opacity: !forecastInput.trim() || forecastSending ? 0.7 : 1,
+                    border: 'none', fontFamily: 'inherit', letterSpacing: '0.04em',
+                    opacity: !forecastInput.trim() || forecastSending ? 0.6 : 1,
                   }}
                 >
-                  {forecastSending
-                    ? (pathname === '/ai-forecast' ? 'Applied ✓' : 'Opening Forecast Builder…')
-                    : (pathname === '/ai-forecast' ? `Apply to ${forecastQuarter} →` : `Open Forecast Builder →`)
-                  }
+                  {forecastSending ? '✓' : (pathname === '/ai-forecast' ? 'Apply' : 'Go →')}
                 </button>
-                {pathname !== '/ai-forecast' && (
-                  <div className="text-[11px] text-center" style={{ color: '#9CA3AF' }}>
-                    Results appear in the Forecast Builder tab
-                  </div>
-                )}
               </div>
+              {pathname !== '/ai-forecast' && forecastInput.trim() && (
+                <div className="text-[10px] mt-1.5" style={{ color: '#9CA3AF' }}>
+                  Will open Forecast Builder and apply
+                </div>
+              )}
             </div>
           </div>
         )}

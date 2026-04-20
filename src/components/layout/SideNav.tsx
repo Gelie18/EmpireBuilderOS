@@ -170,7 +170,7 @@ export default function SideNav() {
             color: '#E8B84B',
             fontSize: 10, fontWeight: 700, letterSpacing: '0.06em',
             textTransform: 'uppercase', padding: '2px 8px', borderRadius: 3,
-          }}>Oct 2026</span>
+          }}>Apr 2026</span>
           <span style={{
             background: 'rgba(5,150,105,0.15)',
             border: '1px solid rgba(5,150,105,0.30)',

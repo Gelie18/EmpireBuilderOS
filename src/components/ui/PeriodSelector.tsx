@@ -3,11 +3,11 @@
 export type PeriodKey = 'current' | 'last' | 'last3' | 'ytd' | 'last12';
 
 export const PERIOD_OPTIONS: { key: PeriodKey; label: string; sublabel: string }[] = [
-  { key: 'current', label: 'Current Month',  sublabel: 'Oct 2026' },
-  { key: 'last',    label: 'Last Month',      sublabel: 'Sep 2026' },
-  { key: 'last3',   label: 'Last 3 Months',   sublabel: 'Aug–Oct 2026' },
-  { key: 'ytd',     label: 'Year to Date',     sublabel: 'Jan–Oct 2026' },
-  { key: 'last12',  label: 'Last 12 Months',  sublabel: 'Nov 2025–Oct 2026' },
+  { key: 'current', label: 'Current Month',  sublabel: 'Apr 2026' },
+  { key: 'last',    label: 'Last Month',      sublabel: 'Mar 2026' },
+  { key: 'last3',   label: 'Last 3 Months',   sublabel: 'Feb–Apr 2026' },
+  { key: 'ytd',     label: 'Year to Date',     sublabel: 'Jan–Apr 2026' },
+  { key: 'last12',  label: 'Last 12 Months',  sublabel: 'May 2025–Apr 2026' },
 ];
 
 interface PeriodSelectorProps {

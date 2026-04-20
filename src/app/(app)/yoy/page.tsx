@@ -62,7 +62,7 @@ function Badge({ children, color, bg }: { children: React.ReactNode; color: stri
   );
 }
 
-const MONTH_LABELS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October'];
+const MONTH_LABELS = ['January', 'February', 'March', 'April'];
 
 export default function YoYPage() {
   const cur = yoy.currentYear;
@@ -95,7 +95,7 @@ export default function YoYPage() {
               Year-over-Year
             </div>
             <div className="text-[15px] mt-1" style={{ color: 'var(--color-muted)', fontFamily: 'var(--font-condensed)' }}>
-              Jan–Oct 2026 vs 2023
+              Jan–Apr 2026 vs 2023
             </div>
           </div>
           <div className="flex flex-wrap gap-2 items-center">
@@ -180,7 +180,7 @@ export default function YoYPage() {
 
       {/* ── REVENUE COMPARISON CHART ── */}
       <Card>
-        <Label>Monthly Revenue — FY 2026 vs FY 2023</Label>
+        <Label>Monthly Revenue — Jan–Apr 2026 vs Jan–Apr 2023</Label>
         <ResponsiveContainer width="100%" height={220}>
           <BarChart data={revenueData} barGap={3} barCategoryGap="28%">
             <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" vertical={false} />
@@ -304,9 +304,9 @@ export default function YoYPage() {
         </div>
         <ul className="flex flex-col gap-2.5" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
           {[
-            'ShipBob renegotiation delivered a structural COGS improvement mid-October — $14K/month in fulfilled savings that will compound from November onward, directly expanding gross margin from 43.9% (2023) to 45.1% (2026 Oct).',
-            'DTC channel mix shift drove higher-margin revenue: e-commerce now represents a larger share of the top line, and the Oct 12 email campaign generated a 14% conversion spike without any discounting, demonstrating pricing power vs 2023.',
-            'OpEx concern: expenses grew +22.1% YoY versus revenue growth of +18.4% — operating leverage is not yet materializing. The divergence is concentrated in marketing spend, which at $171K in October was the largest overage in 14 months and inflated the YoY OpEx line. If October normalizes in November, the full-year OpEx growth rate drops to roughly 15%, putting the business back on the right side of leverage.',
+            'ShipBob renegotiation delivered a structural COGS improvement mid-April — $14K/month in fulfilled savings that will compound from May onward, directly expanding gross margin from 43.9% (2023) to 43.3% (2026 Apr).',
+            'DTC channel mix shift drove higher-margin revenue: e-commerce now represents a larger share of the top line, and the Apr 12 email campaign generated a 14% conversion spike without any discounting, demonstrating pricing power vs 2023.',
+            'OpEx concern: expenses grew +22.1% YoY versus revenue growth of +18.4% — operating leverage is not yet materializing. The divergence is concentrated in marketing spend, which at $171K in April was the largest overage in 14 months and inflated the YoY OpEx line. If April normalizes in May, the full-year OpEx growth rate drops to roughly 15%, putting the business back on the right side of leverage.',
           ].map((bullet, i) => (
             <li key={i} className="flex gap-3 items-start">
               <span

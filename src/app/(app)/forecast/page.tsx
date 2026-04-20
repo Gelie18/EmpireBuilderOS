@@ -11,11 +11,11 @@ import {
 // ── Constants ─────────────────────────────────────────────────────────────────
 
 // Monthly fully-loaded cost per head (payroll + benefits + overhead)
-// Derived from Oct actuals: $201,200 payroll ÷ 42 people = $4,790/mo
+// Derived from Apr actuals: $201,200 payroll ÷ 42 people = $4,790/mo
 const COST_PER_HEAD = 4_790;
 
 // The last actual month — all projections compound from here
-const LAST_ACTUAL_MONTH = "Oct '26";
+const LAST_ACTUAL_MONTH = "Apr '26";
 
 const CARD: React.CSSProperties = {
   background:   'var(--color-surf)',
@@ -80,7 +80,7 @@ export default function ForecastPage() {
 
     // Lock in the last actual's revenue as the compounding base
     const actuals = baseForecast.months.filter((m) => m.isActual);
-    const lastActualRevenue = actuals[actuals.length - 1].revenue; // Oct '24 = $1,311,600
+    const lastActualRevenue = actuals[actuals.length - 1].revenue; // Apr '26 = $1,311,600
 
     let projIndex = 0; // counts only projected months (1, 2, 3 …)
 
@@ -134,7 +134,7 @@ export default function ForecastPage() {
 
   // Derived driver values for display
   const headcount     = drivers.find((d) => d.id === 'headcount')?.value  ?? 42;
-  const baseHeadcount = 42; // Oct actual
+  const baseHeadcount = 42; // Apr actual
   const hcDelta       = headcount - baseHeadcount;
   const monthlyPayroll = headcount * COST_PER_HEAD;
 
@@ -148,7 +148,7 @@ export default function ForecastPage() {
             Driver Model — 12-Month Forecast
           </div>
           <div className="text-[12px] mt-0.5" style={{ color: 'var(--color-muted)' }}>
-            Actuals locked May–Oct 2026 · Projections Nov 2026–Apr 2027
+            Actuals locked Nov 2025–Apr 2026 · Projections May 2026–Oct 2026
           </div>
         </div>
         <div className="flex gap-3 flex-wrap">
@@ -188,9 +188,9 @@ export default function ForecastPage() {
         style={{ background: 'rgba(0,166,81,0.07)', borderLeft: '3px solid var(--color-green)' }}>
         <span style={{ color: 'var(--color-green)', fontSize: 16 }}>🔒</span>
         <div className="text-[11px] leading-snug" style={{ color: 'var(--color-muted)' }}>
-          <strong style={{ color: 'var(--color-green)' }}>Actuals locked</strong> — May through October 2026 are real P&L data and are never recalculated.
-          Sliders only affect the <strong style={{ color: 'var(--color-orange)' }}>6 projected months</strong> (Nov 2026 – Apr 2027),
-          compounding from Oct's actual revenue of <strong style={{ color: 'var(--color-blue)' }}>$1,311,600</strong>.
+          <strong style={{ color: 'var(--color-green)' }}>Actuals locked</strong> — November 2025 through April 2026 are real P&L data and are never recalculated.
+          Sliders only affect the <strong style={{ color: 'var(--color-orange)' }}>6 projected months</strong> (May 2026 – Oct 2026),
+          compounding from Apr's actual revenue of <strong style={{ color: 'var(--color-blue)' }}>$1,311,600</strong>.
         </div>
       </div>
 
@@ -199,7 +199,7 @@ export default function ForecastPage() {
         <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
           <div className="text-[13px] font-bold uppercase tracking-[0.10em]"
             style={{ fontFamily: 'var(--font-condensed)', color: 'var(--color-muted)' }}>
-            Projection Drivers — Affects Nov 2026 – Apr 2027 Only
+            Projection Drivers — Affects May 2026 – Oct 2026 Only
           </div>
           <div className="text-[10px] px-2 py-1 font-bold uppercase"
             style={{ background: 'var(--color-orange-d)', color: 'var(--color-orange)', fontFamily: 'var(--font-condensed)' }}>
@@ -243,7 +243,7 @@ export default function ForecastPage() {
                     <span style={{ color: delta > 0 ? 'var(--color-orange)' : delta < 0 ? 'var(--color-green)' : 'var(--color-muted)' }}>
                       {delta > 0 ? `+${delta} hires → +${formatCurrency(Math.abs(delta) * COST_PER_HEAD)}/mo` :
                        delta < 0 ? `${delta} cuts → ${formatCurrency(Math.abs(delta) * COST_PER_HEAD)}/mo saved` :
-                       `No change vs Oct`}
+                       `No change vs Apr`}
                     </span>
                   ) : (
                     <span>{d.max}{d.unit === 'percent' ? '%' : ''}</span>
@@ -419,9 +419,9 @@ export default function ForecastPage() {
                 const row = m as typeof m & { _payroll?: number; _nonPayroll?: number };
                 const gmPct  = m.revenue > 0 ? (m.grossProfit / m.revenue) * 100 : 0;
                 const niPct  = m.revenue > 0 ? (m.netIncome   / m.revenue) * 100 : 0;
-                // For actuals, derive payroll from Oct known-data ratio; for projected, use stored _payroll
+                // For actuals, derive payroll from Apr known-data ratio; for projected, use stored _payroll
                 const payroll    = m.isActual
-                  ? Math.round(m.opex * 0.437) // Oct: $201,200 / $460,700 = 43.7% of OpEx is payroll
+                  ? Math.round(m.opex * 0.437) // Apr: $201,200 / $460,700 = 43.7% of OpEx is payroll
                   : (row._payroll ?? headcount * COST_PER_HEAD);
                 const nonPayroll = m.isActual
                   ? m.opex - payroll

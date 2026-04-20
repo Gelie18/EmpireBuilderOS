@@ -155,7 +155,7 @@ export default function MarketPage() {
               fontFamily: 'var(--font-condensed)', fontSize: 13, fontWeight: 700,
               color: 'var(--color-blue)', letterSpacing: '0.04em',
             }}>
-              Oct 2026
+              Apr 2026
             </span>
           </div>
         </div>
@@ -327,7 +327,7 @@ export default function MarketPage() {
         <ul style={{ display: 'flex', flexDirection: 'column', gap: 10, margin: 0, padding: 0, listStyle: 'none' }}>
           {[
             'Ridgeline is outperforming the industry on both revenue growth (+18.4% vs 11% median) and gross margin (45.1% vs 42% median), driven by a differentiated DTC mix and improving channel economics.',
-            'The net margin gap vs. median (5.4% vs 8.2%) is entirely attributable to the October marketing overage — it is not structural. Normalized marketing spend puts net margin at ~8.8%, above the industry median.',
+            'The net margin gap vs. median (5.4% vs 8.2%) is entirely attributable to the April marketing overage — it is not structural. Normalized marketing spend puts net margin at ~8.8%, above the industry median.',
             'Freight cost pressure is industry-wide; proactive carrier management and contract lock-in before Q4 peak is recommended to avoid the same headwinds hitting competitors in November–December.',
           ].map((bullet, i) => (
             <li key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>

@@ -22,7 +22,7 @@ const TT: React.CSSProperties = {
   boxShadow: '0 4px 16px rgba(0,0,0,0.10)',
 };
 
-// ── Synthetic October 2026 data ─────────────────────────────────────────────
+// ── Synthetic April 2026 data ───────────────────────────────────────────────
 
 const ASSETS = {
   cash:         873_500,
@@ -241,7 +241,7 @@ export default function BalanceSheetPage() {
               Balance Sheet
             </div>
             <div style={{ fontSize: 13, color: 'var(--color-muted)', marginTop: 5 }}>
-              October 31, 2026
+              April 30, 2026
             </div>
           </div>
 
@@ -379,7 +379,7 @@ export default function BalanceSheetPage() {
             fontFamily: 'var(--font-condensed)', fontSize: 13, fontWeight: 700,
             letterSpacing: '0.07em', textTransform: 'uppercase', color: 'var(--color-text)',
           }}>
-            October 2026 Snapshot
+            April 2026 Snapshot
           </span>
           <span style={{
             fontFamily: 'var(--font-condensed)', fontSize: 11,

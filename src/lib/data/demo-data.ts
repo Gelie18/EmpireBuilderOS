@@ -21,27 +21,27 @@ import type {
 // ── Default Period ──
 export const DEFAULT_PERIOD: Period = {
   type: 'month',
-  startDate: '2026-10-01',
-  endDate: '2026-10-31',
-  label: 'Oct 2026',
+  startDate: '2026-04-01',
+  endDate: '2026-04-30',
+  label: 'Apr 2026',
 };
 
 export const AVAILABLE_PERIODS: Period[] = [
-  { type: 'month', startDate: '2026-10-01', endDate: '2026-10-31', label: 'Oct' },
-  { type: 'quarter', startDate: '2026-07-01', endDate: '2026-09-30', label: 'Q3' },
-  { type: 'ytd', startDate: '2026-01-01', endDate: '2026-10-31', label: 'YTD' },
+  { type: 'month', startDate: '2026-04-01', endDate: '2026-04-30', label: 'Apr' },
+  { type: 'quarter', startDate: '2026-01-01', endDate: '2026-03-31', label: 'Q1' },
+  { type: 'ytd', startDate: '2026-01-01', endDate: '2026-04-30', label: 'YTD' },
 ];
 
 // ── P&L Rows (ported from prototype) ──
 export const DEMO_PNL_ROWS: PnlRow[] = [
   { id: 'sec-rev', type: 'section', label: 'Revenue', indent: false, budget: null, actual: null, varianceDollar: null, variancePercent: null, isAnomaly: false },
-  { id: 'rev-dtc', type: 'line_item', label: 'DTC / E-commerce', indent: true, budget: 742000, actual: 770400, varianceDollar: 28400, variancePercent: 3.8, isAnomaly: false, aiNote: 'Revenue beat by $28.4K \u2014 a targeted email campaign on Oct 12 drove a 14% conversion spike. No discounting required.' },
-  { id: 'rev-wholesale', type: 'line_item', label: 'Wholesale', indent: true, budget: 528000, actual: 541200, varianceDollar: 13200, variancePercent: 2.5, isAnomaly: false, aiNote: 'Wholesale outperformed $13.2K. Scheels placed an accelerated reorder for their Q4 floor reset \u2014 watch November for a pull-forward effect.' },
+  { id: 'rev-dtc', type: 'line_item', label: 'DTC / E-commerce', indent: true, budget: 742000, actual: 770400, varianceDollar: 28400, variancePercent: 3.8, isAnomaly: false, aiNote: 'Revenue beat by $28.4K \u2014 a targeted email campaign on Apr 12 drove a 14% conversion spike. No discounting required.' },
+  { id: 'rev-wholesale', type: 'line_item', label: 'Wholesale', indent: true, budget: 528000, actual: 541200, varianceDollar: 13200, variancePercent: 2.5, isAnomaly: false, aiNote: 'Wholesale outperformed $13.2K. Scheels placed an accelerated reorder for their Q2 floor reset \u2014 watch May for a pull-forward effect.' },
   { id: 'rev-total', type: 'subtotal', label: 'Total Revenue', indent: false, budget: 1270000, actual: 1311600, varianceDollar: 41600, variancePercent: 3.3, isAnomaly: false },
 
   { id: 'sec-cogs', type: 'section', label: 'Cost of Goods Sold', indent: false, budget: null, actual: null, varianceDollar: null, variancePercent: null, isAnomaly: false },
   { id: 'cogs-materials', type: 'line_item', label: 'Materials & Production', indent: true, budget: 508000, actual: 516800, varianceDollar: 8800, variancePercent: 1.7, isAnomaly: false, aiNote: 'Over by $8.8K \u2014 an unbudgeted freight surcharge from the El Paso warehouse. Carrier contract review recommended.' },
-  { id: 'cogs-fulfillment', type: 'line_item', label: 'Fulfillment & 3PL', indent: true, budget: 217800, actual: 203500, varianceDollar: -14300, variancePercent: -6.6, isAnomaly: false, aiNote: 'Favorable $14.3K \u2014 the new ShipBob deal kicked in mid-October at a lower per-unit rate. Full benefit hits November.' },
+  { id: 'cogs-fulfillment', type: 'line_item', label: 'Fulfillment & 3PL', indent: true, budget: 217800, actual: 203500, varianceDollar: -14300, variancePercent: -6.6, isAnomaly: false, aiNote: 'Favorable $14.3K \u2014 the new ShipBob deal kicked in mid-April at a lower per-unit rate. Full benefit hits May.' },
   { id: 'cogs-total', type: 'subtotal', label: 'Total COGS', indent: false, budget: 725800, actual: 720300, varianceDollar: -5500, variancePercent: -0.8, isAnomaly: false },
 
   { id: 'gp', type: 'total', label: 'Gross Profit', indent: false, budget: 552200, actual: 591300, varianceDollar: 39100, variancePercent: 7.1, isAnomaly: false },
@@ -49,7 +49,7 @@ export const DEMO_PNL_ROWS: PnlRow[] = [
   { id: 'sec-opex', type: 'section', label: 'Operating Expenses', indent: false, budget: null, actual: null, varianceDollar: null, variancePercent: null, isAnomaly: false },
   { id: 'opex-marketing', type: 'line_item', label: 'Marketing & Advertising', indent: true, budget: 124000, actual: 171200, varianceDollar: 47200, variancePercent: 38.1, isAnomaly: true, aiNote: 'ANOMALY: $47.2K over budget \u2014 largest marketing overage in 14 months. Altitude Creative ($18K) and WestCoast Influencers LLC ($13K) are not mapped to any approved campaign. Flag for CFO review before close.' },
   { id: 'opex-payroll', type: 'line_item', label: 'Payroll & Benefits', indent: true, budget: 198000, actual: 201200, varianceDollar: 3200, variancePercent: 1.6, isAnomaly: false, aiNote: 'Essentially on budget. One open SDR role unfilled (~$9K saved) offset by $6K in contract design fees for the Q4 catalog.' },
-  { id: 'opex-tech', type: 'line_item', label: 'Technology & Software', indent: true, budget: 18400, actual: 14200, varianceDollar: -4200, variancePercent: -22.8, isAnomaly: false, aiNote: 'Favorable $4.2K \u2014 Salesforce renewal pushed to November. Expect a $22K charge next month.' },
+  { id: 'opex-tech', type: 'line_item', label: 'Technology & Software', indent: true, budget: 18400, actual: 14200, varianceDollar: -4200, variancePercent: -22.8, isAnomaly: false, aiNote: 'Favorable $4.2K \u2014 Salesforce renewal pushed to May. Expect a $22K charge next month.' },
   { id: 'opex-ga', type: 'line_item', label: 'General & Administrative', indent: true, budget: 72000, actual: 74100, varianceDollar: 2100, variancePercent: 2.9, isAnomaly: false, aiNote: 'In line. Office lease, insurance, and legal fees all tracking to plan. No surprises.' },
   { id: 'opex-total', type: 'subtotal', label: 'Total OpEx', indent: false, budget: 412400, actual: 460700, varianceDollar: 48300, variancePercent: 11.7, isAnomaly: false },
 
@@ -153,7 +153,7 @@ export function getDemoCashFlow(): CashFlowReport {
 function generateDailyForecast(): { date: string; balance: number; isProjected: boolean }[] {
   const points: { date: string; balance: number; isProjected: boolean }[] = [];
   let balance = 847000;
-  const today = new Date('2026-10-31');
+  const today = new Date('2026-04-30');
 
   // Historical (past 30 days)
   for (let i = -30; i <= 0; i++) {
@@ -184,31 +184,31 @@ function generateDailyForecast(): { date: string; balance: number; isProjected: 
 
 // ── Forecast ──
 //
-// ACTUALS (May–Oct 2026): exact values from the real P&L / MoM dataset — never touched by drivers.
-// PROJECTIONS (Nov 2026–Apr 2025): computed fresh from drivers on every slider change.
+// ACTUALS (Nov 2025–Apr 2026): exact values from the real P&L / MoM dataset — never touched by drivers.
+// PROJECTIONS (May 2026–Oct 2026): computed fresh from drivers on every slider change.
 //
 export function getDemoForecast(): ForecastModel {
   // ── Locked actuals — sourced from MoM P&L data ──
   const ACTUALS = [
-    { month: '2026-05', label: "May '24", revenue: 1_088_000, cogs: 585_600, grossProfit:  502_400, opex: 362_000, netIncome:  92_000, isActual: true },
-    { month: '2026-06', label: "Jun '24", revenue: 1_112_000, cogs: 593_000, grossProfit:  519_000, opex: 370_000, netIncome:  99_000, isActual: true },
-    { month: '2026-07', label: "Jul '24", revenue: 1_145_000, cogs: 609_000, grossProfit:  536_000, opex: 381_000, netIncome: 104_000, isActual: true },
-    { month: '2026-08', label: "Aug '24", revenue: 1_198_000, cogs: 640_000, grossProfit:  558_000, opex: 395_000, netIncome: 111_000, isActual: true },
-    { month: '2026-09', label: "Sep '24", revenue: 1_272_300, cogs: 689_300, grossProfit:  583_000, opex: 413_000, netIncome: 108_200, isActual: true },
-    { month: '2026-10', label: "Oct '24", revenue: 1_311_600, cogs: 720_300, grossProfit:  591_300, opex: 460_700, netIncome:  71_400, isActual: true },
+    { month: '2025-11', label: "Nov '25", revenue: 1_088_000, cogs: 585_600, grossProfit:  502_400, opex: 362_000, netIncome:  92_000, isActual: true },
+    { month: '2025-12', label: "Dec '25", revenue: 1_112_000, cogs: 593_000, grossProfit:  519_000, opex: 370_000, netIncome:  99_000, isActual: true },
+    { month: '2026-01', label: "Jan '26", revenue: 1_145_000, cogs: 609_000, grossProfit:  536_000, opex: 381_000, netIncome: 104_000, isActual: true },
+    { month: '2026-02', label: "Feb '26", revenue: 1_198_000, cogs: 640_000, grossProfit:  558_000, opex: 395_000, netIncome: 111_000, isActual: true },
+    { month: '2026-03', label: "Mar '26", revenue: 1_272_300, cogs: 689_300, grossProfit:  583_000, opex: 413_000, netIncome: 108_200, isActual: true },
+    { month: '2026-04', label: "Apr '26", revenue: 1_311_600, cogs: 720_300, grossProfit:  591_300, opex: 460_700, netIncome:  71_400, isActual: true },
   ];
 
   // ── Projected month shells — values are placeholders; the page recomputes from drivers ──
-  // costPerHead, cogsPct, nonPayrollOpExPct defaults match the Oct '24 actuals:
-  //   Oct headcount: 42  |  COGS %: 54.9%  |  Non-payroll OpEx % (mktg+tech+G&A): 19.8%
+  // costPerHead, cogsPct, nonPayrollOpExPct defaults match the Apr '26 actuals:
+  //   Apr headcount: 42  |  COGS %: 54.9%  |  Non-payroll OpEx % (mktg+tech+G&A): 19.8%
   //   Payroll (42 × $4,790 ≈ $201,200) + non-payroll ($259,500) = $460,700 total OpEx ✓
   const PROJ_MONTHS = [
-    { month: '2026-11', label: "Nov '24" },
-    { month: '2026-12', label: "Dec '24" },
-    { month: '2025-01', label: "Jan '25" },
-    { month: '2025-02', label: "Feb '25" },
-    { month: '2025-03', label: "Mar '25" },
-    { month: '2025-04', label: "Apr '25" },
+    { month: '2026-05', label: "May '26" },
+    { month: '2026-06', label: "Jun '26" },
+    { month: '2026-07', label: "Jul '26" },
+    { month: '2026-08', label: "Aug '26" },
+    { month: '2026-09', label: "Sep '26" },
+    { month: '2026-10', label: "Oct '26" },
   ].map((m) => ({
     ...m,
     revenue: 0, cogs: 0, grossProfit: 0, opex: 0, netIncome: 0,
@@ -233,26 +233,26 @@ export function getDemoForecast(): ForecastModel {
 }
 
 // ── Scenarios ──
-// All scenarios project FORWARD from Oct '24 actuals using independent monthly calculations.
+// All scenarios project FORWARD from Apr '26 actuals using independent monthly calculations.
 // None re-use the base.months projected stubs (those are 0 until the driver model runs them).
 export function getDemoScenarios(): Scenario[] {
-  // 12 projected months: Nov '24 → Oct '25
+  // 12 projected months: May '26 → Apr '27
   const MONTHS = [
-    { key: '2026-11', label: "Nov '24" },
-    { key: '2026-12', label: "Dec '24" },
-    { key: '2025-01', label: "Jan '25" },
-    { key: '2025-02', label: "Feb '25" },
-    { key: '2025-03', label: "Mar '25" },
-    { key: '2025-04', label: "Apr '25" },
-    { key: '2025-05', label: "May '25" },
-    { key: '2025-06', label: "Jun '25" },
-    { key: '2025-07', label: "Jul '25" },
-    { key: '2025-08', label: "Aug '25" },
-    { key: '2025-09', label: "Sep '25" },
-    { key: '2025-10', label: "Oct '25" },
+    { key: '2026-05', label: "May '26" },
+    { key: '2026-06', label: "Jun '26" },
+    { key: '2026-07', label: "Jul '26" },
+    { key: '2026-08', label: "Aug '26" },
+    { key: '2026-09', label: "Sep '26" },
+    { key: '2026-10', label: "Oct '26" },
+    { key: '2026-11', label: "Nov '26" },
+    { key: '2026-12', label: "Dec '26" },
+    { key: '2027-01', label: "Jan '27" },
+    { key: '2027-02', label: "Feb '27" },
+    { key: '2027-03', label: "Mar '27" },
+    { key: '2027-04', label: "Apr '27" },
   ];
 
-  // Oct '24 base anchors (normalized: marketing at budget level)
+  // Apr '26 base anchors (normalized: marketing at budget level)
   const BASE_REV  = 1_311_600;
   const BASE_OPEX = 436_000; // normalized: marketing at $124K, includes Salesforce renewal
 
@@ -287,13 +287,13 @@ export function getDemoScenarios(): Scenario[] {
     startOpex: BASE_OPEX, opexGrowthPct: 0.015,
   });
 
-  // ── Best Case: New client wins ($6M ARR) ramping Jan '25, 5% organic growth ──
-  // $6M ARR / 12 = $500K/mo at full ramp. Ramp starts month 2 (Jan '25), full by Jun '25.
+  // ── Best Case: New client wins ($6M ARR) ramping Jul '26, 5% organic growth ──
+  // $6M ARR / 12 = $500K/mo at full ramp. Ramp starts month 2 (Jul '26), full by Dec '26.
   const bestResults = buildProjection({
     revGrowthPct: 0.05, cogsPct: 0.53,
     startOpex: 452_000,  // 2 additional sales hires for client acquisition
     opexGrowthPct: 0.015,
-    newRevStartIdx: 2,   // Jan '25
+    newRevStartIdx: 2,   // Jul '26
     newRevMax: 500_000,  // $500K/mo at full ramp → ~$6M ARR
   });
 
@@ -379,15 +379,15 @@ function makeComparisonMonth(
 }
 
 export function getDemoYoY(): YoYReport {
-  // Current year: Jan–Oct 2026 (10 months), using Oct as latest
-  const currentYear: ComparisonMonth[] = Array.from({ length: 10 }, (_, i) => {
+  // Current year: Jan–Apr 2026 (4 months), using Apr as latest
+  const currentYear: ComparisonMonth[] = Array.from({ length: 4 }, (_, i) => {
     const base = 1_050_000 + i * 25_000;
     return makeComparisonMonth(2026, i, base, 1.0);
   });
-  // Oct 2026: use the real P&L numbers
-  currentYear[9] = {
-    month: '2026-10',
-    label: "Oct '24",
+  // Apr 2026: use the real P&L numbers
+  currentYear[3] = {
+    month: '2026-04',
+    label: "Apr '26",
     revenue: 1_311_600,
     grossProfit: 591_300,
     grossMargin: 45.1,
@@ -396,8 +396,8 @@ export function getDemoYoY(): YoYReport {
     headcount: 42,
   };
 
-  // Prior year: Jan–Oct 2023, about 18% lower
-  const priorYear: ComparisonMonth[] = Array.from({ length: 10 }, (_, i) => {
+  // Prior year: Jan–Apr 2023, about 18% lower
+  const priorYear: ComparisonMonth[] = Array.from({ length: 4 }, (_, i) => {
     const base = 890_000 + i * 20_000;
     return makeComparisonMonth(2023, i, base, 1.0);
   });
@@ -421,27 +421,27 @@ export function getDemoYoY(): YoYReport {
 export function getDemoMoM(): MoMReport {
   const months: ComparisonMonth[] = [
     {
-      month: '2026-05', label: "May '24",
+      month: '2025-11', label: "Nov '25",
       revenue: 1_088_000, grossProfit: 502_400, grossMargin: 46.2, opex: 362_000, netIncome: 92_000, headcount: 38,
     },
     {
-      month: '2026-06', label: "Jun '24",
+      month: '2025-12', label: "Dec '25",
       revenue: 1_112_000, grossProfit: 519_000, grossMargin: 46.7, opex: 370_000, netIncome: 99_000, headcount: 39,
     },
     {
-      month: '2026-07', label: "Jul '24",
+      month: '2026-01', label: "Jan '26",
       revenue: 1_145_000, grossProfit: 536_000, grossMargin: 46.8, opex: 381_000, netIncome: 104_000, headcount: 40,
     },
     {
-      month: '2026-08', label: "Aug '24",
+      month: '2026-02', label: "Feb '26",
       revenue: 1_198_000, grossProfit: 558_000, grossMargin: 46.6, opex: 395_000, netIncome: 111_000, headcount: 40,
     },
     {
-      month: '2026-09', label: "Sep '24",
+      month: '2026-03', label: "Mar '26",
       revenue: 1_272_300, grossProfit: 583_000, grossMargin: 45.8, opex: 413_000, netIncome: 108_200, headcount: 41,
     },
     {
-      month: '2026-10', label: "Oct '24",
+      month: '2026-04', label: "Apr '26",
       revenue: 1_311_600, grossProfit: 591_300, grossMargin: 45.1, opex: 460_700, netIncome: 71_400, headcount: 42,
     },
   ];
@@ -459,19 +459,19 @@ export function getDemoMoM(): MoMReport {
 
 export function getDemoDailyRevenue(): DailyRevenuePoint[] {
   const points: DailyRevenuePoint[] = [];
-  const daysInOct = 31;
-  const dailyBudget = Math.round(1_270_000 / daysInOct);
+  const daysInApr = 30;
+  const dailyBudget = Math.round(1_270_000 / daysInApr);
 
   let runningTotal = 0;
   let runningBudget = 0;
 
   // Weekend pattern: lower wholesale on weekends
-  for (let d = 1; d <= daysInOct; d++) {
-    const date = new Date(2026, 9, d); // Oct 2026
+  for (let d = 1; d <= daysInApr; d++) {
+    const date = new Date(2026, 3, d); // Apr 2026
     const dayOfWeek = date.getDay(); // 0=Sun, 6=Sat
     const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
 
-    // Oct 12 campaign spike
+    // Apr 12 campaign spike
     const isCampaignDay = d === 12;
     const isScheelsPO = d === 22;
 
@@ -571,39 +571,39 @@ export function getDemoActionItems(): ActionItem[] {
       priority: 'high',
       owner: 'CFO',
       text: 'Review Altitude Creative ($18K) and WestCoast Influencers ($13K) — no approved campaign IDs. Hold or approve invoices before next close.',
-      dueDate: '2026-11-05',
+      dueDate: '2026-05-05',
       status: 'open',
     },
     {
       id: 'act-2',
       priority: 'high',
       owner: 'Finance',
-      text: 'Salesforce renewal ($22,000) hits in November — budget impact confirmed? Offset by full ShipBob benefit (+$14K/mo).',
-      dueDate: '2026-11-01',
+      text: 'Salesforce renewal ($22,000) hits in May — budget impact confirmed? Offset by full ShipBob benefit (+$14K/mo).',
+      dueDate: '2026-05-01',
       status: 'open',
     },
     {
       id: 'act-3',
       priority: 'medium',
       owner: 'Operations',
-      text: 'Initiate carrier contract review — unbudgeted El Paso freight surcharge ($8.8K) may recur in Q4 holiday volume.',
-      dueDate: '2026-11-15',
+      text: 'Initiate carrier contract review — unbudgeted El Paso freight surcharge ($8.8K) may recur in Q3 holiday volume.',
+      dueDate: '2026-05-15',
       status: 'in_progress',
     },
     {
       id: 'act-4',
       priority: 'medium',
       owner: 'Sales',
-      text: 'Flag Scheels Q4 pull-forward reorder — may create a revenue shortfall in November if they do not reorder as expected.',
-      dueDate: '2026-11-08',
+      text: 'Flag Scheels Q2 pull-forward reorder — may create a revenue shortfall in May if they do not reorder as expected.',
+      dueDate: '2026-05-08',
       status: 'open',
     },
     {
       id: 'act-5',
       priority: 'low',
       owner: 'HR',
-      text: 'Backfill open SDR role — currently saving ~$9K/mo, but Q4 pipeline velocity may suffer without the hire.',
-      dueDate: '2026-11-30',
+      text: 'Backfill open SDR role — currently saving ~$9K/mo, but Q3 pipeline velocity may suffer without the hire.',
+      dueDate: '2026-05-30',
       status: 'open',
     },
   ];
@@ -623,7 +623,7 @@ export function getDemoComments(): Comment[] {
       authorInitials: 'SC',
       content:
         'Reached out to Altitude Creative — they confirmed this was a campaign signed off by James in September. Waiting on the campaign ID from the agency portal. Will update by EOD Thursday.',
-      timestamp: '2026-10-31T14:22:00Z',
+      timestamp: '2026-04-30T14:22:00Z',
       status: 'open',
       tags: ['requires-action', 'vendor'],
       replies: [
@@ -632,14 +632,14 @@ export function getDemoComments(): Comment[] {
           author: 'James Tran',
           authorInitials: 'JT',
           content: 'Correct — I approved this verbally but forgot to log the campaign. Sending the ID now.',
-          timestamp: '2026-10-31T15:05:00Z',
+          timestamp: '2026-04-30T15:05:00Z',
         },
         {
           id: 'rep-1-2',
           author: 'Sarah Chen',
           authorInitials: 'SC',
           content: 'Received — Campaign ID: MKT-2026-119. Updating the PO. WestCoast Influencers still outstanding.',
-          timestamp: '2026-10-31T15:48:00Z',
+          timestamp: '2026-04-30T15:48:00Z',
         },
       ],
     },
@@ -650,8 +650,8 @@ export function getDemoComments(): Comment[] {
       author: 'Mike Torres',
       authorInitials: 'MT',
       content:
-        'Scheels pull-forward confirmed: they needed inventory for a floor reset ahead of their Black Friday promo. Their standard November reorder is $280K — this may not come until December. Watch November wholesale closely.',
-      timestamp: '2026-10-30T09:15:00Z',
+        'Scheels pull-forward confirmed: they needed inventory for a floor reset ahead of their summer promo. Their standard May reorder is $280K — this may not come until June. Watch May wholesale closely.',
+      timestamp: '2026-04-29T09:15:00Z',
       status: 'flagged',
       tags: ['forecast-risk', 'wholesale'],
       replies: [],
@@ -663,8 +663,8 @@ export function getDemoComments(): Comment[] {
       author: 'Lisa Park',
       authorInitials: 'LP',
       content:
-        'ShipBob contract went live Oct 15. Full savings hit in November (~$14K/mo). Current month only captured half-month benefit. No issues with the transition.',
-      timestamp: '2026-10-28T16:30:00Z',
+        'ShipBob contract went live Apr 15. Full savings hit in May (~$14K/mo). Current month only captured half-month benefit. No issues with the transition.',
+      timestamp: '2026-04-27T16:30:00Z',
       status: 'resolved',
       tags: ['vendor', 'savings'],
       replies: [],
@@ -676,8 +676,8 @@ export function getDemoComments(): Comment[] {
       author: 'Sarah Chen',
       authorInitials: 'SC',
       content:
-        'Salesforce renewal pushed to November per their billing cycle. $22K charge will hit 11/1. I\'ve updated the November forecast. Partially offset by ShipBob savings.',
-      timestamp: '2026-10-25T11:00:00Z',
+        'Salesforce renewal pushed to May per their billing cycle. $22K charge will hit 5/1. I\'ve updated the May forecast. Partially offset by ShipBob savings.',
+      timestamp: '2026-04-24T11:00:00Z',
       status: 'resolved',
       tags: ['renewal', 'forecast'],
       replies: [
@@ -686,7 +686,7 @@ export function getDemoComments(): Comment[] {
           author: 'CFO',
           authorInitials: 'CF',
           content: 'Confirmed in board preview. Noted.',
-          timestamp: '2026-10-25T13:22:00Z',
+          timestamp: '2026-04-24T13:22:00Z',
         },
       ],
     },
@@ -697,8 +697,8 @@ export function getDemoComments(): Comment[] {
       author: 'Lisa Park',
       authorInitials: 'LP',
       content:
-        'El Paso freight surcharge is a new carrier fuel surcharge that took effect Oct 1. We\'re in talks with three alternative carriers. Should have a decision by Nov 10 before holiday volume ramps.',
-      timestamp: '2026-10-29T10:45:00Z',
+        'El Paso freight surcharge is a new carrier fuel surcharge that took effect Apr 1. We\'re in talks with three alternative carriers. Should have a decision by May 10 before holiday volume ramps.',
+      timestamp: '2026-04-28T10:45:00Z',
       status: 'open',
       tags: ['vendor', 'operations'],
       replies: [],
@@ -748,7 +748,7 @@ export function getDemoMacroIndicators(): MacroIndicator[] {
       id: 'consumer-spending',
       label: 'US Consumer Spending',
       value: '+0.4% MoM',
-      change: 'Sep 2026',
+      change: 'Mar 2026',
       direction: 'up',
       impact: 'positive',
       detail: 'Outdoor / apparel discretionary spend still growing. DTC channel strength consistent with broader category tailwinds.',
@@ -775,10 +775,10 @@ export function getDemoMacroIndicators(): MacroIndicator[] {
       id: 'wholesale-outlook',
       label: 'Specialty Retail Foot Traffic',
       value: '+3.8% YoY',
-      change: 'Oct 2026',
+      change: 'Apr 2026',
       direction: 'up',
       impact: 'positive',
-      detail: 'Wholesale channel (Scheels, REI) benefiting from retail recovery. Supports Q4 reorder thesis if macro holds.',
+      detail: 'Wholesale channel (Scheels, REI) benefiting from retail recovery. Supports Q2 reorder thesis if macro holds.',
     },
   ];
 }

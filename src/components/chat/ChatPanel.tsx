@@ -11,7 +11,7 @@ const SUGGESTED_CHIPS: Record<string, string[]> = {
   '/forecast':        ['Revenue sensitivity', 'What if COGS rises 5%?', 'Break-even month', 'Worst case'],
   '/scenarios':       ['Compare scenarios', 'Which has best margin?', 'Downside risk', 'Hiring impact'],
   '/yoy':             ['Revenue growth vs last year', 'Margin expansion', 'What changed?', 'YoY headcount'],
-  '/mom':             ['MoM revenue trend', 'What drove the change?', 'Biggest swing line', 'October vs September'],
+  '/mom':             ['MoM revenue trend', 'What drove the change?', 'Biggest swing line', 'April vs March'],
   '/daily-revenue':   ['Daily revenue pace', 'DTC vs wholesale split', 'Best day this month', 'Track to budget'],
   '/daily-ceo':       ['Top 3 risks today', 'Cash position', 'Action items', 'What to watch'],
   '/comments':        ['Open items', 'Unresolved flags', 'Marketing anomaly', 'Board prep items'],
@@ -25,7 +25,7 @@ export default function ChatPanel() {
 
   const { messages, isLoading, sendMessage } = useChat({
     currentView: pathname.replace('/', '') || 'dashboard',
-    period: { type: 'month', startDate: '2026-10-01', endDate: '2026-10-31', label: 'Oct 2026' },
+    period: { type: 'month', startDate: '2026-04-01', endDate: '2026-04-30', label: 'Apr 2026' },
   });
 
   const chips = SUGGESTED_CHIPS[pathname] ?? SUGGESTED_CHIPS['/dashboard'];

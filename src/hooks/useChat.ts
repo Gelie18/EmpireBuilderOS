@@ -14,7 +14,7 @@ export function useChat(context: ChatContext) {
       id: 'welcome',
       role: 'assistant',
       content:
-        'October closed strong on revenue (+$41K vs plan) but net income missed by $38K — entirely driven by a $47K marketing overage. Two vendor invoices are unreconciled. Cash is healthy at $873K with 8.2 months of runway.\n\nPick a question below or ask me anything about the financials.',
+        'April closed strong on revenue (+$41K vs plan) but net income missed by $38K — entirely driven by a $47K marketing overage. Two vendor invoices are unreconciled. Cash is healthy at $873K with 8.2 months of runway.\n\nPick a question below or ask me anything about the financials.',
       timestamp: new Date().toISOString(),
     },
   ]);

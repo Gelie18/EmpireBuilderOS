@@ -234,7 +234,7 @@ export default function CommentsPage() {
           Comments & Annotations
         </div>
         <div className="text-[12px] mt-0.5" style={{ color: 'var(--color-muted)' }}>
-          Threaded notes across all financial line items — October 2026
+          Threaded notes across all financial line items — April 2026
         </div>
       </div>
 
@@ -292,7 +292,7 @@ export default function CommentsPage() {
               const newComment: Comment = {
                 id: `cmt-${Date.now()}`,
                 targetId: 'general',
-                targetLabel: 'General — Oct 2026',
+                targetLabel: 'General — Apr 2026',
                 author: 'You',
                 authorInitials: 'ME',
                 content: newText.trim(),

@@ -8,39 +8,30 @@ interface TopNavProps {
 
 /**
  * Empire Builder logo — EMPIRE BUILDER wordmark with stylized geometric M.
- * M is rendered as two vertical bars + circle dot above (matches brand identity).
- * "EMPIRE" in cobalt blue, "BUILDER" in warm gold.
+ * M: two vertical bars (pure CSS, stretches to match letter height) + circle dot above.
+ * EMPIRE in cobalt blue, BUILDER in warm gold, Barlow Condensed typeface.
  */
 function EmpireBuilderLogo() {
   const FONT = "'Barlow Condensed', 'DM Sans', system-ui, sans-serif";
   return (
     <div
       className="select-none flex-shrink-0"
-      style={{ display: 'flex', flexDirection: 'column', gap: 2, lineHeight: 1 }}
+      style={{ display: 'flex', flexDirection: 'column', gap: 2, lineHeight: 1, paddingTop: 7, overflow: 'visible' }}
       aria-label="Empire Builder"
     >
-      {/* EMPIRE row — E + stylized M + PIRE */}
-      <div style={{ display: 'flex', alignItems: 'flex-end', gap: 0 }}>
-        <span style={{ fontFamily: FONT, fontWeight: 900, fontSize: 15, color: '#1D44BF', lineHeight: 1, letterSpacing: '0.04em' }}>
-          E
-        </span>
-        {/* Stylized M: two vertical bars + floating circle dot */}
-        <svg width="12" height="19" viewBox="0 0 12 19" style={{ marginBottom: 1, flexShrink: 0 }} aria-hidden="true">
-          {/* Left bar */}
-          <rect x="0"  y="6" width="3.2" height="12" fill="#1D44BF" rx="0.3" />
-          {/* Right bar */}
-          <rect x="8.8" y="6" width="3.2" height="12" fill="#1D44BF" rx="0.3" />
-          {/* Circle dot above */}
-          <circle cx="6" cy="2.6" r="2.6" fill="#1D44BF" />
-        </svg>
-        <span style={{ fontFamily: FONT, fontWeight: 900, fontSize: 15, color: '#1D44BF', lineHeight: 1, letterSpacing: '0.04em' }}>
-          PIRE
-        </span>
+      {/* EMPIRE row — E + M (bars+dot) + PIRE, all in a stretch-aligned row */}
+      <div style={{ display: 'inline-flex', alignItems: 'stretch', overflow: 'visible' }}>
+        <span style={{ fontFamily: FONT, fontWeight: 900, fontSize: 15, color: '#1D44BF', lineHeight: 1, letterSpacing: '0.04em' }}>E</span>
+        {/* Stylized M — two solid bars + floating circle dot above */}
+        <div style={{ position: 'relative', width: 14, flexShrink: 0, overflow: 'visible' }}>
+          <div style={{ position: 'absolute', top: 2, bottom: 3, left: 0,   width: 4.5, background: '#1D44BF' }} />
+          <div style={{ position: 'absolute', top: 2, bottom: 3, right: 0,  width: 4.5, background: '#1D44BF' }} />
+          <div style={{ position: 'absolute', top: -6, left: '50%', transform: 'translateX(-50%)', width: 6, height: 6, borderRadius: '50%', background: '#1D44BF' }} />
+        </div>
+        <span style={{ fontFamily: FONT, fontWeight: 900, fontSize: 15, color: '#1D44BF', lineHeight: 1, letterSpacing: '0.04em' }}>PIRE</span>
       </div>
       {/* BUILDER row */}
-      <span style={{ fontFamily: FONT, fontWeight: 900, fontSize: 10, color: '#E8B84B', letterSpacing: '0.22em', lineHeight: 1 }}>
-        BUILDER
-      </span>
+      <span style={{ fontFamily: FONT, fontWeight: 900, fontSize: 10, color: '#E8B84B', letterSpacing: '0.22em', lineHeight: 1 }}>BUILDER</span>
     </div>
   );
 }

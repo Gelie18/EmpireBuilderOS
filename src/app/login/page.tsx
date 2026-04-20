@@ -12,56 +12,33 @@ const CREDENTIALS = [
 ];
 
 // ── Empire Builder wordmark with stylized geometric M ─────────────────────────
+// M = two solid vertical bars (CSS stretch) + circle dot above — matches brand mark.
 function EmpireLogo({ scale = 1, animate = false }: { scale?: number; animate?: boolean }) {
   const FONT = "'Barlow Condensed', system-ui, -apple-system, sans-serif";
   return (
     <div style={{ textAlign: 'center', transform: `scale(${scale})`, transformOrigin: 'center' }}>
-      {/* EMPIRE row — E + stylized M + PIRE */}
+      {/* EMPIRE row: uses stretch so M bars match exact letter height */}
       <div
         style={{
           display: 'inline-flex',
-          alignItems: 'flex-end',
+          alignItems: 'stretch',
           justifyContent: 'center',
-          gap: 0,
+          overflow: 'visible',
+          paddingTop: 22,           // make room for the dot above
           animation: animate ? 'fadeUp 0.7s ease both' : undefined,
         }}
       >
-        <span style={{
-          fontFamily: FONT,
-          fontWeight: 900,
-          fontSize: 52,
-          color: '#1D44BF',
-          lineHeight: 1,
-          letterSpacing: '0.03em',
-          textTransform: 'uppercase',
-        }}>
-          E
-        </span>
-        {/* Stylized M: two vertical bars + floating circle dot */}
-        <svg
-          width="44" height="62"
-          viewBox="0 0 44 62"
-          style={{ marginBottom: 5, flexShrink: 0 }}
-          aria-hidden="true"
-        >
-          {/* Left bar — aligns to cap height */}
-          <rect x="0"  y="20" width="12" height="40" fill="#1D44BF" rx="1" />
+        <span style={{ fontFamily: FONT, fontWeight: 900, fontSize: 52, color: '#1D44BF', lineHeight: 1, letterSpacing: '0.03em' }}>E</span>
+        {/* Stylized M — two bars + dot */}
+        <div style={{ position: 'relative', width: 46, flexShrink: 0, overflow: 'visible' }}>
+          {/* Left bar */}
+          <div style={{ position: 'absolute', top: 6, bottom: 10, left: 0,  width: 14, background: '#1D44BF' }} />
           {/* Right bar */}
-          <rect x="32" y="20" width="12" height="40" fill="#1D44BF" rx="1" />
-          {/* Circle dot above the gap */}
-          <circle cx="22" cy="8.5" r="8.5" fill="#1D44BF" />
-        </svg>
-        <span style={{
-          fontFamily: FONT,
-          fontWeight: 900,
-          fontSize: 52,
-          color: '#1D44BF',
-          lineHeight: 1,
-          letterSpacing: '0.03em',
-          textTransform: 'uppercase',
-        }}>
-          PIRE
-        </span>
+          <div style={{ position: 'absolute', top: 6, bottom: 10, right: 0, width: 14, background: '#1D44BF' }} />
+          {/* Circle dot — floats above bars */}
+          <div style={{ position: 'absolute', top: -20, left: '50%', transform: 'translateX(-50%)', width: 20, height: 20, borderRadius: '50%', background: '#1D44BF' }} />
+        </div>
+        <span style={{ fontFamily: FONT, fontWeight: 900, fontSize: 52, color: '#1D44BF', lineHeight: 1, letterSpacing: '0.03em' }}>PIRE</span>
       </div>
 
       {/* BUILDER row */}

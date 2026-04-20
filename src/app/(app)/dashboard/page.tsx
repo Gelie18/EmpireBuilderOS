@@ -41,7 +41,7 @@ const TOOLTIP_STYLE = {
 const EXEC_METRICS = [
   {
     id:         'revenue',
-    label:      'October Revenue',
+    label:      'April Revenue',
     value:      '$1.31M',
     delta:      '+3.3% vs plan',
     sub:        'Beat by $41.6K',
@@ -109,13 +109,13 @@ const PERIOD_DATA: Record<PeriodKey, {
     cashBalance: '$851.0K', cashSub: '~8.0 months runway', cashDelta: '+0.5% vs Aug', cashDeltaColor: '#0A8A5C', cashDeltaBg: 'rgba(10,138,92,0.10)',
   },
   last3: {
-    revenue: '$3.82M', revSub: 'Aug–Oct 2026 total', revDelta: '+3.8% avg growth', revDeltaColor: '#0A8A5C', revDeltaBg: 'rgba(10,138,92,0.10)',
+    revenue: '$3.82M', revSub: 'Feb–Apr 2026 total', revDelta: '+3.8% avg growth', revDeltaColor: '#0A8A5C', revDeltaBg: 'rgba(10,138,92,0.10)',
     expenses: '$3.39M', expSub: 'COGS + OpEx combined', expDelta: '+5.1% vs prior 3M', expDeltaColor: '#C13333', expDeltaBg: 'rgba(193,51,51,0.10)',
     netIncome: '$247.3K', niSub: '3-month total NI', niDelta: '–8.4% vs prior 3M', niDeltaColor: '#C13333', niDeltaBg: 'rgba(193,51,51,0.10)',
     cashBalance: '$873.5K', cashSub: 'End of period cash', cashDelta: '+4.6% over 3M', cashDeltaColor: '#0A8A5C', cashDeltaBg: 'rgba(10,138,92,0.10)',
   },
   ytd: {
-    revenue: '$12.85M', revSub: 'Jan–Oct 2026 total', revDelta: '+18.4% YoY', revDeltaColor: '#0A8A5C', revDeltaBg: 'rgba(10,138,92,0.10)',
+    revenue: '$12.85M', revSub: 'Jan–Apr 2026 total', revDelta: '+18.4% YoY', revDeltaColor: '#0A8A5C', revDeltaBg: 'rgba(10,138,92,0.10)',
     expenses: '$11.32M', expSub: 'YTD COGS + OpEx', expDelta: '+19.1% YoY', expDeltaColor: '#C13333', expDeltaBg: 'rgba(193,51,51,0.10)',
     netIncome: '$847.2K', niSub: 'YTD net income', niDelta: '+6.2% YoY', niDeltaColor: '#0A8A5C', niDeltaBg: 'rgba(10,138,92,0.10)',
     cashBalance: '$873.5K', cashSub: 'Current cash on hand', cashDelta: '+4.6% vs Jan', cashDeltaColor: '#0A8A5C', cashDeltaBg: 'rgba(10,138,92,0.10)',
@@ -124,7 +124,7 @@ const PERIOD_DATA: Record<PeriodKey, {
     revenue: '$15.64M', revSub: 'Trailing 12-month total', revDelta: '+18.4% vs prior 12M', revDeltaColor: '#0A8A5C', revDeltaBg: 'rgba(10,138,92,0.10)',
     expenses: '$13.72M', expSub: 'COGS + OpEx TTM', expDelta: '+17.2% vs prior 12M', expDeltaColor: '#C13333', expDeltaBg: 'rgba(193,51,51,0.10)',
     netIncome: '$1.12M', niSub: 'Trailing 12-month NI', niDelta: '+8.7% vs prior 12M', niDeltaColor: '#0A8A5C', niDeltaBg: 'rgba(10,138,92,0.10)',
-    cashBalance: '$873.5K', cashSub: 'Current cash on hand', cashDelta: '+4.6% since Nov 2025', cashDeltaColor: '#0A8A5C', cashDeltaBg: 'rgba(10,138,92,0.10)',
+    cashBalance: '$873.5K', cashSub: 'Current cash on hand', cashDelta: '+4.6% since May 2025', cashDeltaColor: '#0A8A5C', cashDeltaBg: 'rgba(10,138,92,0.10)',
   },
 };
 
@@ -133,10 +133,10 @@ const REPORTS = [
   { href: '/pnl',           label: 'P&L',            sub: 'Budget vs Actuals',   accent: 'var(--color-green)'  },
   { href: '/cashflow',      label: 'Cash Flow',       sub: '8.2 mo runway',      accent: 'var(--color-blue)'   },
   { href: '/yoy',           label: 'Year-over-Year',  sub: '+18.4% growth',      accent: 'var(--color-green)'  },
-  { href: '/mom',           label: 'MoM Trend',       sub: '+3.1% Oct vs Sep',   accent: 'var(--color-blue)'   },
+  { href: '/mom',           label: 'MoM Trend',       sub: '+3.1% Apr vs Mar',   accent: 'var(--color-blue)'   },
   { href: '/ai-forecast',   label: 'AI Forecast',     sub: '$16.8M proj. ARR',   accent: 'var(--color-blue)'   },
   { href: '/scenarios',     label: 'Scenarios',       sub: '4 cases modeled',    accent: '#1D44BF'             },
-  { href: '/daily-revenue', label: 'Daily Revenue',   sub: 'Oct 31-day view',    accent: 'var(--color-orange)' },
+  { href: '/daily-revenue', label: 'Daily Revenue',   sub: 'Apr 30-day view',    accent: 'var(--color-orange)' },
   { href: '/backlog',       label: 'Backlog',         sub: '10 items · $659K risk', accent: 'var(--color-red)'    },
   { href: '/market',        label: 'Market Intel',    sub: 'Above median peers', accent: 'var(--color-green)'  },
 ];
@@ -169,7 +169,7 @@ export default function DashboardPage() {
                 marginBottom:  6,
               }}
             >
-              Financial Overview · October 2026
+              Financial Overview · April 2026
             </div>
             <div
               style={{

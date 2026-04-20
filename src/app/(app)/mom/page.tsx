@@ -85,15 +85,15 @@ export default function MoMPage() {
               Month-over-Month
             </div>
             <div className="text-[15px] mt-1" style={{ color: 'var(--color-muted)', fontFamily: 'var(--font-condensed)' }}>
-              May–October 2026
+              Nov 2025–April 2026
             </div>
           </div>
           <div className="flex flex-wrap gap-2 items-center">
             <Badge color="var(--color-green)" bg="var(--color-green-d)">
-              Oct Revenue {formatCurrency(latest.revenue, true)} ({revPct >= 0 ? '+' : ''}{revPct.toFixed(1)}%)
+              Apr Revenue {formatCurrency(latest.revenue, true)} ({revPct >= 0 ? '+' : ''}{revPct.toFixed(1)}%)
             </Badge>
             <Badge color="var(--color-red)" bg="var(--color-red-d)">
-              Oct NI {formatCurrency(latest.netIncome, true)} ({niPct.toFixed(0)}% MoM)
+              Apr NI {formatCurrency(latest.netIncome, true)} ({niPct.toFixed(0)}% MoM)
             </Badge>
             <Badge color="var(--color-blue)" bg="var(--color-blue-d)">
               Gross Margin {latest.grossMargin.toFixed(1)}% ({gmDelta >= 0 ? '+' : ''}{gmDelta.toFixed(1)}pp)
@@ -164,7 +164,7 @@ export default function MoMPage() {
 
       {/* ── 6-MONTH REVENUE AREA CHART ── */}
       <Card>
-        <Label>Revenue — 6-Month Trend (May–Oct 2026)</Label>
+        <Label>Revenue — 6-Month Trend (Nov '25–Apr '26)</Label>
         <ResponsiveContainer width="100%" height={200}>
           <AreaChart data={areaData}>
             <defs>
@@ -307,13 +307,13 @@ export default function MoMPage() {
           className="text-[12px] font-bold uppercase tracking-[0.10em] mb-3"
           style={{ fontFamily: 'var(--font-condensed)', color: 'var(--color-blue)' }}
         >
-          What Changed in October
+          What Changed in April
         </div>
         <ul className="flex flex-col gap-2.5" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
           {[
-            'Revenue +3.1% driven by DTC email campaign on Oct 12 — a 14% conversion spike with no discounting required, adding $39.7K above September. Wholesale also contributed via an accelerated Scheels reorder for their Q4 floor reset.',
+            'Revenue +3.1% driven by DTC email campaign on Apr 12 — a 14% conversion spike with no discounting required, adding $39.7K above March. Wholesale also contributed via an accelerated Scheels reorder for their Q4 floor reset.',
             'Net Income dropped 34% MoM due entirely to a $47K marketing overage — Altitude Creative ($18K) and WestCoast Influencers ($13K) were not mapped to any approved campaign. Excluding the overage, net income would have been approximately $118K, a new 6-month high.',
-            'Gross margin improved 0.4pp from 45.7% to 45.1% (Oct vs Sep blended) from DTC channel mix shift and the ShipBob renegotiation taking effect mid-October at a lower per-unit fulfillment rate. Full ShipBob savings hit in November.',
+            'Gross margin improved 0.4pp from 45.7% to 45.1% (Apr vs Mar blended) from DTC channel mix shift and the ShipBob renegotiation taking effect mid-April at a lower per-unit fulfillment rate. Full ShipBob savings hit in May.',
           ].map((bullet, i) => (
             <li key={i} className="flex gap-3 items-start">
               <span

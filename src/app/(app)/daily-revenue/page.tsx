@@ -85,7 +85,7 @@ const runningData = data
 const dailyBar = data
   .filter((_, i) => i % 2 === 0 || i === data.length - 1)
   .map((r) => ({
-    day: r.dayLabel.replace('Oct ', ''),
+    day: r.dayLabel.replace('Apr ', ''),
     DTC: r.dtc,
     Wholesale: r.wholesale,
     Budget: r.budget,
@@ -102,7 +102,7 @@ export default function DailyRevenuePage() {
             Daily Revenue Report
           </div>
           <div className="text-[12px] mt-0.5" style={{ color: 'var(--color-muted)' }}>
-            October 2026 — 31 days closed
+            April 2026 — 30 days closed
           </div>
         </div>
         <div className="flex gap-2 flex-wrap">
@@ -149,7 +149,7 @@ export default function DailyRevenuePage() {
 
       {/* Running total vs budget */}
       <Card>
-        <SectionTitle>Running Revenue vs Budget Pace — October</SectionTitle>
+        <SectionTitle>Running Revenue vs Budget Pace — April</SectionTitle>
         <ResponsiveContainer width="100%" height={220}>
           <ComposedChart data={runningData}>
             <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" />
@@ -159,7 +159,7 @@ export default function DailyRevenuePage() {
             <Legend wrapperStyle={{ fontSize: 11, color: '#6B7A8D' }} />
             <Area type="monotone" dataKey="Budget Pace" fill="rgba(136,132,128,0.08)" stroke="rgba(136,132,128,0.4)" strokeDasharray="4 3" strokeWidth={1.5} dot={false} />
             <Line type="monotone" dataKey="Actual" stroke="#1D44BF" strokeWidth={2.5} dot={false} />
-            <ReferenceLine x="Oct 12" stroke="#D97706" strokeDasharray="3 2" label={{ value: 'Campaign', fill: '#D97706', fontSize: 10 }} />
+            <ReferenceLine x="Apr 12" stroke="#D97706" strokeDasharray="3 2" label={{ value: 'Campaign', fill: '#D97706', fontSize: 10 }} />
           </ComposedChart>
         </ResponsiveContainer>
       </Card>
@@ -229,12 +229,12 @@ export default function DailyRevenuePage() {
 
       {/* Key event annotations */}
       <Card>
-        <SectionTitle>Key Revenue Events — October</SectionTitle>
+        <SectionTitle>Key Revenue Events — April</SectionTitle>
         <div className="flex flex-col gap-2">
           {[
-            { date: 'Oct 12', icon: '◉', color: 'var(--color-blue)', label: 'Email Campaign Launch', detail: 'Targeted DTC email sent 9am — 14% conversion, no discount. DTC revenue 2.4× daily avg.' },
-            { date: 'Oct 22', icon: '◆', color: 'var(--color-orange)', label: 'Scheels Wholesale PO', detail: 'Q4 floor reset pull-forward order: $131K in a single day. Creates November reorder risk.' },
-            { date: 'Oct 15', icon: '◈', color: 'var(--color-green)', label: 'ShipBob Contract Live', detail: 'New 3PL rates effective — saving $14K/mo vs prior carrier. Full benefit hits November.' },
+            { date: 'Apr 12', icon: '◉', color: 'var(--color-blue)', label: 'Email Campaign Launch', detail: 'Targeted DTC email sent 9am — 14% conversion, no discount. DTC revenue 2.4× daily avg.' },
+            { date: 'Apr 22', icon: '◆', color: 'var(--color-orange)', label: 'Scheels Wholesale PO', detail: 'Q4 floor reset pull-forward order: $131K in a single day. Creates May reorder risk.' },
+            { date: 'Apr 15', icon: '◈', color: 'var(--color-green)', label: 'ShipBob Contract Live', detail: 'New 3PL rates effective — saving $14K/mo vs prior carrier. Full benefit hits May.' },
           ].map((e) => (
             <div key={e.date} className="flex gap-3 items-start"
               style={{ padding: '14px 16px', borderRadius: 8, border: '1px solid var(--color-border)', background: 'var(--color-surf2)' }}>

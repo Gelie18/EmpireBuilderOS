@@ -134,9 +134,9 @@ function ProductTooltip({ active, payload, label }: {
 // ─── Section 1: KPI Strip ────────────────────────────────────────────────────
 
 const PERIOD_REV: Record<PeriodKey, { revenue: string; mrr: string; arr: string; recurring: string; label: string }> = {
-  current: { revenue: '$1.31M',   mrr: '$297.6K',     arr: '$3.57M', recurring: '22.7%', label: 'Oct 2026' },
-  last:    { revenue: '$1.27M',   mrr: '$289.4K',     arr: '$3.47M', recurring: '22.8%', label: 'Sep 2026' },
-  last3:   { revenue: '$3.82M',   mrr: '$295K avg',   arr: '$3.54M', recurring: '23.1%', label: 'Aug–Oct 2026' },
+  current: { revenue: '$1.31M',   mrr: '$297.6K',     arr: '$3.57M', recurring: '22.7%', label: 'Apr 2026' },
+  last:    { revenue: '$1.27M',   mrr: '$289.4K',     arr: '$3.47M', recurring: '22.8%', label: 'Mar 2026' },
+  last3:   { revenue: '$3.82M',   mrr: '$295K avg',   arr: '$3.54M', recurring: '23.1%', label: 'Feb–Apr 2026' },
   ytd:     { revenue: '$12.85M',  mrr: '$284K avg',   arr: '$3.41M', recurring: '22.1%', label: 'YTD 2026' },
   last12:  { revenue: '$15.64M',  mrr: '$271K avg',   arr: '$3.25M', recurring: '20.8%', label: 'Last 12M' },
 };
@@ -199,7 +199,7 @@ function ProductLineSection() {
   return (
     <div style={CARD}>
       <div style={CARD_HEADER}>
-        <p style={CARD_HEADER_TITLE}>Revenue by Product Line — October 2026</p>
+        <p style={CARD_HEADER_TITLE}>Revenue by Product Line — April 2026</p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: 0 }}>
         {/* Chart */}
@@ -348,7 +348,7 @@ function CustomerSection() {
   return (
     <div style={CARD}>
       <div style={CARD_HEADER}>
-        <p style={CARD_HEADER_TITLE}>Customer Concentration — October 2026</p>
+        <p style={CARD_HEADER_TITLE}>Customer Concentration — April 2026</p>
       </div>
 
       {/* Warning banner */}
@@ -376,12 +376,12 @@ function CustomerSection() {
         <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
           <thead>
             <tr style={{ background: 'var(--color-surf2)' }}>
-              {['Customer', 'Oct Revenue', '% of Total', 'YTD Revenue', 'Type', 'Status'].map((h) => (
+              {['Customer', 'Apr Revenue', '% of Total', 'YTD Revenue', 'Type', 'Status'].map((h) => (
                 <th
                   key={h}
                   style={{
                     padding:       '10px 16px',
-                    textAlign:     h === 'Oct Revenue' || h === 'YTD Revenue' ? 'right' : 'left',
+                    textAlign:     h === 'Apr Revenue' || h === 'YTD Revenue' ? 'right' : 'left',
                     fontSize:      11,
                     fontWeight:    600,
                     color:         GRAY,
@@ -700,7 +700,7 @@ function TrendSection() {
         >
           {[
             { label: 'May Baseline', value: '$1.19M', color: GRAY },
-            { label: 'Oct Actual',   value: '$1.31M', color: BLUE },
+            { label: 'Apr Actual',   value: '$1.31M', color: BLUE },
             { label: '6-Mo Growth',  value: '+10.2%', color: GREEN },
             { label: '6-Mo Avg',     value: '$1.26M', color: GRAY },
           ].map((s) => (

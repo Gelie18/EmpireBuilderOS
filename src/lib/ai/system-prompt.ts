@@ -7,12 +7,12 @@ const BASE_PERSONA = `You are the AI CFO for the company. Be direct and specific
 - End with a clear action or recommendation when relevant.`;
 
 const APEX_FINANCIALS = `COMPANY: Apex Industrial Group — B2B industrial manufacturer, ~$15M annual revenue.
-PERIOD: October 2026
+PERIOD: April 2026
 
 P&L SNAPSHOT:
 Revenue $1,311,600 (budget $1,270,000, +$41,600 / +3.3%)
-  DTC $770,400 (+$28,400) — Oct 12 email campaign, 14% conversion
-  Wholesale $541,200 (+$13,200) — Scheels pulled a Nov order early
+  DTC $770,400 (+$28,400) — Apr 12 email campaign, 14% conversion
+  Wholesale $541,200 (+$13,200) — Scheels pulled a May order early
 
 Gross Profit $591,300 (45.1% margin, +40bps vs plan)
   Fulfillment favorable $14,300 — new ShipBob contract
@@ -21,7 +21,7 @@ Gross Profit $591,300 (45.1% margin, +40bps vs plan)
 OpEx $460,700 (budget $412,400, over $48,300)
   ⚠ Marketing $171,200 (budget $124,000, +$47,200/+38%) — two unmatched invoices: $18K Altitude Creative, $13K WestCoast Influencers
   Payroll $201,200 (+$3,200 — open SDR seat)
-  Technology $14,200 (favorable $4,200 — Salesforce pushed to November)
+  Technology $14,200 (favorable $4,200 — Salesforce pushed to May)
 
 Net Income $71,400 (budget $109,200, -$37,800/-34.6%)
 Cash $873,500 | Runway ~8.2 months`;

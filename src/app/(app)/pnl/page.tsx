@@ -336,15 +336,15 @@ export default function PnlPage() {
       {/* ── CFO Takeaways ── */}
       <div style={{ ...CARD, padding: '24px 28px', borderLeft: `4px solid ${BLUE}` }}>
         <div style={{ fontSize: 13, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: BLUE, fontFamily: 'var(--font-condensed)', marginBottom: 16 }}>
-          CFO Takeaways — October 2026
+          CFO Takeaways — April 2026
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
           {[
-            { icon: '▲', color: GREEN,  text: 'Revenue beat by $41.6K (+3.3%). DTC email campaign on Oct 12 converted at 14% with no discounting. Scheels pulled forward a Q4 reorder adding $13.2K wholesale.' },
-            { icon: '▲', color: GREEN,  text: 'COGS came in $5.5K favorable. New ShipBob deal activated mid-October at a lower per-unit rate. Full $14K/month benefit starts November.' },
+            { icon: '▲', color: GREEN,  text: 'Revenue beat by $41.6K (+3.3%). DTC email campaign on Apr 12 converted at 14% with no discounting. Scheels pulled forward a Q4 reorder adding $13.2K wholesale.' },
+            { icon: '▲', color: GREEN,  text: 'COGS came in $5.5K favorable. New ShipBob deal activated mid-April at a lower per-unit rate. Full $14K/month benefit starts May.' },
             { icon: '▼', color: RED,    text: 'Marketing $47.2K over budget — the only issue this month. Altitude Creative ($18K) and WestCoast Influencers ($13K) not matched to approved campaigns. Hold for reconciliation.' },
             { icon: '△', color: ORANGE, text: 'Net income $37.8K below plan despite the revenue beat. If the marketing run rate repeats, full-year net income compresses by ~$400K.' },
-            { icon: '→', color: BLUE,   text: 'November: Salesforce renewal ($22K) hits, offset by full ShipBob savings ($14K). Net impact ~–$8K. Revenue trend healthy at 3% MoM.' },
+            { icon: '→', color: BLUE,   text: 'May: Salesforce renewal ($22K) hits, offset by full ShipBob savings ($14K). Net impact ~–$8K. Revenue trend healthy at 3% MoM.' },
           ].map((item, i) => (
             <div key={i} style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
               <span style={{ fontSize: 14, color: item.color, fontWeight: 900, flexShrink: 0, marginTop: 1 }}>{item.icon}</span>
