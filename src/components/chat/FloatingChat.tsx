@@ -4,175 +4,303 @@ import { useState, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import { useChat } from '@/hooks/useChat';
 
-// ── Page-aware suggested questions ────────────────────────────────────────────
-const PAGE_CTX: Record<string, { label: string; chips: string[] }> = {
+// ── Page-aware suggested questions — 12 per page (two sets of 6) ──────────────
+const PAGE_CTX: Record<string, { label: string; allChips: string[] }> = {
   '/dashboard': {
     label: 'Dashboard',
-    chips: [
+    allChips: [
       'Why is net income below plan?',
       'What needs immediate attention?',
       'Cash and runway status?',
       'What do I tell the board?',
       'What are our biggest cost cuts?',
       'Q4 outlook?',
+      // set 2
+      'EBITDA this month?',
+      'Gross margin trend?',
+      'Revenue by channel breakdown?',
+      'Where are we losing to plan?',
+      'What improved vs last month?',
+      'November priorities?',
     ],
   },
   '/pnl': {
     label: 'P&L',
-    chips: [
+    allChips: [
       'What drove the marketing overage?',
       'Why did gross margin expand?',
       'Break down OpEx by category',
       'P&L vs last October?',
       'What is our EBITDA?',
       'Where can we cut costs?',
+      // set 2
+      'Which line item concerns you most?',
+      'Revenue beat — is it repeatable?',
+      'Payroll vs revenue ratio?',
+      'G&A — any leakage?',
+      'Fulfillment savings this month?',
+      'Best and worst variance lines?',
     ],
   },
   '/cashflow': {
     label: 'Cash Flow',
-    chips: [
+    allChips: [
       'Cash position and runway?',
       'AR aging — what to collect now?',
       'Should we extend AP terms?',
       'November cash outlook?',
       'What is our break-even?',
       'Liquidity risks to flag?',
+      // set 2
+      'Operating vs investing cash flow?',
+      'Largest cash outflows this month?',
+      'DSO trend — improving?',
+      'Which vendor to delay paying?',
+      'How does ShipBob affect cash?',
+      'Cash if revenue drops 10%?',
     ],
   },
   '/balance-sheet': {
     label: 'Balance Sheet',
-    chips: [
+    allChips: [
       'How is working capital trending?',
       'AR aging breakdown?',
       'Should we extend AP terms?',
       'What is tying up cash?',
       'Inventory levels — any risk?',
       'Tax payment status?',
+      // set 2
+      'Current ratio vs benchmark?',
+      'Debt-to-equity position?',
+      'What assets can we liquidate fast?',
+      'Accrued liabilities detail?',
+      'Cash conversion cycle?',
+      'How healthy is our balance sheet?',
     ],
   },
   '/backlog': {
     label: 'Ops Backlog',
-    chips: [
+    allChips: [
       'Wexler contract — next steps?',
       'AR aging action plan?',
       'IRS payment — are we covered?',
       'Which items need this week?',
       'Total dollar risk in backlog?',
       'Which vendor to hold payment on?',
+      // set 2
+      'Biggest single risk right now?',
+      'What resolves fastest?',
+      'Contracts close to expiring?',
+      'Impact if Wexler falls through?',
+      'Who owns each backlog item?',
+      'Week-over-week backlog change?',
     ],
   },
   '/fin-backlog': {
     label: 'Financial Backlog',
-    chips: [
+    allChips: [
       'Which WIP contracts are blocked?',
       'Titan Energy — what is the holdup?',
       'Bellco Systems material delay?',
       'How much unbilled revenue is aged?',
       'When does backlog convert to revenue?',
       'What accelerates billing recognition?',
+      // set 2
+      'Total unbilled over 30 days?',
+      'How do I reduce WIP cycle time?',
+      'Which contract has highest margin?',
+      'Change order impact on revenue?',
+      'WIP to billed conversion rate?',
+      'Which projects are most at risk?',
     ],
   },
   '/revenue': {
     label: 'Revenue Intel',
-    chips: [
+    allChips: [
       'Which product line is underperforming?',
       'Customer concentration risk?',
       'Scheels account — any risk?',
       'MRR and ARR trend?',
       'DTC vs wholesale mix shift?',
       'How do we grow recurring revenue?',
+      // set 2
+      'Top 5 customers by revenue?',
+      'Fastest growing channel?',
+      'Churn risk in wholesale?',
+      'Oct 12 email campaign impact?',
+      'Average order value trend?',
+      'Which segment should we double down on?',
     ],
   },
   '/forecast': {
     label: 'Driver Model',
-    chips: [
+    allChips: [
       'What is the 12-month revenue target?',
       'Q1 2027 outlook?',
       'Key forecast assumptions?',
       'What breaks the forecast?',
       'Pipeline to revenue — timing?',
       'What drives our growth rate?',
+      // set 2
+      'Sensitivity to pricing change?',
+      'Hiring impact on the model?',
+      'What if wholesale slows?',
+      'COGS trend in the forecast?',
+      'Best-case NI margin for 2027?',
+      'When do we hit $20M run rate?',
     ],
   },
   '/ai-forecast': {
     label: 'AI Forecast',
-    chips: [
+    allChips: [
       'Q4 revenue on track?',
       'Q1 2027 outlook?',
       'Where is the forecast most uncertain?',
       'Marketing normalization impact?',
       'Enterprise pipeline — when does it close?',
       'Best case revenue this year?',
+      // set 2
+      'Downside scenario — revenue impact?',
+      'What moves the needle most in Q1?',
+      'Seasonal patterns in the forecast?',
+      'Margin trajectory next 6 months?',
+      'When do we beat last year?',
+      'Biggest forecast risk right now?',
     ],
   },
   '/scenarios': {
     label: 'Scenarios',
-    chips: [
+    allChips: [
       'Best vs downside outcome?',
       'What breaks our runway?',
       'Enterprise pipeline impact?',
       'Margin if COGS rises 2%?',
       'What if marketing stays at $171K?',
       'Downside — how long is runway?',
+      // set 2
+      'Revenue if we land one more enterprise deal?',
+      'Impact of a 10% price increase?',
+      'What if we lose Scheels?',
+      'Hiring freeze — NI impact?',
+      'El Paso freight renegotiation impact?',
+      'Cash if DTC drops 15%?',
     ],
   },
   '/market': {
     label: 'Market Intel',
-    chips: [
+    allChips: [
       'How do we rank vs peers?',
       'Where are we above industry median?',
       'NI margin gap — how to close it?',
       'Biggest competitive advantage?',
       'Freight cost vs competitors?',
       'Macro risks to monitor?',
+      // set 2
+      'Market share opportunity?',
+      'Industry revenue growth rate?',
+      'Where peers outperform us?',
+      'Pricing power vs competitors?',
+      'Which metric matters most to investors?',
+      'Benchmark our gross margin?',
     ],
   },
   '/yoy': {
     label: 'Year-over-Year',
-    chips: [
+    allChips: [
       'YoY revenue growth summary?',
       'Why did NI margin compress?',
       'Gross margin trend YoY?',
       'OpEx growth vs revenue growth?',
       'What improved most vs last year?',
       'What got worse vs last year?',
+      // set 2
+      'Customer count YoY change?',
+      'EBITDA YoY comparison?',
+      'Which channel grew fastest?',
+      'Headcount vs revenue YoY?',
+      'Marketing ROI vs last year?',
+      'Cash position YoY change?',
     ],
   },
   '/mom': {
     label: 'Month-over-Month',
-    chips: [
+    allChips: [
       'What changed most vs September?',
       'Is the marketing spike a trend?',
       'Revenue trend healthy?',
       'November outlook?',
       'Which line improved most?',
       'What explains the NI drop?',
+      // set 2
+      'Gross profit MoM change?',
+      'Cash position change MoM?',
+      'Biggest OpEx mover?',
+      'DTC revenue vs last month?',
+      'Inventory MoM change?',
+      'AR aging better or worse?',
     ],
   },
   '/daily-revenue': {
     label: 'Daily Revenue',
-    chips: [
+    allChips: [
       'Which day drove the most revenue?',
       'DTC vs wholesale daily split?',
       'Email campaign impact on Oct 12?',
       'Revenue run rate for November?',
       'Slowest revenue days — why?',
       'Weekend vs weekday performance?',
+      // set 2
+      'Best single-day revenue record?',
+      'Average daily DTC order count?',
+      'Wholesale order frequency?',
+      'Revenue consistency score?',
+      'Which day to target for campaigns?',
+      'Volatility in daily revenue?',
     ],
   },
 };
 
 const DEFAULT_CTX = {
   label: 'Empire Builder',
-  chips: [
+  allChips: [
     'Net income miss — root cause?',
     'Cash and runway status?',
     'What do I tell the board?',
     'Q4 outlook?',
     'Biggest cost reduction opportunity?',
     'November priorities?',
+    'EBITDA this month?',
+    'Top 3 things to fix right now?',
+    'Revenue growth vs last year?',
+    'Marketing ROI?',
+    'Gross margin trend?',
+    'Where are we losing to plan?',
   ],
 };
+
+// ── Think Big prompts — 4 sets of 3 creative/unconventional questions ─────────
+const THINK_BIG_SETS: string[][] = [
+  [
+    'How do I 10x revenue without doubling headcount?',
+    'What would a PE firm restructure first?',
+    'What new revenue stream fits our model?',
+  ],
+  [
+    'What business model shift would change our margins?',
+    'Which customer segment are we completely ignoring?',
+    'How do we build recurring revenue from a transactional business?',
+  ],
+  [
+    'What would disrupt this business in the next 2 years?',
+    'What partnership unlocks our biggest growth constraint?',
+    'What would a 10% price increase actually do to our model?',
+  ],
+  [
+    'What is our unfair competitive advantage — and are we using it?',
+    'How do we monetize our data or domain expertise?',
+    'If we had to grow 30% next year with no new hires, how?',
+  ],
+];
 
 // ── Message formatter ─────────────────────────────────────────────────────────
 function FormattedMessage({ content }: { content: string }) {
@@ -226,7 +354,6 @@ function FormattedMessage({ content }: { content: string }) {
 }
 
 function renderInline(text: string): React.ReactNode {
-  // Bold: **text** or text that looks like a dollar/metric figure
   const parts = text.split(/(\*\*[^*]+\*\*)/g);
   return parts.map((part, i) => {
     if (part.startsWith('**') && part.endsWith('**')) {
@@ -236,9 +363,28 @@ function renderInline(text: string): React.ReactNode {
   });
 }
 
+// ── Refresh icon ──────────────────────────────────────────────────────────────
+function RefreshIcon({ spinning }: { spinning?: boolean }) {
+  return (
+    <svg
+      width="13" height="13" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+      style={spinning ? { animation: 'eb-spin-once 0.4s ease' } : undefined}
+    >
+      <polyline points="23 4 23 10 17 10" />
+      <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
+    </svg>
+  );
+}
+
+// ── Main component ────────────────────────────────────────────────────────────
 export default function FloatingChat() {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState('');
+  const [chipSetIdx, setChipSetIdx] = useState(0);
+  const [thinkBigIdx, setThinkBigIdx] = useState(0);
+  const [refreshAnim, setRefreshAnim] = useState(false);
+  const [thinkRefreshAnim, setThinkRefreshAnim] = useState(false);
   const pathname = usePathname();
   const ctx = PAGE_CTX[pathname as keyof typeof PAGE_CTX] ?? DEFAULT_CTX;
   const msgsEndRef = useRef<HTMLDivElement>(null);
@@ -249,6 +395,12 @@ export default function FloatingChat() {
     period: { type: 'month', startDate: '2026-10-01', endDate: '2026-10-31', label: 'Oct 2026' },
     highlights: [`Viewing: ${ctx.label}`],
   });
+
+  // Derive visible chips — show 6 at a time, rotating through allChips
+  const totalSets = Math.ceil(ctx.allChips.length / 6);
+  const currentSet = chipSetIdx % totalSets;
+  const visibleChips = ctx.allChips.slice(currentSet * 6, currentSet * 6 + 6);
+  const currentThinkBig = THINK_BIG_SETS[thinkBigIdx % THINK_BIG_SETS.length];
 
   useEffect(() => {
     const handler = () => setOpen(true);
@@ -276,14 +428,43 @@ export default function FloatingChat() {
     return () => window.removeEventListener('keydown', handler);
   }, []);
 
+  // Reset chip index when page changes
+  useEffect(() => {
+    setChipSetIdx(0);
+    setThinkBigIdx(0);
+  }, [pathname]);
+
   const handleSend = () => {
     if (!input.trim() || isLoading) return;
     sendMessage(input.trim());
     setInput('');
   };
 
+  const handleRefreshChips = () => {
+    setRefreshAnim(true);
+    setChipSetIdx((i) => i + 1);
+    setTimeout(() => setRefreshAnim(false), 450);
+  };
+
+  const handleRefreshThinkBig = () => {
+    setThinkRefreshAnim(true);
+    setThinkBigIdx((i) => i + 1);
+    setTimeout(() => setThinkRefreshAnim(false), 450);
+  };
+
   return (
     <>
+      <style>{`
+        @keyframes eb-spin-once {
+          from { transform: rotate(0deg); }
+          to   { transform: rotate(360deg); }
+        }
+        @keyframes eb-chip-fade {
+          from { opacity: 0; transform: translateY(3px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
+
       <div
         className="fixed z-[60] flex flex-col bottom-14 md:bottom-0"
         style={{
@@ -359,24 +540,92 @@ export default function FloatingChat() {
           <div ref={msgsEndRef} />
         </div>
 
-        {/* Quick chips */}
+        {/* ── Quick questions ── */}
         <div className="border-t flex-shrink-0" style={{ borderColor: 'rgba(0,0,0,0.08)' }}>
-          <div className="px-4 pt-2.5 pb-1 flex items-center justify-between">
+          <div className="px-4 pt-2.5 pb-1.5 flex items-center justify-between">
             <div className="text-[10px] font-semibold uppercase tracking-[0.08em]" style={{ color: '#6B7280' }}>
               Quick questions
             </div>
-            <div className="text-[10px]" style={{ color: '#9CA3AF' }}>
-              {ctx.label}
-            </div>
+            <button
+              onClick={handleRefreshChips}
+              title={`Refresh insights (${currentSet + 1}/${totalSets})`}
+              className="flex items-center gap-1 cursor-pointer transition-all"
+              style={{
+                color: '#9CA3AF', fontSize: 10, fontWeight: 600,
+                background: 'none', border: 'none', padding: '2px 4px',
+                letterSpacing: '0.04em',
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = '#1D44BF'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = '#9CA3AF'; }}
+            >
+              <RefreshIcon spinning={refreshAnim} />
+              <span>{currentSet + 1}/{totalSets}</span>
+            </button>
           </div>
-          <div className="px-4 pb-3 flex flex-wrap gap-1.5" style={{ maxHeight: 92, overflowY: 'auto' }}>
-            {ctx.chips.map((chip) => (
+          <div
+            key={`chips-${currentSet}-${pathname}`}
+            className="px-4 pb-2.5 flex flex-wrap gap-1.5"
+            style={{ animation: 'eb-chip-fade 0.25s ease both' }}
+          >
+            {visibleChips.map((chip) => (
               <button key={chip} onClick={() => sendMessage(chip)}
                 className="text-[11px] px-2.5 py-1 cursor-pointer transition-all rounded whitespace-nowrap"
                 style={{ border: '1px solid rgba(0,0,0,0.10)', color: '#6B7280', background: '#F8F8FA', fontWeight: 500 }}
                 onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#1D44BF'; e.currentTarget.style.color = '#1D44BF'; e.currentTarget.style.background = 'rgba(29,68,191,0.07)'; }}
                 onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(0,0,0,0.10)'; e.currentTarget.style.color = '#6B7280'; e.currentTarget.style.background = '#F8F8FA'; }}
               >{chip}</button>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Think Outside the Box ── */}
+        <div className="border-t flex-shrink-0" style={{ borderColor: 'rgba(232,184,75,0.30)', background: 'rgba(232,184,75,0.04)' }}>
+          <div className="px-4 pt-2 pb-1.5 flex items-center justify-between">
+            <div className="flex items-center gap-1.5">
+              <span style={{ fontSize: 13 }}>💡</span>
+              <div className="text-[10px] font-semibold uppercase tracking-[0.08em]" style={{ color: '#C9962A' }}>
+                Think Outside the Box
+              </div>
+            </div>
+            <button
+              onClick={handleRefreshThinkBig}
+              title="New creative angles"
+              className="flex items-center gap-1 cursor-pointer transition-all"
+              style={{
+                color: '#C9962A', opacity: 0.7, fontSize: 10, fontWeight: 600,
+                background: 'none', border: 'none', padding: '2px 4px',
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.opacity = '1'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.opacity = '0.7'; }}
+            >
+              <RefreshIcon spinning={thinkRefreshAnim} />
+            </button>
+          </div>
+          <div
+            key={`think-${thinkBigIdx}`}
+            className="px-4 pb-3 flex flex-col gap-1.5"
+            style={{ animation: 'eb-chip-fade 0.25s ease both' }}
+          >
+            {currentThinkBig.map((prompt) => (
+              <button key={prompt} onClick={() => sendMessage(prompt)}
+                className="text-left text-[11px] px-3 py-1.5 cursor-pointer transition-all rounded-md w-full"
+                style={{
+                  border: '1px solid rgba(232,184,75,0.28)',
+                  color: '#92680A',
+                  background: 'rgba(232,184,75,0.08)',
+                  fontWeight: 500, lineHeight: 1.4,
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = '#E8B84B';
+                  e.currentTarget.style.background = 'rgba(232,184,75,0.16)';
+                  e.currentTarget.style.color = '#7A5508';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = 'rgba(232,184,75,0.28)';
+                  e.currentTarget.style.background = 'rgba(232,184,75,0.08)';
+                  e.currentTarget.style.color = '#92680A';
+                }}
+              >{prompt}</button>
             ))}
           </div>
         </div>
