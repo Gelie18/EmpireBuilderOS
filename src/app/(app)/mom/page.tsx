@@ -85,7 +85,7 @@ export default function MoMPage() {
               Month-over-Month
             </div>
             <div className="text-[15px] mt-1" style={{ color: 'var(--color-muted)', fontFamily: 'var(--font-condensed)' }}>
-              May–October 2024
+              May–October 2026
             </div>
           </div>
           <div className="flex flex-wrap gap-2 items-center">
@@ -164,7 +164,7 @@ export default function MoMPage() {
 
       {/* ── 6-MONTH REVENUE AREA CHART ── */}
       <Card>
-        <Label>Revenue — 6-Month Trend (May–Oct 2024)</Label>
+        <Label>Revenue — 6-Month Trend (May–Oct 2026)</Label>
         <ResponsiveContainer width="100%" height={200}>
           <AreaChart data={areaData}>
             <defs>

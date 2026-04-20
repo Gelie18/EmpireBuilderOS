@@ -29,7 +29,7 @@ interface ParsedAssumption {
 
 interface ForecastMonth {
   period: string;     // "Nov '24"
-  quarter: string;    // "Q4 2024"
+  quarter: string;    // "Q4 2026"
   revenue: number;
   cogs: number;
   grossProfit: number;
@@ -257,7 +257,7 @@ function buildBaseForecast(): ForecastMonth[] {
   // Last 3 months of actual data (Aug, Sep, Oct)
   const actuals: ForecastMonth[] = HISTORICAL_MONTHS.slice(3).map((m) => ({
     period: m.label,
-    quarter: m.month < '2024-10' ? 'Q3 2024' : 'Q4 2024',
+    quarter: m.month < '2026-10' ? 'Q3 2026' : 'Q4 2026',
     revenue: m.revenue,
     cogs: m.revenue - m.grossProfit,
     grossProfit: m.grossProfit,
@@ -275,16 +275,16 @@ function buildBaseForecast(): ForecastMonth[] {
   const avgCogsPct = lastActuals.reduce((s, m) => s + (m.revenue - m.grossProfit) / m.revenue, 0) / 3;
   const avgOpexPct = lastActuals.reduce((s, m) => s + m.opex / m.revenue, 0) / 3;
 
-  // Project 6 quarters forward (Nov 2024 – Apr 2026) → 18 months
+  // Project 6 quarters forward (Nov 2026 – Apr 2026) → 18 months
   const projected: ForecastMonth[] = [];
-  let baseRevenue = HISTORICAL_MONTHS[5].revenue; // Oct 2024
+  let baseRevenue = HISTORICAL_MONTHS[5].revenue; // Oct 2026
 
   const MONTHS_LABELS = [
     "Nov '24", "Dec '24", "Jan '25", "Feb '25", "Mar '25",
     "Apr '25", "May '25", "Jun '25", "Jul '25", "Aug '25", "Sep '25", "Oct '25",
   ];
   const QUARTERS = [
-    'Q4 2024', 'Q4 2024', // Nov, Dec
+    'Q4 2026', 'Q4 2026', // Nov, Dec
     'Q1 2025', 'Q1 2025', 'Q1 2025', // Jan, Feb, Mar
     'Q2 2025', 'Q2 2025', 'Q2 2025', // Apr, May, Jun
     'Q3 2025', 'Q3 2025', 'Q3 2025', // Jul, Aug, Sep
@@ -390,7 +390,7 @@ function applyAdjustments(
 
 const avgCogsPct = HISTORICAL_MONTHS.slice(-3).reduce((s, m) => s + (m.revenue - m.grossProfit) / m.revenue, 0) / 3;
 
-const QUARTERS_AVAILABLE = ['Q4 2024', 'Q1 2025', 'Q2 2025', 'Q3 2025', 'Q4 2025'];
+const QUARTERS_AVAILABLE = ['Q4 2026', 'Q1 2025', 'Q2 2025', 'Q3 2025', 'Q4 2025'];
 
 const TOOLTIP_STYLE = {
   background: '#FFFFFF',
@@ -458,11 +458,11 @@ export default function AiForecastPage() {
 
   const [adjustments, setAdjustments] = useState<QuarterAdjustment[]>([]);
   const [input, setInput] = useState('');
-  const [targetQuarter, setTargetQuarter] = useState('Q4 2024');
+  const [targetQuarter, setTargetQuarter] = useState('Q4 2026');
   const [aiMessages, setAiMessages] = useState<{ role: 'user' | 'ai'; text: string; timestamp: string }[]>([
     {
       role: 'ai',
-      text: "I've built this forecast from your trailing 3-month actuals (Aug–Oct 2024) using a 3.1% MoM growth rate, 54.9% COGS ratio, and 35.1% OpEx ratio — adjusted for seasonal patterns. Tell me what you expect for any quarter and I'll update the model automatically. Example: \"Q1 2025 revenue grows 10% — we're launching a new product line in January.\"",
+      text: "I've built this forecast from your trailing 3-month actuals (Aug–Oct 2026) using a 3.1% MoM growth rate, 54.9% COGS ratio, and 35.1% OpEx ratio — adjusted for seasonal patterns. Tell me what you expect for any quarter and I'll update the model automatically. Example: \"Q1 2025 revenue grows 10% — we're launching a new product line in January.\"",
       timestamp: new Date().toISOString(),
     },
   ]);
@@ -578,13 +578,13 @@ export default function AiForecastPage() {
       {/* Methodology note */}
       <div className="px-4 py-3 leading-relaxed"
         style={{ background: 'rgba(65,182,230,0.07)', borderLeft: '3px solid var(--color-blue)', color: 'var(--color-muted)', fontSize: 13 }}>
-        <strong style={{ color: 'var(--color-blue)' }}>Baseline methodology:</strong> 3.1% MoM revenue growth (trailing 6-month avg), 54.9% COGS ratio, 35.1% OpEx ratio — adjusted for outdoor-apparel seasonal patterns (peak: Jul–Oct, trough: Dec–Feb). Actuals locked through October 2024.
+        <strong style={{ color: 'var(--color-blue)' }}>Baseline methodology:</strong> 3.1% MoM revenue growth (trailing 6-month avg), 54.9% COGS ratio, 35.1% OpEx ratio — adjusted for outdoor-apparel seasonal patterns (peak: Jul–Oct, trough: Dec–Feb). Actuals locked through October 2026.
       </div>
 
       {/* Summary KPIs */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {[
-          { label: '12M Fwd Revenue',  value: formatCurrency(totalFwdRevenue, true),  color: 'var(--color-blue)',  sub: 'Nov 2024 – Oct 2025' },
+          { label: '12M Fwd Revenue',  value: formatCurrency(totalFwdRevenue, true),  color: 'var(--color-blue)',  sub: 'Nov 2026 – Oct 2025' },
           { label: '12M Fwd Net Inc.',  value: formatCurrency(totalFwdNI, true),       color: totalFwdNI >= 0 ? 'var(--color-green)' : 'var(--color-red)', sub: 'Projected' },
           { label: 'Avg NI Margin',    value: `${(totalFwdNI / totalFwdRevenue * 100).toFixed(1)}%`, color: 'var(--color-text)', sub: 'Forward 12 months' },
           { label: 'Adjustments',      value: adjustmentCount.toString(),              color: 'var(--color-orange)', sub: adjustmentCount === 0 ? 'AI baseline only' : 'User inputs applied' },

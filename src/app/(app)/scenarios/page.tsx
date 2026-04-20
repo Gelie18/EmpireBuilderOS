@@ -89,7 +89,7 @@ export default function ScenariosPage() {
             Scenario Planning
           </div>
           <div className="text-[13px] mt-0.5" style={{ color: 'var(--color-muted)' }}>
-            Nov 2024 → Oct 2025 · 12-month forward projections from Oct actuals
+            Nov 2026 → Oct 2025 · 12-month forward projections from Oct actuals
           </div>
         </div>
         <div

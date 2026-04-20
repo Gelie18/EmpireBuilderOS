@@ -89,7 +89,7 @@ export default function TopNav({ companyName }: TopNavProps) {
             className="text-[10px] font-bold uppercase tracking-[0.08em]"
             style={{ color: '#E8B84B' }}
           >
-            Oct 2024
+            Oct 2026
           </span>
         </div>
 
@@ -110,7 +110,7 @@ export default function TopNav({ companyName }: TopNavProps) {
         <div className="flex items-center gap-2">
           <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: '#059669' }} />
           <span className="hidden sm:block text-[11px] font-medium" style={{ color: 'rgba(255,255,255,0.45)' }}>
-            {isLive ? 'Live · QBO' : 'Demo · Oct 2024'}
+            {isLive ? 'Live · QBO' : 'Demo · Oct 2026'}
           </span>
         </div>
       </div>

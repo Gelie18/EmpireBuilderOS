@@ -126,7 +126,7 @@ export default function DashboardPage() {
                 marginBottom:  6,
               }}
             >
-              Financial Overview · October 2024
+              Financial Overview · October 2026
             </div>
             <div
               style={{
@@ -169,7 +169,7 @@ export default function DashboardPage() {
                 borderRadius:  5,
               }}
             >
-              Oct 2024
+              Oct 2026
             </span>
           </div>
         </div>
@@ -304,46 +304,55 @@ export default function DashboardPage() {
             />
             <div
               style={{
-                fontSize:      11,
-                fontWeight:    600,
-                textTransform: 'uppercase',
-                letterSpacing: '0.09em',
-                color:         'var(--color-muted)',
-                marginBottom:  10,
-                marginTop:     6,
+                display:       'flex',
+                flexDirection: 'column',
+                alignItems:    'center',
+                textAlign:     'center',
               }}
             >
-              {m.label}
+              <div
+                style={{
+                  fontSize:      11,
+                  fontWeight:    600,
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.09em',
+                  color:         'var(--color-muted)',
+                  marginBottom:  10,
+                  marginTop:     6,
+                }}
+              >
+                {m.label}
+              </div>
+              <div
+                style={{
+                  fontSize:     34,
+                  fontWeight:   800,
+                  lineHeight:   1,
+                  color:        m.valueColor,
+                  marginBottom: 6,
+                  letterSpacing: '-0.02em',
+                  fontVariantNumeric: 'tabular-nums',
+                }}
+              >
+                {m.value}
+              </div>
+              <div style={{ fontSize: 13, color: 'var(--color-muted)', marginBottom: 10 }}>
+                {m.sub}
+              </div>
+              <span
+                style={{
+                  background:    m.deltaBg,
+                  color:         m.deltaColor,
+                  fontSize:      11,
+                  fontWeight:    700,
+                  borderRadius:  3,
+                  padding:       '3px 8px',
+                  letterSpacing: '0.03em',
+                }}
+              >
+                {m.delta}
+              </span>
             </div>
-            <div
-              style={{
-                fontSize:     34,
-                fontWeight:   800,
-                lineHeight:   1,
-                color:        m.valueColor,
-                marginBottom: 6,
-                letterSpacing: '-0.02em',
-                fontVariantNumeric: 'tabular-nums',
-              }}
-            >
-              {m.value}
-            </div>
-            <div style={{ fontSize: 13, color: 'var(--color-muted)', marginBottom: 10 }}>
-              {m.sub}
-            </div>
-            <span
-              style={{
-                background:    m.deltaBg,
-                color:         m.deltaColor,
-                fontSize:      11,
-                fontWeight:    700,
-                borderRadius:  3,
-                padding:       '3px 8px',
-                letterSpacing: '0.03em',
-              }}
-            >
-              {m.delta}
-            </span>
           </div>
         ))}
       </div>

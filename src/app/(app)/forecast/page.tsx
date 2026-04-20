@@ -101,7 +101,7 @@ export default function ForecastPage() {
             Driver Model — 12-Month Forecast
           </div>
           <div className="text-[12px] mt-0.5" style={{ color: 'var(--color-muted)' }}>
-            Actuals locked May–Oct 2024 · Projections Nov 2024–Apr 2025
+            Actuals locked May–Oct 2026 · Projections Nov 2026–Apr 2025
           </div>
         </div>
         <div className="flex gap-3 flex-wrap">
@@ -135,8 +135,8 @@ export default function ForecastPage() {
         style={{ background: 'rgba(0,166,81,0.07)', borderLeft: '3px solid var(--color-green)' }}>
         <span style={{ color: 'var(--color-green)', fontSize: 16 }}>🔒</span>
         <div className="text-[11px] leading-snug" style={{ color: 'var(--color-muted)' }}>
-          <strong style={{ color: 'var(--color-green)' }}>Actuals locked</strong> — May through October 2024 are real P&L data and are never recalculated.
-          Sliders only affect the <strong style={{ color: 'var(--color-orange)' }}>6 projected months</strong> (Nov 2024 – Apr 2025),
+          <strong style={{ color: 'var(--color-green)' }}>Actuals locked</strong> — May through October 2026 are real P&L data and are never recalculated.
+          Sliders only affect the <strong style={{ color: 'var(--color-orange)' }}>6 projected months</strong> (Nov 2026 – Apr 2025),
           compounding from Oct's actual revenue of <strong style={{ color: 'var(--color-blue)' }}>$1,311,600</strong>.
         </div>
       </div>
@@ -146,7 +146,7 @@ export default function ForecastPage() {
         <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
           <div className="text-[13px] font-bold uppercase tracking-[0.10em]"
             style={{ fontFamily: 'var(--font-condensed)', color: 'var(--color-muted)' }}>
-            Projection Drivers — Affects Nov 2024 – Apr 2025 Only
+            Projection Drivers — Affects Nov 2026 – Apr 2025 Only
           </div>
           <div className="text-[10px] px-2 py-1 font-bold uppercase"
             style={{ background: 'var(--color-orange-d)', color: 'var(--color-orange)', fontFamily: 'var(--font-condensed)' }}>

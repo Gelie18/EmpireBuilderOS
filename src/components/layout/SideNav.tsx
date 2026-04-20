@@ -121,7 +121,9 @@ const NAV_GROUPS = [
     label: 'Operations',
     items: [
       { href: '/daily-revenue', label: 'Daily Revenue', icon: icons.dailyrev },
-      { href: '/backlog',       label: 'Backlog',        icon: icons.backlog },
+      { href: '/revenue',       label: 'Revenue Intel',  icon: icons.pnl },
+      { href: '/backlog',       label: 'Ops Backlog',    icon: icons.backlog },
+      { href: '/fin-backlog',   label: 'Fin. Backlog',   icon: icons.backlog },
     ],
   },
   {
@@ -168,7 +170,7 @@ export default function SideNav() {
             color: '#E8B84B',
             fontSize: 10, fontWeight: 700, letterSpacing: '0.06em',
             textTransform: 'uppercase', padding: '2px 8px', borderRadius: 3,
-          }}>Oct 2024</span>
+          }}>Oct 2026</span>
           <span style={{
             background: 'rgba(5,150,105,0.15)',
             border: '1px solid rgba(5,150,105,0.30)',

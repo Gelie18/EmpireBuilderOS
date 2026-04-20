@@ -155,7 +155,7 @@ export default function MarketPage() {
               fontFamily: 'var(--font-condensed)', fontSize: 13, fontWeight: 700,
               color: 'var(--color-blue)', letterSpacing: '0.04em',
             }}>
-              Oct 2024
+              Oct 2026
             </span>
           </div>
         </div>

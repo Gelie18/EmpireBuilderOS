@@ -21,15 +21,15 @@ import type {
 // ── Default Period ──
 export const DEFAULT_PERIOD: Period = {
   type: 'month',
-  startDate: '2024-10-01',
-  endDate: '2024-10-31',
-  label: 'Oct 2024',
+  startDate: '2026-10-01',
+  endDate: '2026-10-31',
+  label: 'Oct 2026',
 };
 
 export const AVAILABLE_PERIODS: Period[] = [
-  { type: 'month', startDate: '2024-10-01', endDate: '2024-10-31', label: 'Oct' },
-  { type: 'quarter', startDate: '2024-07-01', endDate: '2024-09-30', label: 'Q3' },
-  { type: 'ytd', startDate: '2024-01-01', endDate: '2024-10-31', label: 'YTD' },
+  { type: 'month', startDate: '2026-10-01', endDate: '2026-10-31', label: 'Oct' },
+  { type: 'quarter', startDate: '2026-07-01', endDate: '2026-09-30', label: 'Q3' },
+  { type: 'ytd', startDate: '2026-01-01', endDate: '2026-10-31', label: 'YTD' },
 ];
 
 // ── P&L Rows (ported from prototype) ──
@@ -153,7 +153,7 @@ export function getDemoCashFlow(): CashFlowReport {
 function generateDailyForecast(): { date: string; balance: number; isProjected: boolean }[] {
   const points: { date: string; balance: number; isProjected: boolean }[] = [];
   let balance = 847000;
-  const today = new Date('2024-10-31');
+  const today = new Date('2026-10-31');
 
   // Historical (past 30 days)
   for (let i = -30; i <= 0; i++) {
@@ -184,18 +184,18 @@ function generateDailyForecast(): { date: string; balance: number; isProjected: 
 
 // ── Forecast ──
 //
-// ACTUALS (May–Oct 2024): exact values from the real P&L / MoM dataset — never touched by drivers.
-// PROJECTIONS (Nov 2024–Apr 2025): computed fresh from drivers on every slider change.
+// ACTUALS (May–Oct 2026): exact values from the real P&L / MoM dataset — never touched by drivers.
+// PROJECTIONS (Nov 2026–Apr 2025): computed fresh from drivers on every slider change.
 //
 export function getDemoForecast(): ForecastModel {
   // ── Locked actuals — sourced from MoM P&L data ──
   const ACTUALS = [
-    { month: '2024-05', label: "May '24", revenue: 1_088_000, cogs: 585_600, grossProfit:  502_400, opex: 362_000, netIncome:  92_000, isActual: true },
-    { month: '2024-06', label: "Jun '24", revenue: 1_112_000, cogs: 593_000, grossProfit:  519_000, opex: 370_000, netIncome:  99_000, isActual: true },
-    { month: '2024-07', label: "Jul '24", revenue: 1_145_000, cogs: 609_000, grossProfit:  536_000, opex: 381_000, netIncome: 104_000, isActual: true },
-    { month: '2024-08', label: "Aug '24", revenue: 1_198_000, cogs: 640_000, grossProfit:  558_000, opex: 395_000, netIncome: 111_000, isActual: true },
-    { month: '2024-09', label: "Sep '24", revenue: 1_272_300, cogs: 689_300, grossProfit:  583_000, opex: 413_000, netIncome: 108_200, isActual: true },
-    { month: '2024-10', label: "Oct '24", revenue: 1_311_600, cogs: 720_300, grossProfit:  591_300, opex: 460_700, netIncome:  71_400, isActual: true },
+    { month: '2026-05', label: "May '24", revenue: 1_088_000, cogs: 585_600, grossProfit:  502_400, opex: 362_000, netIncome:  92_000, isActual: true },
+    { month: '2026-06', label: "Jun '24", revenue: 1_112_000, cogs: 593_000, grossProfit:  519_000, opex: 370_000, netIncome:  99_000, isActual: true },
+    { month: '2026-07', label: "Jul '24", revenue: 1_145_000, cogs: 609_000, grossProfit:  536_000, opex: 381_000, netIncome: 104_000, isActual: true },
+    { month: '2026-08', label: "Aug '24", revenue: 1_198_000, cogs: 640_000, grossProfit:  558_000, opex: 395_000, netIncome: 111_000, isActual: true },
+    { month: '2026-09', label: "Sep '24", revenue: 1_272_300, cogs: 689_300, grossProfit:  583_000, opex: 413_000, netIncome: 108_200, isActual: true },
+    { month: '2026-10', label: "Oct '24", revenue: 1_311_600, cogs: 720_300, grossProfit:  591_300, opex: 460_700, netIncome:  71_400, isActual: true },
   ];
 
   // ── Projected month shells — values are placeholders; the page recomputes from drivers ──
@@ -203,8 +203,8 @@ export function getDemoForecast(): ForecastModel {
   //   Oct headcount: 42  |  COGS %: 54.9%  |  Non-payroll OpEx % (mktg+tech+G&A): 19.8%
   //   Payroll (42 × $4,790 ≈ $201,200) + non-payroll ($259,500) = $460,700 total OpEx ✓
   const PROJ_MONTHS = [
-    { month: '2024-11', label: "Nov '24" },
-    { month: '2024-12', label: "Dec '24" },
+    { month: '2026-11', label: "Nov '24" },
+    { month: '2026-12', label: "Dec '24" },
     { month: '2025-01', label: "Jan '25" },
     { month: '2025-02', label: "Feb '25" },
     { month: '2025-03', label: "Mar '25" },
@@ -238,8 +238,8 @@ export function getDemoForecast(): ForecastModel {
 export function getDemoScenarios(): Scenario[] {
   // 12 projected months: Nov '24 → Oct '25
   const MONTHS = [
-    { key: '2024-11', label: "Nov '24" },
-    { key: '2024-12', label: "Dec '24" },
+    { key: '2026-11', label: "Nov '24" },
+    { key: '2026-12', label: "Dec '24" },
     { key: '2025-01', label: "Jan '25" },
     { key: '2025-02', label: "Feb '25" },
     { key: '2025-03', label: "Mar '25" },
@@ -379,14 +379,14 @@ function makeComparisonMonth(
 }
 
 export function getDemoYoY(): YoYReport {
-  // Current year: Jan–Oct 2024 (10 months), using Oct as latest
+  // Current year: Jan–Oct 2026 (10 months), using Oct as latest
   const currentYear: ComparisonMonth[] = Array.from({ length: 10 }, (_, i) => {
     const base = 1_050_000 + i * 25_000;
-    return makeComparisonMonth(2024, i, base, 1.0);
+    return makeComparisonMonth(2026, i, base, 1.0);
   });
-  // Oct 2024: use the real P&L numbers
+  // Oct 2026: use the real P&L numbers
   currentYear[9] = {
-    month: '2024-10',
+    month: '2026-10',
     label: "Oct '24",
     revenue: 1_311_600,
     grossProfit: 591_300,
@@ -421,27 +421,27 @@ export function getDemoYoY(): YoYReport {
 export function getDemoMoM(): MoMReport {
   const months: ComparisonMonth[] = [
     {
-      month: '2024-05', label: "May '24",
+      month: '2026-05', label: "May '24",
       revenue: 1_088_000, grossProfit: 502_400, grossMargin: 46.2, opex: 362_000, netIncome: 92_000, headcount: 38,
     },
     {
-      month: '2024-06', label: "Jun '24",
+      month: '2026-06', label: "Jun '24",
       revenue: 1_112_000, grossProfit: 519_000, grossMargin: 46.7, opex: 370_000, netIncome: 99_000, headcount: 39,
     },
     {
-      month: '2024-07', label: "Jul '24",
+      month: '2026-07', label: "Jul '24",
       revenue: 1_145_000, grossProfit: 536_000, grossMargin: 46.8, opex: 381_000, netIncome: 104_000, headcount: 40,
     },
     {
-      month: '2024-08', label: "Aug '24",
+      month: '2026-08', label: "Aug '24",
       revenue: 1_198_000, grossProfit: 558_000, grossMargin: 46.6, opex: 395_000, netIncome: 111_000, headcount: 40,
     },
     {
-      month: '2024-09', label: "Sep '24",
+      month: '2026-09', label: "Sep '24",
       revenue: 1_272_300, grossProfit: 583_000, grossMargin: 45.8, opex: 413_000, netIncome: 108_200, headcount: 41,
     },
     {
-      month: '2024-10', label: "Oct '24",
+      month: '2026-10', label: "Oct '24",
       revenue: 1_311_600, grossProfit: 591_300, grossMargin: 45.1, opex: 460_700, netIncome: 71_400, headcount: 42,
     },
   ];
@@ -467,7 +467,7 @@ export function getDemoDailyRevenue(): DailyRevenuePoint[] {
 
   // Weekend pattern: lower wholesale on weekends
   for (let d = 1; d <= daysInOct; d++) {
-    const date = new Date(2024, 9, d); // Oct 2024
+    const date = new Date(2026, 9, d); // Oct 2026
     const dayOfWeek = date.getDay(); // 0=Sun, 6=Sat
     const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
 
@@ -571,7 +571,7 @@ export function getDemoActionItems(): ActionItem[] {
       priority: 'high',
       owner: 'CFO',
       text: 'Review Altitude Creative ($18K) and WestCoast Influencers ($13K) — no approved campaign IDs. Hold or approve invoices before next close.',
-      dueDate: '2024-11-05',
+      dueDate: '2026-11-05',
       status: 'open',
     },
     {
@@ -579,7 +579,7 @@ export function getDemoActionItems(): ActionItem[] {
       priority: 'high',
       owner: 'Finance',
       text: 'Salesforce renewal ($22,000) hits in November — budget impact confirmed? Offset by full ShipBob benefit (+$14K/mo).',
-      dueDate: '2024-11-01',
+      dueDate: '2026-11-01',
       status: 'open',
     },
     {
@@ -587,7 +587,7 @@ export function getDemoActionItems(): ActionItem[] {
       priority: 'medium',
       owner: 'Operations',
       text: 'Initiate carrier contract review — unbudgeted El Paso freight surcharge ($8.8K) may recur in Q4 holiday volume.',
-      dueDate: '2024-11-15',
+      dueDate: '2026-11-15',
       status: 'in_progress',
     },
     {
@@ -595,7 +595,7 @@ export function getDemoActionItems(): ActionItem[] {
       priority: 'medium',
       owner: 'Sales',
       text: 'Flag Scheels Q4 pull-forward reorder — may create a revenue shortfall in November if they do not reorder as expected.',
-      dueDate: '2024-11-08',
+      dueDate: '2026-11-08',
       status: 'open',
     },
     {
@@ -603,7 +603,7 @@ export function getDemoActionItems(): ActionItem[] {
       priority: 'low',
       owner: 'HR',
       text: 'Backfill open SDR role — currently saving ~$9K/mo, but Q4 pipeline velocity may suffer without the hire.',
-      dueDate: '2024-11-30',
+      dueDate: '2026-11-30',
       status: 'open',
     },
   ];
@@ -623,7 +623,7 @@ export function getDemoComments(): Comment[] {
       authorInitials: 'SC',
       content:
         'Reached out to Altitude Creative — they confirmed this was a campaign signed off by James in September. Waiting on the campaign ID from the agency portal. Will update by EOD Thursday.',
-      timestamp: '2024-10-31T14:22:00Z',
+      timestamp: '2026-10-31T14:22:00Z',
       status: 'open',
       tags: ['requires-action', 'vendor'],
       replies: [
@@ -632,14 +632,14 @@ export function getDemoComments(): Comment[] {
           author: 'James Tran',
           authorInitials: 'JT',
           content: 'Correct — I approved this verbally but forgot to log the campaign. Sending the ID now.',
-          timestamp: '2024-10-31T15:05:00Z',
+          timestamp: '2026-10-31T15:05:00Z',
         },
         {
           id: 'rep-1-2',
           author: 'Sarah Chen',
           authorInitials: 'SC',
-          content: 'Received — Campaign ID: MKT-2024-119. Updating the PO. WestCoast Influencers still outstanding.',
-          timestamp: '2024-10-31T15:48:00Z',
+          content: 'Received — Campaign ID: MKT-2026-119. Updating the PO. WestCoast Influencers still outstanding.',
+          timestamp: '2026-10-31T15:48:00Z',
         },
       ],
     },
@@ -651,7 +651,7 @@ export function getDemoComments(): Comment[] {
       authorInitials: 'MT',
       content:
         'Scheels pull-forward confirmed: they needed inventory for a floor reset ahead of their Black Friday promo. Their standard November reorder is $280K — this may not come until December. Watch November wholesale closely.',
-      timestamp: '2024-10-30T09:15:00Z',
+      timestamp: '2026-10-30T09:15:00Z',
       status: 'flagged',
       tags: ['forecast-risk', 'wholesale'],
       replies: [],
@@ -664,7 +664,7 @@ export function getDemoComments(): Comment[] {
       authorInitials: 'LP',
       content:
         'ShipBob contract went live Oct 15. Full savings hit in November (~$14K/mo). Current month only captured half-month benefit. No issues with the transition.',
-      timestamp: '2024-10-28T16:30:00Z',
+      timestamp: '2026-10-28T16:30:00Z',
       status: 'resolved',
       tags: ['vendor', 'savings'],
       replies: [],
@@ -677,7 +677,7 @@ export function getDemoComments(): Comment[] {
       authorInitials: 'SC',
       content:
         'Salesforce renewal pushed to November per their billing cycle. $22K charge will hit 11/1. I\'ve updated the November forecast. Partially offset by ShipBob savings.',
-      timestamp: '2024-10-25T11:00:00Z',
+      timestamp: '2026-10-25T11:00:00Z',
       status: 'resolved',
       tags: ['renewal', 'forecast'],
       replies: [
@@ -686,7 +686,7 @@ export function getDemoComments(): Comment[] {
           author: 'CFO',
           authorInitials: 'CF',
           content: 'Confirmed in board preview. Noted.',
-          timestamp: '2024-10-25T13:22:00Z',
+          timestamp: '2026-10-25T13:22:00Z',
         },
       ],
     },
@@ -698,7 +698,7 @@ export function getDemoComments(): Comment[] {
       authorInitials: 'LP',
       content:
         'El Paso freight surcharge is a new carrier fuel surcharge that took effect Oct 1. We\'re in talks with three alternative carriers. Should have a decision by Nov 10 before holiday volume ramps.',
-      timestamp: '2024-10-29T10:45:00Z',
+      timestamp: '2026-10-29T10:45:00Z',
       status: 'open',
       tags: ['vendor', 'operations'],
       replies: [],
@@ -748,7 +748,7 @@ export function getDemoMacroIndicators(): MacroIndicator[] {
       id: 'consumer-spending',
       label: 'US Consumer Spending',
       value: '+0.4% MoM',
-      change: 'Sep 2024',
+      change: 'Sep 2026',
       direction: 'up',
       impact: 'positive',
       detail: 'Outdoor / apparel discretionary spend still growing. DTC channel strength consistent with broader category tailwinds.',
@@ -775,7 +775,7 @@ export function getDemoMacroIndicators(): MacroIndicator[] {
       id: 'wholesale-outlook',
       label: 'Specialty Retail Foot Traffic',
       value: '+3.8% YoY',
-      change: 'Oct 2024',
+      change: 'Oct 2026',
       direction: 'up',
       impact: 'positive',
       detail: 'Wholesale channel (Scheels, REI) benefiting from retail recovery. Supports Q4 reorder thesis if macro holds.',

@@ -151,7 +151,7 @@ export default function CashFlowPage() {
               marginTop: 5,
             }}
           >
-            October 2024
+            October 2026
           </div>
         </div>
 
@@ -172,7 +172,7 @@ export default function CashFlowPage() {
       </div>
 
       {/* ── 3 KPI cards ── */}
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {[
           {
             label:  'Operating Cash Flow',
@@ -204,35 +204,37 @@ export default function CashFlowPage() {
               borderTop: `3px solid ${item.color}`,
             }}
           >
-            <div
-              style={{
-                fontFamily:    'var(--font-condensed)',
-                fontSize:      12,
-                fontWeight:    700,
-                textTransform: 'uppercase',
-                letterSpacing: '0.09em',
-                color:         'var(--color-muted)',
-                marginBottom:  10,
-              }}
-            >
-              {item.label}
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+              <div
+                style={{
+                  fontFamily:    'var(--font-condensed)',
+                  fontSize:      12,
+                  fontWeight:    700,
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.09em',
+                  color:         'var(--color-muted)',
+                  marginBottom:  10,
+                }}
+              >
+                {item.label}
+              </div>
+              <div
+                style={{
+                  fontFamily:  'var(--font-condensed)',
+                  fontSize:    40,
+                  fontWeight:  900,
+                  lineHeight:  1,
+                  color:       item.color,
+                  marginBottom: 6,
+                  letterSpacing: '-0.01em',
+                }}
+              >
+                {item.value >= 0
+                  ? `+${formatCurrency(item.value, true)}`
+                  : `–${formatCurrency(Math.abs(item.value), true)}`}
+              </div>
+              <div style={{ fontSize: 13, color: 'var(--color-muted)' }}>{item.sub}</div>
             </div>
-            <div
-              style={{
-                fontFamily:  'var(--font-condensed)',
-                fontSize:    40,
-                fontWeight:  900,
-                lineHeight:  1,
-                color:       item.color,
-                marginBottom: 6,
-                letterSpacing: '-0.01em',
-              }}
-            >
-              {item.value >= 0
-                ? `+${formatCurrency(item.value, true)}`
-                : `–${formatCurrency(Math.abs(item.value), true)}`}
-            </div>
-            <div style={{ fontSize: 13, color: 'var(--color-muted)' }}>{item.sub}</div>
           </div>
         ))}
       </div>
@@ -340,7 +342,7 @@ export default function CashFlowPage() {
               color:         'var(--color-muted)',
             }}
           >
-            Cash Flow Statement — October 2024
+            Cash Flow Statement — October 2026
           </div>
           <div
             style={{

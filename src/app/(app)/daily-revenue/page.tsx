@@ -102,7 +102,7 @@ export default function DailyRevenuePage() {
             Daily Revenue Report
           </div>
           <div className="text-[12px] mt-0.5" style={{ color: 'var(--color-muted)' }}>
-            October 2024 — 31 days closed
+            October 2026 — 31 days closed
           </div>
         </div>
         <div className="flex gap-2 flex-wrap">

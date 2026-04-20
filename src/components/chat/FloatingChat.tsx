@@ -4,39 +4,192 @@ import { useState, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import { useChat } from '@/hooks/useChat';
 
-const DEMO_CHIPS = [
-  'Why is net income $38K below plan?',
-  'What is causing the marketing overage?',
-  'What do I tell the board this month?',
-  'How is our cash and runway looking?',
-  'What drove revenue above plan?',
-  'How do we compare to competitors?',
-  'What are the top priorities for November?',
-];
-
-const PAGE_LABELS: Record<string, string> = {
-  '/dashboard': 'Dashboard', '/pnl': 'P&L', '/balance-sheet': 'Balance Sheet',
-  '/cashflow': 'Cash Flow', '/yoy': 'Year-over-Year', '/mom': 'Month-over-Month',
-  '/daily-revenue': 'Daily Revenue', '/backlog': 'Backlog', '/ai-forecast': 'AI Forecast',
-  '/forecast': 'Driver Model', '/scenarios': 'Scenarios', '/market': 'Market Intel',
+// ── Page-aware suggested questions ────────────────────────────────────────────
+const PAGE_CTX: Record<string, { label: string; chips: string[] }> = {
+  '/dashboard': {
+    label: 'Dashboard',
+    chips: [
+      'Why is net income below plan?',
+      'What needs immediate attention?',
+      'Cash and runway status?',
+      'What to tell the board?',
+    ],
+  },
+  '/pnl': {
+    label: 'P&L',
+    chips: [
+      'What drove the marketing overage?',
+      'Why did gross margin expand?',
+      'Which line items need action?',
+      'P&L vs last October?',
+    ],
+  },
+  '/cashflow': {
+    label: 'Cash Flow',
+    chips: [
+      'Cash position and runway?',
+      'Any AR aging concerns?',
+      'November cash outlook?',
+      'Liquidity risks to flag?',
+    ],
+  },
+  '/balance-sheet': {
+    label: 'Balance Sheet',
+    chips: [
+      'How is working capital trending?',
+      'Any liability concerns?',
+      'Current ratio vs benchmark?',
+      'What is tying up cash?',
+    ],
+  },
+  '/backlog': {
+    label: 'Backlog',
+    chips: [
+      'What is the highest-risk backlog item?',
+      'Wexler contract — next steps?',
+      'AR aging action plan?',
+      'Which items need this week?',
+    ],
+  },
+  '/revenue': {
+    label: 'Revenue Intel',
+    chips: [
+      'Which product line is underperforming?',
+      'Customer concentration risk?',
+      'MRR and ARR trend?',
+      'Recurring revenue growth?',
+    ],
+  },
+  '/forecast': {
+    label: 'Driver Model',
+    chips: [
+      'What is the 12-month revenue target?',
+      'Key forecast assumptions?',
+      'Where are the biggest risks?',
+      'What drives the growth rate?',
+    ],
+  },
+  '/scenarios': {
+    label: 'Scenarios',
+    chips: [
+      'Best vs downside outcome?',
+      'Enterprise pipeline impact?',
+      'What breaks our runway?',
+      'Margin sensitivity to COGS?',
+    ],
+  },
+  '/market': {
+    label: 'Market Intel',
+    chips: [
+      'How do we rank vs peers?',
+      'Where are we above industry median?',
+      'Biggest competitive gap?',
+      'Macro risks to monitor?',
+    ],
+  },
+  '/yoy': {
+    label: 'Year-over-Year',
+    chips: [
+      'YoY revenue growth summary?',
+      'Why did NI margin compress?',
+      'Gross margin trend?',
+      'OpEx growth vs revenue?',
+    ],
+  },
+  '/mom': {
+    label: 'Month-over-Month',
+    chips: [
+      'What changed most vs September?',
+      'Is the marketing spike one-time?',
+      'Revenue trend healthy?',
+      'November outlook?',
+    ],
+  },
 };
 
-const PAGE_CTX = Object.fromEntries(
-  Object.entries(PAGE_LABELS).map(([href, label]) => [href, { label, chips: DEMO_CHIPS }])
-);
-const DEFAULT_CTX = { label: 'Empire Builder', chips: DEMO_CHIPS };
+const DEFAULT_CTX = {
+  label: 'Empire Builder',
+  chips: [
+    'Net income miss — root cause?',
+    'Cash and runway status?',
+    'What to tell the board?',
+    'November priorities?',
+  ],
+};
+
+// ── Message formatter ─────────────────────────────────────────────────────────
+function FormattedMessage({ content }: { content: string }) {
+  const paragraphs = content.split(/\n\n+/);
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+      {paragraphs.map((para, pi) => {
+        const lines = para.split('\n');
+        const isList = lines.some((l) =>
+          /^[●•✅❌🟢🔵🟡🔴⚠️]/.test(l.trim())
+        );
+
+        if (isList) {
+          return (
+            <div key={pi} style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
+              {lines.map((line, li) => {
+                const trimmed = line.trim();
+                if (!trimmed) return null;
+                const isBullet = /^[●•✅❌🟢🔵🟡🔴⚠️]/.test(trimmed);
+                return isBullet ? (
+                  <div key={li} style={{ display: 'flex', gap: 8, alignItems: 'flex-start' }}>
+                    <span style={{ flexShrink: 0, lineHeight: 1.5, fontSize: 12 }}>
+                      {trimmed.charAt(0)}
+                    </span>
+                    <span style={{ lineHeight: 1.55 }}>
+                      {renderInline(trimmed.slice(1).replace(/^[\s—\-]+/, ''))}
+                    </span>
+                  </div>
+                ) : (
+                  <span key={li} style={{ lineHeight: 1.55 }}>{renderInline(trimmed)}</span>
+                );
+              })}
+            </div>
+          );
+        }
+
+        return (
+          <p key={pi} style={{ margin: 0, lineHeight: 1.6 }}>
+            {lines.map((l, li) => (
+              <span key={li}>
+                {renderInline(l)}
+                {li < lines.length - 1 && <br />}
+              </span>
+            ))}
+          </p>
+        );
+      })}
+    </div>
+  );
+}
+
+function renderInline(text: string): React.ReactNode {
+  // Bold: **text** or text that looks like a dollar/metric figure
+  const parts = text.split(/(\*\*[^*]+\*\*)/g);
+  return parts.map((part, i) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      return <strong key={i} style={{ fontWeight: 700 }}>{part.slice(2, -2)}</strong>;
+    }
+    return <span key={i}>{part}</span>;
+  });
+}
 
 export default function FloatingChat() {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState('');
   const pathname = usePathname();
-  const ctx = PAGE_CTX[pathname] ?? DEFAULT_CTX;
+  const ctx = PAGE_CTX[pathname as keyof typeof PAGE_CTX] ?? DEFAULT_CTX;
   const msgsEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const { messages, isLoading, sendMessage } = useChat({
     currentView: pathname.replace('/', '') || 'dashboard',
-    period: { type: 'month', startDate: '2024-10-01', endDate: '2024-10-31', label: 'Oct 2024' },
+    period: { type: 'month', startDate: '2026-10-01', endDate: '2026-10-31', label: 'Oct 2026' },
     highlights: [`Viewing: ${ctx.label}`],
   });
 
@@ -99,7 +252,7 @@ export default function FloatingChat() {
               AI CFO
             </div>
             <div className="text-[11px] mt-0.5 truncate" style={{ color: 'rgba(255,255,255,0.45)' }}>
-              Context: {ctx.label} · Oct 2024
+              Context: {ctx.label} · Oct 2026
             </div>
           </div>
           <button
@@ -118,14 +271,17 @@ export default function FloatingChat() {
               <div className="text-[10px] font-bold uppercase tracking-[0.08em]" style={{ color: '#6B7280' }}>
                 {msg.role === 'user' ? 'You' : 'AI CFO'}
               </div>
-              <div className="max-w-[90%] px-4 py-3 text-[13px] leading-relaxed" style={{
+              <div className="max-w-[92%] px-4 py-3 text-[13px]" style={{
                 background: msg.role === 'user' ? '#1D44BF' : '#F8F8FA',
                 color: msg.role === 'user' ? '#FFFFFF' : '#1A1C2E',
                 borderRadius: msg.role === 'user' ? '12px 12px 3px 12px' : '12px 12px 12px 3px',
                 border: msg.role === 'assistant' ? '1px solid rgba(0,0,0,0.08)' : 'none',
                 fontWeight: msg.role === 'user' ? 500 : 400,
               }}>
-                {msg.content}
+                {msg.role === 'assistant'
+                  ? <FormattedMessage content={msg.content} />
+                  : msg.content
+                }
               </div>
             </div>
           ))}

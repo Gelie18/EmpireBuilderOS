@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import {
   AreaChart, Area,
   XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
@@ -21,7 +22,7 @@ const TT: React.CSSProperties = {
   boxShadow: '0 4px 16px rgba(0,0,0,0.10)',
 };
 
-// ── Synthetic October 2024 data ─────────────────────────────────────────────
+// ── Synthetic October 2026 data ─────────────────────────────────────────────
 
 const ASSETS = {
   cash:         873_500,
@@ -46,12 +47,12 @@ const EQUITY = 1_750_900;
 
 // 6-month Cash trend (May → Oct)
 const CASH_TREND = [
-  { label: "May '24", cash: 835_000 },
-  { label: "Jun '24", cash: 842_000 },
-  { label: "Jul '24", cash: 858_000 },
-  { label: "Aug '24", cash: 847_000 },
-  { label: "Sep '24", cash: 851_000 },
-  { label: "Oct '24", cash: 873_500 },
+  { label: "May '26", cash: 835_000 },
+  { label: "Jun '26", cash: 842_000 },
+  { label: "Jul '26", cash: 858_000 },
+  { label: "Aug '26", cash: 847_000 },
+  { label: "Sep '26", cash: 851_000 },
+  { label: "Oct '26", cash: 873_500 },
 ];
 
 // ── Helpers ─────────────────────────────────────────────────────────────────
@@ -83,35 +84,38 @@ const cashPctAssets = ((ASSETS.cash / ASSETS.totalAssets) * 100).toFixed(1);
 const arDays       = '11.5';
 
 // ── Asset rows ──────────────────────────────────────────────────────────────
-const ASSET_ROWS: { label: string; value: number | null; type: 'section' | 'line' | 'subtotal' | 'total' }[] = [
+const ASSET_ROWS: { label: string; value: number | null; type: 'section' | 'line' | 'subtotal' | 'total'; insight?: string }[] = [
   { label: 'CURRENT ASSETS',          value: null,               type: 'section'  },
-  { label: 'Cash & Equivalents',      value: ASSETS.cash,        type: 'line'     },
-  { label: 'Accounts Receivable',     value: ASSETS.ar,          type: 'line'     },
-  { label: 'Inventory',               value: ASSETS.inventory,   type: 'line'     },
-  { label: 'Other Current Assets',    value: ASSETS.otherCurrent,type: 'line'     },
+  { label: 'Cash & Equivalents',      value: ASSETS.cash,        type: 'line',    insight: "$873,500 on hand — 8.2 months of runway at trailing burn. Steady increase from $835K in May. No near-term liquidity concern." },
+  { label: 'Accounts Receivable',     value: ASSETS.ar,          type: 'line',    insight: "$412,300 in receivables. $127K is 90+ days aged — priority collection action needed before quarter-end. DSO at ~42 days, slightly above the 35-day target." },
+  { label: 'Inventory',               value: ASSETS.inventory,   type: 'line',    insight: "$520,800 tied up in inventory ahead of Q4 season. Monitor closely — excess relative to demand compresses cash conversion cycle. Aim to reduce by 8–10% post-holiday." },
+  { label: 'Other Current Assets',    value: ASSETS.otherCurrent,type: 'line',    insight: "$48,200 in prepaid expenses and deposits. Routine for this stage — no flags." },
   { label: 'Total Current Assets',    value: ASSETS.totalCurrent,type: 'subtotal' },
   { label: 'FIXED & OTHER ASSETS',    value: null,               type: 'section'  },
-  { label: 'Fixed Assets (net)',       value: ASSETS.fixedNet,    type: 'line'     },
+  { label: 'Fixed Assets (net)',       value: ASSETS.fixedNet,    type: 'line',    insight: "$284,600 net fixed assets after depreciation. No major capex planned for Q4. Depreciation running ~$9K/month." },
   { label: 'TOTAL ASSETS',            value: ASSETS.totalAssets, type: 'total'    },
 ];
 
 // ── Liability + Equity rows ──────────────────────────────────────────────────
-const LIAB_ROWS: { label: string; value: number | null; type: 'section' | 'line' | 'subtotal' | 'total' }[] = [
+const LIAB_ROWS: { label: string; value: number | null; type: 'section' | 'line' | 'subtotal' | 'total'; insight?: string }[] = [
   { label: 'CURRENT LIABILITIES',        value: null,                         type: 'section'  },
-  { label: 'Accounts Payable',           value: LIABILITIES.ap,               type: 'line'     },
-  { label: 'Accrued Liabilities',        value: LIABILITIES.accrued,          type: 'line'     },
+  { label: 'Accounts Payable',           value: LIABILITIES.ap,               type: 'line',    insight: "$142,800 owed to vendors. DPO at ~31 days — room to extend to 45 days without straining supplier relationships. Extending DPO by 14 days would free ~$65K in working capital." },
+  { label: 'Accrued Liabilities',        value: LIABILITIES.accrued,          type: 'line',    insight: "$98,400 in accrued expenses. Includes $31K IRS quarterly payment due Nov 15 — confirm cash coverage this week." },
   { label: 'Short-Term Debt',            value: LIABILITIES.shortTermDebt,    type: 'line'     },
   { label: 'Total Current Liabilities',  value: LIABILITIES.totalCurrent,     type: 'subtotal' },
   { label: 'LONG-TERM LIABILITIES',      value: null,                         type: 'section'  },
-  { label: 'Long-Term Debt',             value: LIABILITIES.longTerm,         type: 'line'     },
+  { label: 'Long-Term Debt',             value: LIABILITIES.longTerm,         type: 'line',    insight: "$147,300 outstanding — low leverage at just 8.4% of total assets. Fixed rate, matures Q2 2028. No refinancing pressure." },
   { label: 'Total Liabilities',          value: LIABILITIES.totalLiabilities, type: 'subtotal' },
   { label: 'EQUITY',                     value: null,                         type: 'section'  },
-  { label: 'Shareholder Equity',         value: EQUITY,                       type: 'line'     },
+  { label: 'Shareholder Equity',         value: EQUITY,                       type: 'line',    insight: "$1,750,900 equity represents an 82% equity-to-asset ratio. Strong, conservatively capitalized balance sheet." },
   { label: 'TOTAL LIAB + EQUITY',        value: LIABILITIES.totalLiabilities + EQUITY, type: 'total' },
 ];
 
 // ── Table row ────────────────────────────────────────────────────────────────
-function BSRow({ label, value, type }: { label: string; value: number | null; type: string }) {
+function BSRow({ label, value, type, insight }: { label: string; value: number | null; type: string; insight?: string }) {
+  const [open, setOpen] = useState(false);
+  const [hovered, setHovered] = useState(false);
+
   if (type === 'section') {
     return (
       <tr>
@@ -136,40 +140,81 @@ function BSRow({ label, value, type }: { label: string; value: number | null; ty
 
   const isTotal    = type === 'total';
   const isSubtotal = type === 'subtotal';
+  const isClickable = type === 'line' && !!insight;
 
   return (
-    <tr
-      style={{
-        borderTop: isTotal ? '1px solid var(--color-border2)' : undefined,
-        background: isTotal ? 'rgba(53,184,232,0.06)' : undefined,
-      }}
-    >
-      <td
+    <>
+      <tr
+        onClick={isClickable ? () => setOpen((o) => !o) : undefined}
+        onMouseEnter={isClickable ? () => setHovered(true) : undefined}
+        onMouseLeave={isClickable ? () => setHovered(false) : undefined}
         style={{
-          padding: isTotal ? '13px 20px' : '10px 20px',
-          fontSize: isTotal ? 15 : isSubtotal ? 14 : 14,
-          fontWeight: isTotal || isSubtotal ? 700 : 400,
-          color: isTotal ? 'var(--color-text)' : isSubtotal ? 'var(--color-text)' : '#1A1A1A',
-          borderBottom: '1px solid rgba(0,0,0,0.06)',
-          paddingLeft: type === 'line' ? 32 : 20,
+          borderTop: isTotal ? '1px solid var(--color-border2)' : undefined,
+          background: isTotal
+            ? 'rgba(53,184,232,0.06)'
+            : hovered && isClickable
+            ? 'rgba(29,68,191,0.04)'
+            : undefined,
+          cursor: isClickable ? 'pointer' : undefined,
+          transition: 'background 0.12s',
         }}
       >
-        {label}
-      </td>
-      <td
-        style={{
-          padding: isTotal ? '13px 20px' : '10px 20px',
-          textAlign: 'right',
-          fontFamily: 'var(--font-condensed)',
-          fontSize: isTotal ? 18 : isSubtotal ? 16 : 15,
-          fontWeight: isTotal || isSubtotal ? 700 : 500,
-          color: isTotal ? 'var(--color-blue)' : isSubtotal ? 'var(--color-text)' : '#1A1A1A',
-          borderBottom: '1px solid rgba(0,0,0,0.06)',
-        }}
-      >
-        {value !== null ? fmt(value) : '—'}
-      </td>
-    </tr>
+        <td
+          style={{
+            padding: isTotal ? '13px 20px' : '10px 20px',
+            fontSize: isTotal ? 15 : isSubtotal ? 14 : 14,
+            fontWeight: isTotal || isSubtotal ? 700 : 400,
+            color: isTotal ? 'var(--color-text)' : isSubtotal ? 'var(--color-text)' : '#1A1A1A',
+            borderBottom: '1px solid rgba(0,0,0,0.06)',
+            paddingLeft: type === 'line' ? 32 : 20,
+          }}
+        >
+          {label}
+        </td>
+        <td
+          style={{
+            padding: isTotal ? '13px 20px' : '10px 20px',
+            textAlign: 'right',
+            fontFamily: 'var(--font-condensed)',
+            fontSize: isTotal ? 18 : isSubtotal ? 16 : 15,
+            fontWeight: isTotal || isSubtotal ? 700 : 500,
+            color: isTotal ? 'var(--color-blue)' : isSubtotal ? 'var(--color-text)' : '#1A1A1A',
+            borderBottom: '1px solid rgba(0,0,0,0.06)',
+          }}
+        >
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+            {value !== null ? fmt(value) : '—'}
+            {isClickable && (
+              <span style={{
+                fontSize: 10,
+                color: '#1D44BF',
+                opacity: 0.7,
+                display: 'inline-block',
+                transform: open ? 'rotate(90deg)' : 'rotate(0deg)',
+                transition: 'transform 0.15s',
+              }}>▸</span>
+            )}
+          </span>
+        </td>
+      </tr>
+      {open && insight && (
+        <tr>
+          <td colSpan={2} style={{ padding: 0, borderBottom: '1px solid rgba(0,0,0,0.06)' }}>
+            <div style={{
+              padding: '10px 20px 10px 32px',
+              background: 'rgba(29,68,191,0.05)',
+              borderLeft: '3px solid #1D44BF',
+              fontSize: 13,
+              lineHeight: 1.6,
+              color: '#374151',
+            }}>
+              <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#1D44BF', display: 'block', marginBottom: 4 }}>AI CFO Insight</span>
+              {insight}
+            </div>
+          </td>
+        </tr>
+      )}
+    </>
   );
 }
 
@@ -196,7 +241,7 @@ export default function BalanceSheetPage() {
               Balance Sheet
             </div>
             <div style={{ fontSize: 13, color: 'var(--color-muted)', marginTop: 5 }}>
-              October 31, 2024
+              October 31, 2026
             </div>
           </div>
 
@@ -269,27 +314,60 @@ export default function BalanceSheetPage() {
           },
         ].map((kpi) => (
           <div key={kpi.label} style={{ ...CARD, padding: '18px 20px' }}>
-            <div style={{
-              fontSize: 11, fontWeight: 700, letterSpacing: '0.09em',
-              textTransform: 'uppercase', fontFamily: 'var(--font-condensed)',
-              color: 'var(--color-muted)', marginBottom: 8,
-            }}>
-              {kpi.label}
-            </div>
-            <div style={{
-              fontFamily: 'var(--font-condensed)', fontSize: 36, fontWeight: 900,
-              color: 'var(--color-text)', lineHeight: 1, letterSpacing: '-0.01em',
-            }}>
-              {kpi.value}
-            </div>
-            <div style={{ fontSize: 12, color: kpi.color, marginTop: 6, fontWeight: 500 }}>
-              {kpi.sub}
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+              <div style={{
+                fontSize: 11, fontWeight: 700, letterSpacing: '0.09em',
+                textTransform: 'uppercase', fontFamily: 'var(--font-condensed)',
+                color: 'var(--color-muted)', marginBottom: 8,
+              }}>
+                {kpi.label}
+              </div>
+              <div style={{
+                fontFamily: 'var(--font-condensed)', fontSize: 36, fontWeight: 900,
+                color: 'var(--color-text)', lineHeight: 1, letterSpacing: '-0.01em',
+              }}>
+                {kpi.value}
+              </div>
+              <div style={{ fontSize: 12, color: kpi.color, marginTop: 6, fontWeight: 500 }}>
+                {kpi.sub}
+              </div>
             </div>
           </div>
         ))}
       </div>
 
-      {/* ── 3. Balance sheet table — two columns side by side ───────────────── */}
+      {/* ── 3. Net Working Capital card ─────────────────────────────────────── */}
+      <div style={{ ...CARD, padding: '18px 20px' }}>
+        <div style={{
+          fontFamily: 'var(--font-condensed)', fontSize: 13, fontWeight: 700,
+          letterSpacing: '0.07em', textTransform: 'uppercase',
+          color: 'var(--color-text)', marginBottom: 14,
+        }}>
+          Net Working Capital
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          {[
+            { label: 'NWC', value: '$1.61M', sub: 'Current assets − current liab', color: 'var(--color-green)' },
+            { label: 'DSO', value: '42d',     sub: 'Days sales outstanding',        color: 'var(--color-orange)' },
+            { label: 'DIO', value: '22d',     sub: 'Days inventory outstanding',    color: 'var(--color-blue)' },
+            { label: 'CCC', value: '33d',     sub: 'Cash conversion cycle',         color: 'var(--color-blue)' },
+          ].map((m) => (
+            <div key={m.label} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', padding: '12px 8px', background: 'var(--color-surf2)', borderRadius: 8 }}>
+              <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.09em', textTransform: 'uppercase', fontFamily: 'var(--font-condensed)', color: 'var(--color-muted)', marginBottom: 6 }}>
+                {m.label}
+              </div>
+              <div style={{ fontFamily: 'var(--font-condensed)', fontSize: 30, fontWeight: 900, color: 'var(--color-text)', lineHeight: 1, letterSpacing: '-0.01em' }}>
+                {m.value}
+              </div>
+              <div style={{ fontSize: 11, color: m.color, marginTop: 5, fontWeight: 500 }}>
+                {m.sub}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── 4. Balance sheet table — two columns side by side ───────────────── */}
       <div style={{ ...CARD, padding: 0, overflow: 'hidden' }}>
         {/* Table header strip */}
         <div style={{
@@ -301,7 +379,7 @@ export default function BalanceSheetPage() {
             fontFamily: 'var(--font-condensed)', fontSize: 13, fontWeight: 700,
             letterSpacing: '0.07em', textTransform: 'uppercase', color: 'var(--color-text)',
           }}>
-            October 2024 Snapshot
+            October 2026 Snapshot
           </span>
           <span style={{
             fontFamily: 'var(--font-condensed)', fontSize: 11,
@@ -312,7 +390,8 @@ export default function BalanceSheetPage() {
         </div>
 
         {/* Two tables */}
-        <div className="grid grid-cols-1 md:grid-cols-2" style={{ borderTop: 'none' }}>
+        <div style={{ overflowX: 'auto' }}>
+        <div className="grid grid-cols-1 md:grid-cols-2" style={{ borderTop: 'none', minWidth: 480 }}>
           {/* Assets */}
           <div style={{ borderRight: '1px solid var(--color-border)' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
@@ -363,9 +442,10 @@ export default function BalanceSheetPage() {
             </table>
           </div>
         </div>
+        </div>
       </div>
 
-      {/* ── 4. 6-month Cash trend chart ─────────────────────────────────────── */}
+      {/* ── 5. 6-month Cash trend chart ─────────────────────────────────────── */}
       <div style={{ ...CARD, padding: '20px 24px' }}>
         <div style={{
           fontFamily: 'var(--font-condensed)', fontSize: 13, fontWeight: 700,
@@ -403,7 +483,7 @@ export default function BalanceSheetPage() {
         </ResponsiveContainer>
       </div>
 
-      {/* ── 5. Balance Sheet Health card ────────────────────────────────────── */}
+      {/* ── 6. Balance Sheet Health card ────────────────────────────────────── */}
       <div style={{
         ...CARD,
         padding: '20px 24px',

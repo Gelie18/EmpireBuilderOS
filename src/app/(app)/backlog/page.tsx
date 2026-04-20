@@ -38,7 +38,7 @@ const BACKLOG: BacklogItem[] = [
     priority: 'Critical',
     status: 'Overdue',
     owner: 'Sarah Chen',
-    dueDate: '2024-10-15',
+    dueDate: '2026-10-15',
     agingDays: 16,
     impact$: 480000,
     impactLabel: 'Annual contract value at risk',
@@ -59,7 +59,7 @@ const BACKLOG: BacklogItem[] = [
     priority: 'Critical',
     status: 'Overdue',
     owner: 'Mike Torres',
-    dueDate: '2024-10-10',
+    dueDate: '2026-10-10',
     agingDays: 21,
     impact$: 127400,
     impactLabel: 'Cash at risk (90+ day AR)',
@@ -80,7 +80,7 @@ const BACKLOG: BacklogItem[] = [
     priority: 'High',
     status: 'Blocked',
     owner: 'Jordan Lee',
-    dueDate: '2024-10-28',
+    dueDate: '2026-10-28',
     agingDays: 9,
     impact$: 18000,
     impactLabel: 'Unbudgeted spend pending approval',
@@ -102,7 +102,7 @@ const BACKLOG: BacklogItem[] = [
     priority: 'High',
     status: 'In Progress',
     owner: 'Jordan Lee',
-    dueDate: '2024-10-25',
+    dueDate: '2026-10-25',
     agingDays: 6,
     impact$: 13000,
     impactLabel: 'Potentially unauthorized spend',
@@ -122,7 +122,7 @@ const BACKLOG: BacklogItem[] = [
     priority: 'High',
     status: 'New',
     owner: 'Alex Rivera',
-    dueDate: '2024-10-28',
+    dueDate: '2026-10-28',
     agingDays: 3,
     impact$: 8000,
     impactLabel: 'Annual savings opportunity',
@@ -143,7 +143,7 @@ const BACKLOG: BacklogItem[] = [
     priority: 'High',
     status: 'Blocked',
     owner: 'Sarah Chen',
-    dueDate: '2024-10-22',
+    dueDate: '2026-10-22',
     agingDays: 7,
     impact$: 31200,
     impactLabel: 'Potential underpayment penalty exposure',
@@ -164,7 +164,7 @@ const BACKLOG: BacklogItem[] = [
     priority: 'High',
     status: 'In Progress',
     owner: 'Alex Rivera',
-    dueDate: '2024-10-31',
+    dueDate: '2026-10-31',
     agingDays: 14,
     impact$: 14000,
     impactLabel: 'Monthly COGS overstatement',
@@ -185,7 +185,7 @@ const BACKLOG: BacklogItem[] = [
     priority: 'Medium',
     status: 'New',
     owner: 'Sarah Chen',
-    dueDate: '2024-11-15',
+    dueDate: '2026-11-15',
     agingDays: 0,
     impact$: 47000,
     impactLabel: 'Revenue line under performance review',
@@ -205,7 +205,7 @@ const BACKLOG: BacklogItem[] = [
     priority: 'Medium',
     status: 'New',
     owner: 'Jordan Lee',
-    dueDate: '2024-11-10',
+    dueDate: '2026-11-10',
     agingDays: 0,
     impact$: 0,
     impactLabel: 'Board deliverable due Nov 10',
@@ -226,7 +226,7 @@ const BACKLOG: BacklogItem[] = [
     priority: 'Medium',
     status: 'New',
     owner: 'Mike Torres',
-    dueDate: '2024-12-07',
+    dueDate: '2026-12-07',
     agingDays: 0,
     impact$: 0,
     impactLabel: 'Key customer compliance requirement',
@@ -306,13 +306,13 @@ export default function BacklogPage() {
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
             <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.10em', textTransform: 'uppercase', color: '#6B7280', marginBottom: 6 }}>
-              Operations · October 2024
+              Operations · October 2026
             </div>
             <div style={{ fontSize: 28, fontWeight: 800, lineHeight: 1, color: '#1A1C2E', letterSpacing: '-0.02em' }}>
-              Backlog Report
+              Ops Backlog
             </div>
             <div style={{ fontSize: 14, color: '#6B7280', marginTop: 6 }}>
-              {BACKLOG.length} open items · AI-driven action plan · Updated Oct 21, 2024
+              {BACKLOG.length} open items · AI-driven action plan · Updated Oct 21, 2026
             </div>
           </div>
           <div className="flex flex-wrap gap-2 items-center">
@@ -496,7 +496,7 @@ export default function BacklogPage() {
           {/* AI Summary */}
           <div style={{ ...CARD, borderLeft: '4px solid #1D44BF', padding: '20px 24px' }}>
             <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.09em', color: '#1D44BF', marginBottom: 12 }}>
-              AI CFO Summary — October 2024 Backlog
+              AI CFO Summary — October 2026 — Ops Backlog
             </div>
             <div style={{ fontSize: 15, color: '#374151', lineHeight: 1.65 }}>
               You have <strong>10 open backlog items</strong> requiring structured resolution. The most urgent exposure is <strong>{fmt$(totalRisk$)}</strong> in combined financial risk — primarily from the Wexler contract ($480K ARR), 90-day AR ($127K), and unconfirmed Q3 tax payment ($31K).

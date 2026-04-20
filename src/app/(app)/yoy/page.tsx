@@ -12,7 +12,7 @@ const CHART_LABELS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'S
 
 const revenueData = yoy.currentYear.map((m, i) => ({
   month: CHART_LABELS[i],
-  'FY 2024': m.revenue,
+  'FY 2026': m.revenue,
   'FY 2023': yoy.priorYear[i]?.revenue ?? 0,
 }));
 
@@ -95,7 +95,7 @@ export default function YoYPage() {
               Year-over-Year
             </div>
             <div className="text-[15px] mt-1" style={{ color: 'var(--color-muted)', fontFamily: 'var(--font-condensed)' }}>
-              Jan–Oct 2024 vs 2023
+              Jan–Oct 2026 vs 2023
             </div>
           </div>
           <div className="flex flex-wrap gap-2 items-center">
@@ -180,7 +180,7 @@ export default function YoYPage() {
 
       {/* ── REVENUE COMPARISON CHART ── */}
       <Card>
-        <Label>Monthly Revenue — FY 2024 vs FY 2023</Label>
+        <Label>Monthly Revenue — FY 2026 vs FY 2023</Label>
         <ResponsiveContainer width="100%" height={220}>
           <BarChart data={revenueData} barGap={3} barCategoryGap="28%">
             <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" vertical={false} />
@@ -206,7 +206,7 @@ export default function YoYPage() {
               wrapperStyle={{ fontSize: 12, color: 'var(--color-muted)', fontFamily: 'var(--font-condensed)' }}
             />
             <Bar dataKey="FY 2023" fill="var(--color-muted)" fillOpacity={0.35} radius={[3, 3, 0, 0]} />
-            <Bar dataKey="FY 2024" fill="var(--color-blue)" radius={[3, 3, 0, 0]} />
+            <Bar dataKey="FY 2026" fill="var(--color-blue)" radius={[3, 3, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </Card>
@@ -220,7 +220,7 @@ export default function YoYPage() {
           <table className="w-full border-collapse min-w-[520px]">
             <thead>
               <tr style={{ background: 'var(--color-surf2)' }}>
-                {['Month', '2023 Revenue', '2024 Revenue', 'YoY Growth'].map((h, i) => (
+                {['Month', '2023 Revenue', '2026 Revenue', 'YoY Growth'].map((h, i) => (
                   <th
                     key={h}
                     className="px-[14px] py-3 text-[12px] font-bold uppercase tracking-[0.09em] border-b"
@@ -304,7 +304,7 @@ export default function YoYPage() {
         </div>
         <ul className="flex flex-col gap-2.5" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
           {[
-            'ShipBob renegotiation delivered a structural COGS improvement mid-October — $14K/month in fulfilled savings that will compound from November onward, directly expanding gross margin from 43.9% (2023) to 45.1% (2024 Oct).',
+            'ShipBob renegotiation delivered a structural COGS improvement mid-October — $14K/month in fulfilled savings that will compound from November onward, directly expanding gross margin from 43.9% (2023) to 45.1% (2026 Oct).',
             'DTC channel mix shift drove higher-margin revenue: e-commerce now represents a larger share of the top line, and the Oct 12 email campaign generated a 14% conversion spike without any discounting, demonstrating pricing power vs 2023.',
             'OpEx concern: expenses grew +22.1% YoY versus revenue growth of +18.4% — operating leverage is not yet materializing. The divergence is concentrated in marketing spend, which at $171K in October was the largest overage in 14 months and inflated the YoY OpEx line. If October normalizes in November, the full-year OpEx growth rate drops to roughly 15%, putting the business back on the right side of leverage.',
           ].map((bullet, i) => (

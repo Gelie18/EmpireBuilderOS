@@ -17,8 +17,8 @@ export const APP_CONFIG = {
   liveCompany: 'Meritage Partners',
   defaultPeriod: {
     type: 'month' as const,
-    startDate: '2024-10-01',
-    endDate: '2024-10-31',
-    label: 'Oct 2024',
+    startDate: '2026-10-01',
+    endDate: '2026-10-31',
+    label: 'Oct 2026',
   },
 };

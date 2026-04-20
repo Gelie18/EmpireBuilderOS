@@ -25,7 +25,7 @@ export default function ChatPanel() {
 
   const { messages, isLoading, sendMessage } = useChat({
     currentView: pathname.replace('/', '') || 'dashboard',
-    period: { type: 'month', startDate: '2024-10-01', endDate: '2024-10-31', label: 'Oct 2024' },
+    period: { type: 'month', startDate: '2026-10-01', endDate: '2026-10-31', label: 'Oct 2026' },
   });
 
   const chips = SUGGESTED_CHIPS[pathname] ?? SUGGESTED_CHIPS['/dashboard'];

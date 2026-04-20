@@ -198,7 +198,7 @@ export default function PnlPage() {
             Profit & Loss
           </div>
           <div style={{ fontSize: 30, fontWeight: 900, letterSpacing: '0.02em', fontFamily: 'var(--font-condensed)', color: 'var(--color-text)', lineHeight: 1 }}>
-            October 2024
+            October 2026
           </div>
           <div style={{ fontSize: 14, marginTop: 6, color: 'var(--color-muted)' }}>
             Budget vs Actuals · Click any row for AI analysis
@@ -234,22 +234,24 @@ export default function PnlPage() {
           return (
             <div key={c.label} style={{ ...CARD, padding: '20px 22px', position: 'relative', overflow: 'hidden' }}>
               <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 3, background: color, opacity: 0.7 }} />
-              <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--color-muted)', fontFamily: 'var(--font-condensed)', marginBottom: 8, marginTop: 4 }}>
-                {c.label}
-              </div>
-              <div style={{ fontSize: 28, fontWeight: 900, lineHeight: 1, color: 'var(--color-text)', fontFamily: 'var(--font-condensed)', fontVariantNumeric: 'tabular-nums' }}>
-                {fmt(c.actual, true)}
-              </div>
-              <div style={{ fontSize: 13, color: 'var(--color-muted)', marginTop: 4, marginBottom: 8 }}>
-                Plan {fmt(c.budget, true)}
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <span style={{ fontSize: 13, fontWeight: 800, color, fontFamily: 'var(--font-condensed)', fontVariantNumeric: 'tabular-nums' }}>
-                  {c.var$ >= 0 ? '+' : '–'}{fmt(Math.abs(c.var$), true)}
-                </span>
-                <span style={{ fontSize: 12, fontWeight: 800, padding: '2px 8px', borderRadius: 4, background: color + '20', color, fontFamily: 'var(--font-condensed)' }}>
-                  {c.varPct >= 0 ? '+' : ''}{c.varPct.toFixed(1)}%
-                </span>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+                <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--color-muted)', fontFamily: 'var(--font-condensed)', marginBottom: 8, marginTop: 4 }}>
+                  {c.label}
+                </div>
+                <div style={{ fontSize: 28, fontWeight: 900, lineHeight: 1, color: 'var(--color-text)', fontFamily: 'var(--font-condensed)', fontVariantNumeric: 'tabular-nums' }}>
+                  {fmt(c.actual, true)}
+                </div>
+                <div style={{ fontSize: 13, color: 'var(--color-muted)', marginTop: 4, marginBottom: 8 }}>
+                  Plan {fmt(c.budget, true)}
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <span style={{ fontSize: 13, fontWeight: 800, color, fontFamily: 'var(--font-condensed)', fontVariantNumeric: 'tabular-nums' }}>
+                    {c.var$ >= 0 ? '+' : '–'}{fmt(Math.abs(c.var$), true)}
+                  </span>
+                  <span style={{ fontSize: 12, fontWeight: 800, padding: '2px 8px', borderRadius: 4, background: color + '20', color, fontFamily: 'var(--font-condensed)' }}>
+                    {c.varPct >= 0 ? '+' : ''}{c.varPct.toFixed(1)}%
+                  </span>
+                </div>
               </div>
             </div>
           );
@@ -268,7 +270,7 @@ export default function PnlPage() {
           borderBottom:  '1px solid var(--color-border)',
         }}>
           <div style={{ fontSize: 14, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', fontFamily: 'var(--font-condensed)', color: 'var(--color-text)' }}>
-            Detailed P&L — October 2024
+            Detailed P&L — October 2026
           </div>
           <div style={{ fontSize: 13, color: 'var(--color-muted)' }}>
             Click any row for AI analysis
@@ -322,7 +324,7 @@ export default function PnlPage() {
       {/* ── CFO Takeaways ── */}
       <div style={{ ...CARD, padding: '24px 28px', borderLeft: `4px solid ${BLUE}` }}>
         <div style={{ fontSize: 13, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: BLUE, fontFamily: 'var(--font-condensed)', marginBottom: 16 }}>
-          CFO Takeaways — October 2024
+          CFO Takeaways — October 2026
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
           {[
