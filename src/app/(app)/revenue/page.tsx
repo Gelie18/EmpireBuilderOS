@@ -23,7 +23,7 @@ const GREEN  = '#0A8A5C';
 const RED    = '#C13333';
 const ORANGE = '#D97706';
 const PURPLE = '#7C3AED';
-const GRAY   = '#6B7280';
+const GRAY   = 'rgba(255,255,255,0.50)';
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -70,7 +70,7 @@ function fmtCompact(n: number): string {
 // ─── Shared styles ───────────────────────────────────────────────────────────
 
 const CARD: React.CSSProperties = {
-  background:   '#FFFFFF',
+  background:   'var(--color-surf)',
   borderRadius: 'var(--card-radius)',
   boxShadow:    'var(--card-shadow)',
   border:       '1px solid var(--color-border)',
@@ -86,18 +86,18 @@ const CARD_HEADER: React.CSSProperties = {
 const CARD_HEADER_TITLE: React.CSSProperties = {
   fontSize:   13,
   fontWeight: 600,
-  color:      '#1A1C2E',
+  color:      '#FFFFFF',
   margin:     0,
   textTransform: 'uppercase',
   letterSpacing: '0.05em',
 };
 
 const TOOLTIP_STYLE: React.CSSProperties = {
-  background:   '#FFFFFF',
-  border:       '1px solid rgba(0,0,0,0.10)',
-  color:        '#1A1C2E',
+  background:   '#1E2236',
+  border:       '1px solid rgba(255,255,255,0.10)',
+  color:        '#FFFFFF',
   fontSize:     12,
-  boxShadow:    '0 4px 16px rgba(0,0,0,0.10)',
+  boxShadow:    '0 1px 4px rgba(0,0,0,0.30), 0 4px 16px rgba(0,0,0,0.25)',
   borderRadius: 8,
 };
 
@@ -111,7 +111,7 @@ function RevenueTooltip({ active, payload, label }: {
   if (!active || !payload?.length) return null;
   return (
     <div style={{ ...TOOLTIP_STYLE, padding: '10px 14px' }}>
-      <div style={{ fontWeight: 600, marginBottom: 4, color: '#1A1C2E' }}>{label}</div>
+      <div style={{ fontWeight: 600, marginBottom: 4, color: '#FFFFFF' }}>{label}</div>
       <div style={{ color: BLUE, fontWeight: 700 }}>{fmtCompact(payload[0].value)}</div>
     </div>
   );
@@ -125,7 +125,7 @@ function ProductTooltip({ active, payload, label }: {
   if (!active || !payload?.length) return null;
   return (
     <div style={{ ...TOOLTIP_STYLE, padding: '10px 14px' }}>
-      <div style={{ fontWeight: 600, marginBottom: 4, color: '#1A1C2E' }}>{label}</div>
+      <div style={{ fontWeight: 600, marginBottom: 4, color: '#FFFFFF' }}>{label}</div>
       <div style={{ color: BLUE, fontWeight: 700 }}>{fmtCompact(payload[0].value)}</div>
     </div>
   );
@@ -165,7 +165,7 @@ function KpiStrip({ period }: { period: PeriodKey }) {
               style={{
                 fontSize:      11,
                 fontWeight:    600,
-                color:         GRAY,
+                color:         'rgba(255,255,255,0.50)',
                 textTransform: 'uppercase',
                 letterSpacing: '0.07em',
                 marginBottom:  10,
@@ -177,7 +177,7 @@ function KpiStrip({ period }: { period: PeriodKey }) {
               style={{
                 fontSize:      34,
                 fontWeight:    800,
-                color:         '#1A1C2E',
+                color:         '#FFFFFF',
                 letterSpacing: '-0.02em',
                 lineHeight:    1.1,
               }}
@@ -210,18 +210,18 @@ function ProductLineSection() {
               data={barData}
               margin={{ top: 0, right: 16, bottom: 0, left: 8 }}
             >
-              <CartesianGrid horizontal={false} strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" />
+              <CartesianGrid horizontal={false} strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
               <XAxis
                 type="number"
                 tickFormatter={(v: number) => `$${(v / 1000).toFixed(0)}K`}
-                tick={{ fill: GRAY, fontSize: 11 }}
+                tick={{ fill: 'rgba(255,255,255,0.50)', fontSize: 11 }}
                 axisLine={false}
                 tickLine={false}
               />
               <YAxis
                 type="category"
                 dataKey="name"
-                tick={{ fill: '#1A1C2E', fontSize: 11 }}
+                tick={{ fill: '#FFFFFF', fontSize: 11 }}
                 axisLine={false}
                 tickLine={false}
                 width={140}
@@ -275,7 +275,7 @@ function ProductLineSection() {
                 <tr
                   key={p.name}
                   style={{
-                    background:  i % 2 === 0 ? '#FFFFFF' : 'rgba(0,0,0,0.015)',
+                    background:  i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.03)',
                     borderBottom: '1px solid var(--color-border)',
                   }}
                 >
@@ -290,10 +290,10 @@ function ProductLineSection() {
                           flexShrink:   0,
                         }}
                       />
-                      <span style={{ fontWeight: 500, color: '#1A1C2E' }}>{p.name}</span>
+                      <span style={{ fontWeight: 500, color: '#FFFFFF' }}>{p.name}</span>
                     </div>
                   </td>
-                  <td style={{ padding: '10px 14px', textAlign: 'right', fontWeight: 600, color: '#1A1C2E' }}>
+                  <td style={{ padding: '10px 14px', textAlign: 'right', fontWeight: 600, color: '#FFFFFF' }}>
                     {fmtUSD(p.revenue)}
                   </td>
                   <td style={{ padding: '10px 14px', textAlign: 'right', color: GRAY }}>
@@ -401,17 +401,17 @@ function CustomerSection() {
               <tr
                 key={c.name}
                 style={{
-                  background:  c.flagged ? 'rgba(220,38,38,0.04)' : i % 2 === 0 ? '#FFFFFF' : 'rgba(0,0,0,0.015)',
+                  background:  c.flagged ? 'rgba(220,38,38,0.04)' : i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.03)',
                   borderBottom: '1px solid var(--color-border)',
                   borderLeft:   c.flagged ? `3px solid ${RED}` : '3px solid transparent',
                 }}
               >
                 <td style={{ padding: '10px 16px' }}>
-                  <span style={{ fontWeight: c.flagged ? 700 : 500, color: c.flagged ? RED : '#1A1C2E' }}>
+                  <span style={{ fontWeight: c.flagged ? 700 : 500, color: c.flagged ? RED : '#FFFFFF' }}>
                     {c.name}
                   </span>
                 </td>
-                <td style={{ padding: '10px 16px', textAlign: 'right', fontWeight: 600, color: '#1A1C2E' }}>
+                <td style={{ padding: '10px 16px', textAlign: 'right', fontWeight: 600, color: '#FFFFFF' }}>
                   {fmtUSD(c.oct)}
                 </td>
                 <td style={{ padding: '10px 16px' }}>
@@ -421,7 +421,7 @@ function CustomerSection() {
                         width:        80,
                         height:       6,
                         borderRadius: 3,
-                        background:   'rgba(0,0,0,0.08)',
+                        background:   'rgba(255,255,255,0.08)',
                         overflow:     'hidden',
                         flexShrink:   0,
                       }}
@@ -440,7 +440,7 @@ function CustomerSection() {
                       style={{
                         fontSize:   12,
                         fontWeight: 600,
-                        color:      c.flagged ? RED : '#1A1C2E',
+                        color:      c.flagged ? RED : '#FFFFFF',
                         minWidth:   36,
                       }}
                     >
@@ -519,7 +519,7 @@ function RecurringSection() {
           style={{
             height:       12,
             borderRadius: 6,
-            background:   '#E5E7EB',
+            background:   'rgba(255,255,255,0.10)',
             overflow:     'hidden',
             display:      'flex',
           }}
@@ -552,12 +552,12 @@ function RecurringSection() {
           <div style={{ padding: '20px 20px 24px' }}>
             <div className="grid grid-cols-2 gap-4" style={{ marginBottom: 20 }}>
               <div>
-                <div style={{ fontSize: 11, fontWeight: 600, color: GRAY, textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 4 }}>MRR</div>
-                <div style={{ fontSize: 26, fontWeight: 800, color: '#1A1C2E', letterSpacing: '-0.02em' }}>$297,600</div>
+                <div style={{ fontSize: 11, fontWeight: 600, color: 'rgba(255,255,255,0.50)', textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 4 }}>MRR</div>
+                <div style={{ fontSize: 26, fontWeight: 800, color: '#FFFFFF', letterSpacing: '-0.02em' }}>$297,600</div>
               </div>
               <div>
-                <div style={{ fontSize: 11, fontWeight: 600, color: GRAY, textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 4 }}>ARR</div>
-                <div style={{ fontSize: 26, fontWeight: 800, color: '#1A1C2E', letterSpacing: '-0.02em' }}>$3,571,200</div>
+                <div style={{ fontSize: 11, fontWeight: 600, color: 'rgba(255,255,255,0.50)', textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 4 }}>ARR</div>
+                <div style={{ fontSize: 26, fontWeight: 800, color: '#FFFFFF', letterSpacing: '-0.02em' }}>$3,571,200</div>
               </div>
             </div>
             <div
@@ -583,14 +583,14 @@ function RecurringSection() {
                     justifyContent: 'space-between',
                     alignItems:     'center',
                     padding:        '7px 0',
-                    borderBottom:   '1px solid rgba(0,0,0,0.04)',
+                    borderBottom:   '1px solid rgba(255,255,255,0.05)',
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                     <div style={{ width: 8, height: 8, borderRadius: '50%', background: GREEN, flexShrink: 0 }} />
-                    <span style={{ fontSize: 13, color: '#1A1C2E' }}>{item.label}</span>
+                    <span style={{ fontSize: 13, color: '#FFFFFF' }}>{item.label}</span>
                   </div>
-                  <span style={{ fontSize: 13, fontWeight: 600, color: '#1A1C2E' }}>{item.value}</span>
+                  <span style={{ fontSize: 13, fontWeight: 600, color: '#FFFFFF' }}>{item.value}</span>
                 </div>
               ))}
             </div>
@@ -604,8 +604,8 @@ function RecurringSection() {
           </div>
           <div style={{ padding: '20px 20px 24px' }}>
             <div style={{ marginBottom: 20 }}>
-              <div style={{ fontSize: 11, fontWeight: 600, color: GRAY, textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 4 }}>Total One-Time</div>
-              <div style={{ fontSize: 34, fontWeight: 800, color: '#1A1C2E', letterSpacing: '-0.02em' }}>$1,014,000</div>
+              <div style={{ fontSize: 11, fontWeight: 600, color: 'rgba(255,255,255,0.50)', textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 4 }}>Total One-Time</div>
+              <div style={{ fontSize: 34, fontWeight: 800, color: '#FFFFFF', letterSpacing: '-0.02em' }}>$1,014,000</div>
             </div>
             <div
               style={{
@@ -630,14 +630,14 @@ function RecurringSection() {
                     justifyContent: 'space-between',
                     alignItems:     'center',
                     padding:        '7px 0',
-                    borderBottom:   '1px solid rgba(0,0,0,0.04)',
+                    borderBottom:   '1px solid rgba(255,255,255,0.05)',
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                     <div style={{ width: 8, height: 8, borderRadius: '50%', background: BLUE, flexShrink: 0 }} />
-                    <span style={{ fontSize: 13, color: '#1A1C2E' }}>{item.label}</span>
+                    <span style={{ fontSize: 13, color: '#FFFFFF' }}>{item.label}</span>
                   </div>
-                  <span style={{ fontSize: 13, fontWeight: 600, color: '#1A1C2E' }}>{item.value}</span>
+                  <span style={{ fontSize: 13, fontWeight: 600, color: '#FFFFFF' }}>{item.value}</span>
                 </div>
               ))}
             </div>
@@ -659,16 +659,16 @@ function TrendSection() {
       <div style={{ padding: '24px 24px 20px' }}>
         <ResponsiveContainer width="100%" height={260}>
           <LineChart data={TREND_DATA} margin={{ top: 8, right: 24, bottom: 0, left: 8 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" vertical={false} />
             <XAxis
               dataKey="month"
-              tick={{ fill: GRAY, fontSize: 12 }}
+              tick={{ fill: 'rgba(255,255,255,0.50)', fontSize: 12 }}
               axisLine={false}
               tickLine={false}
             />
             <YAxis
               tickFormatter={(v: number) => `$${(v / 1_000_000).toFixed(2)}M`}
-              tick={{ fill: GRAY, fontSize: 12 }}
+              tick={{ fill: 'rgba(255,255,255,0.50)', fontSize: 12 }}
               axisLine={false}
               tickLine={false}
               domain={[1_100_000, 1_400_000]}
@@ -699,13 +699,13 @@ function TrendSection() {
           }}
         >
           {[
-            { label: 'May Baseline', value: '$1.19M', color: GRAY },
+            { label: 'May Baseline', value: '$1.19M', color: 'rgba(255,255,255,0.50)' },
             { label: 'Apr Actual',   value: '$1.31M', color: BLUE },
             { label: '6-Mo Growth',  value: '+10.2%', color: GREEN },
-            { label: '6-Mo Avg',     value: '$1.26M', color: GRAY },
+            { label: '6-Mo Avg',     value: '$1.26M', color: 'rgba(255,255,255,0.50)' },
           ].map((s) => (
             <div key={s.label} style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: 11, color: GRAY, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 3 }}>
+              <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.50)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 3 }}>
                 {s.label}
               </div>
               <div style={{ fontSize: 20, fontWeight: 800, color: s.color, letterSpacing: '-0.02em' }}>
@@ -725,7 +725,7 @@ export default function RevenuePage() {
   const [period, setPeriod] = useState<PeriodKey>('current');
 
   return (
-    <div style={{ background: '#F3F4F6', minHeight: '100vh', padding: '28px 28px 48px' }}>
+    <div style={{ background: '#1A1C2E', minHeight: '100vh', padding: '28px 28px 48px' }}>
       {/* Page header */}
       <div style={{ marginBottom: 28 }}>
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
@@ -735,7 +735,7 @@ export default function RevenuePage() {
                 style={{
                   fontSize:      22,
                   fontWeight:    800,
-                  color:         '#1A1C2E',
+                  color:         '#FFFFFF',
                   margin:        0,
                   letterSpacing: '-0.01em',
                 }}
@@ -744,7 +744,7 @@ export default function RevenuePage() {
               </h1>
               <PeriodSelector value={period} onChange={setPeriod} />
             </div>
-            <p style={{ margin: '4px 0 0', fontSize: 13, color: GRAY }}>
+            <p style={{ margin: '4px 0 0', fontSize: 13, color: 'rgba(255,255,255,0.50)' }}>
               Apex Industrial Group &nbsp;·&nbsp; {PERIOD_REV[period].label}
             </p>
           </div>

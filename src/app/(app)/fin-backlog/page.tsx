@@ -14,12 +14,12 @@ const CARD: React.CSSProperties = {
   border: '1px solid var(--color-border)',
 };
 const TT: React.CSSProperties = {
-  background: '#FFFFFF',
-  border: '1px solid rgba(0,0,0,0.10)',
+  background: '#1E2236',
+  border: '1px solid rgba(255,255,255,0.10)',
   borderRadius: 8,
-  color: '#1A1A1A',
+  color: '#FFFFFF',
   fontSize: 12,
-  boxShadow: '0 4px 16px rgba(0,0,0,0.10)',
+  boxShadow: '0 1px 4px rgba(0,0,0,0.30), 0 4px 16px rgba(0,0,0,0.25)',
 };
 
 // ── KPI Data ─────────────────────────────────────────────────────────────────
@@ -83,7 +83,7 @@ function StatusBadge({ status }: { status: string }) {
     'At Risk':  { bg: 'rgba(217,119,6,0.10)',  color: '#D97706' },
     'On Track': { bg: 'rgba(10,138,92,0.10)',  color: '#0A8A5C' },
   };
-  const s = map[status] ?? { bg: 'rgba(0,0,0,0.06)', color: '#6B7280' };
+  const s = map[status] ?? { bg: 'rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.50)' };
   return (
     <span style={{
       display: 'inline-block',
@@ -213,7 +213,7 @@ export default function FinBacklogPage() {
         </div>
         <ResponsiveContainer width="100%" height={220}>
           <ComposedChart data={BURN_DATA} margin={{ top: 4, right: 16, left: 4, bottom: 0 }}>
-            <CartesianGrid stroke="rgba(0,0,0,0.06)" strokeDasharray="4 4" />
+            <CartesianGrid stroke="rgba(255,255,255,0.06)" strokeDasharray="4 4" />
             <XAxis
               dataKey="month"
               tick={{ fill: 'var(--color-muted)', fontSize: 11, fontFamily: 'var(--font-condensed)' }}
@@ -275,7 +275,7 @@ export default function FinBacklogPage() {
               {BURN_DATA.map((row, i) => {
                 const burnRate = ((row.revenue / row.backlog) * 100).toFixed(1);
                 return (
-                  <tr key={i} style={{ borderBottom: '1px solid rgba(0,0,0,0.05)' }}>
+                  <tr key={i} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
                     <td style={{ padding: '9px 12px', fontWeight: 600, color: 'var(--color-text)' }}>{row.month}</td>
                     <td style={{ padding: '9px 12px', textAlign: 'right', fontFamily: 'var(--font-condensed)', color: '#1D44BF', fontWeight: 600 }}>{fmtK(row.backlog)}</td>
                     <td style={{ padding: '9px 12px', textAlign: 'right', fontFamily: 'var(--font-condensed)', color: '#0A8A5C', fontWeight: 600 }}>{fmtK(row.revenue)}</td>
@@ -322,7 +322,7 @@ export default function FinBacklogPage() {
             </thead>
             <tbody>
               {WIP_ITEMS.map((item) => (
-                <tr key={item.id} style={{ borderBottom: '1px solid rgba(0,0,0,0.05)' }}>
+                <tr key={item.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
                   <td style={{ padding: '10px 14px', fontFamily: 'var(--font-condensed)', fontWeight: 700, color: '#1D44BF', fontSize: 12 }}>
                     {item.id}
                   </td>
@@ -337,7 +337,7 @@ export default function FinBacklogPage() {
                   </td>
                   <td style={{ padding: '10px 14px', textAlign: 'right' }}>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 6 }}>
-                      <div style={{ width: 50, height: 5, background: 'rgba(0,0,0,0.08)', borderRadius: 3, overflow: 'hidden' }}>
+                      <div style={{ width: 50, height: 5, background: 'rgba(255,255,255,0.08)', borderRadius: 3, overflow: 'hidden' }}>
                         <div style={{ width: `${item.pct}%`, height: '100%', background: item.pct >= 70 ? '#0A8A5C' : item.pct >= 40 ? '#D97706' : '#C13333', borderRadius: 3 }} />
                       </div>
                       <span style={{ fontFamily: 'var(--font-condensed)', fontWeight: 600, fontSize: 12 }}>{item.pct}%</span>
@@ -456,7 +456,7 @@ export default function FinBacklogPage() {
               <span style={{ fontSize: 10, color: '#1D44BF', transform: expandAI ? 'rotate(90deg)' : 'rotate(0deg)', transition: 'transform 0.15s', display: 'inline-block' }}>▸</span>
             </div>
             {expandAI && (
-              <div style={{ fontSize: 13, lineHeight: 1.6, color: '#374151' }}>
+              <div style={{ fontSize: 13, lineHeight: 1.6, color: 'rgba(255,255,255,0.50)' }}>
                 <strong>$1.49M</strong> (52% of WIP) is blocked or at risk. Titan Energy ($620K, scope CO) and Bellco Systems ($490K, material delay) are the highest-priority escalations. Resolving these two alone would accelerate <strong>$810K</strong> in billing recognition.
               </div>
             )}

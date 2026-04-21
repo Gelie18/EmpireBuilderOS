@@ -10,12 +10,12 @@ import {
 const data = getDemoDailyRevenue();
 
 const TOOLTIP_STYLE = {
-  background: '#FFFFFF',
-  border: '1px solid rgba(0,0,0,0.10)',
+  background: '#1E2236',
+  border: '1px solid rgba(255,255,255,0.10)',
   borderRadius: 8,
-  color: '#1A1A1A',
+  color: '#FFFFFF',
   fontSize: 12,
-  boxShadow: '0 4px 16px rgba(0,0,0,0.10)',
+  boxShadow: '0 1px 4px rgba(0,0,0,0.30), 0 4px 16px rgba(0,0,0,0.25)',
 };
 
 function Card({ children, className = '', style }: { children: React.ReactNode; className?: string; style?: React.CSSProperties }) {
@@ -152,11 +152,11 @@ export default function DailyRevenuePage() {
         <SectionTitle>Running Revenue vs Budget Pace — April</SectionTitle>
         <ResponsiveContainer width="100%" height={220}>
           <ComposedChart data={runningData}>
-            <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" />
-            <XAxis dataKey="day" tick={{ fill: '#6B7A8D', fontSize: 10 }} axisLine={false} tickLine={false} />
-            <YAxis tickFormatter={(v) => `$${(v / 1000).toFixed(0)}K`} tick={{ fill: '#6B7A8D', fontSize: 10 }} axisLine={false} tickLine={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
+            <XAxis dataKey="day" tick={{ fill: 'rgba(255,255,255,0.50)', fontSize: 10 }} axisLine={false} tickLine={false} />
+            <YAxis tickFormatter={(v) => `$${(v / 1000).toFixed(0)}K`} tick={{ fill: 'rgba(255,255,255,0.50)', fontSize: 10 }} axisLine={false} tickLine={false} />
             <Tooltip contentStyle={TOOLTIP_STYLE} formatter={(v) => [`$${Number(v).toLocaleString()}`, '']} />
-            <Legend wrapperStyle={{ fontSize: 11, color: '#6B7A8D' }} />
+            <Legend wrapperStyle={{ fontSize: 11, color: 'rgba(255,255,255,0.50)' }} />
             <Area type="monotone" dataKey="Budget Pace" fill="rgba(136,132,128,0.08)" stroke="rgba(136,132,128,0.4)" strokeDasharray="4 3" strokeWidth={1.5} dot={false} />
             <Line type="monotone" dataKey="Actual" stroke="#1D44BF" strokeWidth={2.5} dot={false} />
             <ReferenceLine x="Apr 12" stroke="#D97706" strokeDasharray="3 2" label={{ value: 'Campaign', fill: '#D97706', fontSize: 10 }} />
@@ -169,11 +169,11 @@ export default function DailyRevenuePage() {
         <SectionTitle>Daily DTC vs Wholesale Breakdown</SectionTitle>
         <ResponsiveContainer width="100%" height={200}>
           <ComposedChart data={dailyBar}>
-            <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" />
-            <XAxis dataKey="day" tick={{ fill: '#6B7A8D', fontSize: 10 }} axisLine={false} tickLine={false} />
-            <YAxis tickFormatter={(v) => `$${(v / 1000).toFixed(0)}K`} tick={{ fill: '#6B7A8D', fontSize: 10 }} axisLine={false} tickLine={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
+            <XAxis dataKey="day" tick={{ fill: 'rgba(255,255,255,0.50)', fontSize: 10 }} axisLine={false} tickLine={false} />
+            <YAxis tickFormatter={(v) => `$${(v / 1000).toFixed(0)}K`} tick={{ fill: 'rgba(255,255,255,0.50)', fontSize: 10 }} axisLine={false} tickLine={false} />
             <Tooltip contentStyle={TOOLTIP_STYLE} formatter={(v) => [`$${Number(v).toLocaleString()}`, '']} />
-            <Legend wrapperStyle={{ fontSize: 11, color: '#6B7A8D' }} />
+            <Legend wrapperStyle={{ fontSize: 11, color: 'rgba(255,255,255,0.50)' }} />
             <Bar dataKey="DTC" stackId="a" fill="#1D44BF" radius={[0, 0, 0, 0]} />
             <Bar dataKey="Wholesale" stackId="a" fill="#E8B84B" radius={[2, 2, 0, 0]} />
             <Line type="monotone" dataKey="Budget" stroke="#D97706" strokeWidth={1.5} strokeDasharray="4 3" dot={false} />

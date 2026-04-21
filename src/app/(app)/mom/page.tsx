@@ -17,12 +17,12 @@ const CARD_STYLE = {
 };
 
 const TOOLTIP_STYLE = {
-  background: '#FFFFFF',
-  border: '1px solid rgba(0,0,0,0.10)',
+  background: '#1E2236',
+  border: '1px solid rgba(255,255,255,0.10)',
   borderRadius: 8,
-  color: '#1A1A1A',
+  color: '#FFFFFF',
   fontSize: 12,
-  boxShadow: '0 4px 16px rgba(0,0,0,0.10)',
+  boxShadow: '0 1px 4px rgba(0,0,0,0.30), 0 4px 16px rgba(0,0,0,0.25)',
 };
 
 function Card({ children, className = '', style = {} }: { children: React.ReactNode; className?: string; style?: React.CSSProperties }) {
@@ -173,7 +173,7 @@ export default function MoMPage() {
                 <stop offset="95%" stopColor="#1D44BF" stopOpacity={0.02} />
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" vertical={false} />
             <XAxis
               dataKey="month"
               tick={{ fill: 'var(--color-muted)', fontSize: 12, fontFamily: 'var(--font-condensed)' }}
@@ -199,7 +199,7 @@ export default function MoMPage() {
               strokeWidth={2.5}
               fill="url(#revGrad)"
               dot={{ r: 4, fill: '#1D44BF', strokeWidth: 0 }}
-              activeDot={{ r: 6, fill: '#1D44BF', stroke: '#FFFFFF', strokeWidth: 2 }}
+              activeDot={{ r: 6, fill: '#1D44BF', stroke: '#1E2236', strokeWidth: 2 }}
             />
           </AreaChart>
         </ResponsiveContainer>

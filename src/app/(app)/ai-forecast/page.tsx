@@ -393,12 +393,11 @@ const avgCogsPct = HISTORICAL_MONTHS.slice(-3).reduce((s, m) => s + (m.revenue -
 const QUARTERS_AVAILABLE = ['Q2 2026', 'Q3 2026', 'Q4 2026', 'Q1 2027', 'Q2 2027'];
 
 const TOOLTIP_STYLE = {
-  background: '#FFFFFF',
-  border: '1px solid rgba(0,0,0,0.10)',
+  background: '#1E2236',
+  border: '1px solid rgba(255,255,255,0.10)',
   borderRadius: 6,
-  color: '#1A1A1A',
+  color: '#FFFFFF',
   fontSize: 12,
-  boxShadow: '0 4px 16px rgba(0,0,0,0.10)',
 };
 
 // AI response generator for the forecast
@@ -627,9 +626,9 @@ export default function AiForecastPage() {
                   <stop offset="95%" stopColor="#E8B84B" stopOpacity={0} />
                 </linearGradient>
               </defs>
-              <CartesianGrid stroke="rgba(0,0,0,0.06)" strokeDasharray="3 3" />
-              <XAxis dataKey="period" tick={{ fill: '#6B7A8D', fontSize: 10 }} axisLine={false} tickLine={false} />
-              <YAxis tickFormatter={(v) => `$${(v / 1000).toFixed(0)}K`} tick={{ fill: '#6B7A8D', fontSize: 10 }} axisLine={false} tickLine={false} width={55} />
+              <CartesianGrid stroke="rgba(255,255,255,0.06)" strokeDasharray="3 3" />
+              <XAxis dataKey="period" tick={{ fill: 'rgba(255,255,255,0.50)', fontSize: 10 }} axisLine={false} tickLine={false} />
+              <YAxis tickFormatter={(v) => `$${(v / 1000).toFixed(0)}K`} tick={{ fill: 'rgba(255,255,255,0.50)', fontSize: 10 }} axisLine={false} tickLine={false} width={55} />
               <Tooltip
                 contentStyle={TOOLTIP_STYLE}
                 formatter={(val, name, props) => {
@@ -638,9 +637,9 @@ export default function AiForecastPage() {
                   return [`$${Number(val).toLocaleString()}${suffix}`, String(name)];
                 }}
               />
-              <ReferenceLine x="Apr '26" stroke="rgba(0,0,0,0.20)" strokeDasharray="4 3"
-                label={{ value: 'Today', fill: '#6B7A8D', fontSize: 9, position: 'top' }} />
-              <Legend wrapperStyle={{ fontSize: 11, color: '#6B7A8D' }} />
+              <ReferenceLine x="Apr '26" stroke="rgba(255,255,255,0.20)" strokeDasharray="4 3"
+                label={{ value: 'Today', fill: 'rgba(255,255,255,0.50)', fontSize: 9, position: 'top' }} />
+              <Legend wrapperStyle={{ fontSize: 11, color: 'rgba(255,255,255,0.50)' }} />
               <Area type="monotone" dataKey="Revenue" stroke="#1D44BF" fill="url(#aifRevGrad)"
                 strokeWidth={2} dot={false} strokeDasharray="none" />
               <Area type="monotone" dataKey="Net Income" stroke="#E8B84B" fill="url(#aifNiGrad)"

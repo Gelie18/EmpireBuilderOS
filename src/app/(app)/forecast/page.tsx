@@ -25,12 +25,11 @@ const CARD: React.CSSProperties = {
 };
 
 const TOOLTIP_STYLE = {
-  background: '#FFFFFF',
-  border: '1px solid rgba(0,0,0,0.10)',
+  background: '#1E2236',
+  border: '1px solid rgba(255,255,255,0.10)',
   borderRadius: 8,
-  color: '#1A1A1A',
+  color: '#FFFFFF',
   fontSize: 12,
-  boxShadow: '0 4px 16px rgba(0,0,0,0.10)',
 };
 
 // ── Page ──────────────────────────────────────────────────────────────────────
@@ -359,11 +358,11 @@ export default function ForecastPage() {
                   <stop offset="95%" stopColor="#E8B84B" stopOpacity={0} />
                 </linearGradient>
               </defs>
-              <CartesianGrid stroke="rgba(0,0,0,0.06)" strokeDasharray="3 3" />
-              <XAxis dataKey="label" tick={{ fill: '#6B7A8D', fontSize: 10 }} axisLine={false} tickLine={false} />
+              <CartesianGrid stroke="rgba(255,255,255,0.06)" strokeDasharray="3 3" />
+              <XAxis dataKey="label" tick={{ fill: 'rgba(255,255,255,0.50)', fontSize: 10 }} axisLine={false} tickLine={false} />
               <YAxis
                 tickFormatter={(v) => `$${(v / 1000).toFixed(0)}K`}
-                tick={{ fill: '#6B7A8D', fontSize: 10 }}
+                tick={{ fill: 'rgba(255,255,255,0.50)', fontSize: 10 }}
                 axisLine={false} tickLine={false} width={55}
               />
               <Tooltip

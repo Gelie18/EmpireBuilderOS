@@ -14,12 +14,12 @@ const CARD: React.CSSProperties = {
   border: '1px solid var(--color-border)',
 };
 const TT: React.CSSProperties = {
-  background: '#FFFFFF',
-  border: '1px solid rgba(0,0,0,0.10)',
+  background: '#1E2236',
+  border: '1px solid rgba(255,255,255,0.10)',
   borderRadius: 8,
-  color: '#1A1A1A',
+  color: '#FFFFFF',
   fontSize: 12,
-  boxShadow: '0 4px 16px rgba(0,0,0,0.10)',
+  boxShadow: '0 1px 4px rgba(0,0,0,0.30), 0 4px 16px rgba(0,0,0,0.25)',
 };
 
 // ── Synthetic April 2026 data ───────────────────────────────────────────────
@@ -164,8 +164,8 @@ function BSRow({ label, value, type, insight }: { label: string; value: number |
             padding: isTotal ? '13px 20px' : '10px 20px',
             fontSize: isTotal ? 15 : isSubtotal ? 14 : 14,
             fontWeight: isTotal || isSubtotal ? 700 : 400,
-            color: isTotal ? 'var(--color-text)' : isSubtotal ? 'var(--color-text)' : '#1A1A1A',
-            borderBottom: '1px solid rgba(0,0,0,0.06)',
+            color: isTotal ? 'var(--color-text)' : isSubtotal ? 'var(--color-text)' : 'var(--color-text)',
+            borderBottom: '1px solid rgba(255,255,255,0.06)',
             paddingLeft: type === 'line' ? 32 : 20,
           }}
         >
@@ -178,8 +178,8 @@ function BSRow({ label, value, type, insight }: { label: string; value: number |
             fontFamily: 'var(--font-condensed)',
             fontSize: isTotal ? 18 : isSubtotal ? 16 : 15,
             fontWeight: isTotal || isSubtotal ? 700 : 500,
-            color: isTotal ? 'var(--color-blue)' : isSubtotal ? 'var(--color-text)' : '#1A1A1A',
-            borderBottom: '1px solid rgba(0,0,0,0.06)',
+            color: isTotal ? 'var(--color-blue)' : isSubtotal ? 'var(--color-text)' : 'var(--color-text)',
+            borderBottom: '1px solid rgba(255,255,255,0.06)',
           }}
         >
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
@@ -199,14 +199,14 @@ function BSRow({ label, value, type, insight }: { label: string; value: number |
       </tr>
       {open && insight && (
         <tr>
-          <td colSpan={2} style={{ padding: 0, borderBottom: '1px solid rgba(0,0,0,0.06)' }}>
+          <td colSpan={2} style={{ padding: 0, borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
             <div style={{
               padding: '10px 20px 10px 32px',
-              background: 'rgba(29,68,191,0.05)',
+              background: 'rgba(29,68,191,0.08)',
               borderLeft: '3px solid #1D44BF',
               fontSize: 13,
               lineHeight: 1.6,
-              color: '#374151',
+              color: 'rgba(255,255,255,0.70)',
             }}>
               <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#1D44BF', display: 'block', marginBottom: 4 }}>AI CFO Insight</span>
               {insight}
@@ -462,7 +462,7 @@ export default function BalanceSheetPage() {
                 <stop offset="95%" stopColor="var(--color-blue)" stopOpacity={0.03} />
               </linearGradient>
             </defs>
-            <CartesianGrid stroke="rgba(0,0,0,0.06)" strokeDasharray="4 4" />
+            <CartesianGrid stroke="rgba(255,255,255,0.06)" strokeDasharray="4 4" />
             <XAxis
               dataKey="label"
               tick={{ fill: 'var(--color-muted)', fontSize: 11, fontFamily: 'var(--font-condensed)' }}

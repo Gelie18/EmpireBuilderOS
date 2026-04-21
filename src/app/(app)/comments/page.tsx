@@ -191,7 +191,7 @@ function CommentCard({ comment, onStatusChange }: { comment: Comment; onStatusCh
               className="px-3 py-2 text-[11px] font-bold uppercase cursor-pointer"
               style={{
                 background: 'var(--color-blue)',
-                color: '#0B1B26',
+                color: '#FFFFFF',
                 border: 'none',
                 fontFamily: 'var(--font-condensed)',
                 letterSpacing: '0.06em',
@@ -282,7 +282,7 @@ export default function CommentsPage() {
             className="px-3 py-2 text-[11px] font-bold uppercase cursor-pointer"
             style={{
               background: 'var(--color-blue)',
-              color: '#0B1B26',
+              color: '#FFFFFF',
               border: 'none',
               fontFamily: 'var(--font-condensed)',
               letterSpacing: '0.06em',

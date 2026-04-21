@@ -9,12 +9,12 @@ import {
 } from 'recharts';
 
 const TOOLTIP_STYLE = {
-  background: '#FFFFFF',
-  border: '1px solid rgba(0,0,0,0.10)',
+  background: '#1E2236',
+  border: '1px solid rgba(255,255,255,0.10)',
   borderRadius: 8,
-  color: '#1A1A1A',
+  color: '#FFFFFF',
   fontSize: 12,
-  boxShadow: '0 4px 16px rgba(0,0,0,0.10)',
+  boxShadow: '0 1px 4px rgba(0,0,0,0.30), 0 4px 16px rgba(0,0,0,0.25)',
 };
 
 const SCENARIO_META: Record<string, { description: string; narrative: string }> = {
@@ -214,22 +214,22 @@ export default function ScenariosPage() {
         <div className="p-4">
           <ResponsiveContainer width="100%" height={280}>
             <LineChart data={chartData} margin={{ top: 5, right: 10, left: 5, bottom: 5 }}>
-              <CartesianGrid stroke="rgba(0,0,0,0.06)" strokeDasharray="3 3" />
+              <CartesianGrid stroke="rgba(255,255,255,0.06)" strokeDasharray="3 3" />
               <XAxis
                 dataKey="month"
-                tick={{ fill: '#6B7A8D', fontSize: 11 }}
+                tick={{ fill: 'rgba(255,255,255,0.50)', fontSize: 11 }}
                 axisLine={false} tickLine={false}
               />
               <YAxis
                 tickFormatter={(v) => `$${(v / 1000).toFixed(0)}K`}
-                tick={{ fill: '#6B7A8D', fontSize: 11 }}
+                tick={{ fill: 'rgba(255,255,255,0.50)', fontSize: 11 }}
                 axisLine={false} tickLine={false} width={60}
               />
               <Tooltip
                 contentStyle={TOOLTIP_STYLE}
                 formatter={(val) => [`$${Number(val).toLocaleString()}`, '']}
               />
-              <Legend wrapperStyle={{ fontSize: 12, color: '#6B7A8D' }} />
+              <Legend wrapperStyle={{ fontSize: 12, color: 'rgba(255,255,255,0.50)' }} />
               {active.map((s) => (
                 <Line
                   key={s.id}

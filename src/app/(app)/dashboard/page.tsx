@@ -29,12 +29,12 @@ const CARD: React.CSSProperties = {
 };
 
 const TOOLTIP_STYLE = {
-  background:   '#FFFFFF',
-  border:       '1px solid rgba(0,0,0,0.10)',
+  background:   '#1E2236',
+  border:       '1px solid rgba(255,255,255,0.10)',
   borderRadius: 8,
-  color:        '#1A1A1A',
+  color:        '#FFFFFF',
   fontSize:     12,
-  boxShadow:    '0 4px 16px rgba(0,0,0,0.10)',
+  boxShadow:    '0 1px 4px rgba(0,0,0,0.30), 0 4px 16px rgba(0,0,0,0.25)',
 };
 
 // Metric cards — each links to a detail page
@@ -279,7 +279,7 @@ export default function DashboardPage() {
                       fontWeight:    600,
                       padding:       '4px 10px',
                       borderRadius:  4,
-                      border:        '1px solid rgba(0,0,0,0.08)',
+                      border:        '1px solid rgba(255,255,255,0.08)',
                     }}
                   >
                     ● {sc.label}
@@ -450,15 +450,15 @@ export default function DashboardPage() {
         <div className="p-4">
           <ResponsiveContainer width="100%" height={200}>
             <LineChart data={trendData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" vertical={false} />
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" vertical={false} />
               <XAxis
                 dataKey="month"
-                tick={{ fill: '#6B7A8D', fontSize: 12 }}
+                tick={{ fill: 'rgba(255,255,255,0.50)', fontSize: 12 }}
                 axisLine={false} tickLine={false}
               />
               <YAxis
                 tickFormatter={(v) => `$${(v / 1000).toFixed(0)}K`}
-                tick={{ fill: '#6B7A8D', fontSize: 11 }}
+                tick={{ fill: 'rgba(255,255,255,0.50)', fontSize: 11 }}
                 axisLine={false} tickLine={false} width={54}
               />
               <Tooltip
@@ -466,7 +466,7 @@ export default function DashboardPage() {
                 formatter={(val) => [`$${Number(val).toLocaleString()}`, '']}
                 cursor={{ stroke: 'rgba(65,182,230,0.20)', strokeWidth: 1 }}
               />
-              <Legend wrapperStyle={{ fontSize: 12, color: '#6B7A8D' }} />
+              <Legend wrapperStyle={{ fontSize: 12, color: 'rgba(255,255,255,0.50)' }} />
               <Line type="monotone" dataKey="Revenue"
                 stroke="#1D44BF" strokeWidth={2.5}
                 dot={{ r: 4, fill: '#1D44BF', strokeWidth: 0 }}

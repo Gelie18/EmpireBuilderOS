@@ -1,40 +1,44 @@
 @import "tailwindcss";
 
 @theme {
-  /* Empire Builder — Meritage Partners Demo */
+  /* ── Empire Builder — Dark Theme ── */
 
-  --color-bg:       #F3F4F6;
-  --color-surf:     #FFFFFF;
-  --color-surf2:    #F8F8FA;
-  --color-surf3:    #EEEEF2;
+  /* Page / shell backgrounds */
+  --color-bg:       #1A1C2E;   /* main page background */
+  --color-surf:     #1E2236;   /* card surface */
+  --color-surf2:    #242840;   /* card inner / hover */
+  --color-surf3:    #2A2F4A;   /* highest surface */
 
-  --color-border:   rgba(0,0,0,0.08);
-  --color-border2:  rgba(29,68,191,0.20);
+  /* Borders */
+  --color-border:   rgba(255,255,255,0.08);
+  --color-border2:  rgba(29,68,191,0.28);
 
-  --color-text:     #1A1C2E;
-  --color-muted:    #6B7280;
-  --color-subtle:   rgba(26,28,46,0.42);
+  /* Text */
+  --color-text:     #FFFFFF;
+  --color-muted:    rgba(255,255,255,0.50);
+  --color-subtle:   rgba(255,255,255,0.28);
 
-  /* Cobalt blue — from "EMPIRE" in logo */
+  /* Cobalt blue — "EMPIRE" */
   --color-blue:     #1D44BF;
   --color-blue-lt:  #3B62D6;
   --color-blue-dk:  #162E8A;
-  --color-blue-d:   rgba(29,68,191,0.09);
+  --color-blue-d:   rgba(29,68,191,0.15);
 
-  /* Warm gold — from "BUILDER" in logo */
+  /* Warm gold — "BUILDER" */
   --color-gold:     #E8B84B;
   --color-gold-dk:  #C9962A;
-  --color-gold-d:   rgba(232,184,75,0.12);
+  --color-gold-d:   rgba(232,184,75,0.14);
 
-  /* Status — toned to complement cobalt/gold palette */
-  --color-green:    #0A8A5C;
-  --color-green-d:  rgba(10,138,92,0.09);
-  --color-red:      #C13333;
-  --color-red-d:    rgba(193,51,51,0.09);
-  --color-orange:   #C27A10;
-  --color-orange-d: rgba(194,122,16,0.09);
+  /* Status */
+  --color-green:    #0EA572;
+  --color-green-d:  rgba(14,165,114,0.14);
+  --color-red:      #E05454;
+  --color-red-d:    rgba(224,84,84,0.14);
+  --color-orange:   #F0A030;
+  --color-orange-d: rgba(240,160,48,0.14);
 
   --font-body:      'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-headline:  'Manrope', 'DM Sans', system-ui, sans-serif;
   --font-condensed: 'DM Sans', system-ui, -apple-system, sans-serif;
   --font-serif:     Georgia, 'Times New Roman', serif;
 
@@ -59,15 +63,16 @@ body {
 
 ::-webkit-scrollbar { width: 3px; height: 3px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.14); border-radius: 2px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(29,68,191,0.35); }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.10); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(29,68,191,0.50); }
 
-::selection { background: rgba(29,68,191,0.15); color: #1A1C2E; }
+::selection { background: rgba(29,68,191,0.30); color: #FFFFFF; }
 
-@keyframes fadeUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeUp  { from { opacity: 0; transform: translateY(6px); }  to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn  { from { opacity: 0; }                               to { opacity: 1; } }
 @keyframes slideInRight { from { opacity: 0; transform: translateX(8px); } to { opacity: 1; transform: translateX(0); } }
-@keyframes blink { 0%, 100% { opacity: 0.25; } 50% { opacity: 1; } }
+@keyframes blink   { 0%, 100% { opacity: 0.25; } 50% { opacity: 1; } }
+@keyframes aif-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.15; } }
 
 .animate-fade-up  { animation: fadeUp       0.3s ease both; }
 .animate-fade-in  { animation: fadeIn       0.25s ease both; }
@@ -78,19 +83,66 @@ body {
 
 :root {
   --card-radius: 10px;
-  --card-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.07);
-  --card-shadow-hover: 0 2px 8px rgba(0,0,0,0.09), 0 8px 28px rgba(0,0,0,0.10);
+  --card-shadow: 0 1px 4px rgba(0,0,0,0.30), 0 4px 20px rgba(0,0,0,0.25);
+  --card-shadow-hover: 0 2px 8px rgba(0,0,0,0.35), 0 8px 32px rgba(0,0,0,0.30);
 }
 
 .card {
-  background: var(--color-surf);
+  background:    var(--color-surf);
   border-radius: var(--card-radius);
-  box-shadow: var(--card-shadow);
-  border: 1px solid var(--color-border);
+  box-shadow:    var(--card-shadow);
+  border:        1px solid var(--color-border);
+}
+.card:hover {
+  box-shadow: var(--card-shadow-hover);
 }
 
-.badge-pos { background: var(--color-green-d);  color: var(--color-green);  font-weight: 700; font-size: 10px; padding: 2px 8px; border-radius: 3px; }
-.badge-neg { background: var(--color-red-d);    color: var(--color-red);    font-weight: 700; font-size: 10px; padding: 2px 8px; border-radius: 3px; }
-.badge-neu { background: var(--color-orange-d); color: var(--color-orange); font-weight: 700; font-size: 10px; padding: 2px 8px; border-radius: 3px; }
+/* Badges */
+.badge-pos { background: var(--color-green-d); color: var(--color-green); font-weight: 700; font-size: 11px; padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(14,165,114,0.22); }
+.badge-neg { background: var(--color-red-d);   color: var(--color-red);   font-weight: 700; font-size: 11px; padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(224,84,84,0.22); }
+.badge-neu { background: var(--color-orange-d);color: var(--color-orange);font-weight: 700; font-size: 11px; padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(240,160,48,0.22); }
+
+/* KPI card left-border accent */
+.kpi-card {
+  background: var(--color-surf);
+  border-radius: var(--card-radius);
+  border: 1px solid var(--color-border);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.kpi-card:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--card-shadow-hover);
+}
+.kpi-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  border-radius: 10px 0 0 10px;
+}
+.kpi-card.accent-blue::before   { background: var(--color-blue); }
+.kpi-card.accent-green::before  { background: var(--color-green); }
+.kpi-card.accent-red::before    { background: var(--color-red); }
+.kpi-card.accent-gold::before   { background: var(--color-gold); }
+
+/* Glass panel (cobalt-tinted) */
+.glass-panel {
+  background: rgba(29,68,191,0.07);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(29,68,191,0.20);
+  border-radius: var(--card-radius);
+}
+
+/* Recharts dark tooltip */
+.chart-tooltip {
+  background: #1E2236 !important;
+  border: 1px solid rgba(255,255,255,0.10) !important;
+  border-radius: 8px !important;
+  color: #FFFFFF !important;
+  font-size: 12px !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.40) !important;
+}
 
 table { border-collapse: collapse; }

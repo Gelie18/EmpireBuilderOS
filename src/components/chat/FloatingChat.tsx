@@ -509,16 +509,16 @@ export default function FloatingChat() {
         className="fixed z-[60] flex flex-col bottom-14 md:bottom-0"
         style={{
           top: 52, right: 0, width: '100%', maxWidth: 420,
-          background: '#FFFFFF',
-          borderLeft: '1px solid rgba(0,0,0,0.08)',
-          boxShadow: '-4px 0 32px rgba(0,0,0,0.12)',
+          background: '#1E2236',
+          borderLeft: '1px solid rgba(255,255,255,0.08)',
+          boxShadow: '-4px 0 32px rgba(0,0,0,0.30)',
           transform: open ? 'translateX(0)' : 'translateX(100%)',
           transition: 'transform 0.26s cubic-bezier(0.4,0,0.2,1)',
         }}
       >
         {/* ── Header ── */}
         <div className="flex items-center gap-3 px-4 py-3.5 border-b flex-shrink-0"
-          style={{ borderColor: 'rgba(0,0,0,0.08)', background: '#1A1C2E' }}>
+          style={{ borderColor: 'rgba(255,255,255,0.08)', background: '#1A1C2E' }}>
           <div className="w-7 h-7 rounded flex items-center justify-center flex-shrink-0"
             style={{ background: '#E8B84B' }}>
             <svg width="14" height="14" fill="none" stroke="#1A1C2E" strokeWidth="2" viewBox="0 0 24 24">
@@ -543,7 +543,7 @@ export default function FloatingChat() {
         </div>
 
         {/* ── Mode tabs ── */}
-        <div className="flex border-b flex-shrink-0" style={{ borderColor: 'rgba(0,0,0,0.08)', background: '#F8F8FA' }}>
+        <div className="flex border-b flex-shrink-0" style={{ borderColor: 'rgba(255,255,255,0.08)', background: '#242840' }}>
           {MODE_TABS.map((tab) => {
             const active = mode === tab.key;
             return (
@@ -552,8 +552,8 @@ export default function FloatingChat() {
                 onClick={() => setMode(tab.key)}
                 className="flex-1 flex items-center justify-center gap-1.5 py-2.5 text-[11px] font-bold uppercase tracking-[0.06em] cursor-pointer transition-all border-b-2"
                 style={{
-                  background: active ? '#FFFFFF' : 'transparent',
-                  color: active ? '#1D44BF' : '#6B7280',
+                  background: active ? '#1E2236' : 'transparent',
+                  color: active ? '#1D44BF' : 'rgba(255,255,255,0.50)',
                   borderBottomColor: active ? '#1D44BF' : 'transparent',
                   fontFamily: 'inherit',
                   border: 'none',
@@ -572,14 +572,14 @@ export default function FloatingChat() {
           <div className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-4 min-h-0">
             {messages.map((msg) => (
               <div key={msg.id} className={`flex flex-col gap-1 ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
-                <div className="text-[10px] font-bold uppercase tracking-[0.08em]" style={{ color: '#6B7280' }}>
+                <div className="text-[10px] font-bold uppercase tracking-[0.08em]" style={{ color: 'rgba(255,255,255,0.50)' }}>
                   {msg.role === 'user' ? 'You' : 'AI CFO'}
                 </div>
                 <div className="max-w-[92%] px-4 py-3 text-[13px]" style={{
-                  background: msg.role === 'user' ? '#1D44BF' : '#F8F8FA',
-                  color: msg.role === 'user' ? '#FFFFFF' : '#1A1C2E',
+                  background: msg.role === 'user' ? '#1D44BF' : '#242840',
+                  color: '#FFFFFF',
                   borderRadius: msg.role === 'user' ? '12px 12px 3px 12px' : '12px 12px 12px 3px',
-                  border: msg.role === 'assistant' ? '1px solid rgba(0,0,0,0.08)' : 'none',
+                  border: msg.role === 'assistant' ? '1px solid rgba(255,255,255,0.08)' : 'none',
                   fontWeight: msg.role === 'user' ? 500 : 400,
                 }}>
                   {msg.role === 'assistant'
@@ -592,8 +592,8 @@ export default function FloatingChat() {
 
             {isLoading && (
               <div className="flex flex-col gap-1 items-start">
-                <div className="text-[10px] font-bold uppercase tracking-[0.08em]" style={{ color: '#6B7280' }}>AI CFO</div>
-                <div className="px-4 py-3 border rounded-xl" style={{ background: '#F8F8FA', borderColor: 'rgba(0,0,0,0.08)' }}>
+                <div className="text-[10px] font-bold uppercase tracking-[0.08em]" style={{ color: 'rgba(255,255,255,0.50)' }}>AI CFO</div>
+                <div className="px-4 py-3 border rounded-xl" style={{ background: '#242840', borderColor: 'rgba(255,255,255,0.08)' }}>
                   <div className="flex gap-1.5 items-center">
                     {[0, 1, 2].map((i) => (
                       <span key={i} className="w-1.5 h-1.5 rounded-full"
@@ -612,16 +612,16 @@ export default function FloatingChat() {
           <div className="flex-1 overflow-y-auto flex flex-col min-h-0">
 
             {/* Quarter + Open Builder bar */}
-            <div className="px-3 pt-3 pb-2.5 border-b flex items-center gap-2 flex-wrap" style={{ borderColor: 'rgba(0,0,0,0.08)' }}>
+            <div className="px-3 pt-3 pb-2.5 border-b flex items-center gap-2 flex-wrap" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
               {FORECAST_QUARTERS.map((q) => {
                 const active = forecastQuarter === q;
                 return (
                   <button key={q} onClick={() => setForecastQuarter(q)}
                     style={{
                       fontSize: 10, fontWeight: 700, padding: '3px 8px', borderRadius: 4, cursor: 'pointer',
-                      border: `1px solid ${active ? '#1D44BF' : 'rgba(0,0,0,0.10)'}`,
+                      border: `1px solid ${active ? '#1D44BF' : 'rgba(255,255,255,0.10)'}`,
                       background: active ? '#1D44BF' : 'transparent',
-                      color: active ? '#FFFFFF' : '#9CA3AF', fontFamily: 'inherit',
+                      color: active ? '#FFFFFF' : 'rgba(255,255,255,0.50)', fontFamily: 'inherit',
                     }}>
                     {q}
                   </button>
@@ -638,15 +638,15 @@ export default function FloatingChat() {
             </div>
 
             {/* Quick scenarios — 2-column compact grid */}
-            <div className="px-3 pt-2.5 pb-2 border-b" style={{ borderColor: 'rgba(0,0,0,0.08)' }}>
-              <div className="text-[9px] font-bold uppercase tracking-[0.10em] mb-1.5" style={{ color: '#9CA3AF' }}>Quick scenarios</div>
+            <div className="px-3 pt-2.5 pb-2 border-b" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
+              <div className="text-[9px] font-bold uppercase tracking-[0.10em] mb-1.5" style={{ color: 'rgba(255,255,255,0.50)' }}>Quick scenarios</div>
               <div className="grid grid-cols-2 gap-1">
                 {FORECAST_SCENARIOS.map((s) => (
                   <button key={s} onClick={() => setForecastInput(s)}
                     className="text-left cursor-pointer transition-all"
-                    style={{ fontSize: 10.5, padding: '5px 8px', border: '1px solid rgba(29,68,191,0.15)', color: '#374151', background: 'rgba(29,68,191,0.03)', borderRadius: 4, fontFamily: 'inherit', lineHeight: 1.35 }}
-                    onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#1D44BF'; e.currentTarget.style.background = 'rgba(29,68,191,0.08)'; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(29,68,191,0.15)'; e.currentTarget.style.background = 'rgba(29,68,191,0.03)'; }}
+                    style={{ fontSize: 10.5, padding: '5px 8px', border: '1px solid rgba(29,68,191,0.25)', color: 'rgba(255,255,255,0.50)', background: 'rgba(29,68,191,0.06)', borderRadius: 4, fontFamily: 'inherit', lineHeight: 1.35 }}
+                    onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#1D44BF'; e.currentTarget.style.background = 'rgba(29,68,191,0.15)'; e.currentTarget.style.color = '#FFFFFF'; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(29,68,191,0.25)'; e.currentTarget.style.background = 'rgba(29,68,191,0.06)'; e.currentTarget.style.color = 'rgba(255,255,255,0.50)'; }}
                   >{s}</button>
                 ))}
               </div>
@@ -662,17 +662,17 @@ export default function FloatingChat() {
                   onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleForecastSend(); } }}
                   placeholder={`${forecastQuarter} assumption…`}
                   className="flex-1 px-3 py-2 text-[12px] border rounded outline-none"
-                  style={{ background: '#F8F8FA', borderColor: 'rgba(0,0,0,0.12)', color: '#1A1C2E', fontFamily: 'inherit', minWidth: 0 }}
+                  style={{ background: '#1E2236', borderColor: 'rgba(255,255,255,0.12)', color: '#FFFFFF', fontFamily: 'inherit', minWidth: 0 }}
                   onFocus={(e) => (e.currentTarget.style.borderColor = '#1D44BF')}
-                  onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(0,0,0,0.12)')}
+                  onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)')}
                 />
                 <button
                   onClick={handleForecastSend}
                   disabled={!forecastInput.trim() || forecastSending}
                   className="flex-shrink-0 px-3 py-2 text-[11px] font-bold uppercase rounded cursor-pointer"
                   style={{
-                    background: !forecastInput.trim() || forecastSending ? '#F0F0F0' : '#1D44BF',
-                    color: !forecastInput.trim() || forecastSending ? '#9CA3AF' : '#FFFFFF',
+                    background: !forecastInput.trim() || forecastSending ? '#2A2F4A' : '#1D44BF',
+                    color: !forecastInput.trim() || forecastSending ? 'rgba(255,255,255,0.28)' : '#FFFFFF',
                     border: 'none', fontFamily: 'inherit', letterSpacing: '0.04em',
                     opacity: !forecastInput.trim() || forecastSending ? 0.6 : 1,
                   }}
@@ -681,7 +681,7 @@ export default function FloatingChat() {
                 </button>
               </div>
               {pathname !== '/ai-forecast' && forecastInput.trim() && (
-                <div className="text-[10px] mt-1.5" style={{ color: '#9CA3AF' }}>
+                <div className="text-[10px] mt-1.5" style={{ color: 'rgba(255,255,255,0.50)' }}>
                   Will open Forecast Builder and apply
                 </div>
               )}
@@ -691,18 +691,18 @@ export default function FloatingChat() {
 
         {/* ── Quick Questions chips (questions mode only) ── */}
         {mode === 'questions' && (
-          <div className="border-t flex-shrink-0" style={{ borderColor: 'rgba(0,0,0,0.08)' }}>
+          <div className="border-t flex-shrink-0" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
             <div className="px-4 pt-2.5 pb-1.5 flex items-center justify-between">
-              <div className="text-[10px] font-semibold uppercase tracking-[0.08em]" style={{ color: '#6B7280' }}>
+              <div className="text-[10px] font-semibold uppercase tracking-[0.08em]" style={{ color: 'rgba(255,255,255,0.50)' }}>
                 Quick questions
               </div>
               <button
                 onClick={handleRefreshChips}
                 title={`Refresh insights (${currentSet + 1}/${totalSets})`}
                 className="flex items-center gap-1 cursor-pointer transition-all"
-                style={{ color: '#9CA3AF', fontSize: 10, fontWeight: 600, background: 'none', border: 'none', padding: '2px 4px', letterSpacing: '0.04em' }}
+                style={{ color: 'rgba(255,255,255,0.28)', fontSize: 10, fontWeight: 600, background: 'none', border: 'none', padding: '2px 4px', letterSpacing: '0.04em' }}
                 onMouseEnter={(e) => { e.currentTarget.style.color = '#1D44BF'; }}
-                onMouseLeave={(e) => { e.currentTarget.style.color = '#9CA3AF'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(255,255,255,0.28)'; }}
               >
                 <RefreshIcon spinning={refreshAnim} />
                 <span>{currentSet + 1}/{totalSets}</span>
@@ -716,9 +716,9 @@ export default function FloatingChat() {
               {visibleChips.map((chip) => (
                 <button key={chip} onClick={() => sendMessage(chip)}
                   className="text-[11px] px-2.5 py-1 cursor-pointer transition-all rounded whitespace-nowrap"
-                  style={{ border: '1px solid rgba(0,0,0,0.10)', color: '#6B7280', background: '#F8F8FA', fontWeight: 500 }}
-                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#1D44BF'; e.currentTarget.style.color = '#1D44BF'; e.currentTarget.style.background = 'rgba(29,68,191,0.07)'; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(0,0,0,0.10)'; e.currentTarget.style.color = '#6B7280'; e.currentTarget.style.background = '#F8F8FA'; }}
+                  style={{ border: '1px solid rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.50)', background: '#242840', fontWeight: 500 }}
+                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#1D44BF'; e.currentTarget.style.color = '#FFFFFF'; e.currentTarget.style.background = 'rgba(29,68,191,0.15)'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'; e.currentTarget.style.color = 'rgba(255,255,255,0.50)'; e.currentTarget.style.background = '#242840'; }}
                 >{chip}</button>
               ))}
             </div>
@@ -762,21 +762,21 @@ export default function FloatingChat() {
 
         {/* ── Text input (questions and thinkbig modes only) ── */}
         {mode !== 'forecast' && (
-          <div className="px-4 py-3.5 border-t" style={{ borderColor: 'rgba(0,0,0,0.08)' }}>
+          <div className="px-4 py-3.5 border-t" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
             <div className="flex gap-2">
               <input
                 ref={inputRef} value={input} onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(); } }}
                 placeholder="Ask anything about your financials..."
                 className="flex-1 px-3.5 py-2.5 text-[13px] border outline-none min-w-0 rounded"
-                style={{ background: '#F8F8FA', borderColor: 'rgba(0,0,0,0.10)', color: '#1A1C2E', fontFamily: 'inherit' }}
+                style={{ background: '#1E2236', borderColor: 'rgba(255,255,255,0.12)', color: '#FFFFFF', fontFamily: 'inherit' }}
                 onFocus={(e) => (e.currentTarget.style.borderColor = '#1D44BF')}
-                onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(0,0,0,0.10)')}
+                onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)')}
               />
               <button onClick={handleSend} disabled={isLoading || !input.trim()}
                 className="w-[44px] h-[44px] flex items-center justify-center flex-shrink-0 cursor-pointer border-none transition-all rounded"
-                style={{ background: isLoading || !input.trim() ? '#F0F0F0' : '#1D44BF', opacity: isLoading || !input.trim() ? 0.5 : 1 }}>
-                <svg width="16" height="16" fill="none" stroke={isLoading || !input.trim() ? '#9CA3AF' : '#FFFFFF'} strokeWidth="2.5" viewBox="0 0 24 24">
+                style={{ background: isLoading || !input.trim() ? '#2A2F4A' : '#1D44BF', opacity: isLoading || !input.trim() ? 0.5 : 1 }}>
+                <svg width="16" height="16" fill="none" stroke={isLoading || !input.trim() ? 'rgba(255,255,255,0.28)' : '#FFFFFF'} strokeWidth="2.5" viewBox="0 0 24 24">
                   <line x1="22" y1="2" x2="11" y2="13" />
                   <polygon points="22 2 15 22 11 13 2 9 22 2" />
                 </svg>
@@ -792,11 +792,11 @@ export default function FloatingChat() {
         className="hidden md:flex fixed z-[61] items-center gap-2.5 cursor-pointer border-none transition-all"
         style={{
           bottom: 28, right: open ? 428 : 28,
-          background: open ? '#FFFFFF' : '#E8B84B',
+          background: open ? '#1E2236' : '#E8B84B',
           color: open ? '#1D44BF' : '#1A1C2E',
           padding: '11px 20px 11px 16px',
-          border: open ? '1px solid rgba(0,0,0,0.10)' : 'none',
-          boxShadow: open ? '0 2px 16px rgba(0,0,0,0.10)' : '0 4px 20px rgba(232,184,75,0.40), 0 2px 8px rgba(0,0,0,0.12)',
+          border: open ? '1px solid rgba(255,255,255,0.08)' : 'none',
+          boxShadow: open ? '0 1px 4px rgba(0,0,0,0.30), 0 4px 16px rgba(0,0,0,0.25)' : '0 4px 20px rgba(232,184,75,0.40), 0 2px 8px rgba(0,0,0,0.12)',
           fontWeight: 700, fontSize: 13, letterSpacing: '0.06em', textTransform: 'uppercase',
           transition: 'right 0.26s cubic-bezier(0.4,0,0.2,1), background 0.18s, color 0.18s',
           borderRadius: 6,

@@ -65,12 +65,12 @@ function PnlRowComponent({ row, inExpense, isOpen, onToggle }: {
         style={{
           borderBottom: `1px solid var(--color-border)`,
           borderTop:    isTotal ? '2px solid var(--color-border2)' : undefined,
-          background:   isOpen ? 'rgba(65,182,230,0.05)' : isTotalish ? 'rgba(0,0,0,0.015)' : 'transparent',
+          background:   isOpen ? 'rgba(65,182,230,0.05)' : isTotalish ? 'rgba(255,255,255,0.03)' : 'transparent',
           cursor:       row.aiNote ? 'pointer' : 'default',
           transition:   'background 0.15s',
         }}
         onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = 'rgba(65,182,230,0.06)'; }}
-        onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = isOpen ? 'rgba(65,182,230,0.05)' : isTotalish ? 'rgba(0,0,0,0.015)' : 'transparent'; }}
+        onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = isOpen ? 'rgba(65,182,230,0.05)' : isTotalish ? 'rgba(255,255,255,0.03)' : 'transparent'; }}
       >
         {/* Label */}
         <td style={{

@@ -9,12 +9,12 @@ import {
 import PeriodSelector, { type PeriodKey } from '@/components/ui/PeriodSelector';
 
 const TOOLTIP_STYLE = {
-  background:   '#FFFFFF',
-  border:       '1px solid rgba(0,0,0,0.10)',
+  background:   '#1E2236',
+  border:       '1px solid rgba(255,255,255,0.10)',
   borderRadius: 8,
-  color:        '#1A1A1A',
+  color:        '#FFFFFF',
   fontSize:     12,
-  boxShadow:    '0 4px 16px rgba(0,0,0,0.10)',
+  boxShadow:    '0 1px 4px rgba(0,0,0,0.30), 0 4px 16px rgba(0,0,0,0.25)',
 };
 
 const CARD: React.CSSProperties = {
@@ -314,16 +314,16 @@ export default function CashFlowPage() {
                   <stop offset="95%" stopColor="#1D44BF" stopOpacity={0} />
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" />
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
               <XAxis
                 dataKey="date"
-                tick={{ fill: '#6B7A8D', fontSize: 10 }}
+                tick={{ fill: 'rgba(255,255,255,0.50)', fontSize: 10 }}
                 axisLine={false}
                 tickLine={false}
               />
               <YAxis
                 tickFormatter={(v) => `$${(v / 1000).toFixed(0)}K`}
-                tick={{ fill: '#6B7A8D', fontSize: 10 }}
+                tick={{ fill: 'rgba(255,255,255,0.50)', fontSize: 10 }}
                 axisLine={false}
                 tickLine={false}
                 width={52}
@@ -406,7 +406,7 @@ export default function CashFlowPage() {
                     alignItems:     'center',
                     padding:        '11px 20px 11px 32px',
                     borderBottom:   idx < section.items.length - 1
-                      ? '1px solid rgba(0,0,0,0.06)'
+                      ? '1px solid rgba(255,255,255,0.06)'
                       : 'none',
                   }}
                 >
