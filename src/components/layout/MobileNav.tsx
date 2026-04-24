@@ -92,6 +92,15 @@ export default function MobileNav() {
   const pathname = usePathname();
   const router = useRouter();
   const [open, setOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767.98px)');
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
+  }, []);
 
   useEffect(() => { setOpen(false); }, [pathname]);
 
@@ -103,6 +112,9 @@ export default function MobileNav() {
     }
     return () => { document.body.style.overflow = ''; };
   }, [open]);
+
+  // Mobile-only — never render on desktop/tablet-landscape
+  if (!isMobile) return null;
 
   const inHR  = pathname.startsWith('/hr');
   const inOps = pathname.startsWith('/ops');
