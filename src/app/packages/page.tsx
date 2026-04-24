@@ -384,10 +384,7 @@ export default function PackagesPage() {
               Every engagement starts with a 2-week on-site scoping session. No commitment beyond scope.
             </p>
             <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-              <a href="mailto:info@783capital.com" style={{ display: 'inline-block', padding: '15px 40px', background: '#F58A1F', color: '#0B0D17', borderRadius: 9, fontSize: 14, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', textDecoration: 'none' }}>
-                Get in Touch
-              </a>
-              <button onClick={() => router.push('/how-it-works')} style={{ padding: '15px 40px', background: 'transparent', color: 'rgba(255,255,255,0.65)', border: '1px solid rgba(255,255,255,0.18)', borderRadius: 9, fontSize: 14, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', cursor: 'pointer', fontFamily: 'inherit' }}>
+              <button onClick={() => router.push('/how-it-works')} style={{ padding: '15px 40px', background: '#F58A1F', color: '#0B0D17', border: 'none', borderRadius: 9, fontSize: 14, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', cursor: 'pointer', fontFamily: 'inherit' }}>
                 How It Works
               </button>
             </div>

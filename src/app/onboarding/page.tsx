@@ -409,15 +409,9 @@ export default function OnboardingPage() {
               The scope phase is the only commitment. We confirm feasibility, price the build, and you decide.
             </p>
             <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-              <a
-                href="mailto:info@783capital.com"
-                style={{ display: 'inline-block', padding: '16px 42px', background: '#F58A1F', color: '#0B0D17', borderRadius: 9, fontSize: 15, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', textDecoration: 'none' }}
-              >
-                Get in Touch
-              </a>
               <button
                 onClick={() => router.push('/packages')}
-                style={{ padding: '16px 42px', background: 'transparent', color: 'rgba(255,255,255,0.70)', border: '1px solid rgba(255,255,255,0.20)', borderRadius: 9, fontSize: 15, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', cursor: 'pointer', fontFamily: 'inherit' }}
+                style={{ padding: '16px 42px', background: '#F58A1F', color: '#0B0D17', border: 'none', borderRadius: 9, fontSize: 15, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', cursor: 'pointer', fontFamily: 'inherit' }}
               >
                 See Packages
               </button>
