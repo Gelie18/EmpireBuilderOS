@@ -86,7 +86,7 @@ export default function FulfillmentPage() {
         }}
       >
         <Link href="/ops" style={{ color: 'var(--color-muted)' }}>
-          CS Ops
+          Ops OS
         </Link>{' '}
         &middot; Fulfillment SLA
       </div>

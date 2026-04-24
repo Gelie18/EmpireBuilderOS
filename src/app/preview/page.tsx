@@ -55,7 +55,7 @@ const DEMOS = [
   },
   {
     id: 'ops',
-    label: 'Customer Service OS',
+    label: 'Ops OS',
     tag: 'LIVE DEMO',
     desc: 'Real-time ticket queue, refund & returns tracking, SLA compliance, CSAT trends, and a live CS chat demo — across every brand.',
     href: '/ops',
@@ -183,7 +183,7 @@ export default function PreviewPage() {
           height: 44,
           display: 'flex', alignItems: 'center', gap: 32,
         }}>
-          {['Finance OS', 'HR OS', 'Customer Service OS', 'All Modules', 'Packages'].map((item, i) => (
+          {['Finance OS', 'HR OS', 'Ops OS', 'All Modules', 'Packages'].map((item, i) => (
             <button
               key={item}
               style={{

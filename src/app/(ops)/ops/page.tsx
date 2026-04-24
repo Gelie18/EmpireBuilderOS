@@ -547,13 +547,13 @@ export default function CustomerServicePage() {
         <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-start', justifyContent: 'space-between', gap: 16 }}>
           <div>
             <div style={{ ...LABEL, marginBottom: 6 }}>
-              {isConsolidated ? 'Consolidated View' : subco.shortName} · CS OS
+              {isConsolidated ? 'Consolidated View' : subco.shortName} · Ops OS
             </div>
             <div style={{ fontSize: 30, fontWeight: 800, lineHeight: 1, color: 'var(--color-text)', letterSpacing: '-0.02em', display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
               <span style={{ background: '#1B4DE6', color: '#FFFFFF', borderRadius: 5, padding: '3px 9px', fontSize: 14, fontWeight: 900, letterSpacing: '0.02em' }}>
-                CS
+                OPS
               </span>
-              <span>Customer Service OS</span>
+              <span>Ops OS</span>
             </div>
             <div style={{ marginTop: 8, fontSize: 12, color: 'var(--color-muted)', fontWeight: 500, maxWidth: 640, lineHeight: 1.5 }}>
               Tickets, refunds, SLA compliance, CSAT, and inventory-driven issues — across all brands.

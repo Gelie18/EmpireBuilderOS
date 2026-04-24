@@ -69,7 +69,7 @@ export default function CustomerHealthPage() {
         }}
       >
         <Link href="/ops" style={{ color: 'var(--color-muted)' }}>
-          CS Ops
+          Ops OS
         </Link>{' '}
         &middot; Customer Health
       </div>

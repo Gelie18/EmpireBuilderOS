@@ -72,7 +72,7 @@ export default function ReturnsPage() {
         }}
       >
         <Link href="/ops" style={{ color: 'var(--color-muted)' }}>
-          CS Ops
+          Ops OS
         </Link>{' '}
         &middot; Returns / RMA
       </div>

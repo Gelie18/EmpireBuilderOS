@@ -67,7 +67,7 @@ export default function SupportQueuePage() {
         }}
       >
         <Link href="/ops" style={{ color: 'var(--color-muted)' }}>
-          CS Ops
+          Ops OS
         </Link>{' '}
         &middot; Support Queue
       </div>

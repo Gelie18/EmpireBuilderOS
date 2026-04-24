@@ -7,7 +7,7 @@ import BLCircleLogo from '@/components/brand/BLCircleLogo';
 const NAV = [
   {
     href: '/ops',
-    label: 'CS Dashboard',
+    label: 'Ops Dashboard',
     hint: 'Overview & KPIs',
     icon: <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>,
   },
@@ -108,7 +108,7 @@ export default function SideNavOps() {
           <BLCircleLogo size={32} />
           <div>
             <div style={{ fontWeight: 800, fontSize: 11, color: 'var(--color-sidebar-text)', letterSpacing: '0.18em', textTransform: 'uppercase', lineHeight: 1 }}>
-              CS OS
+              Ops OS
             </div>
             <div style={{ fontSize: 9.5, fontWeight: 500, color: 'var(--color-sidebar-muted)', letterSpacing: '0.06em', marginTop: 2 }}>
               783 Partners
@@ -291,7 +291,7 @@ export default function SideNavOps() {
           </div>
         </Link>
         <div style={{ marginTop: 6, fontSize: 9, textTransform: 'uppercase', letterSpacing: '0.12em', color: 'var(--color-sidebar-subtle)', textAlign: 'center' }}>
-          783 Partners CS OS v1.0
+          783 Partners Ops OS v1.0
         </div>
       </div>
     </nav>

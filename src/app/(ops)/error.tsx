@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 
 export default function OpsError({ error, reset }: { error: Error; reset: () => void }) {
-  useEffect(() => { console.error('[CS OS error]', error); }, [error]);
+  useEffect(() => { console.error('[Ops OS error]', error); }, [error]);
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '60vh', gap: 16, textAlign: 'center', padding: 32 }}>
       <div style={{ fontSize: 13, color: 'var(--color-muted)', maxWidth: 400 }}>

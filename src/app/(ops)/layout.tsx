@@ -10,8 +10,8 @@ export default function OpsLayout({ children }: { children: React.ReactNode }) {
     <ThemeProvider>
       <SubcoProvider>
         <div className="h-dvh flex flex-col overflow-x-hidden" style={{ background: 'var(--color-bg)' }}>
-          <SplashScreen product="CS OS" />
-          <TopNav companyName="783 Partners" product="CS OS" />
+          <SplashScreen product="Ops OS" />
+          <TopNav companyName="783 Partners" product="Ops OS" />
 
           <div className="flex flex-1 min-h-0 overflow-hidden">
             <SideNavOps />
