@@ -9,7 +9,7 @@ const NAV_GROUPS = [
   {
     label: 'CEO',
     items: [
-      { href: '/dashboard',     label: 'Morning Brief',
+      { href: '/dashboard',     label: 'CEO Dashboard',
         icon: <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path d="M4 4h12a2 2 0 0 1 2 2v14l-4-3-3 3-3-3-4 3V6a2 2 0 0 1 2-2z" strokeLinejoin="round"/><path d="M8 9h8M8 13h5" strokeLinecap="round"/></svg> },
       { href: '/inbox',         label: 'Decision Inbox', badgeKey: 'pending',
         icon: <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path d="M3 7h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/><path d="M3 7l9 6 9-6" strokeLinecap="round" strokeLinejoin="round"/></svg> },

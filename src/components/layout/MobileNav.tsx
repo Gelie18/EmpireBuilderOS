@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 // ── Pages within each demo ───────────────────────────────────────────────────
 
 const FINANCE_NAV = [
-  { label: 'Morning Brief',    href: '/dashboard' },
+  { label: 'CEO Dashboard',    href: '/dashboard' },
   { label: 'Decision Inbox',   href: '/inbox' },
   { label: 'P&L',              href: '/pnl' },
   { label: 'Cash Flow',        href: '/cashflow' },

@@ -319,7 +319,7 @@ export default function DashboardPage() {
         <div style={{ position: 'relative', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-start', gap: 16 }}>
           <div style={{ minWidth: 0, flex: '1 1 360px' }}>
             <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: subco.colors.accent, marginBottom: 8 }}>
-              The Morning Brief · {TODAY}
+              Finance CEO Dashboard · {TODAY}
             </div>
             <div style={{ fontSize: 32, fontWeight: 800, lineHeight: 1.05, color: 'var(--color-text)', letterSpacing: '-0.02em', display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap', fontFamily: DISPLAY_FONT }}>
               <span style={{

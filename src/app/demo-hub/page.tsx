@@ -11,11 +11,26 @@ const WHITE   = '#FFFFFF';
 
 const DEMOS = [
   {
+    id: 'brief',
+    label: 'Morning Brief',
+    tag: 'CROSS-OS PULSE',
+    desc: 'One-screen pulse across Finance, HR, and Ops — what needs your attention right now, with drill-ins to every CEO dashboard.',
+    href: '/brief',
+    accent: '#F58A1F',
+    accentLight: 'rgba(245,138,31,0.08)',
+    icon: (
+      <svg width="24" height="24" fill="none" stroke="#F58A1F" strokeWidth="1.8" viewBox="0 0 24 24">
+        <path d="M12 22c1.1 0 2-.9 2-2h-4a2 2 0 0 0 2 2z" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M19 16v-5a7 7 0 1 0-14 0v5l-2 3h18l-2-3z" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
+  },
+  {
     id: 'finance',
     label: 'Finance OS',
     tag: 'LIVE DEMO',
     desc: 'Consolidated P&L across every brand, drill into any subco, SKU rationalization, channel mix, and an AI CFO that answers in plain English.',
-    href: '/brief',
+    href: '/dashboard',
     accent: NAVY,
     accentLight: 'rgba(79,168,255,0.07)',
     icon: (
@@ -88,6 +103,7 @@ export default function DemoHubPage() {
         .dh-card:nth-child(1) { animation-delay: 0.08s; }
         .dh-card:nth-child(2) { animation-delay: 0.16s; }
         .dh-card:nth-child(3) { animation-delay: 0.24s; }
+        .dh-card:nth-child(4) { animation-delay: 0.32s; }
         .dh-card:hover {
           border-color: rgba(79,168,255,0.28);
           box-shadow: 0 4px 24px rgba(79,168,255,0.10), 0 1px 4px rgba(79,168,255,0.06);
