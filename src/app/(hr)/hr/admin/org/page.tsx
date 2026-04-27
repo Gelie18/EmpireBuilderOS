@@ -39,7 +39,7 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
 }
 
 const DEPT_COLOR: Record<string, string> = {
-  Executive:   '#1B4DE6',
+  Executive:   '#1D44BF',
   Engineering: '#1B4DA8',
   Product:     '#6A1A7A',
   CS:          '#0E7C7B',

@@ -17,7 +17,7 @@ const TOOLTIP_STYLE = {
 const STATUS_COLORS: Record<StockStatus, { bg: string; fg: string; label: string }> = {
   healthy:   { bg: 'rgba(45,180,122,0.18)',  fg: '#2DB47A', label: 'Healthy'   },
   low:       { bg: 'rgba(245,138,31,0.20)',  fg: '#D97706', label: 'Low'       },
-  stockout:  { bg: 'rgba(27,77,230,0.20)',   fg: '#1B4DE6', label: 'Stockout'  },
+  stockout:  { bg: 'rgba(27,77,230,0.20)',   fg: '#1D44BF', label: 'Stockout'  },
   overstock: { bg: 'rgba(136,132,128,0.20)', fg: '#8B5CF6', label: 'Overstock' },
   deadstock: { bg: 'rgba(136,132,128,0.20)', fg: '#6B7280', label: 'Deadstock' },
 };
@@ -160,7 +160,7 @@ export default function SkuDetailPage() {
         {[
           { label: 'On-hand',           value: `${sku.onHand.toLocaleString()}`, sub: `${fmt$(costValue)} at cost · ${fmt$(retailValue)} retail`, color: 'var(--color-blue)' },
           { label: 'Available to sell', value: `${sku.available.toLocaleString()}`, sub: `${sku.reserved.toLocaleString()} reserved`, color: 'var(--color-green)' },
-          { label: 'Days of cover',     value: `${sku.daysOfCover.toFixed(0)}d`, sub: `${sku.avgDailySales}/day · ROP ${sku.reorderPoint.toLocaleString()}`, color: sku.status === 'stockout' ? '#1B4DE6' : 'var(--color-text)' },
+          { label: 'Days of cover',     value: `${sku.daysOfCover.toFixed(0)}d`, sub: `${sku.avgDailySales}/day · ROP ${sku.reorderPoint.toLocaleString()}`, color: sku.status === 'stockout' ? '#1D44BF' : 'var(--color-text)' },
           { label: 'In-transit',        value: `${sku.inTransit.toLocaleString()}`, sub: sku.inTransit > 0 ? `${fmt$(inTransitValue)} on water` : 'No open inbound', color: 'var(--color-orange)' },
         ].map((c) => (
           <Card key={c.label} style={{ position: 'relative', overflow: 'hidden', padding: '18px 20px 16px' }}>
@@ -188,8 +188,8 @@ export default function SkuDetailPage() {
               <YAxis yAxisId="left"  tick={{ fill: 'var(--color-chart-text)', fontSize: 10 }} axisLine={false} tickLine={false} />
               <YAxis yAxisId="right" orientation="right" tick={{ fill: 'var(--color-chart-text)', fontSize: 10 }} axisLine={false} tickLine={false} />
               <Tooltip contentStyle={TOOLTIP_STYLE} />
-              <Line yAxisId="left"  type="monotone" dataKey="units"  name="Units sold" stroke="#F58A1F" strokeWidth={2} dot={false} />
-              <Line yAxisId="right" type="monotone" dataKey="onHand" name="On-hand"    stroke="#1B4DE6" strokeWidth={2.5} dot={false} />
+              <Line yAxisId="left"  type="monotone" dataKey="units"  name="Units sold" stroke="#E8B84B" strokeWidth={2} dot={false} />
+              <Line yAxisId="right" type="monotone" dataKey="onHand" name="On-hand"    stroke="#1D44BF" strokeWidth={2.5} dot={false} />
               <ReferenceLine yAxisId="right" y={sku.reorderPoint} stroke="#D97706" strokeDasharray="3 3" label={{ value: 'Reorder point', fill: '#D97706', fontSize: 10, position: 'insideTopRight' }} />
             </LineChart>
           </ResponsiveContainer>
@@ -239,7 +239,7 @@ export default function SkuDetailPage() {
                   }}>{l.loc}</div>
                   <div>
                     <div style={{ height: 8, borderRadius: 4, background: 'var(--color-border)', overflow: 'hidden' }}>
-                      <div style={{ height: '100%', width: `${Math.max(2, pct)}%`, background: '#1B4DE6', borderRadius: 4 }} />
+                      <div style={{ height: '100%', width: `${Math.max(2, pct)}%`, background: '#1D44BF', borderRadius: 4 }} />
                     </div>
                     <div style={{ fontSize: 11, color: 'var(--color-muted)', marginTop: 4 }}>
                       {pct.toFixed(1)}% of on-hand
@@ -266,10 +266,10 @@ export default function SkuDetailPage() {
                 const isNegative = m.qty < 0;
                 const typeColor =
                   m.type === 'sale'       ? '#2DB47A' :
-                  m.type === 'receipt'    ? '#F58A1F' :
+                  m.type === 'receipt'    ? '#E8B84B' :
                   m.type === 'transfer'   ? '#8B5CF6' :
                   m.type === 'return'     ? '#4B9BE8' :
-                  m.type === 'write-off'  ? '#1B4DE6' :
+                  m.type === 'write-off'  ? '#1D44BF' :
                                             '#6B7280';
                 return (
                   <div key={m.id} style={{
@@ -293,7 +293,7 @@ export default function SkuDetailPage() {
                     </div>
                     <div style={{
                       fontFamily: 'var(--font-condensed)', fontSize: 14, fontWeight: 800,
-                      color: isNegative ? '#1B4DE6' : '#2DB47A',
+                      color: isNegative ? '#1D44BF' : '#2DB47A',
                       textAlign: 'right',
                     }}>
                       {isNegative ? '' : '+'}{m.qty.toLocaleString()}
@@ -307,7 +307,7 @@ export default function SkuDetailPage() {
       </div>
 
       {/* Recommendation */}
-      <Card style={{ borderLeft: `4px solid ${sku.status === 'stockout' || sku.status === 'low' ? '#1B4DE6' : sku.status === 'deadstock' || sku.status === 'overstock' ? '#D97706' : '#2DB47A'}` }}>
+      <Card style={{ borderLeft: `4px solid ${sku.status === 'stockout' || sku.status === 'low' ? '#1D44BF' : sku.status === 'deadstock' || sku.status === 'overstock' ? '#D97706' : '#2DB47A'}` }}>
         <SectionTitle>AI recommendation</SectionTitle>
         <div style={{ fontSize: 14, color: 'var(--color-text)', lineHeight: 1.5 }}>
           {sku.status === 'stockout' && (

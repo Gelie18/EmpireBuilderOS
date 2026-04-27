@@ -33,9 +33,9 @@ const TEXT      = '#FFFFFF';
 const MUTED     = 'rgba(255,255,255,0.60)';
 const FAINT     = 'rgba(255,255,255,0.38)';
 
-const BLUE      = '#1B4DE6';
+const BLUE      = '#1D44BF';
 const SKY       = '#4FA8FF';
-const ORANGE    = '#F58A1F';
+const ORANGE    = '#E8B84B';
 const GREEN     = '#2DB47A';
 const RED       = '#E06060';
 const AMBER     = '#F7A500';
@@ -356,7 +356,7 @@ export default function MorningBriefPage() {
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           fontSize: 10, fontWeight: 700, letterSpacing: '0.10em', color: TEXT, textTransform: 'uppercase',
         }}>
-          783 OS · Morning Brief · Cross-OS Pulse
+          Empire OS · Morning Brief · Cross-OS Pulse
         </div>
 
         {/* Header */}
@@ -372,7 +372,7 @@ export default function MorningBriefPage() {
             <div>
               <div style={{ fontSize: 15, fontWeight: 900, color: TEXT, lineHeight: 1, letterSpacing: '-0.01em' }}>Morning Brief</div>
               <div style={{ fontSize: 11, fontWeight: 600, color: SKY, letterSpacing: '0.09em', textTransform: 'uppercase', marginTop: 3 }}>
-                783 Partners · Pulse
+                Meritage Partners · Pulse
               </div>
             </div>
           </div>

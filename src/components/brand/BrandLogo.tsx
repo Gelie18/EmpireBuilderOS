@@ -1,7 +1,7 @@
 import BrandMark from './BrandMark';
 
 /**
- * Composed wordmark: the "783" brand mark paired with a product label.
+ * Composed wordmark: the "Empire" brand mark paired with a product label.
  * Two layouts:
  *  - 'horizontal' (default): mark on the left, product label stacked to the right
  *  - 'stacked': mark centered above the product label (used on splash and hero)
@@ -10,9 +10,9 @@ import BrandMark from './BrandMark';
 interface BrandLogoProps {
   product?: string;               // e.g. "OS", "FINANCE OS", "HR OS"
   layout?: 'horizontal' | 'stacked';
-  /** Pixel height of the 783 mark. */
+  /** Pixel height of the Empire mark. */
   markHeight?: number;
-  /** Color of the 783 mark. */
+  /** Color of the Empire mark. */
   markColor?: string;
   /** Color of the product label. */
   labelColor?: string;
@@ -28,12 +28,12 @@ export default function BrandLogo({
   labelColor = 'var(--color-accent)',
   ariaLabel,
 }: BrandLogoProps) {
-  const label = ariaLabel ?? (product ? `783 — ${product}` : '783');
+  const label = ariaLabel ?? (product ? `Empire — ${product}` : 'Empire');
 
   if (layout === 'stacked') {
     return (
       <div aria-label={label} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
-        <BrandMark color={markColor} height={markHeight} label="783" />
+        <BrandMark color={markColor} height={markHeight} label="Empire" />
         {product && (
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <div style={{ width: 36, height: 1, background: labelColor, opacity: 0.6, marginBottom: 8 }} />
@@ -56,7 +56,7 @@ export default function BrandLogo({
 
   return (
     <div aria-label={label} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-      <BrandMark color={markColor} height={markHeight} label="783" />
+      <BrandMark color={markColor} height={markHeight} label="Empire" />
       {product && (
         <>
           <div style={{ width: 1, height: markHeight * 0.72, background: 'rgba(255,255,255,0.22)' }} aria-hidden />

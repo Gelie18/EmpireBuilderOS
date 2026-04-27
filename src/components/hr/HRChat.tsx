@@ -128,7 +128,7 @@ export default function HRChat() {
       <div style={{ padding: '18px 22px 14px', borderBottom: '1px solid var(--color-border)' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
           <div>
-            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#F58A1F', marginBottom: 4 }}>
+            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#E8B84B', marginBottom: 4 }}>
               AI HR Advisor
             </div>
             <h2 style={{ fontSize: 18, fontWeight: 800, color: 'var(--color-text)', letterSpacing: '-0.01em' }}>
@@ -197,14 +197,14 @@ export default function HRChat() {
             fontSize: 14, fontFamily: 'inherit',
             outline: 'none',
           }}
-          onFocus={(e) => { e.currentTarget.style.borderColor = '#1B4DE6'; }}
+          onFocus={(e) => { e.currentTarget.style.borderColor = '#1D44BF'; }}
           onBlur={(e) => { e.currentTarget.style.borderColor = 'var(--color-border)'; }}
         />
         <button
           type="submit"
           disabled={!input.trim() || isTyping}
           style={{
-            padding: '11px 16px', background: '#F58A1F', color: '#0B0D17',
+            padding: '11px 16px', background: '#E8B84B', color: '#0B0D17',
             border: 'none', borderRadius: 8,
             fontSize: 13, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase',
             cursor: input.trim() && !isTyping ? 'pointer' : 'not-allowed',
@@ -295,7 +295,7 @@ function TypingBubble() {
             key={i}
             style={{
               width: 7, height: 7, borderRadius: '50%',
-              background: '#F58A1F',
+              background: '#E8B84B',
               animation: `hr-dot 1.2s ${i * 0.15}s infinite ease-in-out`,
             }}
           />
@@ -314,7 +314,7 @@ function renderRich(text: string): React.ReactNode {
   function flushQuote() {
     if (quoteBuf.length === 0) return;
     blocks.push(
-      <div key={`q-${blocks.length}`} style={{ margin: '6px 0', padding: '8px 12px', borderLeft: '3px solid #F58A1F', background: 'rgba(245,138,31,0.06)', fontSize: 13, color: 'var(--color-text)', borderRadius: '0 6px 6px 0' }}>
+      <div key={`q-${blocks.length}`} style={{ margin: '6px 0', padding: '8px 12px', borderLeft: '3px solid #E8B84B', background: 'rgba(245,138,31,0.06)', fontSize: 13, color: 'var(--color-text)', borderRadius: '0 6px 6px 0' }}>
         {quoteBuf.map((ln, i) => <div key={i}>{renderBold(ln)}</div>)}
       </div>
     );

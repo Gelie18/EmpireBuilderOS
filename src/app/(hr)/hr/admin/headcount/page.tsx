@@ -143,7 +143,7 @@ export default function HeadcountPage() {
                 />
                 <Legend />
                 <Line type="monotone" dataKey="plan"   name="Plan FTE"   stroke="#4FA8FF" strokeWidth={2.5} strokeDasharray="6 4" dot={{ r: 3 }} />
-                <Line type="monotone" dataKey="actual" name="Actual FTE" stroke="#1B4DE6" strokeWidth={3}   dot={{ r: 4 }} />
+                <Line type="monotone" dataKey="actual" name="Actual FTE" stroke="#1D44BF" strokeWidth={3}   dot={{ r: 4 }} />
               </LineChart>
             </ResponsiveContainer>
           </div>

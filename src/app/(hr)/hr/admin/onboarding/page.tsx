@@ -135,7 +135,7 @@ export default function OnboardingTrackerPage() {
       <div style={{ display: 'grid', gap: 14 }}>
         {ONBOARDING_COHORT.map((h) => {
           const s = STATUS_STYLE[h.status];
-          const barColor = h.status === 'at-risk' ? '#1B4DE6' : h.status === 'complete' ? '#5D6B7F' : '#2DB47A';
+          const barColor = h.status === 'at-risk' ? '#1D44BF' : h.status === 'complete' ? '#5D6B7F' : '#2DB47A';
           return (
             <Card key={h.id}>
               <div
@@ -255,7 +255,7 @@ export default function OnboardingTrackerPage() {
                     marginTop: 10,
                     padding: '8px 12px',
                     background: 'rgba(27, 77, 230, 0.05)',
-                    borderLeft: '3px solid #1B4DE6',
+                    borderLeft: '3px solid #1D44BF',
                     borderRadius: 4,
                     fontSize: 12,
                   }}

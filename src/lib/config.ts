@@ -13,8 +13,8 @@ export function isDemoMode(): boolean {
 }
 
 export const APP_CONFIG = {
-  demoCompany: '783 Partners',
-  liveCompany: '783 Partners',
+  demoCompany: 'Meritage Partners',
+  liveCompany: 'Meritage Partners',
   defaultPeriod: {
     type: 'month' as const,
     startDate: '2026-04-01',

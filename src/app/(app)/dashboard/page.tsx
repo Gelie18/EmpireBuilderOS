@@ -199,7 +199,7 @@ const REPORTS = [
   { href: '/yoy',           label: 'Year-over-Year',  sub: '+18.4% growth',      accent: 'var(--color-green)'  },
   { href: '/mom',           label: 'MoM Trend',       sub: '+3.1% Apr vs Mar',   accent: 'var(--color-blue)'   },
   { href: '/ai-forecast',   label: 'AI Forecast',     sub: '$16.8M proj. ARR',   accent: 'var(--color-blue)'   },
-  { href: '/scenarios',     label: 'Scenarios',       sub: '4 cases modeled',    accent: '#1B4DE6'             },
+  { href: '/scenarios',     label: 'Scenarios',       sub: '4 cases modeled',    accent: '#1D44BF'             },
   { href: '/daily-revenue', label: 'Daily Revenue',   sub: 'Apr 30-day view',    accent: 'var(--color-orange)' },
   { href: '/backlog',       label: 'Backlog',         sub: '10 items · $659K risk', accent: 'var(--color-red)'    },
   { href: '/market',        label: 'Market Intel',    sub: 'Above median peers', accent: 'var(--color-green)'  },
@@ -491,14 +491,14 @@ export default function DashboardPage() {
               </Link>
             ))}
           </div>
-          <Link href="/inbox" style={{ display: 'block', padding: '12px 20px', fontSize: 11, fontWeight: 800, letterSpacing: '0.10em', textTransform: 'uppercase', color: '#F58A1F', textDecoration: 'none', borderTop: '1px solid var(--color-border)' }}>
+          <Link href="/inbox" style={{ display: 'block', padding: '12px 20px', fontSize: 11, fontWeight: 800, letterSpacing: '0.10em', textTransform: 'uppercase', color: '#E8B84B', textDecoration: 'none', borderTop: '1px solid var(--color-border)' }}>
             See full queue →
           </Link>
         </div>
 
         {/* Decisions */}
         <div className="col-span-12 lg:col-span-4" style={{ ...CARD, padding: 0, overflow: 'hidden' }}>
-          <SectionHeader title="Decisions waiting" subtitle={`${pendingForContext.length} in your queue`} accent="#F58A1F" />
+          <SectionHeader title="Decisions waiting" subtitle={`${pendingForContext.length} in your queue`} accent="#E8B84B" />
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             {topDecisions.length === 0 && <EmptyState label="Inbox zero. Enjoy it." />}
             {topDecisions.map((d) => (
@@ -520,7 +520,7 @@ export default function DashboardPage() {
                     fontSize: 9, fontWeight: 800, letterSpacing: '0.10em',
                     padding: '2px 7px', borderRadius: 3,
                     background: d.urgency === 'URGENT' ? 'rgba(224,96,96,0.15)' : 'rgba(245,138,31,0.15)',
-                    color: d.urgency === 'URGENT' ? '#E06060' : '#F58A1F',
+                    color: d.urgency === 'URGENT' ? '#E06060' : '#E8B84B',
                   }}>
                     {d.urgency}
                   </span>
@@ -536,7 +536,7 @@ export default function DashboardPage() {
               </Link>
             ))}
           </div>
-          <Link href="/inbox" style={{ display: 'block', padding: '12px 20px', fontSize: 11, fontWeight: 800, letterSpacing: '0.10em', textTransform: 'uppercase', color: '#F58A1F', textDecoration: 'none', borderTop: '1px solid var(--color-border)' }}>
+          <Link href="/inbox" style={{ display: 'block', padding: '12px 20px', fontSize: 11, fontWeight: 800, letterSpacing: '0.10em', textTransform: 'uppercase', color: '#E8B84B', textDecoration: 'none', borderTop: '1px solid var(--color-border)' }}>
             Open decision inbox →
           </Link>
         </div>
@@ -567,8 +567,8 @@ export default function DashboardPage() {
             <PlanRow label={`Net Income · ${periodMeta.label}`}   plan={plan.netIncome.plan} actual={plan.netIncome.actual} deltaPct={plan.netIncome.pctDelta} money />
           </div>
           <div style={{ borderTop: '1px solid var(--color-border)', padding: '10px 20px', display: 'flex', gap: 10 }}>
-            <Link href="/cashflow" style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.10em', textTransform: 'uppercase', color: '#F58A1F' }}>Cash flow →</Link>
-            <Link href="/pnl" style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.10em', textTransform: 'uppercase', color: '#F58A1F' }}>Full P&L →</Link>
+            <Link href="/cashflow" style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.10em', textTransform: 'uppercase', color: '#E8B84B' }}>Cash flow →</Link>
+            <Link href="/pnl" style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.10em', textTransform: 'uppercase', color: '#E8B84B' }}>Full P&L →</Link>
           </div>
         </div>
       </div>
@@ -629,7 +629,7 @@ export default function DashboardPage() {
           </span>
           <button
             onClick={() => router.push('/mom')}
-            style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.07em', color: '#1B4DE6', background: 'transparent', border: 'none', cursor: 'pointer' }}
+            style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.07em', color: '#1D44BF', background: 'transparent', border: 'none', cursor: 'pointer' }}
           >
             Deep Dive →
           </button>
@@ -657,9 +657,9 @@ export default function DashboardPage() {
               />
               <Legend wrapperStyle={{ fontSize: 12 }} />
               <Line type="monotone" dataKey="Revenue"
-                stroke="#1B4DE6" strokeWidth={2.5}
-                dot={{ r: 4, fill: '#1B4DE6', strokeWidth: 0 }}
-                activeDot={{ r: 6, fill: '#1B4DE6', stroke: '#FFFFFF', strokeWidth: 2 }}
+                stroke="#1D44BF" strokeWidth={2.5}
+                dot={{ r: 4, fill: '#1D44BF', strokeWidth: 0 }}
+                activeDot={{ r: 6, fill: '#1D44BF', stroke: '#FFFFFF', strokeWidth: 2 }}
               />
               <Line type="monotone" dataKey="Net Income"
                 stroke="#4FA8FF" strokeWidth={2}
@@ -750,7 +750,7 @@ export default function DashboardPage() {
             </div>
             <button
               onClick={() => router.push('/consolidation')}
-              style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.07em', color: '#1B4DE6', background: 'transparent', border: 'none', cursor: 'pointer' }}
+              style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.07em', color: '#1D44BF', background: 'transparent', border: 'none', cursor: 'pointer' }}
             >
               Deep Dive →
             </button>
@@ -870,7 +870,7 @@ export default function DashboardPage() {
           </div>
           <button
             onClick={() => router.push('/sku-rationalization')}
-            style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.07em', color: '#1B4DE6', background: 'transparent', border: 'none', cursor: 'pointer' }}
+            style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.07em', color: '#1D44BF', background: 'transparent', border: 'none', cursor: 'pointer' }}
           >
             SKU Rationalization →
           </button>

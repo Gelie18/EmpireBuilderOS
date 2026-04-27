@@ -6,7 +6,7 @@ import BrandLogo from '@/components/brand/BrandLogo';
 
 // ── Valid credentials ─────────────────────────────────────────────────────────
 const CREDENTIALS = [
-  { username: '783', password: 'demo2026' },
+  { username: 'empire', password: 'demo2026' },
 ];
 
 // BrandLogo comes from @/components/brand/BrandLogo — kept local here is
@@ -60,8 +60,8 @@ function LoadingOverlay() {
           />
           <defs>
             <linearGradient id="spinGrad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#1B4DE6" />
-              <stop offset="100%" stopColor="#F58A1F" />
+              <stop offset="0%" stopColor="#1D44BF" />
+              <stop offset="100%" stopColor="#E8B84B" />
             </linearGradient>
           </defs>
         </svg>
@@ -149,12 +149,12 @@ export default function LoginPage() {
           transition: border-color 0.2s;
         }
         .login-input::placeholder { color: rgba(255,255,255,0.28); }
-        .login-input:focus { border-color: #1B4DE6; background: rgba(27,77,230,0.08); }
+        .login-input:focus { border-color: #1D44BF; background: rgba(27,77,230,0.08); }
 
         .login-btn {
           width: 100%;
           padding: 14px;
-          background: #1B4DE6;
+          background: #1D44BF;
           color: #FFFFFF;
           border: none;
           border-radius: 8px;
@@ -245,7 +245,7 @@ export default function LoginPage() {
             lineHeight: 1.5,
           }}>
             Business Intelligence Platform<br />
-            <span style={{ color: 'rgba(79,168,255,0.85)', fontWeight: 600 }}>783 Partners · Private Access</span>
+            <span style={{ color: 'rgba(79,168,255,0.85)', fontWeight: 600 }}>Meritage Partners · Private Access</span>
           </div>
 
           {/* Form */}
@@ -328,7 +328,7 @@ export default function LoginPage() {
           letterSpacing: '0.06em',
           textAlign: 'center',
         }}>
-          Powered by 783 OS · 783 Partners
+          Powered by Empire OS · Meritage Partners
         </div>
       </div>
     </>

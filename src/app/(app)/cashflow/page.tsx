@@ -310,8 +310,8 @@ export default function CashFlowPage() {
             <AreaChart data={chartData} margin={{ top: 4, right: 4, left: 4, bottom: 0 }}>
               <defs>
                 <linearGradient id="cashGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%"  stopColor="#1B4DE6" stopOpacity={0.28} />
-                  <stop offset="95%" stopColor="#1B4DE6" stopOpacity={0} />
+                  <stop offset="5%"  stopColor="#1D44BF" stopOpacity={0.28} />
+                  <stop offset="95%" stopColor="#1D44BF" stopOpacity={0} />
                 </linearGradient>
               </defs>
               <CartesianGrid strokeDasharray="3 3" stroke="var(--color-chart-grid)" />
@@ -335,7 +335,7 @@ export default function CashFlowPage() {
               <Area
                 type="monotone"
                 dataKey="Cash"
-                stroke="#1B4DE6"
+                stroke="#1D44BF"
                 strokeWidth={2.5}
                 fill="url(#cashGrad)"
                 dot={false}

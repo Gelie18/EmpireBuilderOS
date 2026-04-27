@@ -245,14 +245,14 @@ const BACKLOG: BacklogItem[] = [
 const PRIORITY_META: Record<Priority, { color: string; bg: string; order: number }> = {
   Critical: { color: '#C13333', bg: 'rgba(193,51,51,0.09)',   order: 0 },
   High:     { color: '#D97706', bg: 'rgba(217,119,6,0.09)',   order: 1 },
-  Medium:   { color: '#1B4DE6', bg: 'rgba(27,77,230,0.09)',   order: 2 },
+  Medium:   { color: '#1D44BF', bg: 'rgba(27,77,230,0.09)',   order: 2 },
   Low:      { color: 'var(--color-chart-text)', bg: 'rgba(255,255,255,0.06)', order: 3 },
 };
 
 const STATUS_META: Record<Status, { color: string; bg: string }> = {
   Overdue:     { color: '#C13333', bg: 'rgba(193,51,51,0.08)'   },
   Blocked:     { color: '#D97706', bg: 'rgba(217,119,6,0.08)'   },
-  'In Progress':{ color: '#1B4DE6', bg: 'rgba(27,77,230,0.08)'  },
+  'In Progress':{ color: '#1D44BF', bg: 'rgba(27,77,230,0.08)'  },
   New:         { color: 'var(--color-chart-text)', bg: 'rgba(255,255,255,0.06)' },
   Resolved:    { color: '#0A8A5C', bg: 'rgba(10,138,92,0.08)'   },
 };
@@ -260,7 +260,7 @@ const STATUS_META: Record<Status, { color: string; bg: string }> = {
 const PHASE_META: Record<ActionPhase, { color: string; label: string }> = {
   'Immediate':    { color: '#C13333', label: 'Act Now' },
   'This Week':    { color: '#D97706', label: 'This Week' },
-  'This Month':   { color: '#1B4DE6', label: 'This Month' },
+  'This Month':   { color: '#1D44BF', label: 'This Month' },
   'Next Quarter': { color: 'var(--color-chart-text)', label: 'Next Quarter' },
 };
 
@@ -331,7 +331,7 @@ export default function BacklogPage() {
       {/* ── KPI Strip ── */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
-          { label: 'Total Items',     value: BACKLOG.length.toString(),  color: '#FFFFFF', accent: '#1B4DE6', href: null },
+          { label: 'Total Items',     value: BACKLOG.length.toString(),  color: '#FFFFFF', accent: '#1D44BF', href: null },
           { label: 'Overdue',         value: overdue.length.toString(),  color: '#C13333', accent: '#C13333', href: null },
           { label: 'Blocked',         value: blocked.length.toString(),  color: '#D97706', accent: '#D97706', href: null },
           { label: 'Total $ at Risk', value: fmt$(totalRisk$),           color: '#FFFFFF', accent: 'var(--color-gold)', href: null },
@@ -354,9 +354,9 @@ export default function BacklogPage() {
           <button key={v} onClick={() => setView(v)} style={{
             padding: '8px 20px', fontSize: 13, fontWeight: 700, letterSpacing: '0.04em',
             textTransform: 'uppercase', borderRadius: 6, cursor: 'pointer',
-            background: view === v ? '#1B4DE6' : 'var(--color-surf)',
+            background: view === v ? '#1D44BF' : 'var(--color-surf)',
             color: view === v ? '#FFFFFF' : 'rgba(255,255,255,0.50)',
-            border: `1px solid ${view === v ? '#1B4DE6' : 'rgba(255,255,255,0.10)'}`,
+            border: `1px solid ${view === v ? '#1D44BF' : 'rgba(255,255,255,0.10)'}`,
             transition: 'all 0.14s',
           }}>
             {v === 'items' ? '☰ All Items' : '→ Action Plan'}
@@ -494,8 +494,8 @@ export default function BacklogPage() {
       {view === 'plan' && (
         <div className="flex flex-col gap-5">
           {/* AI Summary */}
-          <div style={{ ...CARD, borderLeft: '4px solid #1B4DE6', padding: '20px 24px' }}>
-            <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.09em', color: '#1B4DE6', marginBottom: 12 }}>
+          <div style={{ ...CARD, borderLeft: '4px solid #1D44BF', padding: '20px 24px' }}>
+            <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.09em', color: '#1D44BF', marginBottom: 12 }}>
               AI CFO Summary — April 2026 — Ops Backlog
             </div>
             <div style={{ fontSize: 15, color: 'var(--color-chart-text)', lineHeight: 1.65 }}>
@@ -557,7 +557,7 @@ export default function BacklogPage() {
                               </li>
                             ))}
                             {item.actions.length > 2 && (
-                              <li style={{ fontSize: 12, color: '#1B4DE6', fontWeight: 600, paddingLeft: 18 }}>
+                              <li style={{ fontSize: 12, color: '#1D44BF', fontWeight: 600, paddingLeft: 18 }}>
                                 +{item.actions.length - 2} more steps — click to expand
                               </li>
                             )}
@@ -601,7 +601,7 @@ export default function BacklogPage() {
                     onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = 'none'; }}
                   >
                     <div style={{ fontSize: 12, fontWeight: 700, color: '#FFFFFF', marginBottom: 4 }}>{cat}</div>
-                    <div style={{ fontSize: 22, fontWeight: 800, color: '#1B4DE6', lineHeight: 1 }}>{items.length}</div>
+                    <div style={{ fontSize: 22, fontWeight: 800, color: '#1D44BF', lineHeight: 1 }}>{items.length}</div>
                     {criticals > 0 && (
                       <div style={{ fontSize: 11, color: '#C13333', marginTop: 2, fontWeight: 600 }}>
                         {criticals} critical

@@ -152,7 +152,7 @@ export default function EnpsPage() {
                 }}
               />
               <ReferenceLine y={0} stroke="var(--color-muted)" strokeDasharray="2 2" />
-              <Line type="monotone" dataKey="score" stroke="#1B4DE6" strokeWidth={3} dot={{ r: 4 }} name="eNPS" />
+              <Line type="monotone" dataKey="score" stroke="#1D44BF" strokeWidth={3} dot={{ r: 4 }} name="eNPS" />
               <Line type="monotone" dataKey="bench" stroke="#5D6B7F" strokeWidth={2} strokeDasharray="4 3" dot={false} name="Industry bench" />
             </LineChart>
           </ResponsiveContainer>
@@ -165,7 +165,7 @@ export default function EnpsPage() {
           <SectionTitle>By department</SectionTitle>
           <div style={{ display: 'grid', gap: 12 }}>
             {ENPS_BY_DEPT.map((d) => {
-              const color = d.score >= 40 ? '#2DB47A' : d.score >= 25 ? '#8A5A0F' : '#1B4DE6';
+              const color = d.score >= 40 ? '#2DB47A' : d.score >= 25 ? '#8A5A0F' : '#1D44BF';
               const trendArrow = d.trend === 'up' ? '↑' : d.trend === 'down' ? '↓' : '→';
               const trendColor = d.trend === 'up' ? '#165E36' : d.trend === 'down' ? '#8A1C16' : 'var(--color-muted)';
               return (

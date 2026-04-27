@@ -17,8 +17,8 @@ import PeriodSelector, { type PeriodKey } from '@/components/ui/PeriodSelector';
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
-const BLUE   = '#1B4DE6';
-const GOLD   = '#F58A1F';
+const BLUE   = '#1D44BF';
+const GOLD   = '#E8B84B';
 const GREEN  = '#0A8A5C';
 const RED    = '#C13333';
 const ORANGE = '#D97706';
@@ -745,7 +745,7 @@ export default function RevenuePage() {
               <PeriodSelector value={period} onChange={setPeriod} />
             </div>
             <p style={{ margin: '4px 0 0', fontSize: 13, color: 'var(--color-muted)' }}>
-              783 Partners &nbsp;·&nbsp; {PERIOD_REV[period].label}
+              Meritage Partners &nbsp;·&nbsp; {PERIOD_REV[period].label}
             </p>
           </div>
           <div

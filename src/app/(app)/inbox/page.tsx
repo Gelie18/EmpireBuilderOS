@@ -176,7 +176,7 @@ function DecisionCard({
 }) {
   const brand = ALL_SUBCOS.find((s) => s.id === d.subcoId) ?? ALL_SUBCOS[0];
   const statusMeta = {
-    pending:   { label: 'AWAITING DECISION', color: '#F58A1F', bg: 'rgba(245,138,31,0.12)' },
+    pending:   { label: 'AWAITING DECISION', color: '#E8B84B', bg: 'rgba(245,138,31,0.12)' },
     approved:  { label: 'APPROVED · ROUTED TO OWNER', color: '#2DB47A', bg: 'rgba(45,180,122,0.14)' },
     rejected:  { label: 'REJECTED', color: '#E06060', bg: 'rgba(224,96,96,0.14)' },
     delegated: { label: 'DELEGATED', color: '#4FA8FF', bg: 'rgba(79,168,255,0.14)' },
@@ -201,7 +201,7 @@ function DecisionCard({
             fontSize: 9, fontWeight: 800, letterSpacing: '0.10em',
             padding: '3px 8px', borderRadius: 3,
             background: d.urgency === 'URGENT' ? 'rgba(224,96,96,0.15)' : d.urgency === 'THIS WEEK' ? 'rgba(245,138,31,0.15)' : 'rgba(79,168,255,0.12)',
-            color: d.urgency === 'URGENT' ? '#E06060' : d.urgency === 'THIS WEEK' ? '#F58A1F' : '#4FA8FF',
+            color: d.urgency === 'URGENT' ? '#E06060' : d.urgency === 'THIS WEEK' ? '#E8B84B' : '#4FA8FF',
           }}>
             {d.urgency}
           </span>
@@ -238,14 +238,14 @@ function DecisionCard({
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
             <span style={{
               width: 18, height: 18, borderRadius: 4,
-              background: 'linear-gradient(135deg,#1B4DE6,#F58A1F)',
+              background: 'linear-gradient(135deg,#1D44BF,#E8B84B)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
             }}>
               <svg width="10" height="10" viewBox="0 0 24 24" fill="#FFFFFF">
                 <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z" />
               </svg>
             </span>
-            <div style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#F58A1F' }}>
+            <div style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#E8B84B' }}>
               AI Recommendation
             </div>
           </div>
@@ -274,7 +274,7 @@ function DecisionCard({
             <button
               onClick={onApprove}
               style={{
-                background: 'linear-gradient(135deg,#1B4DE6,#F58A1F)',
+                background: 'linear-gradient(135deg,#1D44BF,#E8B84B)',
                 border: 'none', color: '#FFFFFF',
                 padding: '10px 16px', borderRadius: 7, cursor: 'pointer',
                 fontSize: 11, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase',

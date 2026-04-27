@@ -222,7 +222,7 @@ export default function BudgetPage() {
             {opex.map(renderRow)}
             {subtotal('Total OpEx', totalBudgetOpex, totalActualOpex, opex.reduce((s, r) => s + r.forecast, 0))}
             <tr><td colSpan={7} style={{ height: 8 }} /></tr>
-            <tr style={{ background: '#1B4DE6', color: '#FFFFFF', fontWeight: 900 }}>
+            <tr style={{ background: '#1D44BF', color: '#FFFFFF', fontWeight: 900 }}>
               <td style={{ padding: '14px 10px', fontFamily: 'var(--font-condensed)', textTransform: 'uppercase', letterSpacing: '0.08em', fontSize: 13 }}>
                 EBITDA
               </td>

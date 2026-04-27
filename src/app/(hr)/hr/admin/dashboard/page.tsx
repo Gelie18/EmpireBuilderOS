@@ -10,8 +10,8 @@ import {
 
 const DEPARTMENTS = [
   { name: 'Warehouse & Fulfillment', count: 18, avgSalary: 52_400, turnoverPct: 14.2, color: '#FF6B00' },
-  { name: 'Sales & Wholesale',       count: 9,  avgSalary: 78_000, turnoverPct: 8.8,  color: '#1B4DE6' },
-  { name: 'Marketing',               count: 5,  avgSalary: 82_500, turnoverPct: 6.0,  color: '#F58A1F' },
+  { name: 'Sales & Wholesale',       count: 9,  avgSalary: 78_000, turnoverPct: 8.8,  color: '#1D44BF' },
+  { name: 'Marketing',               count: 5,  avgSalary: 82_500, turnoverPct: 6.0,  color: '#E8B84B' },
   { name: 'Finance & Ops',           count: 6,  avgSalary: 95_000, turnoverPct: 5.0,  color: '#2DB47A' },
   { name: 'Program Mgmt Office',     count: 4,  avgSalary: 118_000, turnoverPct: 3.5, color: '#8B5A2B' },
   { name: 'Tech & Data',             count: 4,  avgSalary: 125_000, turnoverPct: 9.5, color: '#4FA8FF' },
@@ -27,7 +27,7 @@ const BRANDS = [
   { name: 'Shug0',               count: 6,  color: '#0A0A0A' },
   { name: 'All American Socks',  count: 4,  color: '#B31B1B' },
   { name: 'Double Dutch Waffles',count: 4,  color: '#E97F2E' },
-  { name: 'Holdco (BL)',         count: 10, color: '#1B4DE6' },
+  { name: 'Holdco (BL)',         count: 10, color: '#1D44BF' },
 ];
 
 const PAYROLL_MONTHLY = [
@@ -92,7 +92,7 @@ const OPEN_ROLES: OpenRole[] = [
   {
     id: 'r1',
     title: 'Senior Fulfillment Lead',
-    dept: 'Warehouse & Fulfillment', brand: 'SSK', brandColor: '#1B4DE6',
+    dept: 'Warehouse & Fulfillment', brand: 'SSK', brandColor: '#1D44BF',
     daysOpen: 28, priority: 'urgent', postingStatus: 'Interviewing',
     salaryMin: 58_000, salaryMax: 72_000, type: 'Full-time', location: 'Kent, WA (On-site)',
     hiringManager: 'Sarah Kim, VP Operations', recruiter: 'Internal HR',
@@ -108,7 +108,7 @@ const OPEN_ROLES: OpenRole[] = [
   {
     id: 'r2',
     title: 'Amazon Channel Manager',
-    dept: 'Sales & Wholesale', brand: 'SSK', brandColor: '#1B4DE6',
+    dept: 'Sales & Wholesale', brand: 'SSK', brandColor: '#1D44BF',
     daysOpen: 41, priority: 'high', postingStatus: 'Interviewing',
     salaryMin: 85_000, salaryMax: 105_000, type: 'Full-time', location: 'Remote (U.S.)',
     hiringManager: 'Tom Rivera, Head of Sales', recruiter: 'Internal HR',
@@ -141,7 +141,7 @@ const OPEN_ROLES: OpenRole[] = [
     salaryMin: 95_000, salaryMax: 118_000, type: 'Full-time', location: 'Remote',
     hiringManager: 'CTO', recruiter: 'External (search firm)',
     applicants: 42,
-    description: 'Build out BI stack for 783 Partners Holdings. Own Looker dashboards, QuickBooks data pulls, cross-brand revenue rollups, and ad hoc CEO/CFO analysis requests. 63 days open — urgent.',
+    description: 'Build out BI stack for Meritage Partners Holdings. Own Looker dashboards, QuickBooks data pulls, cross-brand revenue rollups, and ad hoc CEO/CFO analysis requests. 63 days open — urgent.',
     candidates: [
       { name: 'Sam Chen',    stage: 'Panel',          lastUpdate: 'Apr 16', status: 'active' },
       { name: 'Rohan Kumar', stage: 'Hiring Manager', lastUpdate: 'Apr 9',  status: 'on_hold', notes: 'Candidate requested delay — offer from another firm' },
@@ -165,7 +165,7 @@ const REQUESTED_ROLES: RequestedRole[] = [
   {
     id: 'req1',
     title: 'Warehouse Associate',
-    dept: 'Warehouse & Fulfillment', brand: 'SSK', brandColor: '#1B4DE6',
+    dept: 'Warehouse & Fulfillment', brand: 'SSK', brandColor: '#1D44BF',
     headcount: 2,
     requestedBy: 'Sarah Kim, VP Operations', requestDate: 'Apr 8',
     approvalStatus: 'Pending',
@@ -282,7 +282,7 @@ export default function HRCEODashboard() {
             People &amp; Payroll Intelligence
           </h1>
           <div style={{ fontSize: 12, color: 'var(--color-muted)', marginTop: 3 }}>
-            783 Partners Holdings · {TOTAL_HC} employees · Apr 2026 snapshot
+            Meritage Partners Holdings · {TOTAL_HC} employees · Apr 2026 snapshot
           </div>
         </div>
         {/* Admin badge */}
@@ -319,8 +319,8 @@ export default function HRCEODashboard() {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {[
           { label: 'Total Headcount',   value: `${TOTAL_HC}`, sub: `+2 QoQ · ${OPEN_ROLES.length} open roles`,      accent: '#4FA8FF' },
-          { label: 'Annual Payroll',    value: fmt(TOTAL_PAYROLL_ANNUAL), sub: `${fmt(totalCompAnnual)} w/ benefits`,  accent: '#1B4DE6' },
-          { label: 'Benefits / Month',  value: fmtM(TOTAL_BENEFITS_MONTHLY), sub: `${((TOTAL_BENEFITS_MONTHLY / (TOTAL_PAYROLL_ANNUAL / 12)) * 100).toFixed(1)}% of payroll`, accent: '#F58A1F' },
+          { label: 'Annual Payroll',    value: fmt(TOTAL_PAYROLL_ANNUAL), sub: `${fmt(totalCompAnnual)} w/ benefits`,  accent: '#1D44BF' },
+          { label: 'Benefits / Month',  value: fmtM(TOTAL_BENEFITS_MONTHLY), sub: `${((TOTAL_BENEFITS_MONTHLY / (TOTAL_PAYROLL_ANNUAL / 12)) * 100).toFixed(1)}% of payroll`, accent: '#E8B84B' },
           { label: 'Blended Turnover',  value: `${blendedTurnover.toFixed(1)}%`, sub: 'Annualized · 10% target',         accent: blendedTurnover > 10 ? '#E06060' : '#2DB47A' },
         ].map((kpi) => (
           <div key={kpi.label} style={{ ...CARD, padding: '18px 20px', position: 'relative', overflow: 'hidden' }}>
@@ -529,11 +529,11 @@ export default function HRCEODashboard() {
                     );
                   })}
                   <tr style={{ background: 'rgba(245,138,31,0.05)', borderTop: '2px solid rgba(245,138,31,0.25)' }}>
-                    <td style={{ padding: '8px 16px', fontWeight: 800, color: '#F58A1F' }}>Total</td>
-                    <td style={{ padding: '8px 16px', textAlign: 'right', fontWeight: 800, color: '#F58A1F', fontFamily: 'var(--font-condensed)' }}>{TOTAL_HC}</td>
+                    <td style={{ padding: '8px 16px', fontWeight: 800, color: '#E8B84B' }}>Total</td>
+                    <td style={{ padding: '8px 16px', textAlign: 'right', fontWeight: 800, color: '#E8B84B', fontFamily: 'var(--font-condensed)' }}>{TOTAL_HC}</td>
                     <td style={{ padding: '8px 16px', textAlign: 'right', color: 'var(--color-muted)', fontFamily: 'var(--font-condensed)' }}>—</td>
-                    <td style={{ padding: '8px 16px', textAlign: 'right', fontWeight: 800, color: '#F58A1F', fontFamily: 'var(--font-condensed)' }}>{fmt(TOTAL_PAYROLL_ANNUAL)}</td>
-                    <td style={{ padding: '8px 16px', textAlign: 'right', fontWeight: 800, color: '#F58A1F' }}>100.0%</td>
+                    <td style={{ padding: '8px 16px', textAlign: 'right', fontWeight: 800, color: '#E8B84B', fontFamily: 'var(--font-condensed)' }}>{fmt(TOTAL_PAYROLL_ANNUAL)}</td>
+                    <td style={{ padding: '8px 16px', textAlign: 'right', fontWeight: 800, color: '#E8B84B' }}>100.0%</td>
                     <td style={{ padding: '8px 16px', textAlign: 'right', fontWeight: 700, color: blendedTurnover > 10 ? '#E06060' : '#2DB47A' }}>{blendedTurnover.toFixed(1)}%</td>
                   </tr>
                 </tbody>
@@ -556,7 +556,7 @@ export default function HRCEODashboard() {
                 </span>
               </div>
               <div style={{ display: 'flex', gap: 14, fontSize: 10, color: 'var(--color-muted)' }}>
-                <span><span style={{ color: '#1B4DE6' }}>—</span> Payroll</span>
+                <span><span style={{ color: '#1D44BF' }}>—</span> Payroll</span>
                 <span><span style={{ color: '#4FA8FF' }}>—</span> Benefits</span>
               </div>
             </div>
@@ -565,8 +565,8 @@ export default function HRCEODashboard() {
                 <AreaChart data={PAYROLL_MONTHLY} margin={{ top: 5, right: 5, left: 10, bottom: 5 }}>
                   <defs>
                     <linearGradient id="payG" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%"  stopColor="#1B4DE6" stopOpacity={0.25} />
-                      <stop offset="95%" stopColor="#1B4DE6" stopOpacity={0} />
+                      <stop offset="5%"  stopColor="#1D44BF" stopOpacity={0.25} />
+                      <stop offset="95%" stopColor="#1D44BF" stopOpacity={0} />
                     </linearGradient>
                     <linearGradient id="benG" x1="0" y1="0" x2="0" y2="1">
                       <stop offset="5%"  stopColor="#4FA8FF" stopOpacity={0.25} />
@@ -577,7 +577,7 @@ export default function HRCEODashboard() {
                   <XAxis dataKey="month" tick={{ fill: 'var(--color-chart-text)', fontSize: 10 }} axisLine={false} tickLine={false} />
                   <YAxis tickFormatter={(v) => `$${(v/1000).toFixed(0)}K`} tick={{ fill: 'var(--color-chart-text)', fontSize: 10 }} axisLine={false} tickLine={false} width={52} />
                   <Tooltip contentStyle={TOOLTIP_STYLE} formatter={((v: unknown, name: unknown) => [fmtM(Number(v)), name === 'payroll' ? 'Payroll' : 'Benefits']) as never} />
-                  <Area type="monotone" dataKey="payroll"  stroke="#1B4DE6" fill="url(#payG)" strokeWidth={2} dot={false} />
+                  <Area type="monotone" dataKey="payroll"  stroke="#1D44BF" fill="url(#payG)" strokeWidth={2} dot={false} />
                   <Area type="monotone" dataKey="benefits" stroke="#4FA8FF" fill="url(#benG)" strokeWidth={2} dot={false} />
                 </AreaChart>
               </ResponsiveContainer>
@@ -595,12 +595,12 @@ export default function HRCEODashboard() {
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                 {[
-                  { label: 'Gross Payroll',    value: totalPayrollMTD,  color: '#1B4DE6' },
+                  { label: 'Gross Payroll',    value: totalPayrollMTD,  color: '#1D44BF' },
                   { label: 'Benefits Cost',    value: totalBenefitsMTD, color: '#4FA8FF' },
-                  { label: 'Total People Cost',value: totalPayrollMTD + totalBenefitsMTD, color: '#F58A1F', bold: true },
+                  { label: 'Total People Cost',value: totalPayrollMTD + totalBenefitsMTD, color: '#E8B84B', bold: true },
                 ].map((r) => (
                   <div key={r.label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 14px', background: r.bold ? 'rgba(245,138,31,0.07)' : 'var(--color-surf2)', borderRadius: 8, border: `1px solid ${r.bold ? 'rgba(245,138,31,0.20)' : 'var(--color-border)'}` }}>
-                    <span style={{ fontSize: 13, fontWeight: r.bold ? 800 : 500, color: r.bold ? '#F58A1F' : 'var(--color-text)' }}>{r.label}</span>
+                    <span style={{ fontSize: 13, fontWeight: r.bold ? 800 : 500, color: r.bold ? '#E8B84B' : 'var(--color-text)' }}>{r.label}</span>
                     <span style={{ fontSize: 16, fontWeight: 900, color: r.color, fontFamily: 'var(--font-condensed)' }}>{fmtM(r.value)}</span>
                   </div>
                 ))}
@@ -663,7 +663,7 @@ export default function HRCEODashboard() {
 
             {OPEN_ROLES.map((r, i) => {
               const priColor = r.priority === 'urgent' ? '#E06060' : r.priority === 'high' ? '#F7A500' : '#4FA8FF';
-              const statusColor = r.postingStatus === 'Offer Out' ? '#2DB47A' : r.postingStatus === 'Interviewing' ? '#F58A1F' : '#4FA8FF';
+              const statusColor = r.postingStatus === 'Offer Out' ? '#2DB47A' : r.postingStatus === 'Interviewing' ? '#E8B84B' : '#4FA8FF';
               const isOpen = selectedRoleId === r.id;
               const activeCount = r.candidates.filter(c => c.status === 'active').length;
               return (
@@ -744,12 +744,12 @@ export default function HRCEODashboard() {
                                     fontSize: 10, fontWeight: 700,
                                     background: hasCandidate ? 'rgba(245,138,31,0.18)' : 'var(--color-surf)',
                                     border: `1px solid ${hasCandidate ? 'rgba(245,138,31,0.40)' : 'var(--color-border)'}`,
-                                    color: hasCandidate ? '#F58A1F' : 'var(--color-subtle)',
+                                    color: hasCandidate ? '#E8B84B' : 'var(--color-subtle)',
                                     whiteSpace: 'nowrap',
                                   }}>
                                     {stage}
                                     {hasCandidate && (
-                                      <span style={{ marginLeft: 6, background: '#F58A1F', color: '#0B0D17', borderRadius: 10, padding: '0px 5px', fontSize: 9, fontWeight: 900 }}>
+                                      <span style={{ marginLeft: 6, background: '#E8B84B', color: '#0B0D17', borderRadius: 10, padding: '0px 5px', fontSize: 9, fontWeight: 900 }}>
                                         {r.candidates.filter(c => c.stage === stage && c.status === 'active').length}
                                       </span>
                                     )}
@@ -821,7 +821,7 @@ export default function HRCEODashboard() {
             </div>
 
             {REQUESTED_ROLES.map((r, i) => {
-              const apColor = r.approvalStatus === 'Approved' ? '#2DB47A' : r.approvalStatus === 'On Hold' ? '#F58A1F' : '#F58A1F';
+              const apColor = r.approvalStatus === 'Approved' ? '#2DB47A' : r.approvalStatus === 'On Hold' ? '#E8B84B' : '#E8B84B';
               const isOpen = selectedReqId === r.id;
               return (
                 <div key={r.id}>
@@ -905,7 +905,7 @@ export default function HRCEODashboard() {
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
               {COMPLIANCE_DATA.map((c) => {
-                const color = c.pct === 100 ? '#2DB47A' : c.pct >= 80 ? '#F58A1F' : '#E06060';
+                const color = c.pct === 100 ? '#2DB47A' : c.pct >= 80 ? '#E8B84B' : '#E06060';
                 return (
                   <div key={c.category}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 6 }}>
@@ -930,7 +930,7 @@ export default function HRCEODashboard() {
               { label: 'Avg Tenure',         value: '2.8 yrs',  sub: '+0.4 yrs YoY',          accent: '#2DB47A' },
               { label: 'Time to Fill',        value: '34 days',  sub: '30-day target · +13%',   accent: '#F7A500' },
               { label: 'Retention Rate',      value: '88.1%',    sub: 'Rolling 12M',            accent: '#4FA8FF' },
-              { label: 'Promotion Rate',      value: '14%',      sub: 'Promoted in last 12M',   accent: '#F58A1F' },
+              { label: 'Promotion Rate',      value: '14%',      sub: 'Promoted in last 12M',   accent: '#E8B84B' },
             ].map((m) => (
               <div key={m.label} style={{ ...CARD, padding: '16px 18px' }}>
                 <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--color-muted)', marginBottom: 6 }}>{m.label}</div>

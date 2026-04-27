@@ -302,7 +302,7 @@ export default function MarketPage() {
             </span>
             <span style={{
               background: 'rgba(27,77,230,0.14)', border: '1px solid rgba(27,77,230,0.35)',
-              color: '#F58A1F', borderRadius: 6, padding: '5px 11px',
+              color: '#E8B84B', borderRadius: 6, padding: '5px 11px',
               fontSize: 11, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase',
             }}>
               Apr 2026

@@ -28,7 +28,7 @@ function TopBar() {
         <button onClick={() => router.push('/how-it-works')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.55)', fontSize: 13, fontWeight: 700, letterSpacing: '0.08em', fontFamily: 'inherit', padding: 0, textTransform: 'uppercase' }}>How It Works</button>
         <button onClick={() => router.push('/onboarding')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.55)', fontSize: 13, fontWeight: 700, letterSpacing: '0.08em', fontFamily: 'inherit', padding: 0, textTransform: 'uppercase' }}>Onboarding</button>
         <button onClick={() => router.push('/faq')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.55)', fontSize: 13, fontWeight: 700, letterSpacing: '0.08em', fontFamily: 'inherit', padding: 0, textTransform: 'uppercase' }}>FAQ</button>
-        <button onClick={() => router.push('/demo-hub')} style={{ background: '#F58A1F', border: 'none', borderRadius: 7, padding: '8px 20px', color: '#0B0D17', fontSize: 12, fontWeight: 800, letterSpacing: '0.10em', fontFamily: 'inherit', cursor: 'pointer', textTransform: 'uppercase' }}>
+        <button onClick={() => router.push('/demo-hub')} style={{ background: '#E8B84B', border: 'none', borderRadius: 7, padding: '8px 20px', color: '#0B0D17', fontSize: 12, fontWeight: 800, letterSpacing: '0.10em', fontFamily: 'inherit', cursor: 'pointer', textTransform: 'uppercase' }}>
           Exit
         </button>
       </div>
@@ -111,7 +111,7 @@ const MODULES = [
   {
     id: 'finance',
     label: 'Finance OS',
-    color: '#1B4DE6',
+    color: '#1D44BF',
     tagline: 'Stop assembling reports. Start doing strategy.',
     pieces: [
       { title: 'Live Exec Dashboard', desc: 'Real-time KPIs, cash position, and P&L — always current, no manual assembly.' },
@@ -153,7 +153,7 @@ const MODULES = [
 ];
 
 const INTEGRATION_CATEGORIES = [
-  { category: 'Accounting / ERP', color: '#1B4DE6', tools: ['QuickBooks', 'NetSuite', 'Sage Intacct', 'Xero', 'Microsoft Dynamics'] },
+  { category: 'Accounting / ERP', color: '#1D44BF', tools: ['QuickBooks', 'NetSuite', 'Sage Intacct', 'Xero', 'Microsoft Dynamics'] },
   { category: 'HRIS / Payroll', color: '#0A6A3C', tools: ['Rippling', 'Gusto', 'Workday', 'BambooHR', 'ADP', 'Paychex'] },
   { category: 'Commerce', color: '#B38A00', tools: ['Shopify', 'BigCommerce', 'WooCommerce', 'Amazon Seller', 'Faire', 'Square'] },
   { category: 'Spend / Cards', color: '#5B21B6', tools: ['Ramp', 'Brex', 'Bill.com', 'Expensify', 'Divvy'] },
@@ -193,8 +193,8 @@ export default function PackagesPage() {
 
         {/* HERO */}
         <section className="pkg-pad" style={{ padding: '88px 40px 72px', maxWidth: 1100, margin: '0 auto', animation: 'fadeUp 0.6s ease both' }}>
-          <div style={{ fontSize: 12, fontWeight: 800, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#F58A1F', marginBottom: 22 }}>
-            783 OS · Pricing &amp; Packages
+          <div style={{ fontSize: 12, fontWeight: 800, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#E8B84B', marginBottom: 22 }}>
+            Empire OS · Pricing &amp; Packages
           </div>
           <h1 className="pkg-hero" style={{ fontSize: 68, fontWeight: 900, lineHeight: 1.03, letterSpacing: '-0.03em', maxWidth: 820, marginBottom: 24 }}>
             What you get,<br />and what it costs.
@@ -227,14 +227,14 @@ export default function PackagesPage() {
                 {tier.badge && (
                   <div style={{
                     position: 'absolute', top: -11, left: '50%', transform: 'translateX(-50%)',
-                    background: tier.featured ? '#F58A1F' : 'rgba(255,255,255,0.12)',
+                    background: tier.featured ? '#E8B84B' : 'rgba(255,255,255,0.12)',
                     color: tier.featured ? '#0B0D17' : '#FFFFFF',
                     fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase',
                     padding: '3px 12px', borderRadius: 20, whiteSpace: 'nowrap',
                   }}>{tier.badge}</div>
                 )}
 
-                <div style={{ fontSize: 12, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: tier.featured ? '#F58A1F' : 'rgba(255,255,255,0.40)', marginBottom: 14 }}>
+                <div style={{ fontSize: 12, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: tier.featured ? '#E8B84B' : 'rgba(255,255,255,0.40)', marginBottom: 14 }}>
                   {tier.label}
                 </div>
 
@@ -254,8 +254,8 @@ export default function PackagesPage() {
                   {tier.includes.map((item) => (
                     <div key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: 9 }}>
                       <svg width="13" height="13" fill="none" viewBox="0 0 16 16" style={{ flexShrink: 0, marginTop: 2 }}>
-                        <circle cx="8" cy="8" r="7.5" stroke={tier.featured ? '#F58A1F' : 'rgba(255,255,255,0.18)'} strokeWidth="1"/>
-                        <path d="M4.5 8l2.5 2.5 4-5" stroke={tier.featured ? '#F58A1F' : 'rgba(255,255,255,0.40)'} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        <circle cx="8" cy="8" r="7.5" stroke={tier.featured ? '#E8B84B' : 'rgba(255,255,255,0.18)'} strokeWidth="1"/>
+                        <path d="M4.5 8l2.5 2.5 4-5" stroke={tier.featured ? '#E8B84B' : 'rgba(255,255,255,0.40)'} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                       </svg>
                       <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.65)', lineHeight: 1.45 }}>{item}</span>
                     </div>
@@ -312,7 +312,7 @@ export default function PackagesPage() {
                   AI Implementation<br />Partner Retainer
                 </h2>
                 <p style={{ fontSize: 17, color: 'rgba(255,255,255,0.55)', lineHeight: 1.75, maxWidth: 480 }}>
-                  For companies that want 783 Partners as a standing member of the team —
+                  For companies that want Meritage Partners as a standing member of the team —
                   not just a one-time build partner. We act as your in-house AI function:
                   expanding coverage, maintaining systems, building new automations as the
                   business evolves, and keeping model outputs reliable as your data changes.
@@ -327,7 +327,7 @@ export default function PackagesPage() {
                   { title: 'Quarterly strategic advisory', desc: 'Roadmap sessions, ROI tracking, and guidance on where AI moves the needle next.' },
                 ].map((item) => (
                   <div key={item.title} style={{ display: 'flex', gap: 14, alignItems: 'flex-start', padding: '16px 18px', background: '#0B0D17', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 10 }}>
-                    <div style={{ width: 5, height: 5, borderRadius: '50%', background: '#F58A1F', flexShrink: 0, marginTop: 8 }} />
+                    <div style={{ width: 5, height: 5, borderRadius: '50%', background: '#E8B84B', flexShrink: 0, marginTop: 8 }} />
                     <div>
                       <div style={{ fontSize: 15, fontWeight: 800, color: '#FFFFFF', marginBottom: 3 }}>{item.title}</div>
                       <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.45)', lineHeight: 1.55 }}>{item.desc}</div>
@@ -384,7 +384,7 @@ export default function PackagesPage() {
               Every engagement starts with a 2-week on-site scoping session. No commitment beyond scope.
             </p>
             <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-              <button onClick={() => router.push('/how-it-works')} style={{ padding: '15px 40px', background: '#F58A1F', color: '#0B0D17', border: 'none', borderRadius: 9, fontSize: 14, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', cursor: 'pointer', fontFamily: 'inherit' }}>
+              <button onClick={() => router.push('/how-it-works')} style={{ padding: '15px 40px', background: '#E8B84B', color: '#0B0D17', border: 'none', borderRadius: 9, fontSize: 14, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', cursor: 'pointer', fontFamily: 'inherit' }}>
                 How It Works
               </button>
             </div>
@@ -392,8 +392,7 @@ export default function PackagesPage() {
         </section>
 
         <div style={{ background: '#0B0D17', borderTop: '1px solid rgba(255,255,255,0.06)', padding: '22px 40px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
-          <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.25)', letterSpacing: '0.04em' }}>783 OS · Pricing &amp; Packages</span>
-          <a href="mailto:info@783capital.com" style={{ fontSize: 13, color: 'rgba(255,255,255,0.25)', textDecoration: 'none', letterSpacing: '0.04em' }}>info@783capital.com</a>
+          <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.25)', letterSpacing: '0.04em' }}>Empire OS · Pricing &amp; Packages</span>
         </div>
       </div>
     </>

@@ -62,11 +62,11 @@ export default function SplashScreen({ product = 'Finance OS' }: SplashScreenPro
         {/* Product label */}
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, animation: 'bl-fadeUp 0.5s 0.15s ease both' }}>
           <div style={{ fontFamily: 'Inter, system-ui, sans-serif', fontWeight: 900, fontSize: 22, color: '#FFFFFF', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-            783 Partners
+            Meritage Partners
           </div>
           {/* Animated crimson → navy bar */}
           <div style={{ overflow: 'hidden', height: 2, width: 140 }}>
-            <div style={{ height: 2, background: 'linear-gradient(90deg,#1B4DE6,#BF1A1A,#FFFFFF)', borderRadius: 2, animation: 'bl-barIn 0.65s 0.25s cubic-bezier(0.4,0,0.2,1) both' }} />
+            <div style={{ height: 2, background: 'linear-gradient(90deg,#1D44BF,#BF1A1A,#FFFFFF)', borderRadius: 2, animation: 'bl-barIn 0.65s 0.25s cubic-bezier(0.4,0,0.2,1) both' }} />
           </div>
           <div style={{ fontFamily: 'Inter, system-ui, sans-serif', fontWeight: 700, fontSize: 13, color: 'rgba(255,255,255,0.65)', letterSpacing: '0.22em', textTransform: 'uppercase' }}>
             {product}
@@ -80,7 +80,7 @@ export default function SplashScreen({ product = 'Finance OS' }: SplashScreenPro
             <circle cx="20" cy="20" r="16" stroke="url(#splashGrad)" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="26 76" />
             <defs>
               <linearGradient id="splashGrad" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stopColor="#1B4DE6" />
+                <stop offset="0%" stopColor="#1D44BF" />
                 <stop offset="100%" stopColor="#FFFFFF" />
               </linearGradient>
             </defs>

@@ -169,8 +169,8 @@ export default function MoMPage() {
           <AreaChart data={areaData}>
             <defs>
               <linearGradient id="revGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%"  stopColor="#1B4DE6" stopOpacity={0.28} />
-                <stop offset="95%" stopColor="#1B4DE6" stopOpacity={0.02} />
+                <stop offset="5%"  stopColor="#1D44BF" stopOpacity={0.28} />
+                <stop offset="95%" stopColor="#1D44BF" stopOpacity={0.02} />
               </linearGradient>
             </defs>
             <CartesianGrid strokeDasharray="3 3" stroke="var(--color-chart-grid)" vertical={false} />
@@ -195,11 +195,11 @@ export default function MoMPage() {
             <Area
               type="monotone"
               dataKey="Revenue"
-              stroke="#1B4DE6"
+              stroke="#1D44BF"
               strokeWidth={2.5}
               fill="url(#revGrad)"
-              dot={{ r: 4, fill: '#1B4DE6', strokeWidth: 0 }}
-              activeDot={{ r: 6, fill: '#1B4DE6', stroke: '#1E2236', strokeWidth: 2 }}
+              dot={{ r: 4, fill: '#1D44BF', strokeWidth: 0 }}
+              activeDot={{ r: 6, fill: '#1D44BF', stroke: '#1E2236', strokeWidth: 2 }}
             />
           </AreaChart>
         </ResponsiveContainer>

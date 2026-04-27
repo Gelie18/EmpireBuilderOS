@@ -68,7 +68,7 @@ export default function AdminDocumentsPage() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, paddingBottom: 32 }}>
       <header style={{ background: 'linear-gradient(135deg, rgba(27,77,230,0.14), rgba(245,138,31,0.04))', border: '1px solid rgba(27,77,230,0.28)', borderRadius: 14, padding: '22px 24px' }}>
-        <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#F58A1F', marginBottom: 4 }}>HR Admin</div>
+        <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#E8B84B', marginBottom: 4 }}>HR Admin</div>
         <h1 style={{ fontSize: 22, fontWeight: 800, color: 'var(--color-text)', letterSpacing: '-0.01em' }}>Policies & handbooks</h1>
         <div style={{ fontSize: 13, color: 'var(--color-muted)', marginTop: 6, maxWidth: 720 }}>
           Documents here are what the HR chat searches when employees ask policy questions. The {SEED_DOCUMENTS.length} seed documents cover the basics; add your own handbook or policy and the chat will start citing it immediately.
@@ -78,13 +78,13 @@ export default function AdminDocumentsPage() {
       <section style={{ background: 'var(--color-surf)', border: '1px solid var(--color-border)', borderRadius: 14, padding: '20px 22px' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12, gap: 10, flexWrap: 'wrap' }}>
           <div>
-            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#F58A1F', marginBottom: 4 }}>Document library</div>
+            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#E8B84B', marginBottom: 4 }}>Document library</div>
             <div style={{ fontSize: 13, color: 'var(--color-muted)' }}>{all.length} documents · {uploaded.length} uploaded · {SEED_DOCUMENTS.length} seed</div>
           </div>
           <button
             onClick={() => setShowForm((v) => !v)}
             style={{
-              padding: '10px 16px', background: showForm ? 'var(--color-surf2)' : '#F58A1F',
+              padding: '10px 16px', background: showForm ? 'var(--color-surf2)' : '#E8B84B',
               color: showForm ? 'var(--color-text)' : '#0B0D17',
               border: showForm ? '1px solid var(--color-border)' : 'none',
               borderRadius: 8, fontWeight: 800, fontSize: 12, letterSpacing: '0.08em', textTransform: 'uppercase',
@@ -168,7 +168,7 @@ export default function AdminDocumentsPage() {
                     <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.10em', textTransform: 'uppercase', padding: '2px 7px', borderRadius: 999, background: d.source === 'seed' ? 'var(--color-surf)' : 'rgba(14,165,114,0.14)', border: '1px solid ' + (d.source === 'seed' ? 'var(--color-border)' : 'rgba(14,165,114,0.30)'), color: d.source === 'seed' ? 'var(--color-muted)' : '#0EA572' }}>
                       {d.source === 'seed' ? 'Seed' : 'Uploaded'}
                     </span>
-                    <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.10em', textTransform: 'uppercase', padding: '2px 7px', borderRadius: 999, background: 'rgba(27,77,230,0.10)', border: '1px solid rgba(27,77,230,0.28)', color: '#F58A1F' }}>
+                    <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.10em', textTransform: 'uppercase', padding: '2px 7px', borderRadius: 999, background: 'rgba(27,77,230,0.10)', border: '1px solid rgba(27,77,230,0.28)', color: '#E8B84B' }}>
                       {CATEGORIES.find((c) => c.value === d.category)?.label || d.category}
                     </span>
                   </div>

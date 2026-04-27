@@ -14,7 +14,7 @@ export default function HRLayout({ children }: { children: React.ReactNode }) {
         <PersonaProvider>
           <div className="h-dvh flex flex-col overflow-x-hidden" style={{ background: 'var(--color-bg)' }}>
             <SplashScreen product="HR OS" />
-            <TopNav companyName="783 Partners" product="HR OS" rightSlot={<PersonaSwitcher />} />
+            <TopNav companyName="Meritage Partners" product="HR OS" rightSlot={<PersonaSwitcher />} />
 
             <div className="flex flex-1 min-h-0 overflow-hidden">
               <SideNavHR />

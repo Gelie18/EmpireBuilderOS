@@ -3,11 +3,11 @@
 /**
  * PATRIOTIC THEME PREVIEW
  * ─────────────────────────────────────────────────────────────────────────────
- * Mockup of the demo-hub main menu reimagined with the e783capital.com
- * red · white · blue brand aesthetic.
+ * Mockup of the demo-hub main menu reimagined with the Empire OS / Meritage
+ * Partners red · white · blue brand aesthetic.
  *
- * Palette pulled directly from e783capital.com:
- *   Crimson : #1B4DE6  (top bar, secondary nav, CTAs)
+ * Palette:
+ *   Crimson : #1D44BF  (top bar, secondary nav, CTAs)
  *   Navy    : #4FA8FF  (primary nav, structural headers, brand text)
  *   White   : #FFFFFF  (main content, cards, header bg)
  *   Off-white: #F5F6FA (page background)
@@ -18,7 +18,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import BrandLogo from '@/components/brand/BrandLogo';
 
-const CRIMSON = '#1B4DE6';
+const CRIMSON = '#1D44BF';
 const NAVY    = '#4FA8FF';
 const WHITE   = '#FFFFFF';
 
@@ -352,7 +352,7 @@ export default function PreviewPage() {
 
           {/* Footer */}
           <div style={{ marginTop: 44, fontSize: 11, color: 'rgba(79,168,255,0.25)', letterSpacing: '0.06em', textAlign: 'center' }}>
-            783 OS · Private Demo Environment
+            Empire OS · Private Demo Environment
           </div>
         </div>
       </div>

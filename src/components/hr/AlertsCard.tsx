@@ -17,7 +17,7 @@ export default function AlertsCard() {
     >
       <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 16 }}>
         <div>
-          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#F58A1F', marginBottom: 6 }}>
+          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#E8B84B', marginBottom: 6 }}>
             What you should know
           </div>
           <h2 style={{ fontSize: 18, fontWeight: 800, color: 'var(--color-text)', letterSpacing: '-0.01em' }}>
@@ -113,7 +113,7 @@ function severityIconColor(s: 'info' | 'warning' | 'success'): string {
 function severityCtaColor(s: 'info' | 'warning' | 'success'): string {
   if (s === 'warning') return '#F0A030';
   if (s === 'success') return '#0EA572';
-  return '#F58A1F';
+  return '#E8B84B';
 }
 function severityGlyph(s: 'info' | 'warning' | 'success'): string {
   if (s === 'warning') return '!';

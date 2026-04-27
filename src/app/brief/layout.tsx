@@ -1,5 +1,5 @@
 export const metadata = {
-  title: 'Morning Brief · 783 OS',
+  title: 'Morning Brief · Empire OS',
   description: 'Consolidated pulse across Finance, HR, and Ops.',
 };
 

@@ -62,7 +62,7 @@ function StatusDot({ ok }: { ok: boolean }) {
         height: 8,
         borderRadius: '50%',
         marginRight: 8,
-        background: ok ? '#2DB47A' : '#1B4DE6',
+        background: ok ? '#2DB47A' : '#1D44BF',
       }}
     />
   );
@@ -194,7 +194,7 @@ export default function FulfillmentPage() {
               />
               <Legend />
               <Bar yAxisId="right" dataKey="volume" name="Orders" fill="#E3F0FC" />
-              <Line yAxisId="left" type="monotone" dataKey="sameDay" name="Same-day %" stroke="#1B4DE6" strokeWidth={2.5} dot={{ r: 3 }} />
+              <Line yAxisId="left" type="monotone" dataKey="sameDay" name="Same-day %" stroke="#1D44BF" strokeWidth={2.5} dot={{ r: 3 }} />
               <Line yAxisId="left" type="monotone" dataKey="otd" name="OTD %" stroke="#4FA8FF" strokeWidth={2.5} dot={{ r: 3 }} />
             </ComposedChart>
           </ResponsiveContainer>

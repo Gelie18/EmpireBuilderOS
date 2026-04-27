@@ -191,7 +191,7 @@ export default function LocationsPage() {
             <YAxis type="category" dataKey="loc" tick={{ fill: 'var(--color-chart-text)', fontSize: 12, fontWeight: 700 }} axisLine={false} tickLine={false} />
             <Tooltip contentStyle={TOOLTIP_STYLE} formatter={(v, n) => n === 'Value' ? [fmt$(Number(v)), 'At cost'] : [Number(v).toLocaleString(), 'Units']} />
             <Legend wrapperStyle={{ fontSize: 11, color: 'var(--color-chart-text)' }} />
-            <Bar dataKey="Value" fill="#1B4DE6" radius={[0, 4, 4, 0]} barSize={26} />
+            <Bar dataKey="Value" fill="#1D44BF" radius={[0, 4, 4, 0]} barSize={26} />
           </BarChart>
         </ResponsiveContainer>
       </Card>

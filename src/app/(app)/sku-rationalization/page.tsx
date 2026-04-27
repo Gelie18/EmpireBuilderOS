@@ -865,7 +865,7 @@ function SkuDetailDrawer({
               <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                 <span style={{
                   width: 22, height: 22, borderRadius: 5,
-                  background: 'linear-gradient(135deg,#1B4DE6,#F58A1F)',
+                  background: 'linear-gradient(135deg,#1D44BF,#E8B84B)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                 }}>
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="#FFFFFF">
@@ -914,7 +914,7 @@ function SkuDetailDrawer({
                     position: 'absolute', left: 0, top: 0,
                     width: 20, height: 20, borderRadius: '50%',
                     background: 'rgba(245,138,31,0.15)',
-                    color: '#F58A1F',
+                    color: '#E8B84B',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     fontSize: 10, fontWeight: 900,
                   }}>
@@ -961,7 +961,7 @@ function SkuDetailDrawer({
                 <button
                   onClick={handleApprove}
                   style={{
-                    background: 'linear-gradient(135deg,#1B4DE6,#F58A1F)',
+                    background: 'linear-gradient(135deg,#1D44BF,#E8B84B)',
                     border: 'none', color: '#FFFFFF',
                     padding: '9px 14px', borderRadius: 7, cursor: 'pointer',
                     fontSize: 11, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase',

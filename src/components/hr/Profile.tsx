@@ -108,7 +108,7 @@ function HeaderCard({ p }: { p: Persona }) {
       <div style={{ display: 'flex', alignItems: 'center', gap: 18, flexWrap: 'wrap' }}>
         <div style={{
           width: 72, height: 72, borderRadius: '50%',
-          background: 'linear-gradient(135deg,#1B4DE6,#F58A1F)',
+          background: 'linear-gradient(135deg,#1D44BF,#E8B84B)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           fontWeight: 800, fontSize: 28, color: '#FFFFFF', letterSpacing: '0.04em', flexShrink: 0,
         }}>
@@ -509,7 +509,7 @@ function GoalsCard({ p }: { p: Persona }) {
               </div>
               <div style={{ fontSize: 13, color: 'var(--color-muted)', marginBottom: 10, lineHeight: 1.5 }}>{g.description}</div>
               <div style={{ height: 6, background: 'var(--color-border)', borderRadius: 999, overflow: 'hidden' }}>
-                <div style={{ width: `${g.progress}%`, height: '100%', background: g.progress >= 90 ? '#0EA572' : g.progress >= 40 ? '#F58A1F' : '#F0A030' }} />
+                <div style={{ width: `${g.progress}%`, height: '100%', background: g.progress >= 90 ? '#0EA572' : g.progress >= 40 ? '#E8B84B' : '#F0A030' }} />
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 6, fontSize: 11, color: 'var(--color-muted)' }}>
                 <span>{g.period} · due {g.dueDate}{g.assignedBy ? ` · assigned by ${g.assignedBy}` : ' · self-set'}</span>
@@ -558,7 +558,7 @@ function CareerCard({ p }: { p: Persona }) {
                 <div style={{ fontSize: 11, color: 'var(--color-muted)' }}>{l.provider}</div>
               </div>
               <div style={{ height: 4, background: 'var(--color-border)', borderRadius: 999, overflow: 'hidden', marginTop: 8 }}>
-                <div style={{ width: `${l.progress}%`, height: '100%', background: '#F58A1F' }} />
+                <div style={{ width: `${l.progress}%`, height: '100%', background: '#E8B84B' }} />
               </div>
               <div style={{ fontSize: 11, color: 'var(--color-muted)', marginTop: 4 }}>{l.progress}% complete</div>
             </div>

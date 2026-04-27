@@ -53,7 +53,7 @@ export default function AdminGoalsPage() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, paddingBottom: 32 }}>
       <header style={{ background: 'linear-gradient(135deg, rgba(27,77,230,0.14), rgba(245,138,31,0.04))', border: '1px solid rgba(27,77,230,0.28)', borderRadius: 14, padding: '22px 24px' }}>
-        <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#F58A1F', marginBottom: 4 }}>HR Admin</div>
+        <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#E8B84B', marginBottom: 4 }}>HR Admin</div>
         <h1 style={{ fontSize: 22, fontWeight: 800, color: 'var(--color-text)', letterSpacing: '-0.01em' }}>Draft & assign goals — {headerName}</h1>
         <div style={{ fontSize: 13, color: 'var(--color-muted)', marginTop: 6, maxWidth: 760 }}>
           Managers draft 1–2 goals for each direct report each cycle; employees propose the rest. Employees see the goal on their Profile page and can update progress from the chat.
@@ -62,7 +62,7 @@ export default function AdminGoalsPage() {
       </header>
 
       <section style={{ background: 'var(--color-surf)', border: '1px solid var(--color-border)', borderRadius: 14, padding: '20px 22px' }}>
-        <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#F58A1F', marginBottom: 12 }}>New goal</div>
+        <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#E8B84B', marginBottom: 12 }}>New goal</div>
 
         <div style={{ display: 'grid', gap: 12, gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))' }}>
           <Field label="Assign to">
@@ -99,7 +99,7 @@ export default function AdminGoalsPage() {
             onClick={assign}
             disabled={!title.trim()}
             style={{
-              padding: '10px 18px', background: '#F58A1F', color: '#0B0D17',
+              padding: '10px 18px', background: '#E8B84B', color: '#0B0D17',
               border: 'none', borderRadius: 8, fontWeight: 800, fontSize: 12, letterSpacing: '0.08em', textTransform: 'uppercase',
               cursor: title.trim() ? 'pointer' : 'not-allowed', opacity: title.trim() ? 1 : 0.5, fontFamily: 'inherit',
             }}
@@ -118,7 +118,7 @@ export default function AdminGoalsPage() {
       {/* Existing goals per report */}
       {reportsList && reportsList.length > 0 && (
         <section style={{ background: 'var(--color-surf)', border: '1px solid var(--color-border)', borderRadius: 14, padding: '20px 22px' }}>
-          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#F58A1F', marginBottom: 12 }}>Team snapshot</div>
+          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#E8B84B', marginBottom: 12 }}>Team snapshot</div>
           <div style={{ display: 'grid', gap: 10 }}>
             {reportsList.map((name) => (
               <ReportRow key={name} name={name} />
@@ -131,7 +131,7 @@ export default function AdminGoalsPage() {
       <section style={{ background: 'var(--color-surf)', border: '1px solid var(--color-border)', borderRadius: 14, padding: '20px 22px' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12, flexWrap: 'wrap', gap: 8 }}>
           <div>
-            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#F58A1F', marginBottom: 4 }}>Assigned goals per persona</div>
+            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#E8B84B', marginBottom: 4 }}>Assigned goals per persona</div>
             <div style={{ fontSize: 13, color: 'var(--color-muted)' }}>Live goals visible on each employee&apos;s Profile.</div>
           </div>
         </div>
@@ -221,7 +221,7 @@ function PersonaGoalColumn({ id }: { id: PersonaId }) {
 }
 
 function MiniGoal({ g }: { g: Goal }) {
-  const tone = g.status === 'on_track' ? '#0EA572' : g.status === 'at_risk' ? '#F0A030' : g.status === 'off_track' ? '#E05454' : '#F58A1F';
+  const tone = g.status === 'on_track' ? '#0EA572' : g.status === 'at_risk' ? '#F0A030' : g.status === 'off_track' ? '#E05454' : '#E8B84B';
   return (
     <div style={{ padding: '8px 10px', background: 'var(--color-surf)', border: '1px solid var(--color-border)', borderRadius: 6 }}>
       <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--color-text)' }}>{g.title}</div>

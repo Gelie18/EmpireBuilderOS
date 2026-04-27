@@ -6,7 +6,7 @@ const BASE_PERSONA = `You are the AI CFO for the company. Be direct and specific
 - Use bullet points for lists. Use **bold** for key figures.
 - End with a clear action or recommendation when relevant.`;
 
-const APEX_FINANCIALS = `COMPANY: 783 Partners — baseball B2B industrial manufacturer softball equipment holdco, ~$15M annual revenue.
+const APEX_FINANCIALS = `COMPANY: Meritage Partners — baseball B2B industrial manufacturer softball equipment holdco, ~$15M annual revenue.
 PERIOD: April 2026
 
 P&L SNAPSHOT:

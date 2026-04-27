@@ -34,7 +34,7 @@ export default function PersonaSwitcher() {
         onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = 'rgba(245,138,31,0.16)'; }}
         onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = 'rgba(245,138,31,0.10)'; }}
       >
-        <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#F58A1F' }} />
+        <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#E8B84B' }} />
         <div style={{ textAlign: 'left' }}>
           <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'rgba(245,138,31,0.80)', lineHeight: 1 }}>
             Viewing as
@@ -43,7 +43,7 @@ export default function PersonaSwitcher() {
             {persona.profile.firstName} {persona.profile.lastName}
           </div>
         </div>
-        <svg width="10" height="10" fill="none" stroke="#F58A1F" strokeWidth="2.5" viewBox="0 0 24 24" style={{ marginLeft: 4 }}>
+        <svg width="10" height="10" fill="none" stroke="#E8B84B" strokeWidth="2.5" viewBox="0 0 24 24" style={{ marginLeft: 4 }}>
           <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </button>
@@ -85,7 +85,7 @@ export default function PersonaSwitcher() {
                 onMouseEnter={(e) => { if (!active) (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.04)'; }}
                 onMouseLeave={(e) => { if (!active) (e.currentTarget as HTMLElement).style.background = 'transparent'; }}
               >
-                <div style={{ width: 8, height: 8, borderRadius: '50%', background: active ? '#1B4DE6' : 'rgba(255,255,255,0.15)', flexShrink: 0 }} />
+                <div style={{ width: 8, height: 8, borderRadius: '50%', background: active ? '#1D44BF' : 'rgba(255,255,255,0.15)', flexShrink: 0 }} />
                 <div style={{ flex: 1 }}>
                   <div style={{ fontSize: 13, fontWeight: 700, color: '#FFFFFF', lineHeight: 1.2 }}>
                     {summary.label}

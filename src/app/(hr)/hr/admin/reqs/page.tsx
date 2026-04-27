@@ -44,7 +44,7 @@ const STAGE_COLOR: Record<string, { bg: string; fg: string; label: string }> = {
   'phone-screen': { bg: '#E3F0FC', fg: '#1B4DA8', label: 'Phone screen' },
   'on-site':      { bg: '#FFF0D9', fg: '#8A5A0F', label: 'On-site' },
   offer:          { bg: '#DCF2E4', fg: '#165E36', label: 'Offer out' },
-  accepted:       { bg: '#1B4DE6', fg: '#FFFFFF', label: 'Accepted' },
+  accepted:       { bg: '#1D44BF', fg: '#FFFFFF', label: 'Accepted' },
 };
 
 const PRIORITY_COLOR = { high: '#8A1C16', med: '#8A5A0F', low: '#4A5464' };

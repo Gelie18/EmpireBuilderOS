@@ -1,7 +1,7 @@
 /**
- * 783 Partners topco + subsidiary brand directory.
+ * Meritage Partners topco + subsidiary brand directory.
  *
- * The topco (783 Partners) is the consolidated view; each subco is one of
+ * The topco (Meritage Partners) is the consolidated view; each subco is one of
  * the five operating brands under it. Every entity carries its own brand
  * palette, monogram, product categories, revenue-channel mix, and a short
  * narrative pitch. The Finance OS pages read from this via useSubco() so
@@ -62,11 +62,11 @@ export const CONSOLIDATED_VIEW: Subco = {
   role: 'topco',
   tagline: 'All portcos aggregated — full portfolio view.',
   description:
-    'Virtual view: aggregates all five operating brands under 783 Partners. No individual entity — switch to a specific portco to see brand-level data.',
+    'Virtual view: aggregates all five operating brands under Meritage Partners. No individual entity — switch to a specific portco to see brand-level data.',
   colors: {
-    primary: '#1B4DE6',
+    primary: '#1D44BF',
     primaryRgb: '217, 30, 24',
-    accent: '#F58A1F',
+    accent: '#E8B84B',
     accentRgb: '244, 185, 66',
   },
   products: ['Consolidated — all brands'],
@@ -89,22 +89,22 @@ export const CONSOLIDATED_VIEW: Subco = {
 };
 
 // ── Holdco / Operating Parent ───────────────────────────────────────────────
-// 783 Partners is a real operating entity (the holding company) that rolls up
+// Meritage Partners is a real operating entity (the holding company) that rolls up
 // to the Consolidated view. It is its own selectable portco in the dropdown.
 export const BASES_LOADED_TOPCO: Subco = {
   id: 'bases-loaded',
   slug: 'bases-loaded',
-  name: '783 Partners',
-  shortName: '783 Partners',
+  name: 'Meritage Partners',
+  shortName: 'Meritage Partners',
   monogram: 'BL',
   role: 'subco',
   tagline: 'Baseball & softball holdco — operating parent of 5 brands.',
   description:
-    "783 Partners is the operating holding company that owns and operates five baseball/athletic brands. The entity handles shared services, finance, and cross-brand strategy. Revenue reflects holdco-level operations; the Consolidated view aggregates all portcos.",
+    "Meritage Partners is the operating holding company that owns and operates five baseball/athletic brands. The entity handles shared services, finance, and cross-brand strategy. Revenue reflects holdco-level operations; the Consolidated view aggregates all portcos.",
   colors: {
-    primary: '#1B4DE6',
+    primary: '#1D44BF',
     primaryRgb: '217, 30, 24',
-    accent: '#F58A1F',
+    accent: '#E8B84B',
     accentRgb: '244, 185, 66',
   },
   products: ['Holdco operations', 'Shared services', 'Cross-brand strategy'],
@@ -136,7 +136,7 @@ export const SSK_BASEBALL: Subco = {
   role: 'subco',
   tagline: 'US distributor for SSK Japan — premium gloves, bats, training gear.',
   description:
-    'SSK is a Japanese baseball brand; 783 Partners owns the US distribution arm and operates the brand stateside end-to-end. Z9 / Z7 / Z5 glove series anchor the catalog, with FP5 softball catcher mitts as the emerging line. Revenue share arrangement remits back to Japan parent.',
+    'SSK is a Japanese baseball brand; Meritage Partners owns the US distribution arm and operates the brand stateside end-to-end. Z9 / Z7 / Z5 glove series anchor the catalog, with FP5 softball catcher mitts as the emerging line. Revenue share arrangement remits back to Japan parent.',
   colors: {
     primary: '#FF6B00',
     primaryRgb: '255, 107, 0',

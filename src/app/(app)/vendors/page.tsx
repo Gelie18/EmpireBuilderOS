@@ -45,7 +45,7 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
 }
 
 const TIER_STYLE: Record<VendorSpend['tier'], { bg: string; fg: string; label: string }> = {
-  strategic: { bg: '#1B4DE6', fg: '#FFFFFF', label: 'Strategic' },
+  strategic: { bg: '#1D44BF', fg: '#FFFFFF', label: 'Strategic' },
   core:      { bg: '#E3F0FC', fg: '#1B4DA8', label: 'Core' },
   tail:      { bg: '#E9EDF3', fg: '#4A5464', label: 'Tail' },
 };

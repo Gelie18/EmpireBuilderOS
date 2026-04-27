@@ -1,5 +1,5 @@
 // Inventory demo data — feeds all /ops/inventory/* pages.
-// These 8 SKUs act as the demo catalog for the whole 783 Partners portfolio
+// These 8 SKUs act as the demo catalog for the whole Meritage Partners portfolio
 // (scaled so top-SKU velocity × unit price × 30d ≈ MTD revenue story on /dashboard).
 // Numbers are hand-tuned to tell a consistent story across screens:
 // • ~$345K inventory at cost, ~$890K at retail, ~51K units, 3 locations

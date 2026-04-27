@@ -147,9 +147,9 @@ export default function SupportQueuePage() {
                 row.tone === 'good'
                   ? '#2DB47A'
                   : row.tone === 'warn'
-                  ? '#F58A1F'
+                  ? '#E8B84B'
                   : row.tone === 'danger'
-                  ? '#1B4DE6'
+                  ? '#1D44BF'
                   : '#5D6B7F';
               return (
                 <div key={row.label}>

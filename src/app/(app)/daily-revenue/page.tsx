@@ -158,7 +158,7 @@ export default function DailyRevenuePage() {
             <Tooltip contentStyle={TOOLTIP_STYLE} formatter={(v) => [`$${Number(v).toLocaleString()}`, '']} />
             <Legend wrapperStyle={{ fontSize: 11, color: 'var(--color-chart-text)' }} />
             <Area type="monotone" dataKey="Budget Pace" fill="rgba(136,132,128,0.08)" stroke="rgba(136,132,128,0.4)" strokeDasharray="4 3" strokeWidth={1.5} dot={false} />
-            <Line type="monotone" dataKey="Actual" stroke="#1B4DE6" strokeWidth={2.5} dot={false} />
+            <Line type="monotone" dataKey="Actual" stroke="#1D44BF" strokeWidth={2.5} dot={false} />
             <ReferenceLine x="Apr 12" stroke="#D97706" strokeDasharray="3 2" label={{ value: 'Campaign', fill: '#D97706', fontSize: 10 }} />
           </ComposedChart>
         </ResponsiveContainer>
@@ -174,8 +174,8 @@ export default function DailyRevenuePage() {
             <YAxis tickFormatter={(v) => `$${(v / 1000).toFixed(0)}K`} tick={{ fill: 'var(--color-chart-text)', fontSize: 10 }} axisLine={false} tickLine={false} />
             <Tooltip contentStyle={TOOLTIP_STYLE} formatter={(v) => [`$${Number(v).toLocaleString()}`, '']} />
             <Legend wrapperStyle={{ fontSize: 11, color: 'var(--color-chart-text)' }} />
-            <Bar dataKey="DTC" stackId="a" fill="#1B4DE6" radius={[0, 0, 0, 0]} />
-            <Bar dataKey="Wholesale" stackId="a" fill="#F58A1F" radius={[2, 2, 0, 0]} />
+            <Bar dataKey="DTC" stackId="a" fill="#1D44BF" radius={[0, 0, 0, 0]} />
+            <Bar dataKey="Wholesale" stackId="a" fill="#E8B84B" radius={[2, 2, 0, 0]} />
             <Line type="monotone" dataKey="Budget" stroke="#D97706" strokeWidth={1.5} strokeDasharray="4 3" dot={false} />
           </ComposedChart>
         </ResponsiveContainer>

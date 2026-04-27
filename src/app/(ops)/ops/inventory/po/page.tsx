@@ -337,7 +337,7 @@ export default function POTrackerPage() {
                   padding: '8px 12px',
                   background: 'var(--color-surf2)',
                   borderRadius: 8,
-                  borderLeft: `3px solid ${p.status === 'late' ? '#1B4DE6' : '#4FA8FF'}`,
+                  borderLeft: `3px solid ${p.status === 'late' ? '#1D44BF' : '#4FA8FF'}`,
                 }}
               >
                 <span style={{ fontFamily: 'var(--font-condensed)', fontWeight: 700, color: 'var(--color-text)' }}>

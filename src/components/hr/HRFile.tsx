@@ -202,7 +202,7 @@ function Header({ persona }: { persona: ReturnType<typeof usePersona>['persona']
         padding: '22px 24px',
       }}
     >
-      <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#F58A1F', marginBottom: 6 }}>
+      <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#E8B84B', marginBottom: 6 }}>
         My HR File
       </div>
       <h1 style={{ fontSize: 26, fontWeight: 900, color: 'var(--color-text)', letterSpacing: '-0.01em' }}>

@@ -27,7 +27,7 @@ function TopBar() {
       <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
         <button onClick={() => router.push('/how-it-works')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.65)', fontSize: 13, fontWeight: 700, letterSpacing: '0.08em', fontFamily: 'inherit', padding: 0, textTransform: 'uppercase' }}>How It Works</button>
         <button onClick={() => router.push('/onboarding')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.65)', fontSize: 13, fontWeight: 700, letterSpacing: '0.08em', fontFamily: 'inherit', padding: 0, textTransform: 'uppercase' }}>Onboarding</button>
-        <button onClick={() => router.push('/packages')} style={{ background: '#F58A1F', border: 'none', borderRadius: 7, padding: '8px 20px', color: '#0B0D17', fontSize: 12, fontWeight: 800, letterSpacing: '0.10em', fontFamily: 'inherit', cursor: 'pointer', textTransform: 'uppercase' }}>
+        <button onClick={() => router.push('/packages')} style={{ background: '#E8B84B', border: 'none', borderRadius: 7, padding: '8px 20px', color: '#0B0D17', fontSize: 12, fontWeight: 800, letterSpacing: '0.10em', fontFamily: 'inherit', cursor: 'pointer', textTransform: 'uppercase' }}>
           Packages
         </button>
       </div>
@@ -39,7 +39,7 @@ type FaqItem = { q: string; a: string | React.ReactNode; big?: boolean };
 
 const FAQS: FaqItem[] = [
   {
-    q: "What is 783 OS?",
+    q: "What is Empire OS?",
     a: "An operating system for your business — not software you buy, but a custom-built environment we build on top of your existing systems. Finance OS gives your CFO real-time P&L, cash flow, and variance analysis. HR OS gives every employee an AI advisor for their benefits, comp, and goals. Ops OS keeps fulfillment, inventory, and customer health in one view. Each module is trained on your actual data and wired to your actual tools.",
   },
   {
@@ -64,7 +64,7 @@ const FAQS: FaqItem[] = [
   },
   {
     q: "How do you handle data security?",
-    a: "We work inside your environment wherever possible. Credentials go into your shared 1Password vault — not ours. All data transfer is encrypted in transit and at rest. We sign an NDA before the scope begins. We don't store your production data on 783 Partners infrastructure. You can revoke all access the moment the engagement ends.",
+    a: "We work inside your environment wherever possible. Credentials go into your shared 1Password vault — not ours. All data transfer is encrypted in transit and at rest. We sign an NDA before the scope begins. We don't store your production data on Meritage Partners infrastructure. You can revoke all access the moment the engagement ends.",
   },
   {
     q: "What happens after Day 90?",
@@ -91,7 +91,7 @@ const FAQS: FaqItem[] = [
     q: "What else can you build?",
     a: (
       <>
-        <p style={{ fontSize: 22, fontWeight: 800, color: '#F58A1F', lineHeight: 1.45, marginBottom: 20 }}>
+        <p style={{ fontSize: 22, fontWeight: 800, color: '#E8B84B', lineHeight: 1.45, marginBottom: 20 }}>
           Basically anything.
         </p>
         <p style={{ marginBottom: 16, color: 'rgba(255,255,255,0.75)', lineHeight: 1.75 }}>
@@ -125,7 +125,7 @@ function FaqCard({ item }: { item: FaqItem }) {
         border: item.big ? '1px solid rgba(245,138,31,0.25)' : '1px solid rgba(255,255,255,0.07)',
         borderRadius: 12,
         overflow: 'hidden',
-        borderLeft: item.big ? '4px solid #F58A1F' : undefined,
+        borderLeft: item.big ? '4px solid #E8B84B' : undefined,
       }}
     >
       <button
@@ -137,7 +137,7 @@ function FaqCard({ item }: { item: FaqItem }) {
           fontFamily: 'inherit',
         }}
       >
-        <span style={{ fontSize: item.big ? 22 : 17, fontWeight: item.big ? 900 : 700, color: item.big ? '#F58A1F' : '#FFFFFF', lineHeight: 1.35, letterSpacing: item.big ? '-0.01em' : undefined }}>
+        <span style={{ fontSize: item.big ? 22 : 17, fontWeight: item.big ? 900 : 700, color: item.big ? '#E8B84B' : '#FFFFFF', lineHeight: 1.35, letterSpacing: item.big ? '-0.01em' : undefined }}>
           {item.q}
         </span>
         <span style={{ color: 'rgba(255,255,255,0.40)', fontSize: 20, flexShrink: 0, transition: 'transform 0.2s', display: 'block', transform: open ? 'rotate(45deg)' : 'rotate(0deg)' }}>+</span>
@@ -176,7 +176,7 @@ export default function FaqPage() {
 
         {/* HERO */}
         <section className="faq-hero" style={{ padding: '88px 40px 64px', maxWidth: 900, margin: '0 auto', animation: 'fadeUp 0.6s ease both' }}>
-          <div style={{ fontSize: 12, fontWeight: 800, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#F58A1F', marginBottom: 22 }}>
+          <div style={{ fontSize: 12, fontWeight: 800, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#E8B84B', marginBottom: 22 }}>
             Frequently Asked Questions
           </div>
           <h1 style={{ fontSize: 68, fontWeight: 900, lineHeight: 1.03, letterSpacing: '-0.03em', marginBottom: 26 }}>
@@ -197,7 +197,7 @@ export default function FaqPage() {
         </div>
 
         {/* CTA STRIP */}
-        <section style={{ background: '#1B4DE6', padding: '72px 40px', textAlign: 'center' }}>
+        <section style={{ background: '#1D44BF', padding: '72px 40px', textAlign: 'center' }}>
           <div style={{ maxWidth: 640, margin: '0 auto' }}>
             <h2 style={{ fontSize: 48, fontWeight: 900, color: '#FFFFFF', lineHeight: 1.08, letterSpacing: '-0.025em', marginBottom: 16 }}>
               Still have a question?
@@ -206,9 +206,6 @@ export default function FaqPage() {
               Ask it. We answer every one.
             </p>
             <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
-              <a href="mailto:info@783capital.com" style={{ padding: '15px 38px', background: '#F58A1F', color: '#0B0D17', border: 'none', borderRadius: 9, fontSize: 14, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', cursor: 'pointer', fontFamily: 'inherit', textDecoration: 'none', display: 'inline-block' }}>
-                Email Us
-              </a>
               <button onClick={() => router.push('/packages')} style={{ padding: '15px 38px', background: 'transparent', color: '#FFFFFF', border: '2px solid rgba(255,255,255,0.35)', borderRadius: 9, fontSize: 14, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', cursor: 'pointer', fontFamily: 'inherit' }}>
                 See Packages
               </button>
@@ -217,8 +214,7 @@ export default function FaqPage() {
         </section>
 
         <div style={{ background: '#0F1120', padding: '22px 40px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
-          <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.28)', letterSpacing: '0.04em' }}>783 OS · FAQ</span>
-          <a href="mailto:info@783capital.com" style={{ fontSize: 13, color: 'rgba(255,255,255,0.28)', textDecoration: 'none', letterSpacing: '0.04em' }}>info@783capital.com</a>
+          <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.28)', letterSpacing: '0.04em' }}>Empire OS · FAQ</span>
         </div>
       </div>
     </>

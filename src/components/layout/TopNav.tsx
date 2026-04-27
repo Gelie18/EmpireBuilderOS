@@ -23,8 +23,8 @@ export default function TopNav({ companyName, product = 'Finance OS', rightSlot 
     isConsolidated
       ? 'Consolidated · All Portcos'
       : subco.id === 'bases-loaded'
-        ? '783 Partners · Holdco'
-        : `${subco.name} · 783 Partners`
+        ? 'Meritage Partners · Holdco'
+        : `${subco.name} · Meritage Partners`
   );
 
   const handleLogout = () => {
@@ -55,7 +55,7 @@ export default function TopNav({ companyName, product = 'Finance OS', rightSlot 
         <div className="flex flex-col justify-center min-w-0">
           <span
             className="text-[11px] font-bold uppercase tracking-[0.14em] leading-none"
-            style={{ color: isDark ? 'var(--color-accent)' : '#1B4DE6' }}
+            style={{ color: isDark ? 'var(--color-accent)' : '#1D44BF' }}
           >
             {product}
           </span>
@@ -108,7 +108,7 @@ export default function TopNav({ companyName, product = 'Finance OS', rightSlot 
             border: '1px solid rgba(27,77,230,0.30)',
             borderRadius: 6,
             padding: '5px 10px',
-            color: '#1B4DE6',
+            color: '#1D44BF',
             fontSize: 11,
             fontWeight: 700,
             letterSpacing: '0.06em',

@@ -82,7 +82,7 @@ export default function ForecastPage() {
   // the $1.31M Apr actual becomes ~$0.95M, etc. Consolidated view stays at $1.31M.
   const subcoScale = useMemo(() => {
     if (isConsolidated) return 1;
-    // 783 Partners (holdco entity) uses full scale too
+    // Meritage Partners (holdco entity) uses full scale too
     if (subco.id === 'bases-loaded') return 1;
     return subco.annualRevenue / SUBCO_TOTAL_REVENUE;
   }, [isConsolidated, subco.id, subco.annualRevenue]);
@@ -374,13 +374,13 @@ export default function ForecastPage() {
                   padding: '14px 16px',
                   cursor: 'pointer',
                   textAlign: 'left',
-                  border: isActive ? '2px solid #1B4DE6' : '1px solid var(--color-border)',
+                  border: isActive ? '2px solid #1D44BF' : '1px solid var(--color-border)',
                   background: isActive ? 'var(--color-blue-d)' : 'var(--color-surf)',
                   transition: 'border-color 0.15s, background 0.15s',
                 }}
                 onMouseEnter={(e) => {
                   if (!isActive) {
-                    e.currentTarget.style.borderColor = '#1B4DE6';
+                    e.currentTarget.style.borderColor = '#1D44BF';
                     e.currentTarget.style.background = 'var(--color-blue-d)';
                   }
                 }}
@@ -392,7 +392,7 @@ export default function ForecastPage() {
                 }}
               >
                 <div className="text-[13px] font-bold mb-1"
-                  style={{ fontFamily: 'var(--font-condensed)', color: isActive ? '#1B4DE6' : 'var(--color-text)' }}>
+                  style={{ fontFamily: 'var(--font-condensed)', color: isActive ? '#1D44BF' : 'var(--color-text)' }}>
                   {scenario.label}
                 </div>
                 <div className="text-[11px]" style={{ color: 'var(--color-muted)', lineHeight: 1.4 }}>
@@ -519,12 +519,12 @@ export default function ForecastPage() {
             <AreaChart data={months} margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
               <defs>
                 <linearGradient id="revGradF" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%"  stopColor="#1B4DE6" stopOpacity={0.25} />
-                  <stop offset="95%" stopColor="#1B4DE6" stopOpacity={0} />
+                  <stop offset="5%"  stopColor="#1D44BF" stopOpacity={0.25} />
+                  <stop offset="95%" stopColor="#1D44BF" stopOpacity={0} />
                 </linearGradient>
                 <linearGradient id="niGradF" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%"  stopColor="#F58A1F" stopOpacity={0.25} />
-                  <stop offset="95%" stopColor="#F58A1F" stopOpacity={0} />
+                  <stop offset="5%"  stopColor="#E8B84B" stopOpacity={0.25} />
+                  <stop offset="95%" stopColor="#E8B84B" stopOpacity={0} />
                 </linearGradient>
               </defs>
               <CartesianGrid stroke="var(--color-chart-grid)" strokeDasharray="3 3" />
@@ -548,8 +548,8 @@ export default function ForecastPage() {
                 strokeDasharray="4 3"
                 label={{ value: '← Actual | Projected →', fill: '#D97706', fontSize: 9, position: 'top' }}
               />
-              <Area type="monotone" dataKey="revenue"   stroke="#1B4DE6" fill="url(#revGradF)" strokeWidth={2} dot={false} />
-              <Area type="monotone" dataKey="netIncome" stroke="#F58A1F" fill="url(#niGradF)"  strokeWidth={2} dot={false} />
+              <Area type="monotone" dataKey="revenue"   stroke="#1D44BF" fill="url(#revGradF)" strokeWidth={2} dot={false} />
+              <Area type="monotone" dataKey="netIncome" stroke="#E8B84B" fill="url(#niGradF)"  strokeWidth={2} dot={false} />
             </AreaChart>
           </ResponsiveContainer>
         </div>

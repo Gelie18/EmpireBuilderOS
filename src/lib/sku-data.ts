@@ -259,7 +259,7 @@ const SHUG0: SkuBundle = {
   skus: SHUG0_SKUS,
 };
 
-// ── Consolidated / 783 Partners Topco — all subco SKUs merged ───────────────
+// ── Consolidated / Meritage Partners Topco — all subco SKUs merged ──────────
 // The topco view shows every SKU across the portfolio with a brand label.
 // This gives the CEO a single cross-portfolio Pareto and prune list.
 const ALL_SKUS = [...SSK_SKUS, ...BGL_SKUS, ...DDW_SKUS, ...AAS_SKUS, ...SHUG0_SKUS];

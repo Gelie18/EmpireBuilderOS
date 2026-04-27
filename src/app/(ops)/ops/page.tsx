@@ -36,7 +36,7 @@ const LABEL: React.CSSProperties = {
 };
 
 // ─── Brand colours (parallel with ALL_PORTFOLIO_SUBCOS order) ─────────────────
-const BRAND_COLORS = ['#1B4DE6', '#0A8A5C', '#F58A1F', '#41B6E6', '#FF6B00'];
+const BRAND_COLORS = ['#1D44BF', '#0A8A5C', '#E8B84B', '#41B6E6', '#FF6B00'];
 
 // ─── Consolidated base data ────────────────────────────────────────────────────
 const TOTAL_REVENUE = ALL_PORTFOLIO_SUBCOS.reduce((a, s) => a + s.annualRevenue, 0);
@@ -64,8 +64,8 @@ const TICKET_TREND = [
 
 // Ticket status breakdown (donut)
 const TICKET_STATUS = [
-  { name: 'Open',        value: 247, color: '#1B4DE6'  },
-  { name: 'In Progress', value:  89, color: '#F58A1F'  },
+  { name: 'Open',        value: 247, color: '#1D44BF'  },
+  { name: 'In Progress', value:  89, color: '#E8B84B'  },
   { name: 'Escalated',   value:  34, color: '#FF6B00'  },
   { name: 'Closed Today',value: 128, color: '#2DB47A'  },
 ];
@@ -73,8 +73,8 @@ const TICKET_STATUS = [
 // Issue type breakdown (horizontal bar)
 const ISSUE_TYPES = [
   { type: 'Late / Missing Shipment',  count: 87, color: '#FF6B00' },
-  { type: 'Defective / Damaged Item', count: 64, color: '#1B4DE6' },
-  { type: 'Wrong Item Sent',          count: 41, color: '#F58A1F' },
+  { type: 'Defective / Damaged Item', count: 64, color: '#1D44BF' },
+  { type: 'Wrong Item Sent',          count: 41, color: '#E8B84B' },
   { type: 'Refund / Return Request',  count: 38, color: '#4FA8FF' },
   { type: 'Size / Fit Issue',         count: 29, color: '#2DB47A' },
   { type: 'Backorder / Stockout',     count: 24, color: '#9B59B6' },
@@ -84,7 +84,7 @@ const ISSUE_TYPES = [
 
 // Ticket source channels
 const TICKET_CHANNELS = [
-  { channel: 'Amazon Seller', count: 98, color: '#F58A1F' },
+  { channel: 'Amazon Seller', count: 98, color: '#E8B84B' },
   { channel: 'Email',         count: 71, color: '#4FA8FF' },
   { channel: 'Chat (DTC)',    count: 44, color: '#2DB47A' },
   { channel: 'Phone',         count: 21, color: '#FF6B00' },
@@ -127,15 +127,15 @@ interface TicketRow {
 }
 
 const ALL_TICKETS: TicketRow[] = [
-  { id: 'CS-4821', brandMonogram: 'SSK',  brandColor: '#1B4DE6', brandName: 'SSK Baseball',   issue: 'Z9 Elite glove — lacing snapped after 2 uses',              channel: 'Amazon',      priority: 'high',   age: '3h 12m',  status: 'Escalated'   },
+  { id: 'CS-4821', brandMonogram: 'SSK',  brandColor: '#1D44BF', brandName: 'SSK Baseball',   issue: 'Z9 Elite glove — lacing snapped after 2 uses',              channel: 'Amazon',      priority: 'high',   age: '3h 12m',  status: 'Escalated'   },
   { id: 'CS-4820', brandMonogram: 'SHUG', brandColor: '#FF6B00', brandName: 'Shug0',          issue: 'Metal cleats backordered — needs ETA or refund',            channel: 'Email',       priority: 'high',   age: '4h 08m',  status: 'Escalated'   },
   { id: 'CS-4819', brandMonogram: 'AAS',  brandColor: '#41B6E6', brandName: 'All American',   issue: 'Ordered size Large, received size Small — Elite Pro socks', channel: 'Chat',        priority: 'medium', age: '6h 20m',  status: 'In Progress' },
-  { id: 'CS-4818', brandMonogram: 'SSK',  brandColor: '#1B4DE6', brandName: 'SSK Baseball',   issue: 'Youth bat — cracked barrel, warranty claim filed',           channel: 'Amazon',      priority: 'high',   age: '8h 45m',  status: 'Open'        },
+  { id: 'CS-4818', brandMonogram: 'SSK',  brandColor: '#1D44BF', brandName: 'SSK Baseball',   issue: 'Youth bat — cracked barrel, warranty claim filed',           channel: 'Amazon',      priority: 'high',   age: '8h 45m',  status: 'Open'        },
   { id: 'CS-4816', brandMonogram: 'SHUG', brandColor: '#FF6B00', brandName: 'Shug0',          issue: 'Cleat backorder — refund requested, no ETA provided',       channel: 'Email',       priority: 'high',   age: '12h 30m', status: 'Escalated'   },
-  { id: 'CS-4815', brandMonogram: 'DDW',  brandColor: '#F58A1F', brandName: 'Double Dutch',   issue: 'Gift box damaged in transit — holiday order',               channel: 'Chat',        priority: 'medium', age: '14h 10m', status: 'In Progress' },
+  { id: 'CS-4815', brandMonogram: 'DDW',  brandColor: '#E8B84B', brandName: 'Double Dutch',   issue: 'Gift box damaged in transit — holiday order',               channel: 'Chat',        priority: 'medium', age: '14h 10m', status: 'In Progress' },
   { id: 'CS-4814', brandMonogram: 'BGL',  brandColor: '#0A8A5C', brandName: 'Baseball Lace',  issue: 'Red laces sent instead of Navy — relacing kit order',       channel: 'Email',       priority: 'low',    age: '18h 55m', status: 'Open'        },
   { id: 'CS-4813', brandMonogram: 'AAS',  brandColor: '#41B6E6', brandName: 'All American',   issue: 'Missing compression sleeve in bundle order',                channel: 'Amazon',      priority: 'medium', age: '1d 2h',   status: 'Open'        },
-  { id: 'CS-4812', brandMonogram: 'SSK',  brandColor: '#1B4DE6', brandName: 'SSK Baseball',   issue: 'Glove break-in process — product care question',            channel: 'Social',      priority: 'low',    age: '1d 4h',   status: 'Open'        },
+  { id: 'CS-4812', brandMonogram: 'SSK',  brandColor: '#1D44BF', brandName: 'SSK Baseball',   issue: 'Glove break-in process — product care question',            channel: 'Social',      priority: 'low',    age: '1d 4h',   status: 'Open'        },
   { id: 'CS-4810', brandMonogram: 'BGL',  brandColor: '#0A8A5C', brandName: 'Baseball Lace',  issue: 'Pro relacing kit — back in stock ETA inquiry',             channel: 'Email',       priority: 'low',    age: '2d 1h',   status: 'Open'        },
 ];
 
@@ -150,7 +150,7 @@ const CS_FLAGS = [
   },
   {
     id: 2, severity: 'critical' as const,
-    brandMonogram: 'SSK', brandColor: '#1B4DE6', brandName: 'SSK Baseball',
+    brandMonogram: 'SSK', brandColor: '#1D44BF', brandName: 'SSK Baseball',
     ticketCount: 18,
     title: 'Z9 Elite glove defect — lacing failure across recent batch',
     desc:  '18 warranty claims this week citing lacing snapping within first week of use. Suspected bad batch from Japan factory. Recommend pull-forward replacement program and notify operations to quarantine unsold inventory.',
@@ -164,7 +164,7 @@ const CS_FLAGS = [
   },
   {
     id: 4, severity: 'warning' as const,
-    brandMonogram: 'SSK', brandColor: '#1B4DE6', brandName: 'SSK Baseball',
+    brandMonogram: 'SSK', brandColor: '#1D44BF', brandName: 'SSK Baseball',
     ticketCount: 6,
     title: 'Z9 batting gloves nearing reorder point',
     desc:  '6 customer inquiries about availability this week — early signal of demand spike. Safety stock at 12% of target. Reorder triggered; expect 22-day lead from Japan.',
@@ -180,19 +180,19 @@ const CS_FLAGS = [
 
 const SEVERITY_CONFIG = {
   critical: { color: '#E05454', bg: 'rgba(224,84,84,0.10)',  border: 'rgba(224,84,84,0.30)',  label: 'CRITICAL' },
-  warning:  { color: '#F58A1F', bg: 'rgba(245,138,31,0.10)', border: 'rgba(245,138,31,0.28)', label: 'WARNING'  },
+  warning:  { color: '#E8B84B', bg: 'rgba(245,138,31,0.10)', border: 'rgba(245,138,31,0.28)', label: 'WARNING'  },
   info:     { color: '#4FA8FF', bg: 'rgba(79,168,255,0.10)', border: 'rgba(79,168,255,0.25)', label: 'INFO'     },
 } as const;
 
 const PRIORITY_CONFIG = {
   high:   { color: '#E05454', bg: 'rgba(224,84,84,0.12)',  label: 'HIGH'   },
-  medium: { color: '#F58A1F', bg: 'rgba(245,138,31,0.12)', label: 'MED'    },
+  medium: { color: '#E8B84B', bg: 'rgba(245,138,31,0.12)', label: 'MED'    },
   low:    { color: '#2DB47A', bg: 'rgba(45,180,122,0.12)', label: 'LOW'    },
 } as const;
 
 const STATUS_CONFIG: Record<string, { color: string; bg: string }> = {
   'Open':        { color: '#4FA8FF', bg: 'rgba(79,168,255,0.12)'  },
-  'In Progress': { color: '#F58A1F', bg: 'rgba(245,138,31,0.12)'  },
+  'In Progress': { color: '#E8B84B', bg: 'rgba(245,138,31,0.12)'  },
   'Escalated':   { color: '#E05454', bg: 'rgba(224,84,84,0.12)'   },
 };
 
@@ -227,7 +227,7 @@ const BRAND_AGENTS: Record<string, string> = {
   ddw:          'Double Dutch Wear',
   aas:          'All American Socks',
   shug0:        'Shug0',
-  any:          '783 Partners Support',
+  any:          'Meritage Partners Support',
 };
 
 const CS_SUGGESTED_PROMPTS: Record<string, string[]> = {
@@ -249,7 +249,7 @@ function csReply(text: string, brandId: string): { text: string; ticketId?: stri
       if (brandId === 'ssk') return {
         text: `I'm so sorry to hear about the quality issue with your SSK gear — that's absolutely not the standard we hold ourselves to.\n\nI've opened warranty claim **${ticketId}** for you. Our quality team will review within 24 hours.\n\n**What happens next:**\n• Prepaid return label sent to your email within 2 hours\n• Replacement ships within 2 business days of receiving your return\n• If this is part of a known batch issue, we may upgrade you to the next model at no charge\n\nCould you confirm the best email address for your return label?`,
         ticketId,
-        actions: [{ label: 'Send Return Label Now', color: '#2DB47A' }, { label: 'Flag for QC Team', color: '#F58A1F' }],
+        actions: [{ label: 'Send Return Label Now', color: '#2DB47A' }, { label: 'Flag for QC Team', color: '#E8B84B' }],
       };
       if (brandId === 'shug0') return {
         text: `I'm really sorry about that — your gear should perform at the highest level.\n\nI've created warranty ticket **${ticketId}**. Since you're a Shug0 customer, we've got you covered with our Performance Guarantee.\n\n**Next steps:**\n• Prepaid return label on its way to your email\n• Replacement or full refund — your choice — within 3 business days\n\nCan I get your order number to pull up your details?`,
@@ -266,14 +266,14 @@ function csReply(text: string, brandId: string): { text: string; ticketId?: stri
       return {
         text: `Of course — I'd be happy to start a return for you. Our 30-day return policy covers all unused and defective items.\n\nI've initiated return **${ticketId}**.\n\n**How it works:**\n• You'll receive a prepaid return label via email within 1 hour\n• Drop off at any FedEx or UPS location\n• Refund hits your original payment method within 3–5 business days of us receiving the item\n\nWould you like a refund or an exchange?`,
         ticketId,
-        actions: [{ label: 'Process Refund', color: '#2DB47A' }, { label: 'Process Exchange', color: '#F58A1F' }],
+        actions: [{ label: 'Process Refund', color: '#2DB47A' }, { label: 'Process Exchange', color: '#E8B84B' }],
       };
 
     case 'wrong_item':
       return {
         text: `Oh no — I'm so sorry about that mix-up! That's a fulfillment error on our end and we'll make it right immediately.\n\nI've flagged order **${ticketId}** as a wrong-item shipment.\n\n**Here's what we'll do:**\n• We'll ship the correct item to you today — no need to return the wrong one\n• You'll receive a shipping confirmation within 2 hours\n• Keep or donate the item you received\n\nCan you confirm your shipping address is still current?`,
         ticketId,
-        actions: [{ label: 'Ship Correct Item', color: '#2DB47A' }, { label: 'Arrange Return', color: '#F58A1F' }],
+        actions: [{ label: 'Ship Correct Item', color: '#2DB47A' }, { label: 'Arrange Return', color: '#E8B84B' }],
       };
 
     case 'backorder':
@@ -316,7 +316,7 @@ function csReply(text: string, brandId: string): { text: string; ticketId?: stri
       return {
         text: `Of course — I completely understand. I'm connecting you with a senior member of our team now.\n\n**Reference number: ${ticketId}**\n\nA customer success specialist will reach out within **30 minutes** during business hours (M–F 9am–6pm ET). If it's after hours, they'll contact you first thing tomorrow morning.\n\nIs there a preferred phone number or email for them to reach you?`,
         ticketId,
-        actions: [{ label: 'Queue for Specialist', color: '#F58A1F' }, { label: 'Schedule Callback', color: '#4FA8FF' }],
+        actions: [{ label: 'Queue for Specialist', color: '#E8B84B' }, { label: 'Schedule Callback', color: '#4FA8FF' }],
       };
 
     case 'complaint':
@@ -384,7 +384,7 @@ export default function CustomerServicePage() {
   // CS Chat state
   const [chatBrand, setChatBrand] = useState<string>('any');
   const [chatMessages, setChatMessages] = useState<CSMessage[]>([
-    { id: 'init', role: 'agent', text: `Hi there! 👋 Welcome to 783 Partners Customer Support. I'm your CS agent — I can help with orders, returns, warranty claims, product questions, and more.\n\nSelect a brand above or just type your question below!` },
+    { id: 'init', role: 'agent', text: `Hi there! 👋 Welcome to Meritage Partners Customer Support. I'm your CS agent — I can help with orders, returns, warranty claims, product questions, and more.\n\nSelect a brand above or just type your question below!` },
   ]);
   const [chatInput, setChatInput] = useState('');
   const [chatTyping, setChatTyping] = useState(false);
@@ -422,7 +422,7 @@ export default function CustomerServicePage() {
       delta:   '+14 vs yesterday',
       dColor:  '#E05454',
       dBg:     'rgba(224,84,84,0.12)',
-      accent:  '#1B4DE6',
+      accent:  '#1D44BF',
       sub:     'across all brands',
     },
     {
@@ -438,9 +438,9 @@ export default function CustomerServicePage() {
       label:   'CSAT Score',
       value:   `${BASE_KPIS.csat.toFixed(1)} / 5`,
       delta:   '↓ 0.1 vs last month',
-      dColor:  '#F58A1F',
+      dColor:  '#E8B84B',
       dBg:     'rgba(245,138,31,0.12)',
-      accent:  '#F58A1F',
+      accent:  '#E8B84B',
       sub:     'customer satisfaction',
     },
     {
@@ -456,9 +456,9 @@ export default function CustomerServicePage() {
       label:   'SLA Compliance',
       value:   `${BASE_KPIS.slaCompliance}%`,
       delta:   'Target: 95%',
-      dColor:  '#F58A1F',
+      dColor:  '#E8B84B',
       dBg:     'rgba(245,138,31,0.12)',
-      accent:  '#F58A1F',
+      accent:  '#E8B84B',
       sub:     'resolved within SLA',
     },
     {
@@ -550,7 +550,7 @@ export default function CustomerServicePage() {
               {isConsolidated ? 'Consolidated View' : subco.shortName} · Ops OS
             </div>
             <div style={{ fontSize: 30, fontWeight: 800, lineHeight: 1, color: 'var(--color-text)', letterSpacing: '-0.02em', display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
-              <span style={{ background: '#1B4DE6', color: '#FFFFFF', borderRadius: 5, padding: '3px 9px', fontSize: 14, fontWeight: 900, letterSpacing: '0.02em' }}>
+              <span style={{ background: '#1D44BF', color: '#FFFFFF', borderRadius: 5, padding: '3px 9px', fontSize: 14, fontWeight: 900, letterSpacing: '0.02em' }}>
                 OPS
               </span>
               <span>Ops OS</span>
@@ -624,7 +624,7 @@ export default function CustomerServicePage() {
               <SectionHeader title="Ticket Volume — 30 Day Trend" sub="opened vs resolved" />
               <div style={{ padding: '20px 16px 12px' }}>
                 <div style={{ marginBottom: 8, display: 'flex', gap: 16, paddingLeft: 4 }}>
-                  {[{ label: 'Opened', color: '#1B4DE6' }, { label: 'Resolved', color: '#2DB47A' }].map((l) => (
+                  {[{ label: 'Opened', color: '#1D44BF' }, { label: 'Resolved', color: '#2DB47A' }].map((l) => (
                     <div key={l.label} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                       <div style={{ width: 10, height: 10, borderRadius: 2, background: l.color }} />
                       <span style={{ fontSize: 11, color: 'var(--color-muted)', fontWeight: 600 }}>{l.label}</span>
@@ -635,8 +635,8 @@ export default function CustomerServicePage() {
                   <AreaChart data={ticketTrend} margin={{ top: 4, right: 16, left: 0, bottom: 0 }}>
                     <defs>
                       <linearGradient id="gradOpened" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%"  stopColor="#1B4DE6" stopOpacity={0.30} />
-                        <stop offset="95%" stopColor="#1B4DE6" stopOpacity={0} />
+                        <stop offset="5%"  stopColor="#1D44BF" stopOpacity={0.30} />
+                        <stop offset="95%" stopColor="#1D44BF" stopOpacity={0} />
                       </linearGradient>
                       <linearGradient id="gradResolved" x1="0" y1="0" x2="0" y2="1">
                         <stop offset="5%"  stopColor="#2DB47A" stopOpacity={0.25} />
@@ -647,7 +647,7 @@ export default function CustomerServicePage() {
                     <XAxis dataKey="date" tick={{ fill: 'var(--color-chart-text)', fontSize: 10 }} axisLine={false} tickLine={false} />
                     <YAxis tick={{ fill: 'var(--color-chart-text)', fontSize: 10 }} axisLine={false} tickLine={false} width={30} />
                     <Tooltip contentStyle={TOOLTIP_STYLE} />
-                    <Area type="monotone" dataKey="opened"   stroke="#1B4DE6" fill="url(#gradOpened)"   strokeWidth={2} dot={false} />
+                    <Area type="monotone" dataKey="opened"   stroke="#1D44BF" fill="url(#gradOpened)"   strokeWidth={2} dot={false} />
                     <Area type="monotone" dataKey="resolved" stroke="#2DB47A" fill="url(#gradResolved)" strokeWidth={2} dot={false} />
                   </AreaChart>
                 </ResponsiveContainer>
@@ -842,9 +842,9 @@ export default function CustomerServicePage() {
           {/* Summary KPIs */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 14 }}>
             {[
-              { label: 'Total Returns (MTD)',    value: sc(119).toLocaleString(),     color: '#1B4DE6', accent: '#1B4DE6', sub: 'all brands combined' },
+              { label: 'Total Returns (MTD)',    value: sc(119).toLocaleString(),     color: '#1D44BF', accent: '#1D44BF', sub: 'all brands combined' },
               { label: 'Refund $ (MTD)',          value: fmtUSD(sc(14178)),             color: '#E05454', accent: '#E05454', sub: 'cash returned' },
-              { label: 'Avg Return Rate',         value: `${BASE_KPIS.refundRate}%`,    color: '#F58A1F', accent: '#F58A1F', sub: 'of orders this month' },
+              { label: 'Avg Return Rate',         value: `${BASE_KPIS.refundRate}%`,    color: '#E8B84B', accent: '#E8B84B', sub: 'of orders this month' },
               { label: 'Defect-Driven Returns',   value: `${sc(82).toLocaleString()}`,  color: '#4FA8FF', accent: '#4FA8FF', sub: '69% of all returns' },
             ].map((k, i) => (
               <div key={i} style={{ ...CARD, padding: '18px 20px 14px', position: 'relative', overflow: 'hidden' }}>
@@ -874,8 +874,8 @@ export default function CustomerServicePage() {
                 <div style={{ textAlign: 'center' }}>Trend</div>
               </div>
               {refundRows.map((row, i) => {
-                const rateColor = row.returnRate >= 6 ? '#E05454' : row.returnRate >= 4 ? '#F58A1F' : '#2DB47A';
-                const trendColor = row.trend === '↑' ? '#E05454' : row.trend === '↓' ? '#2DB47A' : '#F58A1F';
+                const rateColor = row.returnRate >= 6 ? '#E05454' : row.returnRate >= 4 ? '#E8B84B' : '#2DB47A';
+                const trendColor = row.trend === '↑' ? '#E05454' : row.trend === '↓' ? '#2DB47A' : '#E8B84B';
                 return (
                   <div
                     key={row.subco.id}
@@ -921,9 +921,9 @@ export default function CustomerServicePage() {
                   layout="vertical"
                   margin={{ top: 0, right: 60, left: 0, bottom: 0 }}
                   data={[
-                    { reason: 'Defective / Quality Issue',  pct: 39, color: '#1B4DE6' },
+                    { reason: 'Defective / Quality Issue',  pct: 39, color: '#1D44BF' },
                     { reason: 'Backorder / Cancellation',  pct: 26, color: '#FF6B00' },
-                    { reason: 'Size / Fit',                pct: 18, color: '#F58A1F' },
+                    { reason: 'Size / Fit',                pct: 18, color: '#E8B84B' },
                     { reason: 'Wrong Item Sent',           pct: 11, color: '#4FA8FF' },
                     { reason: 'Damaged in Transit',        pct:  6, color: '#9B59B6' },
                   ]}
@@ -933,7 +933,7 @@ export default function CustomerServicePage() {
                   <Tooltip contentStyle={TOOLTIP_STYLE} formatter={((v: unknown) => [`${v}%`, 'Share of returns']) as never} />
                   <Bar dataKey="pct" radius={[0, 4, 4, 0]} maxBarSize={20} label={{ position: 'right', fill: 'var(--color-chart-text)', fontSize: 10, formatter: ((v: unknown) => `${v}%`) as never }}>
                     {[0,1,2,3,4].map((i) => (
-                      <Cell key={i} fill={['#1B4DE6','#FF6B00','#F58A1F','#4FA8FF','#9B59B6'][i]} />
+                      <Cell key={i} fill={['#1D44BF','#FF6B00','#E8B84B','#4FA8FF','#9B59B6'][i]} />
                     ))}
                   </Bar>
                 </BarChart>
@@ -948,7 +948,7 @@ export default function CustomerServicePage() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
           {/* Context banner */}
           <div style={{ ...CARD, padding: '18px 22px', background: 'linear-gradient(135deg, rgba(27,77,230,0.10), rgba(245,138,31,0.04))', borderColor: 'rgba(27,77,230,0.28)' }}>
-            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#F58A1F', marginBottom: 6 }}>Demo Mode — Customer Perspective</div>
+            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#E8B84B', marginBottom: 6 }}>Demo Mode — Customer Perspective</div>
             <div style={{ fontSize: 16, fontWeight: 800, color: 'var(--color-text)', letterSpacing: '-0.01em', marginBottom: 6 }}>Chat as a customer · See how the CS agent responds</div>
             <div style={{ fontSize: 13, color: 'var(--color-muted)', lineHeight: 1.6, maxWidth: 760 }}>
               Select a brand below, pick a scenario or type your own message. The AI CS agent knows your product catalog, current known issues (glove lacing defects, cleat backorders, etc.), and can handle returns, warranty claims, order status, and more.
@@ -962,14 +962,14 @@ export default function CustomerServicePage() {
               {(['any', ...ALL_PORTFOLIO_SUBCOS.map((s) => s.id)] as string[]).map((id) => {
                 const s = ALL_PORTFOLIO_SUBCOS.find((x) => x.id === id);
                 const label = s ? s.shortName : 'Any Brand';
-                const color = s ? s.colors.primary : '#1B4DE6';
+                const color = s ? s.colors.primary : '#1D44BF';
                 const active = chatBrand === id;
                 return (
                   <button
                     key={id}
                     onClick={() => {
                       setChatBrand(id);
-                      setChatMessages([{ id: 'init-' + id, role: 'agent', text: `Hi there! 👋 You're chatting with ${BRAND_AGENTS[id] ?? '783 Partners'} support. How can I help you today?` }]);
+                      setChatMessages([{ id: 'init-' + id, role: 'agent', text: `Hi there! 👋 You're chatting with ${BRAND_AGENTS[id] ?? 'Meritage Partners'} support. How can I help you today?` }]);
                     }}
                     style={{
                       padding: '5px 12px', borderRadius: 6, fontSize: 12, fontWeight: 700,
@@ -997,7 +997,7 @@ export default function CustomerServicePage() {
                     borderRadius: 999, padding: '5px 12px',
                     cursor: 'pointer', fontFamily: 'inherit', transition: 'border-color 0.15s',
                   }}
-                  onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = '#1B4DE6'; }}
+                  onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = '#1D44BF'; }}
                   onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--color-border)'; }}
                 >
                   {p}
@@ -1011,9 +1011,9 @@ export default function CustomerServicePage() {
             {/* Chat header */}
             <div style={{ padding: '14px 20px 12px', borderBottom: '1px solid var(--color-border)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
               <div>
-                <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#F58A1F', marginBottom: 3 }}>CS Agent</div>
+                <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#E8B84B', marginBottom: 3 }}>CS Agent</div>
                 <div style={{ fontSize: 15, fontWeight: 800, color: 'var(--color-text)' }}>
-                  {BRAND_AGENTS[chatBrand] ?? '783 Partners Support'}
+                  {BRAND_AGENTS[chatBrand] ?? 'Meritage Partners Support'}
                 </div>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
@@ -1030,7 +1030,7 @@ export default function CustomerServicePage() {
                   <div key={msg.id} style={{ display: 'flex', justifyContent: isCustomer ? 'flex-end' : 'flex-start' }}>
                     <div style={{ maxWidth: '82%' }}>
                       {!isCustomer && (
-                        <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#F58A1F', marginBottom: 4 }}>
+                        <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#E8B84B', marginBottom: 4 }}>
                           CS Agent
                         </div>
                       )}
@@ -1074,7 +1074,7 @@ export default function CustomerServicePage() {
                   <div style={{ background: 'var(--color-surf2)', border: '1px solid var(--color-border)', borderRadius: 10, padding: '14px 16px', display: 'flex', gap: 5 }}>
                     <style>{`@keyframes cs-dot { 0%,80%,100%{transform:scale(0.6);opacity:0.4} 40%{transform:scale(1);opacity:1} }`}</style>
                     {[0, 1, 2].map((i) => (
-                      <span key={i} style={{ width: 7, height: 7, borderRadius: '50%', background: '#1B4DE6', display: 'inline-block', animation: `cs-dot 1.2s ${i * 0.15}s infinite ease-in-out` }} />
+                      <span key={i} style={{ width: 7, height: 7, borderRadius: '50%', background: '#1D44BF', display: 'inline-block', animation: `cs-dot 1.2s ${i * 0.15}s infinite ease-in-out` }} />
                     ))}
                   </div>
                 </div>
@@ -1095,14 +1095,14 @@ export default function CustomerServicePage() {
                   background: 'var(--color-surf2)', border: '1px solid var(--color-border)',
                   borderRadius: 8, color: 'var(--color-text)', fontSize: 14, fontFamily: 'inherit', outline: 'none',
                 }}
-                onFocus={(e) => { e.currentTarget.style.borderColor = '#1B4DE6'; }}
+                onFocus={(e) => { e.currentTarget.style.borderColor = '#1D44BF'; }}
                 onBlur={(e) => { e.currentTarget.style.borderColor = 'var(--color-border)'; }}
               />
               <button
                 type="submit"
                 disabled={!chatInput.trim() || chatTyping}
                 style={{
-                  padding: '10px 16px', background: '#1B4DE6', color: '#FFFFFF',
+                  padding: '10px 16px', background: '#1D44BF', color: '#FFFFFF',
                   border: 'none', borderRadius: 8, fontSize: 12, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase',
                   cursor: chatInput.trim() && !chatTyping ? 'pointer' : 'not-allowed',
                   opacity: chatInput.trim() && !chatTyping ? 1 : 0.5,
@@ -1127,7 +1127,7 @@ export default function CustomerServicePage() {
               <SectionHeader title="SLA Compliance by Brand" sub="— target: 95%" />
               <div style={{ padding: '16px 20px' }}>
                 {slaRows.map((row) => {
-                  const barColor = row.compliance >= 93 ? '#2DB47A' : row.compliance >= 80 ? '#F58A1F' : '#E05454';
+                  const barColor = row.compliance >= 93 ? '#2DB47A' : row.compliance >= 80 ? '#E8B84B' : '#E05454';
                   return (
                     <div key={row.subco.id} style={{ marginBottom: 16 }}>
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 6 }}>
@@ -1156,8 +1156,8 @@ export default function CustomerServicePage() {
                   {[
                     { label: 'Avg Response Time', value: `${scf(BASE_KPIS.avgFirstResponseHrs)}h`, color: '#4FA8FF' },
                     { label: 'Within 24h',         value: '92%',                                    color: '#2DB47A' },
-                    { label: 'Avg Resolution Time',value: '11.2h',                                  color: '#F58A1F' },
-                    { label: 'Reopened Tickets',   value: `${sc(18)}`,                              color: '#F58A1F' },
+                    { label: 'Avg Resolution Time',value: '11.2h',                                  color: '#E8B84B' },
+                    { label: 'Reopened Tickets',   value: `${sc(18)}`,                              color: '#E8B84B' },
                   ].map((m) => (
                     <div key={m.label} style={{ background: 'var(--color-surf2)', borderRadius: 8, padding: '14px 16px' }}>
                       <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'var(--color-muted)', marginBottom: 6, fontFamily: 'var(--font-condensed)' }}>{m.label}</div>
@@ -1173,7 +1173,7 @@ export default function CustomerServicePage() {
               <SectionHeader title="CSAT Trend" sub="— 6 months" />
               <div style={{ padding: '16px 16px 8px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
-                  <span style={{ fontSize: 36, fontWeight: 900, color: '#F58A1F', letterSpacing: '-0.02em', fontVariantNumeric: 'tabular-nums' }}>
+                  <span style={{ fontSize: 36, fontWeight: 900, color: '#E8B84B', letterSpacing: '-0.02em', fontVariantNumeric: 'tabular-nums' }}>
                     {BASE_KPIS.csat.toFixed(1)}
                   </span>
                   <div>
@@ -1187,7 +1187,7 @@ export default function CustomerServicePage() {
                     <XAxis dataKey="month" tick={{ fill: 'var(--color-chart-text)', fontSize: 10 }} axisLine={false} tickLine={false} />
                     <YAxis domain={[3.8, 5.0]} tick={{ fill: 'var(--color-chart-text)', fontSize: 10 }} axisLine={false} tickLine={false} width={30} />
                     <Tooltip contentStyle={TOOLTIP_STYLE} formatter={((v: unknown) => [`${v} / 5.0`, 'CSAT']) as never} />
-                    <Line type="monotone" dataKey="csat" stroke="#F58A1F" strokeWidth={2.5} dot={{ fill: '#F58A1F', r: 4 }} />
+                    <Line type="monotone" dataKey="csat" stroke="#E8B84B" strokeWidth={2.5} dot={{ fill: '#E8B84B', r: 4 }} />
                   </LineChart>
                 </ResponsiveContainer>
 
@@ -1206,7 +1206,7 @@ export default function CustomerServicePage() {
                       <div key={a.name} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '6px 0', borderBottom: '1px solid var(--color-border)' }}>
                         <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-text)', flex: 1 }}>{a.name}</span>
                         <span style={{ fontSize: 11, color: 'var(--color-muted)', width: 60, textAlign: 'right' }}>{a.tickets} tickets</span>
-                        <span style={{ fontSize: 12, fontWeight: 700, color: '#F58A1F', width: 48, textAlign: 'right' }}>{a.csat}/5</span>
+                        <span style={{ fontSize: 12, fontWeight: 700, color: '#E8B84B', width: 48, textAlign: 'right' }}>{a.csat}/5</span>
                         <span style={{ fontSize: 11, color: 'var(--color-muted)', width: 56, textAlign: 'right' }}>{a.avgRes}</span>
                       </div>
                     ))}
@@ -1226,8 +1226,8 @@ export default function CustomerServicePage() {
                   margin={{ top: 0, right: 60, left: 0, bottom: 0 }}
                   data={[
                     { type: 'Backorder / Stockout',     hours: 28.4, color: '#9B59B6' },
-                    { type: 'Defective / Damaged',      hours: 18.7, color: '#1B4DE6' },
-                    { type: 'Wrong Item Sent',           hours: 12.1, color: '#F58A1F' },
+                    { type: 'Defective / Damaged',      hours: 18.7, color: '#1D44BF' },
+                    { type: 'Wrong Item Sent',           hours: 12.1, color: '#E8B84B' },
                     { type: 'Refund / Return Request',  hours: 10.2, color: '#4FA8FF' },
                     { type: 'Late / Missing Shipment',  hours:  8.4, color: '#FF6B00' },
                     { type: 'Size / Fit',               hours:  6.8, color: '#2DB47A' },
@@ -1239,7 +1239,7 @@ export default function CustomerServicePage() {
                   <Tooltip contentStyle={TOOLTIP_STYLE} formatter={((v: unknown) => [`${v}h avg`, 'Resolution time']) as never} />
                   <Bar dataKey="hours" radius={[0, 4, 4, 0]} maxBarSize={18} label={{ position: 'right', fill: 'var(--color-chart-text)', fontSize: 10, formatter: ((v: unknown) => `${v}h`) as never }}>
                     {[0,1,2,3,4,5,6].map((i) => (
-                      <Cell key={i} fill={['#9B59B6','#1B4DE6','#F58A1F','#4FA8FF','#FF6B00','#2DB47A','#41B6E6'][i]} />
+                      <Cell key={i} fill={['#9B59B6','#1D44BF','#E8B84B','#4FA8FF','#FF6B00','#2DB47A','#41B6E6'][i]} />
                     ))}
                   </Bar>
                 </BarChart>

@@ -66,7 +66,7 @@ function buildRows() {
 }
 
 const URGENCY_COLORS = {
-  critical: { bg: 'rgba(27,77,230,0.18)',  fg: '#1B4DE6', label: 'Critical' },
+  critical: { bg: 'rgba(27,77,230,0.18)',  fg: '#1D44BF', label: 'Critical' },
   high:     { bg: 'rgba(245,138,31,0.20)', fg: '#D97706', label: 'High' },
   medium:   { bg: 'rgba(75,155,232,0.18)', fg: '#4B9BE8', label: 'Plan' },
   none:     { bg: 'rgba(45,180,122,0.15)', fg: '#2DB47A', label: 'OK' },
@@ -211,10 +211,10 @@ export default function ReorderPlannerPage() {
                         padding: '3px 8px', borderRadius: 4,
                       }}>{u.label}</span>
                     </td>
-                    <td style={{ padding: '10px 8px', textAlign: 'right', fontFamily: 'var(--font-condensed)', fontWeight: 700, fontSize: 13, color: r.sku.onHand === 0 ? '#1B4DE6' : 'var(--color-text)' }}>
+                    <td style={{ padding: '10px 8px', textAlign: 'right', fontFamily: 'var(--font-condensed)', fontWeight: 700, fontSize: 13, color: r.sku.onHand === 0 ? '#1D44BF' : 'var(--color-text)' }}>
                       {r.sku.onHand.toLocaleString()}
                     </td>
-                    <td style={{ padding: '10px 8px', textAlign: 'right', fontFamily: 'var(--font-condensed)', fontSize: 13, color: r.sku.daysOfCover < 14 ? '#1B4DE6' : 'var(--color-muted)' }}>
+                    <td style={{ padding: '10px 8px', textAlign: 'right', fontFamily: 'var(--font-condensed)', fontSize: 13, color: r.sku.daysOfCover < 14 ? '#1D44BF' : 'var(--color-muted)' }}>
                       {r.sku.daysOfCover.toFixed(0)}d
                     </td>
                     <td style={{ padding: '10px 8px', textAlign: 'right', fontFamily: 'var(--font-condensed)', fontSize: 13, color: 'var(--color-muted)' }}>
@@ -281,7 +281,7 @@ export default function ReorderPlannerPage() {
             </button>
             <Link href="/ops/inventory/po" className="no-underline">
               <button style={{
-                background: 'linear-gradient(135deg, #1B4DE6 0%, #F58A1F 100%)',
+                background: 'linear-gradient(135deg, #1D44BF 0%, #E8B84B 100%)',
                 color: '#FFFFFF', border: 'none', padding: '10px 18px',
                 fontSize: 12, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase',
                 borderRadius: 6, cursor: 'pointer', fontFamily: 'inherit',

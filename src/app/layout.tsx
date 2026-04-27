@@ -2,8 +2,8 @@ import type { Metadata, Viewport } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: '783 OS — Finance, HR & Ops Intelligence',
-  description: 'AI-driven business operating system — 783 Partners',
+  title: 'Empire OS — Finance, HR & Ops Intelligence',
+  description: 'AI-driven business operating system — Meritage Partners',
 };
 
 export const viewport: Viewport = {

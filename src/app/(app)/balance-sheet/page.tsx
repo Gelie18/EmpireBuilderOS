@@ -187,7 +187,7 @@ function BSRow({ label, value, type, insight }: { label: string; value: number |
             {isClickable && (
               <span style={{
                 fontSize: 10,
-                color: '#1B4DE6',
+                color: '#1D44BF',
                 opacity: 0.7,
                 display: 'inline-block',
                 transform: open ? 'rotate(90deg)' : 'rotate(0deg)',
@@ -203,12 +203,12 @@ function BSRow({ label, value, type, insight }: { label: string; value: number |
             <div style={{
               padding: '10px 20px 10px 32px',
               background: 'rgba(27,77,230,0.08)',
-              borderLeft: '3px solid #1B4DE6',
+              borderLeft: '3px solid #1D44BF',
               fontSize: 13,
               lineHeight: 1.6,
               color: 'var(--color-chart-text)',
             }}>
-              <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#1B4DE6', display: 'block', marginBottom: 4 }}>AI CFO Insight</span>
+              <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#1D44BF', display: 'block', marginBottom: 4 }}>AI CFO Insight</span>
               {insight}
             </div>
           </td>

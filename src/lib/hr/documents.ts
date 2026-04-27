@@ -46,8 +46,8 @@ export const SEED_DOCUMENTS: PolicyDocument[] = [
     summary: 'Core employment terms, workplace conduct, time & attendance basics, and where to find detailed policies.',
     sections: [
       {
-        heading: 'About 783 Partners',
-        body: '783 Partners is a baseball and softball holding company operating 5 brands across equipment manufacturing, direct-to-consumer retail, team sales, training technology, and field services. Full-time employees of 783 Partners (the holdco) are covered by this handbook. Portfolio-company employees follow their operating-company handbook, which supplements (but does not override) this document.',
+        heading: 'About Meritage Partners',
+        body: 'Meritage Partners is a baseball and softball holding company operating 5 brands across equipment manufacturing, direct-to-consumer retail, team sales, training technology, and field services. Full-time employees of Meritage Partners (the holdco) are covered by this handbook. Portfolio-company employees follow their operating-company handbook, which supplements (but does not override) this document.',
       },
       {
         heading: 'Employment classification',
@@ -67,7 +67,7 @@ export const SEED_DOCUMENTS: PolicyDocument[] = [
       },
       {
         heading: 'Confidentiality & IP',
-        body: 'All employees sign a confidentiality and IP assignment agreement at hire. Customer information, financial information, and internal plans are strictly confidential. Work product created on company time or using company resources is the property of 783 Partners.',
+        body: 'All employees sign a confidentiality and IP assignment agreement at hire. Customer information, financial information, and internal plans are strictly confidential. Work product created on company time or using company resources is the property of Meritage Partners.',
       },
       {
         heading: 'Where to find more',
@@ -257,7 +257,7 @@ export const SEED_DOCUMENTS: PolicyDocument[] = [
     sections: [
       {
         heading: 'Anti-harassment & equal opportunity',
-        body: 'We are an equal-opportunity employer. Harassment, discrimination, or retaliation based on race, color, religion, sex, gender identity, sexual orientation, national origin, age, disability, veteran status, or any other protected category is prohibited. Report concerns to your manager, HR, or our anonymous ethics hotline (1-800-555-0100, also accessible via ethics.783capital.com).',
+        body: 'We are an equal-opportunity employer. Harassment, discrimination, or retaliation based on race, color, religion, sex, gender identity, sexual orientation, national origin, age, disability, veteran status, or any other protected category is prohibited. Report concerns to your manager, HR, or our anonymous ethics hotline (1-800-555-0100, also accessible via ethics.meritagepartners.com).',
       },
       {
         heading: 'Conflicts of interest',
@@ -265,7 +265,7 @@ export const SEED_DOCUMENTS: PolicyDocument[] = [
       },
       {
         heading: 'Outside employment',
-        body: 'Outside employment is permitted as long as it does not compete with 783 Partners, does not use company resources, and does not impair job performance. Disclose it via the outside-employment form if it is regular (more than occasional).',
+        body: 'Outside employment is permitted as long as it does not compete with Meritage Partners, does not use company resources, and does not impair job performance. Disclose it via the outside-employment form if it is regular (more than occasional).',
       },
       {
         heading: 'Whistleblower protection',
@@ -273,7 +273,7 @@ export const SEED_DOCUMENTS: PolicyDocument[] = [
       },
       {
         heading: 'Social media',
-        body: 'Personal social media is your own. You are free to identify as a 783 Partners employee. Do not share confidential information, speak on behalf of the company without authorization, or harass colleagues. Common sense.',
+        body: 'Personal social media is your own. You are free to identify as a Meritage Partners employee. Do not share confidential information, speak on behalf of the company without authorization, or harass colleagues. Common sense.',
       },
     ],
     source: 'seed',
@@ -319,7 +319,7 @@ export const SEED_DOCUMENTS: PolicyDocument[] = [
     sections: [
       {
         heading: 'Pay schedule',
-        body: 'We pay biweekly (every other Friday), 26 pay periods per year. Pay period ends on a Sunday; paychecks deposit the following Friday. New hires: first paycheck covers the partial pay period from start date through the nearest period end. For a list of pay dates, see payroll@783capital.com or the HR chat.',
+        body: 'We pay biweekly (every other Friday), 26 pay periods per year. Pay period ends on a Sunday; paychecks deposit the following Friday. New hires: first paycheck covers the partial pay period from start date through the nearest period end. For a list of pay dates, see payroll@meritagepartners.com or the HR chat.',
       },
       {
         heading: 'Direct deposit',

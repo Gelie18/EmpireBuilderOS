@@ -96,9 +96,9 @@ export default function SideNav() {
             OS
           </div>
         </div>
-        <div style={{ width: 28, height: 2, background: 'linear-gradient(90deg,#1B4DE6,rgba(27,77,230,0.40))', borderRadius: 2, marginTop: 10 }} />
+        <div style={{ width: 28, height: 2, background: 'linear-gradient(90deg,#1D44BF,rgba(27,77,230,0.40))', borderRadius: 2, marginTop: 10 }} />
         <div style={{ marginTop: 10, fontSize: 9.5, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.10em', color: 'var(--color-sidebar-muted)', lineHeight: 1.3 }}>
-          Finance OS · 783 Partners
+          Finance OS · Meritage Partners
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 10 }}>
           <span style={{ background: 'rgba(27,77,230,0.22)', border: '1px solid rgba(27,77,230,0.45)', color: 'rgba(255,255,255,0.80)', fontSize: 9, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', padding: '2px 7px', borderRadius: 3 }}>Apr 2026</span>
@@ -153,7 +153,7 @@ export default function SideNav() {
                   >
                     {/* Active left bar */}
                     {active && (
-                      <div style={{ position: 'absolute', left: 0, top: '20%', height: '60%', width: 2.5, borderRadius: 2, background: '#1B4DE6' }} />
+                      <div style={{ position: 'absolute', left: 0, top: '20%', height: '60%', width: 2.5, borderRadius: 2, background: '#1D44BF' }} />
                     )}
                     <span style={{ display: 'flex', alignItems: 'center', flexShrink: 0, color: active ? '#FFFFFF' : 'var(--color-sidebar-muted)', opacity: active ? 1 : 0.75 }}>
                       {item.icon}
@@ -166,7 +166,7 @@ export default function SideNav() {
                         style={{
                           fontSize: 10, fontWeight: 800, minWidth: 18, textAlign: 'center',
                           padding: '2px 6px', borderRadius: 9,
-                          background: '#1B4DE6', color: '#FFFFFF',
+                          background: '#1D44BF', color: '#FFFFFF',
                           lineHeight: 1,
                         }}
                       >
@@ -230,7 +230,7 @@ export default function SideNav() {
           onClick={() => window.dispatchEvent(new CustomEvent('open-chat'))}
           style={{
             width: '100%', display: 'flex', alignItems: 'center', gap: 10, padding: '10px 14px',
-            background: 'linear-gradient(135deg, #1B4DE6 0%, #F58A1F 100%)', border: 'none', borderRadius: 8, cursor: 'pointer',
+            background: 'linear-gradient(135deg, #1D44BF 0%, #E8B84B 100%)', border: 'none', borderRadius: 8, cursor: 'pointer',
             boxShadow: '0 2px 14px rgba(27,77,230,0.40)',
             transition: 'filter 0.15s, box-shadow 0.15s',
           }}
@@ -249,7 +249,7 @@ export default function SideNav() {
           </svg>
         </button>
         <div style={{ marginTop: 10, fontSize: 9, textTransform: 'uppercase', letterSpacing: '0.12em', color: 'var(--color-sidebar-muted)', textAlign: 'center' }}>
-          783 OS v1.0
+          Empire OS v1.0
         </div>
       </div>
     </nav>

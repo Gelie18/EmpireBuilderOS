@@ -67,7 +67,7 @@ function SectionTitle({ children, right }: { children: React.ReactNode; right?: 
 const STATUS_COLORS: Record<StockStatus, { bg: string; fg: string; label: string }> = {
   healthy:   { bg: 'rgba(45,180,122,0.18)',  fg: '#2DB47A', label: 'Healthy'   },
   low:       { bg: 'rgba(245,138,31,0.20)',  fg: '#D97706', label: 'Low'       },
-  stockout:  { bg: 'rgba(27,77,230,0.20)',   fg: '#1B4DE6', label: 'Stockout'  },
+  stockout:  { bg: 'rgba(27,77,230,0.20)',   fg: '#1D44BF', label: 'Stockout'  },
   overstock: { bg: 'rgba(136,132,128,0.20)', fg: '#8B5CF6', label: 'Overstock' },
   deadstock: { bg: 'rgba(136,132,128,0.20)', fg: '#6B7280', label: 'Deadstock' },
 };
@@ -110,7 +110,7 @@ export default function InventoryDashboardPage() {
           </Link>
           {rollup.stockouts > 0 && (
             <div className="font-bold uppercase tracking-[0.06em]"
-              style={{ background: 'rgba(27,77,230,0.18)', color: '#1B4DE6', fontFamily: 'var(--font-condensed)', fontSize: 13, padding: '6px 14px', borderRadius: 4 }}>
+              style={{ background: 'rgba(27,77,230,0.18)', color: '#1D44BF', fontFamily: 'var(--font-condensed)', fontSize: 13, padding: '6px 14px', borderRadius: 4 }}>
               {rollup.stockouts} stockout{rollup.stockouts !== 1 ? 's' : ''}
             </div>
           )}
@@ -160,7 +160,7 @@ export default function InventoryDashboardPage() {
             { tone: 'warn',     title: 'SSK-RAIN-GRN-L — $2.6K write-down if unsold by Q3', body: 'Recommend seasonal clearance bundle with hoodies in May email.', href: '/ops/inventory/deadstock' },
           ].map((a) => {
             const tone = a.tone === 'critical'
-              ? { bar: '#1B4DE6', bg: 'rgba(27,77,230,0.08)', tag: 'CRITICAL', tagBg: 'rgba(27,77,230,0.18)', tagFg: '#1B4DE6' }
+              ? { bar: '#1D44BF', bg: 'rgba(27,77,230,0.08)', tag: 'CRITICAL', tagBg: 'rgba(27,77,230,0.18)', tagFg: '#1D44BF' }
               : { bar: '#D97706', bg: 'rgba(245,138,31,0.08)', tag: 'WATCH',    tagBg: 'rgba(245,138,31,0.18)', tagFg: '#D97706' };
             return (
               <Link key={a.title} href={a.href} className="no-underline">
@@ -200,9 +200,9 @@ export default function InventoryDashboardPage() {
             <YAxis yAxisId="right" orientation="right" tickFormatter={(v) => `${v}d`} tick={{ fill: 'var(--color-chart-text)', fontSize: 10 }} axisLine={false} tickLine={false} />
             <Tooltip contentStyle={TOOLTIP_STYLE} />
             <Legend wrapperStyle={{ fontSize: 11, color: 'var(--color-chart-text)' }} />
-            <Area  yAxisId="left"  dataKey="onHand"    name="Inventory $"    fill="rgba(27,77,230,0.18)" stroke="#1B4DE6" strokeWidth={2} />
-            <Line  yAxisId="right" dataKey="doc"       name="Days of cover"  stroke="#F58A1F" strokeWidth={2.5} dot={{ r: 3 }} />
-            <Bar   yAxisId="right" dataKey="stockouts" name="Stockouts"      fill="#1B4DE6" barSize={16} />
+            <Area  yAxisId="left"  dataKey="onHand"    name="Inventory $"    fill="rgba(27,77,230,0.18)" stroke="#1D44BF" strokeWidth={2} />
+            <Line  yAxisId="right" dataKey="doc"       name="Days of cover"  stroke="#E8B84B" strokeWidth={2.5} dot={{ r: 3 }} />
+            <Bar   yAxisId="right" dataKey="stockouts" name="Stockouts"      fill="#1D44BF" barSize={16} />
           </ComposedChart>
         </ResponsiveContainer>
       </Card>
@@ -309,7 +309,7 @@ export default function InventoryDashboardPage() {
                 <td className="px-3 py-3 text-right" style={{ fontSize: 13, color: 'var(--color-muted)' }}>{d.daysOnHand}d</td>
                 <td className="px-3 py-3 text-right" style={{ fontFamily: 'var(--font-condensed)', fontSize: 14, fontWeight: 700, color: '#D97706' }}>−{d.suggestedMarkdown}%</td>
                 <td className="px-3 py-3 text-right" style={{ fontFamily: 'var(--font-condensed)', fontSize: 14, fontWeight: 700, color: '#2DB47A' }}>{fmt$(d.estRecovery)}</td>
-                <td className="px-3 py-3 text-right" style={{ fontFamily: 'var(--font-condensed)', fontSize: 14, fontWeight: 700, color: '#1B4DE6' }}>−{fmt$(d.writeDownIfUnsold)}</td>
+                <td className="px-3 py-3 text-right" style={{ fontFamily: 'var(--font-condensed)', fontSize: 14, fontWeight: 700, color: '#1D44BF' }}>−{fmt$(d.writeDownIfUnsold)}</td>
               </tr>
             ))}
           </tbody>

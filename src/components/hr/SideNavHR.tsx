@@ -128,12 +128,12 @@ export default function SideNavHR() {
               HR OS
             </div>
             <div style={{ fontSize: 9.5, fontWeight: 500, color: 'var(--color-sidebar-muted)', letterSpacing: '0.06em', marginTop: 2 }}>
-              783 Partners
+              Meritage Partners
             </div>
           </div>
         </div>
         {/* Crimson gradient bar */}
-        <div style={{ width: '100%', height: 2, background: 'linear-gradient(90deg,#1B4DE6,#BF1A1A,#4FA8FF)', borderRadius: 2, marginTop: 12 }} />
+        <div style={{ width: '100%', height: 2, background: 'linear-gradient(90deg,#1D44BF,#BF1A1A,#4FA8FF)', borderRadius: 2, marginTop: 12 }} />
         <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 10 }}>
           <span style={{ background: 'rgba(45,180,122,0.18)', border: '1px solid rgba(45,180,122,0.35)', color: '#5EDBA8', fontSize: 9, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', padding: '2px 7px', borderRadius: 3 }}>Demo</span>
           <span style={{ background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.20)', color: 'rgba(255,255,255,0.65)', fontSize: 9, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', padding: '2px 7px', borderRadius: 3 }}>Phase 1</span>
@@ -225,7 +225,7 @@ export default function SideNavHR() {
           </div>
         </Link>
         <div style={{ marginTop: 6, fontSize: 9, textTransform: 'uppercase', letterSpacing: '0.12em', color: 'var(--color-sidebar-subtle)', textAlign: 'center' }}>
-          783 Partners HR OS v1.0
+          Meritage Partners HR OS v1.0
         </div>
       </div>
     </nav>

@@ -30,7 +30,7 @@ const CHANNEL_COLOR: Record<string, string> = {
   'Shopify (DTC)':     '#5E8E3E',
   'BigCommerce (DTC)': '#0D52FF',
   'Retail (QB)':       '#7C3AED',
-  'Wholesale':         '#F58A1F',
+  'Wholesale':         '#E8B84B',
   'Direct':            '#2DB47A',
 };
 
@@ -124,7 +124,7 @@ export default function ConsolidationPage() {
           <div style={{ minWidth: 0 }}>
             <div style={{
               fontSize: 11, fontWeight: 700, letterSpacing: '0.14em',
-              textTransform: 'uppercase', color: '#F58A1F', marginBottom: 8,
+              textTransform: 'uppercase', color: '#E8B84B', marginBottom: 8,
             }}>
               Consolidation Layer · Portfolio Roll-up
             </div>
@@ -133,7 +133,7 @@ export default function ConsolidationPage() {
               color: 'var(--color-text)', letterSpacing: '-0.02em',
               fontFamily: DISPLAY_FONT,
             }}>
-              783 Partners · {operating.length} Operating Brands
+              Meritage Partners · {operating.length} Operating Brands
             </div>
             <div style={{ marginTop: 10, fontSize: 14, color: 'var(--color-muted)', maxWidth: 780, lineHeight: 1.5 }}>
               One financial picture across every subsidiary. Revenue, margin, channel mix, and SKU
@@ -144,7 +144,7 @@ export default function ConsolidationPage() {
             <button
               onClick={() => setSubcoId('consolidated')}
               style={{
-                background: '#1B4DE6', border: 'none', color: '#FFFFFF',
+                background: '#1D44BF', border: 'none', color: '#FFFFFF',
                 padding: '10px 16px', borderRadius: 8, cursor: 'pointer',
                 fontSize: 12, fontWeight: 800, letterSpacing: '0.10em', textTransform: 'uppercase',
                 boxShadow: '0 4px 14px rgba(27,77,230,0.35)',
@@ -158,8 +158,8 @@ export default function ConsolidationPage() {
 
       {/* ── KPI strip ── */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <Kpi label="Consolidated Revenue" value={money(totals.totalRev)} sub="Trailing 12 months" accent="#1B4DE6" />
-        <Kpi label="Blended Gross Margin" value={`${totals.weightedGM.toFixed(1)}%`} sub="Revenue-weighted avg" accent="#F58A1F" />
+        <Kpi label="Consolidated Revenue" value={money(totals.totalRev)} sub="Trailing 12 months" accent="#1D44BF" />
+        <Kpi label="Blended Gross Margin" value={`${totals.weightedGM.toFixed(1)}%`} sub="Revenue-weighted avg" accent="#E8B84B" />
         <Kpi label="Total Gross Profit" value={money(totals.totalGP)} sub="Annualized" accent="#2DB47A" />
         <Kpi label="Dead-stock Capital" value={money(skuHealth.cashInDeadStock)} sub={`${skuHealth.deadSkus} zero-mover SKUs`} accent="#E06060" />
       </div>
@@ -268,7 +268,7 @@ export default function ConsolidationPage() {
                 <td style={{ ...tdStyle, fontWeight: 800, fontSize: 13 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                     <span style={{
-                      background: '#F58A1F', color: '#0B0D17',
+                      background: '#E8B84B', color: '#0B0D17',
                       borderRadius: 4, padding: '3px 7px', fontSize: 11, fontWeight: 900,
                       minWidth: 36, textAlign: 'center',
                     }}>
@@ -277,10 +277,10 @@ export default function ConsolidationPage() {
                     <span>Consolidated Total</span>
                   </div>
                 </td>
-                <td style={{ ...tdStyle, textAlign: 'right', fontFamily: DISPLAY_FONT, fontWeight: 900, fontSize: 14, color: '#F58A1F' }}>
+                <td style={{ ...tdStyle, textAlign: 'right', fontFamily: DISPLAY_FONT, fontWeight: 900, fontSize: 14, color: '#E8B84B' }}>
                   {money(totals.totalRev)}
                 </td>
-                <td style={{ ...tdStyle, textAlign: 'right', fontWeight: 800, color: '#F58A1F' }}>
+                <td style={{ ...tdStyle, textAlign: 'right', fontWeight: 800, color: '#E8B84B' }}>
                   {totals.weightedGM.toFixed(1)}%
                 </td>
                 <td style={{ ...tdStyle, textAlign: 'right', fontWeight: 700 }}>
@@ -289,7 +289,7 @@ export default function ConsolidationPage() {
                 <td style={{ ...tdStyle, textAlign: 'right', fontWeight: 800 }}>100.0%</td>
                 <td style={tdStyle}>
                   <div style={{ width: 140, height: 8, background: 'rgba(245,138,31,0.15)', borderRadius: 4, overflow: 'hidden' }}>
-                    <div style={{ width: '100%', height: '100%', background: 'linear-gradient(90deg,#1B4DE6,#F58A1F)' }} />
+                    <div style={{ width: '100%', height: '100%', background: 'linear-gradient(90deg,#1D44BF,#E8B84B)' }} />
                   </div>
                 </td>
                 <td style={{ ...tdStyle, textAlign: 'right', fontWeight: 700, color: 'var(--color-muted)' }}>
@@ -353,13 +353,13 @@ export default function ConsolidationPage() {
             <div style={{ height: 1, background: 'rgba(255,255,255,0.06)', marginTop: 4 }} />
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 5, fontSize: 12 }}>
-                <span style={{ fontWeight: 800, color: '#F58A1F' }}>Blended (weighted)</span>
-                <span style={{ fontFamily: DISPLAY_FONT, fontWeight: 900, color: '#F58A1F' }}>
+                <span style={{ fontWeight: 800, color: '#E8B84B' }}>Blended (weighted)</span>
+                <span style={{ fontFamily: DISPLAY_FONT, fontWeight: 900, color: '#E8B84B' }}>
                   {totals.weightedGM.toFixed(1)}%
                 </span>
               </div>
               <div style={{ height: 10, background: 'rgba(245,138,31,0.10)', borderRadius: 4, overflow: 'hidden' }}>
-                <div style={{ width: `${(totals.weightedGM / 70) * 100}%`, height: '100%', background: 'linear-gradient(90deg,#1B4DE6,#F58A1F)' }} />
+                <div style={{ width: `${(totals.weightedGM / 70) * 100}%`, height: '100%', background: 'linear-gradient(90deg,#1D44BF,#E8B84B)' }} />
               </div>
             </div>
           </div>
@@ -408,7 +408,7 @@ export default function ConsolidationPage() {
             ))}
           </div>
           <div style={{ marginTop: 14 }}>
-            <Link href="/channel-mix" style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.10em', textTransform: 'uppercase', color: '#F58A1F' }}>
+            <Link href="/channel-mix" style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.10em', textTransform: 'uppercase', color: '#E8B84B' }}>
               Deep-dive channel mix →
             </Link>
           </div>
@@ -464,7 +464,7 @@ export default function ConsolidationPage() {
             </table>
           </div>
           <div style={{ padding: '14px 22px', borderTop: '1px solid var(--color-border)' }}>
-            <Link href="/sku-rationalization" style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.10em', textTransform: 'uppercase', color: '#F58A1F' }}>
+            <Link href="/sku-rationalization" style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.10em', textTransform: 'uppercase', color: '#E8B84B' }}>
               Full SKU rationalization →
             </Link>
           </div>

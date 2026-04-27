@@ -28,7 +28,7 @@ const CHANNEL_COLOR: Record<ChannelName, string> = {
   'Shopify (DTC)':     '#5E8E3E',
   'BigCommerce (DTC)': '#0D52FF',
   'Retail (QB)':       '#7C3AED',
-  'Wholesale':         '#F58A1F',
+  'Wholesale':         '#E8B84B',
   'Direct':            '#2DB47A',
 };
 
@@ -362,7 +362,7 @@ export default function ChannelMixPage() {
             }}>
               <div style={{
                 fontSize: 10, fontWeight: 800, letterSpacing: '0.10em',
-                textTransform: 'uppercase', color: ins.tone === 'warn' ? '#F7A500' : ins.tone === 'good' ? '#2DB47A' : '#F58A1F',
+                textTransform: 'uppercase', color: ins.tone === 'warn' ? '#F7A500' : ins.tone === 'good' ? '#2DB47A' : '#E8B84B',
                 marginBottom: 6,
               }}>
                 {ins.tag}

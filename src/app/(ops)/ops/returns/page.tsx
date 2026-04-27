@@ -158,7 +158,7 @@ export default function ReturnsPage() {
                         style={{
                           width: `${row.share * 2.5}%`,
                           height: '100%',
-                          background: '#1B4DE6',
+                          background: '#1D44BF',
                           borderRadius: 4,
                         }}
                       />
@@ -235,7 +235,7 @@ export default function ReturnsPage() {
                     style={{
                       width: `${stage.pct}%`,
                       height: '100%',
-                      background: 'linear-gradient(90deg, #1B4DE6, #4FA8FF)',
+                      background: 'linear-gradient(90deg, #1D44BF, #4FA8FF)',
                       borderRadius: 4,
                     }}
                   />

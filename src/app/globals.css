@@ -9,7 +9,7 @@
 @font-face { font-family: 'Aeonik'; src: url('/fonts/aeonik-black.otf')    format('opentype'); font-weight: 900; font-style: normal; font-display: swap; }
 
 /* ═══════════════════════════════════════════════════════════════════════════════
-   783 OS — Global Design System
+   Empire OS — Global Design System
    ───────────────────────────────────────────────────────────────────────────────
    Palette driven by 2026 brand guidelines (Pantone 2171 C primary blue on
    a near-black canvas). Product accents use brighter tints of the same blue
@@ -68,7 +68,7 @@ body {
 .tabular-nums { font-variant-numeric: tabular-nums; }
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   DEFAULT THEME — 783 Light
+   DEFAULT THEME — Empire Light
    Applied when data-theme="light" OR no theme set
    ══════════════════════════════════════════════════════════════════════════════ */
 :root {
@@ -88,18 +88,18 @@ body {
   --color-subtle:   rgba(11,13,23,0.36);
 
   /* Primary — Pantone 2171 C blue (brand action color) */
-  --color-blue:     #1B4DE6;
+  --color-blue:     #1D44BF;
   --color-blue-lt:  #4C78F0;
   --color-blue-dk:  #0F37B3;
   --color-blue-d:   rgba(27,77,230,0.10);
 
-  /* Accent — bright sky blue (secondary mark color, 783 barcode highlight) */
+  /* Accent — bright sky blue (secondary mark color, Empire accent highlight) */
   --color-accent:   #4FA8FF;
   --color-accent-dk:#2488F0;
   --color-accent-d: rgba(79,168,255,0.14);
 
   /* Gold alias — preserved for chart/data distinction (maps to brand orange) */
-  --color-gold:     #F58A1F;
+  --color-gold:     #E8B84B;
   --color-gold-dk:  #D9700F;
   --color-gold-d:   rgba(245,138,31,0.16);
 
@@ -108,7 +108,7 @@ body {
   --color-green-d:  rgba(45,180,122,0.14);
   --color-red:      #E05454;
   --color-red-d:    rgba(224,84,84,0.14);
-  --color-orange:   #F58A1F;
+  --color-orange:   #E8B84B;
   --color-orange-d: rgba(245,138,31,0.14);
 
   /* Shell — header (WHITE) */
@@ -117,12 +117,12 @@ body {
   --color-on-shell: #0B0D17;
   --color-on-shell-muted: rgba(11,13,23,0.50);
 
-  /* Sidebar — ALWAYS DARK 783 canvas */
+  /* Sidebar — ALWAYS DARK Empire canvas */
   --color-shell-2:      #070911;
   --color-sidebar-text: #FFFFFF;
   --color-sidebar-muted:rgba(255,255,255,0.52);
   --color-sidebar-subtle:rgba(255,255,255,0.30);
-  --color-sidebar-active:#1B4DE6;
+  --color-sidebar-active:#1D44BF;
   --color-sidebar-active-border: rgba(27,77,230,0.55);
   --color-sidebar-hover: rgba(255,255,255,0.06);
   --color-sidebar-section:rgba(255,255,255,0.38);
@@ -130,7 +130,7 @@ body {
   --color-sidebar-divider: rgba(255,255,255,0.10);
 
   /* Subco theming */
-  --subco-primary:     #1B4DE6;
+  --subco-primary:     #1D44BF;
   --subco-primary-rgb: 27, 77, 230;
   --subco-accent:      #4FA8FF;
   --subco-accent-rgb:  79, 168, 255;
@@ -147,7 +147,7 @@ body {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   DARK THEME — deep 783 canvas
+   DARK THEME — deep Empire canvas
    ══════════════════════════════════════════════════════════════════════════════ */
 :root[data-theme="dark"] {
   /* Page surfaces */
@@ -166,7 +166,7 @@ body {
   --color-subtle:   rgba(255,255,255,0.30);
 
   /* Primary */
-  --color-blue:     #1B4DE6;
+  --color-blue:     #1D44BF;
   --color-blue-lt:  #4C78F0;
   --color-blue-dk:  #0F37B3;
   --color-blue-d:   rgba(27,77,230,0.15);
@@ -177,7 +177,7 @@ body {
   --color-accent-d: rgba(79,168,255,0.16);
 
   /* Gold (charts) — maps to brand orange */
-  --color-gold:     #F58A1F;
+  --color-gold:     #E8B84B;
   --color-gold-dk:  #D9700F;
   --color-gold-d:   rgba(245,138,31,0.16);
 
@@ -186,7 +186,7 @@ body {
   --color-green-d:  rgba(45,180,122,0.15);
   --color-red:      #E05454;
   --color-red-d:    rgba(224,84,84,0.15);
-  --color-orange:   #F58A1F;
+  --color-orange:   #E8B84B;
   --color-orange-d: rgba(245,138,31,0.16);
 
   /* Shell — header (DARK) */
@@ -195,12 +195,12 @@ body {
   --color-on-shell: #FFFFFF;
   --color-on-shell-muted: rgba(255,255,255,0.45);
 
-  /* Sidebar — stays dark 783 */
+  /* Sidebar — stays dark Empire */
   --color-shell-2:       #070911;
   --color-sidebar-text:  #FFFFFF;
   --color-sidebar-muted: rgba(255,255,255,0.52);
   --color-sidebar-subtle:rgba(255,255,255,0.30);
-  --color-sidebar-active:#1B4DE6;
+  --color-sidebar-active:#1D44BF;
   --color-sidebar-active-border: rgba(27,77,230,0.55);
   --color-sidebar-hover:  rgba(255,255,255,0.06);
   --color-sidebar-section:rgba(255,255,255,0.38);
@@ -208,7 +208,7 @@ body {
   --color-sidebar-divider:rgba(255,255,255,0.10);
 
   /* Subco */
-  --subco-primary:     #1B4DE6;
+  --subco-primary:     #1D44BF;
   --subco-primary-rgb: 27, 77, 230;
   --subco-accent:      #4FA8FF;
   --subco-accent-rgb:  79, 168, 255;

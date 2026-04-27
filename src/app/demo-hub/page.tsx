@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import BLCircleLogo from '@/components/brand/BLCircleLogo';
 // Note: BrandLogo only supports 'horizontal' | 'stacked' — using BLCircleLogo directly
 
-const CRIMSON = '#1B4DE6';
+const CRIMSON = '#1D44BF';
 const NAVY    = '#4FA8FF';
 const WHITE   = '#FFFFFF';
 
@@ -16,10 +16,10 @@ const DEMOS = [
     tag: 'CROSS-OS PULSE',
     desc: 'One-screen pulse across Finance, HR, and Ops — what needs your attention right now, with drill-ins to every CEO dashboard.',
     href: '/brief',
-    accent: '#F58A1F',
+    accent: '#E8B84B',
     accentLight: 'rgba(245,138,31,0.08)',
     icon: (
-      <svg width="24" height="24" fill="none" stroke="#F58A1F" strokeWidth="1.8" viewBox="0 0 24 24">
+      <svg width="24" height="24" fill="none" stroke="#E8B84B" strokeWidth="1.8" viewBox="0 0 24 24">
         <path d="M12 22c1.1 0 2-.9 2-2h-4a2 2 0 0 0 2 2z" strokeLinecap="round" strokeLinejoin="round"/>
         <path d="M19 16v-5a7 7 0 1 0-14 0v5l-2 3h18l-2-3z" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
@@ -148,7 +148,7 @@ export default function DemoHubPage() {
           fontSize: 11, fontWeight: 600, letterSpacing: '0.06em', color: WHITE,
           animation: 'fadeIn 0.3s ease both',
         }}>
-          783 OS — Private Demo Environment &nbsp;·&nbsp; Apr 2026
+          Empire OS — Private Demo Environment &nbsp;·&nbsp; Apr 2026
         </div>
 
         {/* White header with BL logo only */}
@@ -161,7 +161,7 @@ export default function DemoHubPage() {
           <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
             <BLCircleLogo size={44} />
             <div>
-              <div style={{ fontWeight: 900, fontSize: 16, color: "#FFFFFF", letterSpacing: '-0.01em', lineHeight: 1 }}>783 Partners</div>
+              <div style={{ fontWeight: 900, fontSize: 16, color: "#FFFFFF", letterSpacing: '-0.01em', lineHeight: 1 }}>Meritage Partners</div>
               <div style={{ fontWeight: 600, fontSize: 10, color: CRIMSON, letterSpacing: '0.14em', textTransform: 'uppercase', marginTop: 2 }}>Operating System</div>
             </div>
           </div>
@@ -271,7 +271,7 @@ export default function DemoHubPage() {
           </div>
 
           <div style={{ marginTop: 44, fontSize: 11, color: 'rgba(79,168,255,0.25)', letterSpacing: '0.06em', textAlign: 'center' }}>
-            783 OS · Private Demo Environment
+            Empire OS · Private Demo Environment
           </div>
         </div>
       </div>

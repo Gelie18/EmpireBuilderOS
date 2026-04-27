@@ -124,7 +124,7 @@ export default function MobileNav() {
     ? { title: 'HR OS',      color: '#0A6A3C', items: HR_NAV,      showAI: false }
     : inOps
     ? { title: 'Ops OS',     color: '#4FA8FF', items: OPS_NAV,     showAI: false }
-    : { title: 'Finance OS', color: '#1B4DE6', items: FINANCE_NAV, showAI: true  };
+    : { title: 'Finance OS', color: '#1D44BF', items: FINANCE_NAV, showAI: true  };
 
   return (
     <>
@@ -172,16 +172,16 @@ export default function MobileNav() {
             alignItems: 'center', justifyContent: 'center',
             padding: '10px 0 9px', gap: 4, minHeight: 54,
             background: 'none', border: 'none',
-            borderTop: `2px solid ${open ? '#F58A1F' : 'transparent'}`,
+            borderTop: `2px solid ${open ? '#E8B84B' : 'transparent'}`,
             cursor: 'pointer', WebkitTapHighlightColor: 'transparent',
           }}
         >
-          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke={open ? '#F58A1F' : 'rgba(255,255,255,0.45)'} strokeWidth="2" strokeLinecap="round">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke={open ? '#E8B84B' : 'rgba(255,255,255,0.45)'} strokeWidth="2" strokeLinecap="round">
             <line x1="3" y1="6"  x2="21" y2="6"/>
             <line x1="3" y1="12" x2="21" y2="12"/>
             <line x1="3" y1="18" x2="21" y2="18"/>
           </svg>
-          <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.07em', textTransform: 'uppercase', color: open ? '#F58A1F' : 'rgba(255,255,255,0.45)', fontFamily: 'inherit' }}>
+          <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.07em', textTransform: 'uppercase', color: open ? '#E8B84B' : 'rgba(255,255,255,0.45)', fontFamily: 'inherit' }}>
             Menu
           </span>
         </button>
@@ -261,7 +261,7 @@ export default function MobileNav() {
                 }}
                 style={{
                   width: '100%', padding: '14px 20px',
-                  background: 'linear-gradient(135deg, #1B4DE6 0%, #B38A00 100%)',
+                  background: 'linear-gradient(135deg, #1D44BF 0%, #B38A00 100%)',
                   border: 'none', borderRadius: 11,
                   color: '#FFFFFF', fontSize: 14, fontWeight: 800,
                   letterSpacing: '0.07em', textTransform: 'uppercase',

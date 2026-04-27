@@ -28,7 +28,7 @@ export default function PeriodSelector({ value, onChange }: PeriodSelectorProps)
           display:     'flex',
           alignItems:  'center',
           pointerEvents: 'none',
-          color:       '#1B4DE6',
+          color:       '#1D44BF',
           zIndex:      1,
         }}
       >
@@ -42,7 +42,7 @@ export default function PeriodSelector({ value, onChange }: PeriodSelectorProps)
       <select
         value={value}
         onChange={(e) => onChange(e.target.value as PeriodKey)}
-        onFocus={(e) => { e.currentTarget.style.borderColor = '#1B4DE6'; e.currentTarget.style.boxShadow = '0 0 0 2px rgba(27,77,230,0.12)'; }}
+        onFocus={(e) => { e.currentTarget.style.borderColor = '#1D44BF'; e.currentTarget.style.boxShadow = '0 0 0 2px rgba(27,77,230,0.12)'; }}
         onBlur={(e)  => { e.currentTarget.style.borderColor = 'var(--color-border)'; e.currentTarget.style.boxShadow = 'none'; }}
         style={{
           appearance:      'none',

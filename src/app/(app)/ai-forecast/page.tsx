@@ -618,12 +618,12 @@ export default function AiForecastPage() {
             <ComposedChart data={chartData} margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
               <defs>
                 <linearGradient id="aifRevGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%"  stopColor="#1B4DE6" stopOpacity={0.2} />
-                  <stop offset="95%" stopColor="#1B4DE6" stopOpacity={0} />
+                  <stop offset="5%"  stopColor="#1D44BF" stopOpacity={0.2} />
+                  <stop offset="95%" stopColor="#1D44BF" stopOpacity={0} />
                 </linearGradient>
                 <linearGradient id="aifNiGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%"  stopColor="#F58A1F" stopOpacity={0.2} />
-                  <stop offset="95%" stopColor="#F58A1F" stopOpacity={0} />
+                  <stop offset="5%"  stopColor="#E8B84B" stopOpacity={0.2} />
+                  <stop offset="95%" stopColor="#E8B84B" stopOpacity={0} />
                 </linearGradient>
               </defs>
               <CartesianGrid stroke="var(--color-chart-grid)" strokeDasharray="3 3" />
@@ -640,9 +640,9 @@ export default function AiForecastPage() {
               <ReferenceLine x="Apr '26" stroke="var(--color-chart-grid)" strokeDasharray="4 3"
                 label={{ value: 'Today', fill: 'var(--color-chart-text)', fontSize: 9, position: 'top' }} />
               <Legend wrapperStyle={{ fontSize: 11, color: 'var(--color-chart-text)' }} />
-              <Area type="monotone" dataKey="Revenue" stroke="#1B4DE6" fill="url(#aifRevGrad)"
+              <Area type="monotone" dataKey="Revenue" stroke="#1D44BF" fill="url(#aifRevGrad)"
                 strokeWidth={2} dot={false} strokeDasharray="none" />
-              <Area type="monotone" dataKey="Net Income" stroke="#F58A1F" fill="url(#aifNiGrad)"
+              <Area type="monotone" dataKey="Net Income" stroke="#E8B84B" fill="url(#aifNiGrad)"
                 strokeWidth={2} dot={false} />
             </ComposedChart>
           </ResponsiveContainer>

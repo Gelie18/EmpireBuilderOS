@@ -247,7 +247,7 @@ const PAGE_CTX: Record<string, { label: string; allChips: string[] }> = {
 };
 
 const DEFAULT_CTX = {
-  label: '783 OS',
+  label: 'Empire OS',
   allChips: [
     'Net income miss — root cause?',
     'Cash and runway status?',
@@ -532,7 +532,7 @@ export default function FloatingChat() {
               {/* AI CFO icon mark */}
               <div style={{
                 width: 36, height: 36, borderRadius: 10, flexShrink: 0,
-                background: 'linear-gradient(135deg, #1B4DE6 0%, #F58A1F 100%)',
+                background: 'linear-gradient(135deg, #1D44BF 0%, #E8B84B 100%)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 boxShadow: '0 2px 12px rgba(27,77,230,0.40)',
               }}>
@@ -610,7 +610,7 @@ export default function FloatingChat() {
                     padding: '8px 6px',
                     background: 'transparent',
                     border: 'none',
-                    borderBottom: active ? '2px solid #1B4DE6' : '2px solid transparent',
+                    borderBottom: active ? '2px solid #1D44BF' : '2px solid transparent',
                     color: active ? '#FFFFFF' : 'rgba(255,255,255,0.40)',
                     cursor: 'pointer', fontFamily: 'inherit',
                     fontSize: 11, fontWeight: active ? 700 : 500,
@@ -642,8 +642,8 @@ export default function FloatingChat() {
                 <div style={{
                   width: 26, height: 26, borderRadius: 8, flexShrink: 0,
                   background: msg.role === 'user'
-                    ? 'linear-gradient(135deg,#1B4DE6,#B31010)'
-                    : 'linear-gradient(135deg,#1B4DE6,#F58A1F)',
+                    ? 'linear-gradient(135deg,#1D44BF,#B31010)'
+                    : 'linear-gradient(135deg,#1D44BF,#E8B84B)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                 }}>
                   {msg.role === 'user' ? (
@@ -665,7 +665,7 @@ export default function FloatingChat() {
                   <div style={{
                     padding: '11px 14px',
                     background: msg.role === 'user'
-                      ? 'linear-gradient(135deg,#C91A14,#1B4DE6)'
+                      ? 'linear-gradient(135deg,#C91A14,#1D44BF)'
                       : 'linear-gradient(180deg,#1E2442 0%,#1A1F38 100%)',
                     color: '#FFFFFF',
                     borderRadius: msg.role === 'user' ? '14px 14px 4px 14px' : '4px 14px 14px 14px',
@@ -688,7 +688,7 @@ export default function FloatingChat() {
               <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-end', gap: 8 }}>
                 <div style={{
                   width: 26, height: 26, borderRadius: 8, flexShrink: 0,
-                  background: 'linear-gradient(135deg,#1B4DE6,#F58A1F)',
+                  background: 'linear-gradient(135deg,#1D44BF,#E8B84B)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                 }}>
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="#FFFFFF">
@@ -705,7 +705,7 @@ export default function FloatingChat() {
                     {[0, 1, 2].map((i) => (
                       <span key={i} style={{
                         width: 6, height: 6, borderRadius: '50%',
-                        background: i === 0 ? '#1B4DE6' : i === 1 ? '#E85020' : '#F58A1F',
+                        background: i === 0 ? '#1D44BF' : i === 1 ? '#E85020' : '#E8B84B',
                         animation: 'eb-pulse 1.2s infinite',
                         animationDelay: `${i * 0.18}s`,
                         display: 'inline-block',
@@ -731,8 +731,8 @@ export default function FloatingChat() {
                   <button key={q} onClick={() => setForecastQuarter(q)}
                     style={{
                       fontSize: 10, fontWeight: 700, padding: '3px 8px', borderRadius: 4, cursor: 'pointer',
-                      border: `1px solid ${active ? '#1B4DE6' : 'rgba(255,255,255,0.10)'}`,
-                      background: active ? '#1B4DE6' : 'transparent',
+                      border: `1px solid ${active ? '#1D44BF' : 'rgba(255,255,255,0.10)'}`,
+                      background: active ? '#1D44BF' : 'transparent',
                       color: active ? '#FFFFFF' : 'rgba(255,255,255,0.50)', fontFamily: 'inherit',
                     }}>
                     {q}
@@ -741,7 +741,7 @@ export default function FloatingChat() {
               })}
               <button
                 onClick={() => { router.push('/ai-forecast'); setOpen(false); }}
-                style={{ marginLeft: 'auto', fontSize: 10, fontWeight: 700, color: '#1B4DE6', background: 'rgba(27,77,230,0.08)', border: '1px solid rgba(27,77,230,0.20)', borderRadius: 4, padding: '3px 8px', cursor: 'pointer', fontFamily: 'inherit', whiteSpace: 'nowrap' }}
+                style={{ marginLeft: 'auto', fontSize: 10, fontWeight: 700, color: '#1D44BF', background: 'rgba(27,77,230,0.08)', border: '1px solid rgba(27,77,230,0.20)', borderRadius: 4, padding: '3px 8px', cursor: 'pointer', fontFamily: 'inherit', whiteSpace: 'nowrap' }}
                 onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(27,77,230,0.15)'; }}
                 onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(27,77,230,0.08)'; }}
               >
@@ -757,7 +757,7 @@ export default function FloatingChat() {
                   <button key={s} onClick={() => setForecastInput(s)}
                     className="text-left cursor-pointer transition-all"
                     style={{ fontSize: 10.5, padding: '5px 8px', border: '1px solid rgba(27,77,230,0.25)', color: 'rgba(255,255,255,0.50)', background: 'rgba(27,77,230,0.06)', borderRadius: 4, fontFamily: 'inherit', lineHeight: 1.35 }}
-                    onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#1B4DE6'; e.currentTarget.style.background = 'rgba(27,77,230,0.15)'; e.currentTarget.style.color = '#FFFFFF'; }}
+                    onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#1D44BF'; e.currentTarget.style.background = 'rgba(27,77,230,0.15)'; e.currentTarget.style.color = '#FFFFFF'; }}
                     onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(27,77,230,0.25)'; e.currentTarget.style.background = 'rgba(27,77,230,0.06)'; e.currentTarget.style.color = 'rgba(255,255,255,0.50)'; }}
                   >{s}</button>
                 ))}
@@ -775,7 +775,7 @@ export default function FloatingChat() {
                   placeholder={`${forecastQuarter} assumption…`}
                   className="flex-1 px-3 py-2 text-[12px] border rounded outline-none"
                   style={{ background: '#1E2236', borderColor: 'rgba(255,255,255,0.12)', color: '#FFFFFF', fontFamily: 'inherit', minWidth: 0 }}
-                  onFocus={(e) => (e.currentTarget.style.borderColor = '#1B4DE6')}
+                  onFocus={(e) => (e.currentTarget.style.borderColor = '#1D44BF')}
                   onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)')}
                 />
                 <button
@@ -783,7 +783,7 @@ export default function FloatingChat() {
                   disabled={!forecastInput.trim() || forecastSending}
                   className="flex-shrink-0 px-3 py-2 text-[11px] font-bold uppercase rounded cursor-pointer"
                   style={{
-                    background: !forecastInput.trim() || forecastSending ? '#2A2F4A' : '#1B4DE6',
+                    background: !forecastInput.trim() || forecastSending ? '#2A2F4A' : '#1D44BF',
                     color: !forecastInput.trim() || forecastSending ? 'rgba(255,255,255,0.28)' : '#FFFFFF',
                     border: 'none', fontFamily: 'inherit', letterSpacing: '0.04em',
                     opacity: !forecastInput.trim() || forecastSending ? 0.6 : 1,
@@ -813,7 +813,7 @@ export default function FloatingChat() {
                 title={`Refresh insights (${currentSet + 1}/${totalSets})`}
                 className="flex items-center gap-1 cursor-pointer transition-all"
                 style={{ color: 'rgba(255,255,255,0.28)', fontSize: 10, fontWeight: 600, background: 'none', border: 'none', padding: '2px 4px', letterSpacing: '0.04em' }}
-                onMouseEnter={(e) => { e.currentTarget.style.color = '#1B4DE6'; }}
+                onMouseEnter={(e) => { e.currentTarget.style.color = '#1D44BF'; }}
                 onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(255,255,255,0.28)'; }}
               >
                 <RefreshIcon spinning={refreshAnim} />
@@ -829,7 +829,7 @@ export default function FloatingChat() {
                 <button key={chip} onClick={() => sendMessage(chip)}
                   className="text-[11px] px-2.5 py-1 cursor-pointer transition-all rounded whitespace-nowrap"
                   style={{ border: '1px solid rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.50)', background: '#242840', fontWeight: 500 }}
-                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#1B4DE6'; e.currentTarget.style.color = '#FFFFFF'; e.currentTarget.style.background = 'rgba(27,77,230,0.15)'; }}
+                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#1D44BF'; e.currentTarget.style.color = '#FFFFFF'; e.currentTarget.style.background = 'rgba(27,77,230,0.15)'; }}
                   onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'; e.currentTarget.style.color = 'rgba(255,255,255,0.50)'; e.currentTarget.style.background = '#242840'; }}
                 >{chip}</button>
               ))}
@@ -864,7 +864,7 @@ export default function FloatingChat() {
                 <button key={prompt} onClick={() => sendMessage(prompt)}
                   className="text-left text-[11px] px-3 py-1.5 cursor-pointer transition-all rounded-md w-full"
                   style={{ border: '1px solid rgba(245,138,31,0.28)', color: '#92680A', background: 'rgba(245,138,31,0.08)', fontWeight: 500, lineHeight: 1.4 }}
-                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#F58A1F'; e.currentTarget.style.background = 'rgba(245,138,31,0.16)'; e.currentTarget.style.color = '#7A5508'; }}
+                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#E8B84B'; e.currentTarget.style.background = 'rgba(245,138,31,0.16)'; e.currentTarget.style.color = '#7A5508'; }}
                   onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(245,138,31,0.28)'; e.currentTarget.style.background = 'rgba(245,138,31,0.08)'; e.currentTarget.style.color = '#92680A'; }}
                 >{prompt}</button>
               ))}
@@ -903,7 +903,7 @@ export default function FloatingChat() {
                   width: 36, height: 36, borderRadius: 9, flexShrink: 0,
                   background: isLoading || !input.trim()
                     ? 'rgba(255,255,255,0.05)'
-                    : 'linear-gradient(135deg,#1B4DE6,#B31010)',
+                    : 'linear-gradient(135deg,#1D44BF,#B31010)',
                   border: 'none', cursor: isLoading || !input.trim() ? 'default' : 'pointer',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   transition: 'background 0.15s, box-shadow 0.15s',
@@ -932,7 +932,7 @@ export default function FloatingChat() {
           bottom: 28, right: open ? 448 : 28,
           background: open
             ? 'rgba(255,255,255,0.06)'
-            : 'linear-gradient(135deg,#1B4DE6 0%,#F58A1F 100%)',
+            : 'linear-gradient(135deg,#1D44BF 0%,#E8B84B 100%)',
           color: '#FFFFFF',
           padding: '10px 18px 10px 14px',
           border: open ? '1px solid rgba(255,255,255,0.12)' : 'none',

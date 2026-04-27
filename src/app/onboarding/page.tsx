@@ -27,7 +27,7 @@ function TopBar() {
       <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
         <button onClick={() => router.push('/how-it-works')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.55)', fontSize: 13, fontWeight: 700, letterSpacing: '0.08em', fontFamily: 'inherit', padding: 0, textTransform: 'uppercase' }}>How It Works</button>
         <button onClick={() => router.push('/faq')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.55)', fontSize: 13, fontWeight: 700, letterSpacing: '0.08em', fontFamily: 'inherit', padding: 0, textTransform: 'uppercase' }}>FAQ</button>
-        <button onClick={() => router.push('/packages')} style={{ background: '#F58A1F', border: 'none', borderRadius: 7, padding: '8px 20px', color: '#0B0D17', fontSize: 12, fontWeight: 800, letterSpacing: '0.10em', fontFamily: 'inherit', cursor: 'pointer', textTransform: 'uppercase' }}>
+        <button onClick={() => router.push('/packages')} style={{ background: '#E8B84B', border: 'none', borderRadius: 7, padding: '8px 20px', color: '#0B0D17', fontSize: 12, fontWeight: 800, letterSpacing: '0.10em', fontFamily: 'inherit', cursor: 'pointer', textTransform: 'uppercase' }}>
           Packages
         </button>
       </div>
@@ -41,7 +41,7 @@ const PHASES = [
     label: 'Scope & Audit',
     duration: 'Weeks 1–2',
     mode: 'On-site',
-    color: '#1B4DE6',
+    color: '#1D44BF',
     summary: 'We come to you. Two weeks on-site to map your systems, assess data quality, and lock the build plan before a single line of code is written.',
     weDeliver: [
       'On-site discovery with Finance, HR, and Ops leads',
@@ -98,7 +98,7 @@ const PHASES = [
 const DATA_ACCESS = [
   {
     category: 'Accounting / ERP',
-    color: '#1B4DE6',
+    color: '#1D44BF',
     systems: 'QuickBooks · NetSuite · Sage Intacct · Xero',
     access: 'Read-only API key or admin login',
     data: '24 months of P&L, balance sheet, AP/AR history',
@@ -197,8 +197,8 @@ export default function OnboardingPage() {
 
         {/* HERO */}
         <section className="ob-pad" style={{ padding: '96px 40px 80px', maxWidth: 1000, margin: '0 auto', animation: 'fadeUp 0.6s ease both' }}>
-          <div style={{ fontSize: 12, fontWeight: 800, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#F58A1F', marginBottom: 24 }}>
-            783 OS · Engagement Plan
+          <div style={{ fontSize: 12, fontWeight: 800, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#E8B84B', marginBottom: 24 }}>
+            Empire OS · Engagement Plan
           </div>
           <h1 style={{ fontSize: 72, fontWeight: 900, lineHeight: 1.02, letterSpacing: '-0.03em', marginBottom: 28 }}>
             Signed to live<br />in 90 days.
@@ -411,7 +411,7 @@ export default function OnboardingPage() {
             <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
               <button
                 onClick={() => router.push('/packages')}
-                style={{ padding: '16px 42px', background: '#F58A1F', color: '#0B0D17', border: 'none', borderRadius: 9, fontSize: 15, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', cursor: 'pointer', fontFamily: 'inherit' }}
+                style={{ padding: '16px 42px', background: '#E8B84B', color: '#0B0D17', border: 'none', borderRadius: 9, fontSize: 15, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', cursor: 'pointer', fontFamily: 'inherit' }}
               >
                 See Packages
               </button>
@@ -420,8 +420,7 @@ export default function OnboardingPage() {
         </section>
 
         <div style={{ background: '#0B0D17', borderTop: '1px solid rgba(255,255,255,0.06)', padding: '22px 40px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
-          <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.28)', letterSpacing: '0.04em' }}>783 OS · Engagement Plan</span>
-          <a href="mailto:info@783capital.com" style={{ fontSize: 13, color: 'rgba(255,255,255,0.28)', textDecoration: 'none', letterSpacing: '0.04em' }}>info@783capital.com</a>
+          <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.28)', letterSpacing: '0.04em' }}>Empire OS · Engagement Plan</span>
         </div>
       </div>
     </>

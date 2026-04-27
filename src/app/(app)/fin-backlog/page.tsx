@@ -24,7 +24,7 @@ const TT: React.CSSProperties = {
 
 // ── KPI Data ─────────────────────────────────────────────────────────────────
 const KPIS = [
-  { label: 'Total Backlog',     value: '$2.84M', sub: 'Contracted, unrecognized',    color: '#1B4DE6' },
+  { label: 'Total Backlog',     value: '$2.84M', sub: 'Contracted, unrecognized',    color: '#1D44BF' },
   { label: 'WIP Value',         value: '$847K',  sub: 'In-progress work incurred',   color: '#D97706' },
   { label: 'Unbilled Revenue',  value: '$412K',  sub: 'Earned but not invoiced',     color: '#7C3AED' },
   { label: 'Avg Days to Bill',  value: '18 days',sub: 'Invoice cycle time',          color: '#0A8A5C' },
@@ -147,7 +147,7 @@ export default function FinBacklogPage() {
               background: 'rgba(27,77,230,0.08)', border: '1px solid rgba(27,77,230,0.25)',
               borderRadius: 8, padding: '6px 14px',
               fontFamily: 'var(--font-condensed)', fontSize: 13, fontWeight: 700,
-              color: '#1B4DE6', letterSpacing: '0.04em',
+              color: '#1D44BF', letterSpacing: '0.04em',
             }}>
               <span style={{ fontWeight: 400, color: 'var(--color-muted)', fontSize: 11 }}>BACKLOG</span>
               $2.84M
@@ -241,7 +241,7 @@ export default function FinBacklogPage() {
               yAxisId="left"
               dataKey="revenue"
               name="Expected Revenue"
-              fill="#1B4DE6"
+              fill="#1D44BF"
               opacity={0.85}
               radius={[3, 3, 0, 0]}
             />
@@ -250,9 +250,9 @@ export default function FinBacklogPage() {
               type="monotone"
               dataKey="backlog"
               name="Remaining Backlog"
-              stroke="#F58A1F"
+              stroke="#E8B84B"
               strokeWidth={2.5}
-              dot={{ r: 4, fill: '#F58A1F', strokeWidth: 0 }}
+              dot={{ r: 4, fill: '#E8B84B', strokeWidth: 0 }}
             />
           </ComposedChart>
         </ResponsiveContainer>
@@ -277,7 +277,7 @@ export default function FinBacklogPage() {
                 return (
                   <tr key={i} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
                     <td style={{ padding: '9px 12px', fontWeight: 600, color: 'var(--color-text)' }}>{row.month}</td>
-                    <td style={{ padding: '9px 12px', textAlign: 'right', fontFamily: 'var(--font-condensed)', color: '#1B4DE6', fontWeight: 600 }}>{fmtK(row.backlog)}</td>
+                    <td style={{ padding: '9px 12px', textAlign: 'right', fontFamily: 'var(--font-condensed)', color: '#1D44BF', fontWeight: 600 }}>{fmtK(row.backlog)}</td>
                     <td style={{ padding: '9px 12px', textAlign: 'right', fontFamily: 'var(--font-condensed)', color: '#0A8A5C', fontWeight: 600 }}>{fmtK(row.revenue)}</td>
                     <td style={{ padding: '9px 12px', textAlign: 'right', fontFamily: 'var(--font-condensed)', color: 'var(--color-muted)', fontWeight: 500 }}>{burnRate}%</td>
                   </tr>
@@ -323,7 +323,7 @@ export default function FinBacklogPage() {
             <tbody>
               {WIP_ITEMS.map((item) => (
                 <tr key={item.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                  <td style={{ padding: '10px 14px', fontFamily: 'var(--font-condensed)', fontWeight: 700, color: '#1B4DE6', fontSize: 12 }}>
+                  <td style={{ padding: '10px 14px', fontFamily: 'var(--font-condensed)', fontWeight: 700, color: '#1D44BF', fontSize: 12 }}>
                     {item.id}
                   </td>
                   <td style={{ padding: '10px 14px', fontWeight: 600, color: 'var(--color-text)' }}>
@@ -444,16 +444,16 @@ export default function FinBacklogPage() {
               marginTop: 16,
               padding: '12px 16px',
               background: 'rgba(27,77,230,0.05)',
-              borderLeft: '3px solid #1B4DE6',
+              borderLeft: '3px solid #1D44BF',
               borderRadius: '0 6px 6px 0',
               cursor: 'pointer',
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: expandAI ? 8 : 0 }}>
-              <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#1B4DE6' }}>
+              <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#1D44BF' }}>
                 AI CFO Insight
               </span>
-              <span style={{ fontSize: 10, color: '#1B4DE6', transform: expandAI ? 'rotate(90deg)' : 'rotate(0deg)', transition: 'transform 0.15s', display: 'inline-block' }}>▸</span>
+              <span style={{ fontSize: 10, color: '#1D44BF', transform: expandAI ? 'rotate(90deg)' : 'rotate(0deg)', transition: 'transform 0.15s', display: 'inline-block' }}>▸</span>
             </div>
             {expandAI && (
               <div style={{ fontSize: 13, lineHeight: 1.6, color: 'var(--color-chart-text)' }}>
