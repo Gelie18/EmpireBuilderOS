@@ -1,6 +1,6 @@
 /**
- * BLCircleLogo — legacy export name; now renders the plain 783 wordmark
- * (no circle, no badge). Kept so existing import sites stay compatible.
+ * BLCircleLogo — legacy export name kept so existing import sites stay compatible.
+ * Now renders the Empire Builder logo PNG at the requested height.
  */
 
 import type { CSSProperties } from 'react';
@@ -8,16 +8,16 @@ import BrandMark from './BrandMark';
 
 interface BLCircleLogoProps {
   size?: number;
+  theme?: 'dark' | 'light';
   className?: string;
   style?: CSSProperties;
 }
 
-export default function BLCircleLogo({ size = 40, className, style }: BLCircleLogoProps) {
+export default function BLCircleLogo({ size = 40, theme = 'light', className, style }: BLCircleLogoProps) {
   return (
     <BrandMark
-      color="#FFFFFF"
+      theme={theme}
       height={size}
-      label="783"
       className={className}
       style={style}
     />

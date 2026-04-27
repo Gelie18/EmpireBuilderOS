@@ -1,22 +1,23 @@
-import BrandMark from './BrandMark';
-
 /**
- * Composed wordmark: the "Empire" brand mark paired with a product label.
+ * Composed brand mark with optional product label.
+ * Wraps BrandMark (the real logo PNG) with layout helpers.
+ *
  * Two layouts:
- *  - 'horizontal' (default): mark on the left, product label stacked to the right
- *  - 'stacked': mark centered above the product label (used on splash and hero)
+ *  - 'horizontal' (default): logo on left, product label to the right
+ *  - 'stacked': logo centered above the product label
  */
 
+import BrandMark from './BrandMark';
+
 interface BrandLogoProps {
-  product?: string;               // e.g. "OS", "FINANCE OS", "HR OS"
+  product?: string;
   layout?: 'horizontal' | 'stacked';
-  /** Pixel height of the Empire mark. */
   markHeight?: number;
-  /** Color of the Empire mark. */
+  /** 'light' = black logo for light pages (default), 'dark' = white logo for dark pages */
+  theme?: 'dark' | 'light';
+  /** kept for backward-compat — ignored */
   markColor?: string;
-  /** Color of the product label. */
   labelColor?: string;
-  /** Accessible label. */
   ariaLabel?: string;
 }
 
@@ -24,16 +25,16 @@ export default function BrandLogo({
   product,
   layout = 'horizontal',
   markHeight = 30,
-  markColor = '#FFFFFF',
-  labelColor = 'var(--color-accent)',
+  theme = 'light',
+  labelColor = '#E8B84B',
   ariaLabel,
 }: BrandLogoProps) {
-  const label = ariaLabel ?? (product ? `Empire — ${product}` : 'Empire');
+  const label = ariaLabel ?? (product ? `Empire Builder — ${product}` : 'Empire Builder');
 
   if (layout === 'stacked') {
     return (
       <div aria-label={label} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
-        <BrandMark color={markColor} height={markHeight} label="Empire" />
+        <BrandMark theme={theme} height={markHeight} label="Empire Builder" />
         {product && (
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <div style={{ width: 36, height: 1, background: labelColor, opacity: 0.6, marginBottom: 8 }} />
@@ -56,10 +57,10 @@ export default function BrandLogo({
 
   return (
     <div aria-label={label} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-      <BrandMark color={markColor} height={markHeight} label="Empire" />
+      <BrandMark theme={theme} height={markHeight} label="Empire Builder" />
       {product && (
         <>
-          <div style={{ width: 1, height: markHeight * 0.72, background: 'rgba(255,255,255,0.22)' }} aria-hidden />
+          <div style={{ width: 1, height: markHeight * 0.72, background: 'rgba(0,0,0,0.12)' }} aria-hidden />
           <span style={{
             fontFamily: 'Aeonik, Inter, "DM Sans", system-ui, sans-serif',
             fontWeight: 700,

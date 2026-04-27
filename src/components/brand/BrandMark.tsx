@@ -1,61 +1,54 @@
 /**
- * Empire OS brand wordmark.
+ * Empire Builder brand mark — uses the official logo PNG.
  *
- * Two-line text mark rendered in SVG:
- *   Line 1: "EMPIRE"  — cobalt #1D44BF, bold, ~18px
- *   Line 2: "BUILDER" — gold #E8B84B, bold, ~10px
- * Typeface: DM Sans / system-ui fallback.
+ * The source file is a white logo (works on dark backgrounds).
+ * Pass theme="light" to invert it to black for light/white backgrounds.
  *
- * `height` sizes the mark (width follows the SVG's intrinsic aspect ratio).
+ * `height` sizes the mark; width is always auto (preserves aspect ratio).
  */
 
 interface BrandMarkProps {
+  /** 'dark' = white logo (for dark page backgrounds, default)
+   *  'light' = black logo (for white/light page backgrounds) */
+  theme?: 'dark' | 'light';
+  /** kept for backward-compat with old callers that pass color — ignored */
   color?: string;
-  /** Pixel height of the mark. Width scales to preserve aspect ratio. */
+  /** Pixel height of the mark. */
   height?: number;
-  /** Accessible label. Defaults to "Empire OS". */
+  /** Accessible label. */
   label?: string;
   className?: string;
   style?: React.CSSProperties;
 }
 
-// viewBox is "0 0 440 56" → width / height = 440 / 56
-const ASPECT = 440 / 56;
-
 export default function BrandMark({
-  color = 'currentColor',
+  theme = 'light',
   height = 32,
-  label = 'Empire OS',
+  label = 'Empire Builder',
   className,
   style,
 }: BrandMarkProps) {
-  const width = Math.round(height * ASPECT * 100) / 100;
+  // light pages: invert white→black; mix-blend-mode removes the dark bg halo
+  // dark  pages: show the logo as-is (white on dark)
+  const filterStyle: React.CSSProperties =
+    theme === 'light'
+      ? { filter: 'invert(1)', mixBlendMode: 'multiply' }
+      : {};
+
   return (
-    <svg
-      role="img"
-      aria-label={label}
-      className={className}
-      style={{ display: 'block', ...style }}
-      width={width}
+    <img
+      src="/brand/empire-builder-logo.png"
+      alt={label}
       height={height}
-      viewBox="0 0 440 56"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <text
-        x="0" y="36"
-        style={{ fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 700, fontSize: 36 }}
-        fill="#1D44BF"
-      >
-        EMPIRE
-      </text>
-      <text
-        x="2" y="52"
-        style={{ fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 700, fontSize: 14 }}
-        fill="#E8B84B"
-        letterSpacing="6"
-      >
-        BUILDER
-      </text>
-    </svg>
+      style={{
+        display: 'block',
+        width: 'auto',
+        userSelect: 'none',
+        ...filterStyle,
+        ...style,
+      }}
+      className={className}
+      draggable={false}
+    />
   );
 }
