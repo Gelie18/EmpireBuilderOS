@@ -9,12 +9,10 @@ const CREDENTIALS = [
   { username: 'empire', password: 'demo2026' },
 ];
 
-// BrandLogo comes from @/components/brand/BrandLogo — kept local here is
-// a thin animated wrapper that matches the login page's entrance sequence.
 function AnimatedBrandLogo({ animate = false }: { animate?: boolean }) {
   return (
     <div style={{ animation: animate ? 'fadeUp 0.7s ease both' : undefined }}>
-      <BrandLogo layout="stacked" markHeight={76} markColor="#FFFFFF" />
+      <BrandLogo layout="stacked" markHeight={76} />
     </div>
   );
 }
@@ -25,7 +23,7 @@ function LoadingOverlay() {
     <div style={{
       position: 'fixed',
       inset: 0,
-      background: '#0B0D17',
+      background: '#F8F9FB',
       zIndex: 9999,
       display: 'flex',
       flexDirection: 'column',
@@ -39,7 +37,6 @@ function LoadingOverlay() {
         @keyframes fadeUp  { from { opacity: 0; transform: translateY(16px) } to { opacity: 1; transform: translateY(0) } }
         @keyframes spin    { to { transform: rotate(360deg) } }
         @keyframes pulse   { 0%,100% { opacity: 1 } 50% { opacity: 0.4 } }
-        @keyframes drawIn  { from { stroke-dashoffset: 220 } to { stroke-dashoffset: 0 } }
       `}</style>
 
       <AnimatedBrandLogo animate />
@@ -47,9 +44,7 @@ function LoadingOverlay() {
       {/* Spinner ring */}
       <div style={{ position: 'relative', width: 56, height: 56 }}>
         <svg width="56" height="56" viewBox="0 0 56 56" fill="none" style={{ position: 'absolute', inset: 0 }}>
-          {/* Track */}
-          <circle cx="28" cy="28" r="24" stroke="rgba(255,255,255,0.08)" strokeWidth="3" />
-          {/* Animated arc */}
+          <circle cx="28" cy="28" r="24" stroke="rgba(0,0,0,0.06)" strokeWidth="3" />
           <circle
             cx="28" cy="28" r="24"
             stroke="url(#spinGrad)"
@@ -71,7 +66,7 @@ function LoadingOverlay() {
         fontSize: 12,
         letterSpacing: '0.18em',
         textTransform: 'uppercase',
-        color: 'rgba(255,255,255,0.35)',
+        color: 'rgba(0,0,0,0.35)',
         fontWeight: 600,
         animation: 'pulse 1.8s ease infinite',
       }}>
@@ -93,7 +88,6 @@ export default function LoginPage() {
 
   useEffect(() => {
     setMounted(true);
-    // If already authed, skip to dashboard
     if (document.cookie.includes('eb-auth=')) {
       router.replace('/demo-hub');
     }
@@ -113,11 +107,7 @@ export default function LoginPage() {
     }
 
     setLoading(true);
-
-    // Set auth cookie (session only — clears when browser closes)
     document.cookie = `eb-auth=authenticated; path=/; SameSite=Strict`;
-
-    // Show branded loading overlay, then navigate
     setShowOverlay(true);
     setTimeout(() => {
       router.push('/demo-hub');
@@ -132,24 +122,23 @@ export default function LoginPage() {
       <style>{`
         @keyframes fadeUp   { from { opacity: 0; transform: translateY(20px) } to { opacity: 1; transform: translateY(0) } }
         @keyframes fadeIn   { from { opacity: 0 } to { opacity: 1 } }
-        @keyframes shimmer  { 0%,100% { opacity: 0.5 } 50% { opacity: 1 } }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: #0B0D17 !important; }
+        body { background: #F8F9FB !important; }
 
         .login-input {
           width: 100%;
           padding: 13px 16px;
-          background: rgba(255,255,255,0.05);
-          border: 1px solid rgba(255,255,255,0.12);
+          background: #FFFFFF;
+          border: 1.5px solid rgba(0,0,0,0.12);
           border-radius: 8px;
-          color: #FFFFFF;
+          color: #111827;
           font-size: 15px;
           font-family: inherit;
           outline: none;
-          transition: border-color 0.2s;
+          transition: border-color 0.2s, box-shadow 0.2s;
         }
-        .login-input::placeholder { color: rgba(255,255,255,0.28); }
-        .login-input:focus { border-color: #1D44BF; background: rgba(27,77,230,0.08); }
+        .login-input::placeholder { color: rgba(0,0,0,0.28); }
+        .login-input:focus { border-color: #1D44BF; box-shadow: 0 0 0 3px rgba(29,68,191,0.08); }
 
         .login-btn {
           width: 100%;
@@ -165,11 +154,11 @@ export default function LoginPage() {
           cursor: pointer;
           transition: background 0.18s, transform 0.12s, box-shadow 0.18s;
           font-family: inherit;
-          box-shadow: 0 4px 16px rgba(27,77,230,0.30);
+          box-shadow: 0 4px 16px rgba(29,68,191,0.22);
         }
-        .login-btn:hover:not(:disabled) { background: #2488F0; transform: translateY(-1px); box-shadow: 0 6px 22px rgba(27,77,230,0.42); }
+        .login-btn:hover:not(:disabled) { background: #2452D6; transform: translateY(-1px); box-shadow: 0 6px 22px rgba(29,68,191,0.32); }
         .login-btn:active:not(:disabled) { transform: translateY(0); }
-        .login-btn:disabled { opacity: 0.6; cursor: not-allowed; box-shadow: none; }
+        .login-btn:disabled { opacity: 0.5; cursor: not-allowed; box-shadow: none; }
 
         @media (max-width: 480px) {
           .login-card { padding: 32px 20px 28px !important; }
@@ -179,7 +168,7 @@ export default function LoginPage() {
 
       <div style={{
         minHeight: '100vh',
-        background: '#0B0D17',
+        background: '#F8F9FB',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -189,31 +178,31 @@ export default function LoginPage() {
         overflow: 'hidden',
       }}>
 
-        {/* Background grid texture */}
+        {/* Subtle grid texture */}
         <div style={{
           position: 'absolute',
           inset: 0,
           backgroundImage: `
-            linear-gradient(rgba(27,77,230,0.04) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(27,77,230,0.04) 1px, transparent 1px)
+            linear-gradient(rgba(29,68,191,0.04) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(29,68,191,0.04) 1px, transparent 1px)
           `,
           backgroundSize: '40px 40px',
           pointerEvents: 'none',
         }} />
 
-        {/* Glows */}
+        {/* Soft glows */}
         <div style={{
           position: 'absolute',
-          top: '15%', left: '20%',
-          width: 400, height: 400,
-          background: 'radial-gradient(circle, rgba(27,77,230,0.16) 0%, transparent 70%)',
+          top: '10%', left: '15%',
+          width: 500, height: 500,
+          background: 'radial-gradient(circle, rgba(29,68,191,0.07) 0%, transparent 70%)',
           pointerEvents: 'none',
         }} />
         <div style={{
           position: 'absolute',
-          bottom: '15%', right: '20%',
-          width: 300, height: 300,
-          background: 'radial-gradient(circle, rgba(245,138,31,0.10) 0%, transparent 70%)',
+          bottom: '10%', right: '15%',
+          width: 380, height: 380,
+          background: 'radial-gradient(circle, rgba(232,184,75,0.07) 0%, transparent 70%)',
           pointerEvents: 'none',
         }} />
 
@@ -222,36 +211,36 @@ export default function LoginPage() {
           position: 'relative',
           width: '100%',
           maxWidth: 420,
-          background: 'rgba(255,255,255,0.035)',
-          border: '1px solid rgba(255,255,255,0.10)',
+          background: '#FFFFFF',
+          border: '1.5px solid rgba(0,0,0,0.08)',
           borderRadius: 16,
           padding: '44px 40px 40px',
-          backdropFilter: 'blur(12px)',
+          boxShadow: '0 4px 32px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.04)',
           animation: 'fadeUp 0.6s ease both',
         }}>
 
           {/* Logo */}
           <div className="login-logo" style={{ marginBottom: 28, display: 'flex', justifyContent: 'center' }}>
-            <BrandLogo layout="stacked" markHeight={68} markColor="#FFFFFF" />
+            <BrandLogo layout="stacked" markHeight={68} />
           </div>
 
           {/* Tagline */}
           <div style={{
             fontSize: 13,
-            color: 'rgba(255,255,255,0.40)',
+            color: 'rgba(0,0,0,0.40)',
             textAlign: 'center',
             letterSpacing: '0.04em',
             marginBottom: 32,
             lineHeight: 1.5,
           }}>
             Business Intelligence Platform<br />
-            <span style={{ color: 'rgba(79,168,255,0.85)', fontWeight: 600 }}>Meritage Partners · Private Access</span>
+            <span style={{ color: '#1D44BF', fontWeight: 600 }}>Meritage Partners · Private Access</span>
           </div>
 
           {/* Form */}
           <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
             <div>
-              <label style={{ display: 'block', fontSize: 11, fontWeight: 700, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.40)', marginBottom: 7 }}>
+              <label style={{ display: 'block', fontSize: 11, fontWeight: 700, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.40)', marginBottom: 7 }}>
                 Username
               </label>
               <input
@@ -267,7 +256,7 @@ export default function LoginPage() {
             </div>
 
             <div>
-              <label style={{ display: 'block', fontSize: 11, fontWeight: 700, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.40)', marginBottom: 7 }}>
+              <label style={{ display: 'block', fontSize: 11, fontWeight: 700, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.40)', marginBottom: 7 }}>
                 Password
               </label>
               <input
@@ -284,11 +273,11 @@ export default function LoginPage() {
             {error && (
               <div style={{
                 padding: '10px 14px',
-                background: 'rgba(220,38,38,0.12)',
-                border: '1px solid rgba(220,38,38,0.30)',
+                background: 'rgba(220,38,38,0.06)',
+                border: '1px solid rgba(220,38,38,0.20)',
                 borderRadius: 7,
                 fontSize: 13,
-                color: '#FCA5A5',
+                color: '#DC2626',
                 letterSpacing: '0.01em',
                 animation: 'fadeUp 0.3s ease',
               }}>
@@ -307,14 +296,14 @@ export default function LoginPage() {
           <div style={{
             marginTop: 28,
             paddingTop: 20,
-            borderTop: '1px solid rgba(255,255,255,0.07)',
+            borderTop: '1px solid rgba(0,0,0,0.07)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             gap: 8,
           }}>
-            <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#0A8A5C', boxShadow: '0 0 8px rgba(10,138,92,0.6)' }} />
-            <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.28)', letterSpacing: '0.06em' }}>
+            <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#0A8A5C', boxShadow: '0 0 8px rgba(10,138,92,0.4)' }} />
+            <span style={{ fontSize: 11, color: 'rgba(0,0,0,0.28)', letterSpacing: '0.06em' }}>
               SECURED · PRIVATE DEMO
             </span>
           </div>
@@ -324,7 +313,7 @@ export default function LoginPage() {
         <div style={{
           marginTop: 28,
           fontSize: 11,
-          color: 'rgba(255,255,255,0.18)',
+          color: 'rgba(0,0,0,0.22)',
           letterSpacing: '0.06em',
           textAlign: 'center',
         }}>
