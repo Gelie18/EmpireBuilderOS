@@ -19,7 +19,8 @@ interface BrandMarkProps {
   style?: React.CSSProperties;
 }
 
-const ASPECT = 438.79 / 523.31;
+// viewBox is "0 0 440 56" → width / height = 440 / 56
+const ASPECT = 440 / 56;
 
 export default function BrandMark({
   color = 'currentColor',
