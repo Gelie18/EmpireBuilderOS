@@ -12,7 +12,7 @@ const CREDENTIALS = [
 function AnimatedBrandLogo({ animate = false }: { animate?: boolean }) {
   return (
     <div style={{ animation: animate ? 'fadeUp 0.7s ease both' : undefined }}>
-      <BrandLogo layout="stacked" markHeight={76} />
+      <BrandLogo layout="stacked" markHeight={48} />
     </div>
   );
 }
@@ -221,7 +221,7 @@ export default function LoginPage() {
 
           {/* Logo */}
           <div className="login-logo" style={{ marginBottom: 28, display: 'flex', justifyContent: 'center' }}>
-            <BrandLogo layout="stacked" markHeight={68} />
+            <BrandLogo layout="stacked" markHeight={52} />
           </div>
 
           {/* Tagline */}

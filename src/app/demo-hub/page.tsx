@@ -183,7 +183,7 @@ export default function DemoHubPage() {
           boxShadow: '0 1px 0 rgba(0,0,0,0.04)',
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-            <BLCircleLogo size={44} />
+            <BLCircleLogo size={36} />
             <div>
               <div style={{ fontWeight: 900, fontSize: 16, color: '#111827', letterSpacing: '-0.01em', lineHeight: 1 }}>Meritage Partners</div>
               <div style={{ fontWeight: 600, fontSize: 10, color: COBALT, letterSpacing: '0.14em', textTransform: 'uppercase', marginTop: 2 }}>Operating System</div>

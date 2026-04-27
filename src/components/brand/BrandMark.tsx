@@ -39,9 +39,9 @@ export default function BrandMark({
     <img
       src="/brand/empire-builder-logo.png"
       alt={label}
-      height={height}
       style={{
         display: 'block',
+        height: `${height}px`,   // CSS property — not overridden by Tailwind reset
         width: 'auto',
         userSelect: 'none',
         ...filterStyle,
