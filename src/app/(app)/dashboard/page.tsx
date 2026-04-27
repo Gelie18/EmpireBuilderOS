@@ -328,7 +328,7 @@ export default function DashboardPage() {
               }}>
                 {subco.monogram}
               </span>
-              <span>Good morning, Ganesh</span>
+              <span>Good morning, Brian</span>
             </div>
             <div style={{ marginTop: 10, fontSize: 14, color: 'var(--color-muted)', maxWidth: 780, lineHeight: 1.5 }}>
               {isTopco
