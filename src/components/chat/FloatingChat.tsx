@@ -247,7 +247,7 @@ const PAGE_CTX: Record<string, { label: string; allChips: string[] }> = {
 };
 
 const DEFAULT_CTX = {
-  label: 'Empire Builder',
+  label: '783 OS',
   allChips: [
     'Net income miss — root cause?',
     'Cash and runway status?',
@@ -503,101 +503,213 @@ export default function FloatingChat() {
           from { opacity: 0; transform: translateY(3px); }
           to   { opacity: 1; transform: translateY(0); }
         }
+        @keyframes eb-pulse {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.5; transform: scale(0.85); }
+        }
       `}</style>
 
       <div
         className="fixed z-[60] flex flex-col bottom-14 md:bottom-0"
         style={{
-          top: 52, right: 0, width: '100%', maxWidth: 420,
-          background: '#1E2236',
-          borderLeft: '1px solid rgba(255,255,255,0.08)',
-          boxShadow: '-4px 0 32px rgba(0,0,0,0.30)',
+          top: 52, right: 0, width: '100%', maxWidth: 440,
+          background: '#13172B',
+          borderLeft: '1px solid rgba(255,255,255,0.07)',
+          boxShadow: '-8px 0 48px rgba(0,0,0,0.45)',
           transform: open ? 'translateX(0)' : 'translateX(100%)',
-          transition: 'transform 0.26s cubic-bezier(0.4,0,0.2,1)',
+          transition: 'transform 0.28s cubic-bezier(0.4,0,0.2,1)',
         }}
       >
-        {/* ── Header ── */}
-        <div className="flex items-center gap-3 px-4 py-3.5 border-b flex-shrink-0"
-          style={{ borderColor: 'rgba(255,255,255,0.08)', background: '#1A1C2E' }}>
-          <div className="w-7 h-7 rounded flex items-center justify-center flex-shrink-0"
-            style={{ background: '#E8B84B' }}>
-            <svg width="14" height="14" fill="none" stroke="#1A1C2E" strokeWidth="2" viewBox="0 0 24 24">
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-            </svg>
-          </div>
-          <div className="flex-1 min-w-0">
-            <div className="text-[13px] font-bold uppercase tracking-[0.08em] leading-none" style={{ color: '#FFFFFF' }}>
-              AI CFO
+        {/* ── Header — premium gradient ── */}
+        <div className="flex-shrink-0" style={{
+          background: 'linear-gradient(135deg, #0B0D17 0%, #1A1028 50%, #0D1424 100%)',
+          borderBottom: '1px solid rgba(255,255,255,0.07)',
+          padding: '16px 16px 0',
+        }}>
+          {/* Top row: icon + title + close */}
+          <div className="flex items-start justify-between mb-3">
+            <div className="flex items-center gap-3">
+              {/* AI CFO icon mark */}
+              <div style={{
+                width: 36, height: 36, borderRadius: 10, flexShrink: 0,
+                background: 'linear-gradient(135deg, #1B4DE6 0%, #F58A1F 100%)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                boxShadow: '0 2px 12px rgba(27,77,230,0.40)',
+              }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="#FFFFFF">
+                  <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z" />
+                </svg>
+              </div>
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 3 }}>
+                  <span style={{ fontSize: 16, fontWeight: 900, letterSpacing: '-0.01em', color: '#FFFFFF' }}>
+                    AI CFO
+                  </span>
+                  {/* Live indicator */}
+                  <span style={{
+                    display: 'flex', alignItems: 'center', gap: 4,
+                    background: 'rgba(45,180,122,0.15)',
+                    border: '1px solid rgba(45,180,122,0.35)',
+                    borderRadius: 20, padding: '2px 6px',
+                  }}>
+                    <span style={{
+                      width: 6, height: 6, borderRadius: '50%', background: '#2DB47A',
+                      animation: 'eb-pulse 2s infinite',
+                      display: 'inline-block', flexShrink: 0,
+                    }} />
+                    <span style={{ fontSize: 8, fontWeight: 800, color: '#2DB47A', letterSpacing: '0.10em', textTransform: 'uppercase' }}>
+                      Live
+                    </span>
+                  </span>
+                </div>
+                {/* Page context chip */}
+                <div style={{
+                  display: 'inline-flex', alignItems: 'center', gap: 4,
+                  background: 'rgba(255,255,255,0.06)',
+                  border: '1px solid rgba(255,255,255,0.10)',
+                  borderRadius: 4, padding: '2px 7px',
+                }}>
+                  <svg width="9" height="9" fill="none" stroke="rgba(255,255,255,0.40)" strokeWidth="2" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                  </svg>
+                  <span style={{ fontSize: 10, fontWeight: 700, color: 'rgba(255,255,255,0.50)', letterSpacing: '0.06em' }}>
+                    {mode === 'forecast' ? `Forecast · ${forecastQuarter}` : `${ctx.label} · Apr 2026`}
+                  </span>
+                </div>
+              </div>
             </div>
-            <div className="text-[11px] mt-0.5 truncate" style={{ color: 'rgba(255,255,255,0.45)' }}>
-              {mode === 'forecast' ? `Forecast · ${forecastQuarter}` : `Context: ${ctx.label} · Apr 2026`}
-            </div>
+            <button
+              onClick={() => setOpen(false)}
+              style={{
+                width: 28, height: 28, borderRadius: 6, flexShrink: 0,
+                background: 'transparent', border: '1px solid rgba(255,255,255,0.14)',
+                color: 'rgba(255,255,255,0.45)', cursor: 'pointer', display: 'flex',
+                alignItems: 'center', justifyContent: 'center', fontSize: 14,
+                transition: 'border-color 0.12s, color 0.12s',
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.40)'; e.currentTarget.style.color = '#FFFFFF'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.14)'; e.currentTarget.style.color = 'rgba(255,255,255,0.45)'; }}
+            >✕</button>
           </div>
-          <button
-            onClick={() => setOpen(false)}
-            className="w-7 h-7 flex items-center justify-center cursor-pointer text-[12px] transition-colors rounded"
-            style={{ background: 'transparent', border: '1px solid rgba(255,255,255,0.20)', color: 'rgba(255,255,255,0.55)' }}
-            onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#E8B84B'; e.currentTarget.style.color = '#E8B84B'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.20)'; e.currentTarget.style.color = 'rgba(255,255,255,0.55)'; }}
-          >✕</button>
-        </div>
 
-        {/* ── Mode tabs ── */}
-        <div className="flex border-b flex-shrink-0" style={{ borderColor: 'rgba(255,255,255,0.08)', background: '#242840' }}>
-          {MODE_TABS.map((tab) => {
-            const active = mode === tab.key;
-            return (
-              <button
-                key={tab.key}
-                onClick={() => setMode(tab.key)}
-                className="flex-1 flex items-center justify-center gap-1.5 py-2.5 text-[11px] font-bold uppercase tracking-[0.06em] cursor-pointer transition-all border-b-2"
-                style={{
-                  background: active ? '#1E2236' : 'transparent',
-                  color: active ? '#1D44BF' : 'rgba(255,255,255,0.50)',
-                  borderBottomColor: active ? '#1D44BF' : 'transparent',
-                  fontFamily: 'inherit',
-                  border: 'none',
-                  borderBottom: active ? '2px solid #1D44BF' : '2px solid transparent',
-                }}
-              >
-                <span style={{ fontSize: 13 }}>{tab.icon}</span>
-                <span className="hidden sm:inline">{tab.label}</span>
-              </button>
-            );
-          })}
+          {/* Mode switcher — pill tabs pinned to bottom of header */}
+          <div style={{ display: 'flex', gap: 2, marginBottom: 0, borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: 10 }}>
+            {MODE_TABS.map((tab) => {
+              const active = mode === tab.key;
+              const icons: Record<string, React.ReactNode> = {
+                questions: <svg width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>,
+                thinkbig: <svg width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24"><path d="M9 21h6M12 3a6 6 0 0 1 6 6c0 3-2 5-3 6H9c-1-1-3-3-3-6a6 6 0 0 1 6-6z"/></svg>,
+                forecast: <svg width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>,
+              };
+              return (
+                <button
+                  key={tab.key}
+                  onClick={() => setMode(tab.key)}
+                  style={{
+                    flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5,
+                    padding: '8px 6px',
+                    background: 'transparent',
+                    border: 'none',
+                    borderBottom: active ? '2px solid #1B4DE6' : '2px solid transparent',
+                    color: active ? '#FFFFFF' : 'rgba(255,255,255,0.40)',
+                    cursor: 'pointer', fontFamily: 'inherit',
+                    fontSize: 11, fontWeight: active ? 700 : 500,
+                    letterSpacing: '0.06em', textTransform: 'uppercase',
+                    transition: 'color 0.12s, border-color 0.12s',
+                  }}
+                  onMouseEnter={(e) => { if (!active) (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.70)'; }}
+                  onMouseLeave={(e) => { if (!active) (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.40)'; }}
+                >
+                  {icons[tab.key]}
+                  {tab.label}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* ── Chat messages (hidden in forecast mode) ── */}
         {mode !== 'forecast' && (
-          <div className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-4 min-h-0">
+          <div className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-5 min-h-0"
+            style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,0.018) 40px)' }}>
             {messages.map((msg) => (
-              <div key={msg.id} className={`flex flex-col gap-1 ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
-                <div className="text-[10px] font-bold uppercase tracking-[0.08em]" style={{ color: 'rgba(255,255,255,0.50)' }}>
-                  {msg.role === 'user' ? 'You' : 'AI CFO'}
-                </div>
-                <div className="max-w-[92%] px-4 py-3 text-[13px]" style={{
-                  background: msg.role === 'user' ? '#1D44BF' : '#242840',
-                  color: '#FFFFFF',
-                  borderRadius: msg.role === 'user' ? '12px 12px 3px 12px' : '12px 12px 12px 3px',
-                  border: msg.role === 'assistant' ? '1px solid rgba(255,255,255,0.08)' : 'none',
-                  fontWeight: msg.role === 'user' ? 500 : 400,
+              <div key={msg.id} style={{
+                display: 'flex',
+                flexDirection: msg.role === 'user' ? 'row-reverse' : 'row',
+                alignItems: 'flex-end', gap: 8,
+              }}>
+                {/* Avatar */}
+                <div style={{
+                  width: 26, height: 26, borderRadius: 8, flexShrink: 0,
+                  background: msg.role === 'user'
+                    ? 'linear-gradient(135deg,#1B4DE6,#B31010)'
+                    : 'linear-gradient(135deg,#1B4DE6,#F58A1F)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
                 }}>
-                  {msg.role === 'assistant'
-                    ? <FormattedMessage content={msg.content} />
-                    : msg.content
-                  }
+                  {msg.role === 'user' ? (
+                    <svg width="12" height="12" fill="none" stroke="#FFFFFF" strokeWidth="2.2" viewBox="0 0 24 24">
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+                    </svg>
+                  ) : (
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="#FFFFFF">
+                      <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/>
+                    </svg>
+                  )}
+                </div>
+                <div style={{ maxWidth: '82%', display: 'flex', flexDirection: 'column', gap: 3,
+                  alignItems: msg.role === 'user' ? 'flex-end' : 'flex-start' }}>
+                  <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.10em', textTransform: 'uppercase',
+                    color: 'rgba(255,255,255,0.35)', paddingLeft: msg.role === 'assistant' ? 2 : 0, paddingRight: msg.role === 'user' ? 2 : 0 }}>
+                    {msg.role === 'user' ? 'You' : 'AI CFO'}
+                  </span>
+                  <div style={{
+                    padding: '11px 14px',
+                    background: msg.role === 'user'
+                      ? 'linear-gradient(135deg,#C91A14,#1B4DE6)'
+                      : 'linear-gradient(180deg,#1E2442 0%,#1A1F38 100%)',
+                    color: '#FFFFFF',
+                    borderRadius: msg.role === 'user' ? '14px 14px 4px 14px' : '4px 14px 14px 14px',
+                    border: msg.role === 'assistant' ? '1px solid rgba(255,255,255,0.08)' : 'none',
+                    fontSize: 13, lineHeight: 1.55,
+                    boxShadow: msg.role === 'user'
+                      ? '0 2px 8px rgba(27,77,230,0.30)'
+                      : '0 2px 6px rgba(0,0,0,0.20)',
+                  }}>
+                    {msg.role === 'assistant'
+                      ? <FormattedMessage content={msg.content} />
+                      : msg.content
+                    }
+                  </div>
                 </div>
               </div>
             ))}
 
             {isLoading && (
-              <div className="flex flex-col gap-1 items-start">
-                <div className="text-[10px] font-bold uppercase tracking-[0.08em]" style={{ color: 'rgba(255,255,255,0.50)' }}>AI CFO</div>
-                <div className="px-4 py-3 border rounded-xl" style={{ background: '#242840', borderColor: 'rgba(255,255,255,0.08)' }}>
-                  <div className="flex gap-1.5 items-center">
+              <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-end', gap: 8 }}>
+                <div style={{
+                  width: 26, height: 26, borderRadius: 8, flexShrink: 0,
+                  background: 'linear-gradient(135deg,#1B4DE6,#F58A1F)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                }}>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="#FFFFFF">
+                    <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/>
+                  </svg>
+                </div>
+                <div style={{
+                  padding: '12px 16px', borderRadius: '4px 14px 14px 14px',
+                  background: 'linear-gradient(180deg,#1E2442 0%,#1A1F38 100%)',
+                  border: '1px solid rgba(255,255,255,0.08)',
+                  boxShadow: '0 2px 6px rgba(0,0,0,0.20)',
+                }}>
+                  <div style={{ display: 'flex', gap: 5, alignItems: 'center' }}>
                     {[0, 1, 2].map((i) => (
-                      <span key={i} className="w-1.5 h-1.5 rounded-full"
-                        style={{ background: '#1D44BF', animation: 'blink 1.2s infinite', animationDelay: `${i * 0.22}s` }} />
+                      <span key={i} style={{
+                        width: 6, height: 6, borderRadius: '50%',
+                        background: i === 0 ? '#1B4DE6' : i === 1 ? '#E85020' : '#F58A1F',
+                        animation: 'eb-pulse 1.2s infinite',
+                        animationDelay: `${i * 0.18}s`,
+                        display: 'inline-block',
+                      }} />
                     ))}
                   </div>
                 </div>
@@ -619,8 +731,8 @@ export default function FloatingChat() {
                   <button key={q} onClick={() => setForecastQuarter(q)}
                     style={{
                       fontSize: 10, fontWeight: 700, padding: '3px 8px', borderRadius: 4, cursor: 'pointer',
-                      border: `1px solid ${active ? '#1D44BF' : 'rgba(255,255,255,0.10)'}`,
-                      background: active ? '#1D44BF' : 'transparent',
+                      border: `1px solid ${active ? '#1B4DE6' : 'rgba(255,255,255,0.10)'}`,
+                      background: active ? '#1B4DE6' : 'transparent',
                       color: active ? '#FFFFFF' : 'rgba(255,255,255,0.50)', fontFamily: 'inherit',
                     }}>
                     {q}
@@ -629,9 +741,9 @@ export default function FloatingChat() {
               })}
               <button
                 onClick={() => { router.push('/ai-forecast'); setOpen(false); }}
-                style={{ marginLeft: 'auto', fontSize: 10, fontWeight: 700, color: '#1D44BF', background: 'rgba(29,68,191,0.08)', border: '1px solid rgba(29,68,191,0.20)', borderRadius: 4, padding: '3px 8px', cursor: 'pointer', fontFamily: 'inherit', whiteSpace: 'nowrap' }}
-                onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(29,68,191,0.15)'; }}
-                onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(29,68,191,0.08)'; }}
+                style={{ marginLeft: 'auto', fontSize: 10, fontWeight: 700, color: '#1B4DE6', background: 'rgba(27,77,230,0.08)', border: '1px solid rgba(27,77,230,0.20)', borderRadius: 4, padding: '3px 8px', cursor: 'pointer', fontFamily: 'inherit', whiteSpace: 'nowrap' }}
+                onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(27,77,230,0.15)'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(27,77,230,0.08)'; }}
               >
                 Open Builder →
               </button>
@@ -644,9 +756,9 @@ export default function FloatingChat() {
                 {FORECAST_SCENARIOS.map((s) => (
                   <button key={s} onClick={() => setForecastInput(s)}
                     className="text-left cursor-pointer transition-all"
-                    style={{ fontSize: 10.5, padding: '5px 8px', border: '1px solid rgba(29,68,191,0.25)', color: 'rgba(255,255,255,0.50)', background: 'rgba(29,68,191,0.06)', borderRadius: 4, fontFamily: 'inherit', lineHeight: 1.35 }}
-                    onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#1D44BF'; e.currentTarget.style.background = 'rgba(29,68,191,0.15)'; e.currentTarget.style.color = '#FFFFFF'; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(29,68,191,0.25)'; e.currentTarget.style.background = 'rgba(29,68,191,0.06)'; e.currentTarget.style.color = 'rgba(255,255,255,0.50)'; }}
+                    style={{ fontSize: 10.5, padding: '5px 8px', border: '1px solid rgba(27,77,230,0.25)', color: 'rgba(255,255,255,0.50)', background: 'rgba(27,77,230,0.06)', borderRadius: 4, fontFamily: 'inherit', lineHeight: 1.35 }}
+                    onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#1B4DE6'; e.currentTarget.style.background = 'rgba(27,77,230,0.15)'; e.currentTarget.style.color = '#FFFFFF'; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(27,77,230,0.25)'; e.currentTarget.style.background = 'rgba(27,77,230,0.06)'; e.currentTarget.style.color = 'rgba(255,255,255,0.50)'; }}
                   >{s}</button>
                 ))}
               </div>
@@ -663,7 +775,7 @@ export default function FloatingChat() {
                   placeholder={`${forecastQuarter} assumption…`}
                   className="flex-1 px-3 py-2 text-[12px] border rounded outline-none"
                   style={{ background: '#1E2236', borderColor: 'rgba(255,255,255,0.12)', color: '#FFFFFF', fontFamily: 'inherit', minWidth: 0 }}
-                  onFocus={(e) => (e.currentTarget.style.borderColor = '#1D44BF')}
+                  onFocus={(e) => (e.currentTarget.style.borderColor = '#1B4DE6')}
                   onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)')}
                 />
                 <button
@@ -671,7 +783,7 @@ export default function FloatingChat() {
                   disabled={!forecastInput.trim() || forecastSending}
                   className="flex-shrink-0 px-3 py-2 text-[11px] font-bold uppercase rounded cursor-pointer"
                   style={{
-                    background: !forecastInput.trim() || forecastSending ? '#2A2F4A' : '#1D44BF',
+                    background: !forecastInput.trim() || forecastSending ? '#2A2F4A' : '#1B4DE6',
                     color: !forecastInput.trim() || forecastSending ? 'rgba(255,255,255,0.28)' : '#FFFFFF',
                     border: 'none', fontFamily: 'inherit', letterSpacing: '0.04em',
                     opacity: !forecastInput.trim() || forecastSending ? 0.6 : 1,
@@ -701,7 +813,7 @@ export default function FloatingChat() {
                 title={`Refresh insights (${currentSet + 1}/${totalSets})`}
                 className="flex items-center gap-1 cursor-pointer transition-all"
                 style={{ color: 'rgba(255,255,255,0.28)', fontSize: 10, fontWeight: 600, background: 'none', border: 'none', padding: '2px 4px', letterSpacing: '0.04em' }}
-                onMouseEnter={(e) => { e.currentTarget.style.color = '#1D44BF'; }}
+                onMouseEnter={(e) => { e.currentTarget.style.color = '#1B4DE6'; }}
                 onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(255,255,255,0.28)'; }}
               >
                 <RefreshIcon spinning={refreshAnim} />
@@ -717,7 +829,7 @@ export default function FloatingChat() {
                 <button key={chip} onClick={() => sendMessage(chip)}
                   className="text-[11px] px-2.5 py-1 cursor-pointer transition-all rounded whitespace-nowrap"
                   style={{ border: '1px solid rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.50)', background: '#242840', fontWeight: 500 }}
-                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#1D44BF'; e.currentTarget.style.color = '#FFFFFF'; e.currentTarget.style.background = 'rgba(29,68,191,0.15)'; }}
+                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#1B4DE6'; e.currentTarget.style.color = '#FFFFFF'; e.currentTarget.style.background = 'rgba(27,77,230,0.15)'; }}
                   onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'; e.currentTarget.style.color = 'rgba(255,255,255,0.50)'; e.currentTarget.style.background = '#242840'; }}
                 >{chip}</button>
               ))}
@@ -727,16 +839,16 @@ export default function FloatingChat() {
 
         {/* ── Think Big chips (thinkbig mode only) ── */}
         {mode === 'thinkbig' && (
-          <div className="border-t flex-shrink-0" style={{ borderColor: 'rgba(232,184,75,0.30)', background: 'rgba(232,184,75,0.04)' }}>
+          <div className="border-t flex-shrink-0" style={{ borderColor: 'rgba(245,138,31,0.30)', background: 'rgba(245,138,31,0.04)' }}>
             <div className="px-4 pt-2.5 pb-1.5 flex items-center justify-between">
-              <div className="text-[10px] font-semibold uppercase tracking-[0.08em]" style={{ color: '#C9962A' }}>
+              <div className="text-[10px] font-semibold uppercase tracking-[0.08em]" style={{ color: '#D9700F' }}>
                 Think Outside the Box
               </div>
               <button
                 onClick={handleRefreshThinkBig}
                 title="New creative angles"
                 className="flex items-center gap-1 cursor-pointer transition-all"
-                style={{ color: '#C9962A', opacity: 0.7, fontSize: 10, fontWeight: 600, background: 'none', border: 'none', padding: '2px 4px' }}
+                style={{ color: '#D9700F', opacity: 0.7, fontSize: 10, fontWeight: 600, background: 'none', border: 'none', padding: '2px 4px' }}
                 onMouseEnter={(e) => { e.currentTarget.style.opacity = '1'; }}
                 onMouseLeave={(e) => { e.currentTarget.style.opacity = '0.7'; }}
               >
@@ -751,9 +863,9 @@ export default function FloatingChat() {
               {currentThinkBig.map((prompt) => (
                 <button key={prompt} onClick={() => sendMessage(prompt)}
                   className="text-left text-[11px] px-3 py-1.5 cursor-pointer transition-all rounded-md w-full"
-                  style={{ border: '1px solid rgba(232,184,75,0.28)', color: '#92680A', background: 'rgba(232,184,75,0.08)', fontWeight: 500, lineHeight: 1.4 }}
-                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#E8B84B'; e.currentTarget.style.background = 'rgba(232,184,75,0.16)'; e.currentTarget.style.color = '#7A5508'; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(232,184,75,0.28)'; e.currentTarget.style.background = 'rgba(232,184,75,0.08)'; e.currentTarget.style.color = '#92680A'; }}
+                  style={{ border: '1px solid rgba(245,138,31,0.28)', color: '#92680A', background: 'rgba(245,138,31,0.08)', fontWeight: 500, lineHeight: 1.4 }}
+                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#F58A1F'; e.currentTarget.style.background = 'rgba(245,138,31,0.16)'; e.currentTarget.style.color = '#7A5508'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(245,138,31,0.28)'; e.currentTarget.style.background = 'rgba(245,138,31,0.08)'; e.currentTarget.style.color = '#92680A'; }}
                 >{prompt}</button>
               ))}
             </div>
@@ -762,53 +874,85 @@ export default function FloatingChat() {
 
         {/* ── Text input (questions and thinkbig modes only) ── */}
         {mode !== 'forecast' && (
-          <div className="px-4 py-3.5 border-t" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
-            <div className="flex gap-2">
+          <div style={{
+            padding: '12px 14px',
+            borderTop: '1px solid rgba(255,255,255,0.07)',
+            background: '#0D1020',
+          }}>
+            <div style={{
+              display: 'flex', gap: 8, alignItems: 'center',
+              background: '#1A1F38',
+              border: '1px solid rgba(255,255,255,0.10)',
+              borderRadius: 12, padding: '6px 6px 6px 14px',
+              transition: 'border-color 0.12s',
+            }}
+              onFocusCapture={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(27,77,230,0.50)'; }}
+              onBlurCapture={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.10)'; }}
+            >
               <input
                 ref={inputRef} value={input} onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(); } }}
-                placeholder="Ask anything about your financials..."
-                className="flex-1 px-3.5 py-2.5 text-[13px] border outline-none min-w-0 rounded"
-                style={{ background: '#1E2236', borderColor: 'rgba(255,255,255,0.12)', color: '#FFFFFF', fontFamily: 'inherit' }}
-                onFocus={(e) => (e.currentTarget.style.borderColor = '#1D44BF')}
-                onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)')}
+                placeholder="Ask your AI CFO anything…"
+                style={{
+                  flex: 1, background: 'transparent', border: 'none', outline: 'none',
+                  color: '#FFFFFF', fontSize: 13, fontFamily: 'inherit',
+                }}
               />
               <button onClick={handleSend} disabled={isLoading || !input.trim()}
-                className="w-[44px] h-[44px] flex items-center justify-center flex-shrink-0 cursor-pointer border-none transition-all rounded"
-                style={{ background: isLoading || !input.trim() ? '#2A2F4A' : '#1D44BF', opacity: isLoading || !input.trim() ? 0.5 : 1 }}>
-                <svg width="16" height="16" fill="none" stroke={isLoading || !input.trim() ? 'rgba(255,255,255,0.28)' : '#FFFFFF'} strokeWidth="2.5" viewBox="0 0 24 24">
+                style={{
+                  width: 36, height: 36, borderRadius: 9, flexShrink: 0,
+                  background: isLoading || !input.trim()
+                    ? 'rgba(255,255,255,0.05)'
+                    : 'linear-gradient(135deg,#1B4DE6,#B31010)',
+                  border: 'none', cursor: isLoading || !input.trim() ? 'default' : 'pointer',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  transition: 'background 0.15s, box-shadow 0.15s',
+                  boxShadow: !isLoading && input.trim() ? '0 2px 8px rgba(27,77,230,0.40)' : 'none',
+                }}>
+                <svg width="14" height="14" fill="none"
+                  stroke={isLoading || !input.trim() ? 'rgba(255,255,255,0.20)' : '#FFFFFF'}
+                  strokeWidth="2.5" viewBox="0 0 24 24">
                   <line x1="22" y1="2" x2="11" y2="13" />
                   <polygon points="22 2 15 22 11 13 2 9 22 2" />
                 </svg>
               </button>
             </div>
+            <div style={{ textAlign: 'center', marginTop: 6, fontSize: 9, color: 'rgba(255,255,255,0.20)', letterSpacing: '0.06em' }}>
+              ENTER to send · ESC to close
+            </div>
           </div>
         )}
       </div>
 
-      {/* Desktop toggle */}
+      {/* Desktop toggle — gradient pill */}
       <button
         onClick={() => setOpen((o) => !o)}
-        className="hidden md:flex fixed z-[61] items-center gap-2.5 cursor-pointer border-none transition-all"
+        className="hidden md:flex fixed z-[61] items-center gap-2.5 cursor-pointer"
         style={{
-          bottom: 28, right: open ? 428 : 28,
-          background: open ? '#1E2236' : '#E8B84B',
-          color: open ? '#1D44BF' : '#1A1C2E',
-          padding: '11px 20px 11px 16px',
-          border: open ? '1px solid rgba(255,255,255,0.08)' : 'none',
-          boxShadow: open ? '0 1px 4px rgba(0,0,0,0.30), 0 4px 16px rgba(0,0,0,0.25)' : '0 4px 20px rgba(232,184,75,0.40), 0 2px 8px rgba(0,0,0,0.12)',
-          fontWeight: 700, fontSize: 13, letterSpacing: '0.06em', textTransform: 'uppercase',
-          transition: 'right 0.26s cubic-bezier(0.4,0,0.2,1), background 0.18s, color 0.18s',
-          borderRadius: 6,
+          bottom: 28, right: open ? 448 : 28,
+          background: open
+            ? 'rgba(255,255,255,0.06)'
+            : 'linear-gradient(135deg,#1B4DE6 0%,#F58A1F 100%)',
+          color: '#FFFFFF',
+          padding: '10px 18px 10px 14px',
+          border: open ? '1px solid rgba(255,255,255,0.12)' : 'none',
+          boxShadow: open
+            ? '0 2px 8px rgba(0,0,0,0.30)'
+            : '0 4px 20px rgba(27,77,230,0.35), 0 2px 8px rgba(0,0,0,0.15)',
+          fontWeight: 800, fontSize: 12, letterSpacing: '0.08em', textTransform: 'uppercase',
+          transition: 'right 0.28s cubic-bezier(0.4,0,0.2,1), background 0.18s',
+          borderRadius: 10,
         }}
+        onMouseEnter={(e) => { if (!open) (e.currentTarget as HTMLElement).style.boxShadow = '0 6px 28px rgba(27,77,230,0.50), 0 2px 8px rgba(0,0,0,0.20)'; }}
+        onMouseLeave={(e) => { if (!open) (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 20px rgba(27,77,230,0.35), 0 2px 8px rgba(0,0,0,0.15)'; }}
       >
         {open ? (
-          <><svg width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+          <><svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
             <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
           </svg>Close</>
         ) : (
-          <><svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+          <><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/>
           </svg>AI CFO</>
         )}
       </button>

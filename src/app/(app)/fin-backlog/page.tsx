@@ -24,7 +24,7 @@ const TT: React.CSSProperties = {
 
 // ── KPI Data ─────────────────────────────────────────────────────────────────
 const KPIS = [
-  { label: 'Total Backlog',     value: '$2.84M', sub: 'Contracted, unrecognized',    color: '#1D44BF' },
+  { label: 'Total Backlog',     value: '$2.84M', sub: 'Contracted, unrecognized',    color: '#1B4DE6' },
   { label: 'WIP Value',         value: '$847K',  sub: 'In-progress work incurred',   color: '#D97706' },
   { label: 'Unbilled Revenue',  value: '$412K',  sub: 'Earned but not invoiced',     color: '#7C3AED' },
   { label: 'Avg Days to Bill',  value: '18 days',sub: 'Invoice cycle time',          color: '#0A8A5C' },
@@ -83,7 +83,7 @@ function StatusBadge({ status }: { status: string }) {
     'At Risk':  { bg: 'rgba(217,119,6,0.10)',  color: '#D97706' },
     'On Track': { bg: 'rgba(10,138,92,0.10)',  color: '#0A8A5C' },
   };
-  const s = map[status] ?? { bg: 'rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.50)' };
+  const s = map[status] ?? { bg: 'rgba(255,255,255,0.06)', color: 'var(--color-chart-text)' };
   return (
     <span style={{
       display: 'inline-block',
@@ -144,10 +144,10 @@ export default function FinBacklogPage() {
           <div className="flex flex-wrap gap-2 items-center">
             <span style={{
               display: 'inline-flex', alignItems: 'center', gap: 6,
-              background: 'rgba(29,68,191,0.08)', border: '1px solid rgba(29,68,191,0.25)',
+              background: 'rgba(27,77,230,0.08)', border: '1px solid rgba(27,77,230,0.25)',
               borderRadius: 8, padding: '6px 14px',
               fontFamily: 'var(--font-condensed)', fontSize: 13, fontWeight: 700,
-              color: '#1D44BF', letterSpacing: '0.04em',
+              color: '#1B4DE6', letterSpacing: '0.04em',
             }}>
               <span style={{ fontWeight: 400, color: 'var(--color-muted)', fontSize: 11 }}>BACKLOG</span>
               $2.84M
@@ -211,9 +211,9 @@ export default function FinBacklogPage() {
         }}>
           Backlog Burn Timeline
         </div>
-        <ResponsiveContainer width="100%" height={220}>
+        <ResponsiveContainer width="100%" height={340}>
           <ComposedChart data={BURN_DATA} margin={{ top: 4, right: 16, left: 4, bottom: 0 }}>
-            <CartesianGrid stroke="rgba(255,255,255,0.06)" strokeDasharray="4 4" />
+            <CartesianGrid stroke="var(--color-chart-grid)" strokeDasharray="4 4" />
             <XAxis
               dataKey="month"
               tick={{ fill: 'var(--color-muted)', fontSize: 11, fontFamily: 'var(--font-condensed)' }}
@@ -241,7 +241,7 @@ export default function FinBacklogPage() {
               yAxisId="left"
               dataKey="revenue"
               name="Expected Revenue"
-              fill="#1D44BF"
+              fill="#1B4DE6"
               opacity={0.85}
               radius={[3, 3, 0, 0]}
             />
@@ -250,9 +250,9 @@ export default function FinBacklogPage() {
               type="monotone"
               dataKey="backlog"
               name="Remaining Backlog"
-              stroke="#E8B84B"
+              stroke="#F58A1F"
               strokeWidth={2.5}
-              dot={{ r: 4, fill: '#E8B84B', strokeWidth: 0 }}
+              dot={{ r: 4, fill: '#F58A1F', strokeWidth: 0 }}
             />
           </ComposedChart>
         </ResponsiveContainer>
@@ -277,7 +277,7 @@ export default function FinBacklogPage() {
                 return (
                   <tr key={i} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
                     <td style={{ padding: '9px 12px', fontWeight: 600, color: 'var(--color-text)' }}>{row.month}</td>
-                    <td style={{ padding: '9px 12px', textAlign: 'right', fontFamily: 'var(--font-condensed)', color: '#1D44BF', fontWeight: 600 }}>{fmtK(row.backlog)}</td>
+                    <td style={{ padding: '9px 12px', textAlign: 'right', fontFamily: 'var(--font-condensed)', color: '#1B4DE6', fontWeight: 600 }}>{fmtK(row.backlog)}</td>
                     <td style={{ padding: '9px 12px', textAlign: 'right', fontFamily: 'var(--font-condensed)', color: '#0A8A5C', fontWeight: 600 }}>{fmtK(row.revenue)}</td>
                     <td style={{ padding: '9px 12px', textAlign: 'right', fontFamily: 'var(--font-condensed)', color: 'var(--color-muted)', fontWeight: 500 }}>{burnRate}%</td>
                   </tr>
@@ -323,7 +323,7 @@ export default function FinBacklogPage() {
             <tbody>
               {WIP_ITEMS.map((item) => (
                 <tr key={item.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                  <td style={{ padding: '10px 14px', fontFamily: 'var(--font-condensed)', fontWeight: 700, color: '#1D44BF', fontSize: 12 }}>
+                  <td style={{ padding: '10px 14px', fontFamily: 'var(--font-condensed)', fontWeight: 700, color: '#1B4DE6', fontSize: 12 }}>
                     {item.id}
                   </td>
                   <td style={{ padding: '10px 14px', fontWeight: 600, color: 'var(--color-text)' }}>
@@ -443,20 +443,20 @@ export default function FinBacklogPage() {
             style={{
               marginTop: 16,
               padding: '12px 16px',
-              background: 'rgba(29,68,191,0.05)',
-              borderLeft: '3px solid #1D44BF',
+              background: 'rgba(27,77,230,0.05)',
+              borderLeft: '3px solid #1B4DE6',
               borderRadius: '0 6px 6px 0',
               cursor: 'pointer',
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: expandAI ? 8 : 0 }}>
-              <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#1D44BF' }}>
+              <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#1B4DE6' }}>
                 AI CFO Insight
               </span>
-              <span style={{ fontSize: 10, color: '#1D44BF', transform: expandAI ? 'rotate(90deg)' : 'rotate(0deg)', transition: 'transform 0.15s', display: 'inline-block' }}>▸</span>
+              <span style={{ fontSize: 10, color: '#1B4DE6', transform: expandAI ? 'rotate(90deg)' : 'rotate(0deg)', transition: 'transform 0.15s', display: 'inline-block' }}>▸</span>
             </div>
             {expandAI && (
-              <div style={{ fontSize: 13, lineHeight: 1.6, color: 'rgba(255,255,255,0.50)' }}>
+              <div style={{ fontSize: 13, lineHeight: 1.6, color: 'var(--color-chart-text)' }}>
                 <strong>$1.49M</strong> (52% of WIP) is blocked or at risk. Titan Energy ($620K, scope CO) and Bellco Systems ($490K, material delay) are the highest-priority escalations. Resolving these two alone would accelerate <strong>$810K</strong> in billing recognition.
               </div>
             )}
@@ -464,6 +464,245 @@ export default function FinBacklogPage() {
         </div>
       </div>
 
+      {/* ── 6. AR & AP Aging Report ─────────────────────────────────────────── */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <AgingCard
+          title="Accounts Receivable Aging"
+          subtitle="Money owed to us"
+          rows={AR_AGING}
+          accent="#2DB47A"
+          type="ar"
+        />
+        <AgingCard
+          title="Accounts Payable Aging"
+          subtitle="Money we owe vendors"
+          rows={AP_AGING}
+          accent="#E06060"
+          type="ap"
+        />
+      </div>
+
+      {/* ── 7. Top aged receivables (action queue) ─────────────────────────── */}
+      <div style={{ ...CARD, padding: 0, overflow: 'hidden' }}>
+        <div style={{
+          padding: '14px 20px', borderBottom: '1px solid var(--color-border)',
+          background: 'var(--color-surf2)',
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        }}>
+          <span style={{ fontSize: 12, fontWeight: 800, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'var(--color-text)' }}>
+            Top Overdue Receivables — Action Queue
+          </span>
+          <span style={{ fontSize: 11, color: '#E06060', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+            ⚠ {TOP_OVERDUE_AR.length} accounts &gt; 30d
+          </span>
+        </div>
+        <div style={{ overflowX: 'auto' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 700 }}>
+            <thead>
+              <tr style={{ background: 'var(--color-surf2)' }}>
+                {['Customer', 'Subco', 'Invoice #', 'Amount', 'Days Outstanding', 'Last Contact', 'Action'].map((h, i) => (
+                  <th key={h} style={{
+                    padding: '11px 16px', textAlign: i === 3 || i === 4 ? 'right' : 'left',
+                    fontSize: 10, fontWeight: 800, letterSpacing: '0.09em',
+                    textTransform: 'uppercase', color: 'var(--color-muted)',
+                    borderBottom: '1px solid var(--color-border)',
+                  }}>{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {TOP_OVERDUE_AR.map((r, i) => {
+                const agingColor = r.days >= 90 ? '#C13333' : r.days >= 60 ? '#E06060' : r.days >= 30 ? '#F7A500' : '#8E9BB8';
+                return (
+                  <tr key={r.invoice} style={{
+                    borderTop: i === 0 ? 'none' : '1px solid var(--color-divider)',
+                  }}>
+                    <td style={{ padding: '12px 16px', fontSize: 14, color: 'var(--color-text)', fontWeight: 600 }}>{r.customer}</td>
+                    <td style={{ padding: '12px 16px', fontSize: 12, color: 'var(--color-muted)' }}>{r.subco}</td>
+                    <td style={{ padding: '12px 16px', fontSize: 12, fontFamily: 'ui-monospace,monospace', color: 'var(--color-muted)' }}>{r.invoice}</td>
+                    <td style={{ padding: '12px 16px', fontSize: 14, fontWeight: 800, color: 'var(--color-text)', textAlign: 'right' }}>${r.amount.toLocaleString()}</td>
+                    <td style={{ padding: '12px 16px', fontSize: 14, fontWeight: 800, color: agingColor, textAlign: 'right' }}>{r.days}d</td>
+                    <td style={{ padding: '12px 16px', fontSize: 12, color: 'var(--color-muted)' }}>{r.lastContact}</td>
+                    <td style={{ padding: '12px 16px' }}>
+                      <span style={{
+                        fontSize: 10, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase',
+                        background: `${agingColor}18`, color: agingColor, border: `1px solid ${agingColor}50`,
+                        borderRadius: 5, padding: '3px 9px',
+                      }}>
+                        {r.action}
+                      </span>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* ── 8. Top AP — near-due payables ──────────────────────────────────── */}
+      <div style={{ ...CARD, padding: 0, overflow: 'hidden' }}>
+        <div style={{
+          padding: '14px 20px', borderBottom: '1px solid var(--color-border)',
+          background: 'var(--color-surf2)',
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        }}>
+          <span style={{ fontSize: 12, fontWeight: 800, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'var(--color-text)' }}>
+            Payables — Next 30 Days
+          </span>
+          <span style={{ fontSize: 11, color: 'var(--color-muted)', fontWeight: 700 }}>
+            Total due: <strong style={{ color: 'var(--color-text)' }}>${TOP_AP.reduce((s, p) => s + p.amount, 0).toLocaleString()}</strong>
+          </span>
+        </div>
+        <div style={{ overflowX: 'auto' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 700 }}>
+            <thead>
+              <tr style={{ background: 'var(--color-surf2)' }}>
+                {['Vendor', 'Subco', 'Bill #', 'Amount', 'Due In', 'Terms', 'Priority'].map((h, i) => (
+                  <th key={h} style={{
+                    padding: '11px 16px', textAlign: i === 3 || i === 4 ? 'right' : 'left',
+                    fontSize: 10, fontWeight: 800, letterSpacing: '0.09em',
+                    textTransform: 'uppercase', color: 'var(--color-muted)',
+                    borderBottom: '1px solid var(--color-border)',
+                  }}>{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {TOP_AP.map((p, i) => {
+                const dueColor = p.dueInDays <= 3 ? '#C13333' : p.dueInDays <= 10 ? '#F7A500' : '#2DB47A';
+                const pColor = p.priority === 'Critical' ? '#C13333' : p.priority === 'High' ? '#F7A500' : '#8E9BB8';
+                return (
+                  <tr key={p.bill} style={{ borderTop: i === 0 ? 'none' : '1px solid var(--color-divider)' }}>
+                    <td style={{ padding: '12px 16px', fontSize: 14, color: 'var(--color-text)', fontWeight: 600 }}>{p.vendor}</td>
+                    <td style={{ padding: '12px 16px', fontSize: 12, color: 'var(--color-muted)' }}>{p.subco}</td>
+                    <td style={{ padding: '12px 16px', fontSize: 12, fontFamily: 'ui-monospace,monospace', color: 'var(--color-muted)' }}>{p.bill}</td>
+                    <td style={{ padding: '12px 16px', fontSize: 14, fontWeight: 800, color: 'var(--color-text)', textAlign: 'right' }}>${p.amount.toLocaleString()}</td>
+                    <td style={{ padding: '12px 16px', fontSize: 14, fontWeight: 800, color: dueColor, textAlign: 'right' }}>
+                      {p.dueInDays === 0 ? 'Today' : `${p.dueInDays}d`}
+                    </td>
+                    <td style={{ padding: '12px 16px', fontSize: 12, color: 'var(--color-muted)' }}>{p.terms}</td>
+                    <td style={{ padding: '12px 16px' }}>
+                      <span style={{
+                        fontSize: 10, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase',
+                        background: `${pColor}18`, color: pColor, border: `1px solid ${pColor}50`,
+                        borderRadius: 5, padding: '3px 9px',
+                      }}>
+                        {p.priority}
+                      </span>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  );
+}
+
+// ── AR & AP Aging data + helper ─────────────────────────────────────────────
+const AR_AGING = [
+  { bucket: 'Current (0–30)',  days: 0,  amount: 612_000, pct: 61, tone: 'good' as const },
+  { bucket: '31–60 days',      days: 31, amount: 182_000, pct: 18, tone: 'warn' as const },
+  { bucket: '61–90 days',      days: 61, amount:  84_000, pct:  8, tone: 'bad' as const  },
+  { bucket: '> 90 days',       days: 91, amount:  56_000, pct:  6, tone: 'bad' as const  },
+  { bucket: 'Disputed / Hold', days: 0,  amount:  66_000, pct:  7, tone: 'warn' as const },
+];
+
+const AP_AGING = [
+  { bucket: 'Not yet due',     days: 0,  amount: 268_000, pct: 65, tone: 'good' as const },
+  { bucket: '1–15 days due',   days: 1,  amount:  82_000, pct: 20, tone: 'warn' as const },
+  { bucket: '16–30 days due',  days: 16, amount:  42_000, pct: 10, tone: 'warn' as const },
+  { bucket: 'Past due',        days: 31, amount:  20_000, pct:  5, tone: 'bad' as const  },
+];
+
+const TOP_OVERDUE_AR = [
+  { customer: 'Hilltop Gift Co',    subco: 'DDW',  invoice: 'INV-4821', amount: 14_600, days: 68, lastContact: 'Apr 12 · email', action: 'Credit Hold' },
+  { customer: 'North Shore Novelty',subco: 'DDW',  invoice: 'INV-4792', amount:  8_200, days: 62, lastContact: 'Apr 15 · call',  action: 'Escalate'    },
+  { customer: 'Berry Street Gifts', subco: 'DDW',  invoice: 'INV-4766', amount:  6_400, days: 61, lastContact: 'Apr 10 · email', action: 'Escalate'    },
+  { customer: 'Metro Sports Co-op', subco: 'SSK',  invoice: 'INV-5118', amount: 28_400, days: 47, lastContact: 'Apr 18 · call',  action: '2nd Notice'  },
+  { customer: 'Field & Glove Pro',  subco: 'BGL',  invoice: 'INV-5201', amount: 11_800, days: 42, lastContact: 'Apr 14 · email', action: '2nd Notice'  },
+  { customer: 'Western Team Sports',subco: 'SSK',  invoice: 'INV-5089', amount: 18_200, days: 38, lastContact: 'Apr 19 · call',  action: '1st Reminder'},
+  { customer: 'Cleat Market Inc',   subco: 'AAS',  invoice: 'INV-5240', amount:  9_600, days: 33, lastContact: 'Apr 20 · email', action: '1st Reminder'},
+];
+
+const TOP_AP = [
+  { vendor: 'SSK Japan',             subco: 'SSK',  bill: 'SSK-2026-04-12', amount: 186_000, dueInDays:  3, terms: 'Net 30',  priority: 'Critical' as const },
+  { vendor: 'BGL Leather Supply',    subco: 'BGL',  bill: 'BLS-1842',       amount:  42_400, dueInDays:  7, terms: 'Net 30',  priority: 'High'     as const },
+  { vendor: 'Amazon FBA Fees',       subco: 'BL',   bill: 'AMZN-APR',       amount:  38_600, dueInDays:  0, terms: 'Auto-pay',priority: 'Critical' as const },
+  { vendor: 'Louisville Mfg (AAS)',  subco: 'AAS',  bill: 'LVM-804',        amount:  28_000, dueInDays: 12, terms: 'Net 30',  priority: 'High'     as const },
+  { vendor: 'Shopify Plus',          subco: 'BL',   bill: 'SHOP-APR',       amount:   9_200, dueInDays:  5, terms: 'Monthly', priority: 'High'     as const },
+  { vendor: 'QuickBooks Enterprise', subco: 'BL',   bill: 'QB-2026-05',     amount:   1_840, dueInDays: 18, terms: 'Annual',  priority: 'Low'      as const },
+  { vendor: 'Print Fulfillment Svc', subco: 'Shug0',bill: 'PFS-412',        amount:   6_800, dueInDays: 14, terms: 'Net 15',  priority: 'Medium'   as const },
+  { vendor: 'Gift Box Co-pack',      subco: 'DDW',  bill: 'GBC-294',        amount:  11_400, dueInDays: 22, terms: 'Net 30',  priority: 'Medium'   as const },
+];
+
+function AgingCard({ title, subtitle, rows, accent, type }: {
+  title: string; subtitle: string;
+  rows: Array<{ bucket: string; amount: number; pct: number; tone: 'good' | 'warn' | 'bad' }>;
+  accent: string;
+  type: 'ar' | 'ap';
+}) {
+  const toneColor = { good: '#2DB47A', warn: '#F7A500', bad: '#E06060' };
+  const total = rows.reduce((s, r) => s + r.amount, 0);
+  const overdue = rows.filter((r) => r.tone === 'bad').reduce((s, r) => s + r.amount, 0);
+  const overduePct = total > 0 ? (overdue / total) * 100 : 0;
+
+  return (
+    <div style={{ ...CARD, padding: 0, overflow: 'hidden' }}>
+      {/* Header */}
+      <div style={{
+        padding: '16px 20px', borderBottom: '1px solid var(--color-border)',
+        background: 'var(--color-surf2)',
+        display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between',
+      }}>
+        <div>
+          <div style={{ fontSize: 12, fontWeight: 800, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'var(--color-text)' }}>
+            {title}
+          </div>
+          <div style={{ fontSize: 11, color: 'var(--color-muted)', marginTop: 3 }}>{subtitle}</div>
+        </div>
+        <div style={{ textAlign: 'right' }}>
+          <div style={{ fontSize: 20, fontWeight: 900, color: accent, lineHeight: 1 }}>
+            ${(total / 1000).toFixed(0)}K
+          </div>
+          <div style={{ fontSize: 10, color: overduePct > 10 ? '#E06060' : 'var(--color-muted)', marginTop: 4, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+            {type === 'ar' ? `${overduePct.toFixed(0)}% aged >60d` : `${overduePct.toFixed(0)}% past due`}
+          </div>
+        </div>
+      </div>
+
+      {/* Rows */}
+      <div style={{ padding: '14px 20px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+        {rows.map((r) => {
+          const c = toneColor[r.tone];
+          return (
+            <div key={r.bucket} style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <span style={{ width: 8, height: 8, borderRadius: '50%', background: c }} />
+                  <span style={{ fontSize: 13, color: 'var(--color-text)', fontWeight: 600 }}>{r.bucket}</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                  <span style={{ fontSize: 12, color: 'var(--color-muted)', fontWeight: 600, minWidth: 36, textAlign: 'right' }}>
+                    {r.pct}%
+                  </span>
+                  <span style={{ fontSize: 14, fontWeight: 800, color: c, minWidth: 64, textAlign: 'right' }}>
+                    ${(r.amount / 1000).toFixed(0)}K
+                  </span>
+                </div>
+              </div>
+              {/* Progress bar */}
+              <div style={{ height: 4, background: 'var(--color-surf2)', borderRadius: 3, overflow: 'hidden' }}>
+                <div style={{ height: '100%', width: `${Math.min(100, r.pct * 2)}%`, background: c, borderRadius: 3 }} />
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

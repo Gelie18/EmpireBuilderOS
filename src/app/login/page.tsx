@@ -2,52 +2,19 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import BrandLogo from '@/components/brand/BrandLogo';
 
 // ── Valid credentials ─────────────────────────────────────────────────────────
 const CREDENTIALS = [
-  { username: 'meritage',  password: 'empire2026'  },
-  { username: 'demo',      password: 'builder2026' },
-  { username: 'admin',     password: 'apex2026'    },
-  { username: 'ryan',      password: 'empire2026'  },
+  { username: '783', password: 'demo2026' },
 ];
 
-// ── Empire Builder wordmark ───────────────────────────────────────────────────
-function EmpireLogo({ scale = 1, animate = false }: { scale?: number; animate?: boolean }) {
+// BrandLogo comes from @/components/brand/BrandLogo — kept local here is
+// a thin animated wrapper that matches the login page's entrance sequence.
+function AnimatedBrandLogo({ animate = false }: { animate?: boolean }) {
   return (
-    <div style={{ textAlign: 'center', transform: `scale(${scale})`, transformOrigin: 'center' }}>
-      <div style={{
-        fontWeight: 900,
-        fontSize: 52,
-        letterSpacing: '0.18em',
-        color: '#1D44BF',
-        lineHeight: 1,
-        textTransform: 'uppercase',
-        fontFamily: 'system-ui, -apple-system, sans-serif',
-        animation: animate ? 'fadeUp 0.7s ease both' : undefined,
-      }}>
-        Empire
-      </div>
-      <div style={{
-        fontWeight: 900,
-        fontSize: 22,
-        letterSpacing: '0.38em',
-        color: '#E8B84B',
-        lineHeight: 1,
-        textTransform: 'uppercase',
-        fontFamily: 'system-ui, -apple-system, sans-serif',
-        marginTop: 4,
-        animation: animate ? 'fadeUp 0.7s 0.15s ease both' : undefined,
-      }}>
-        Builder
-      </div>
-      <div style={{
-        width: 48,
-        height: 2,
-        background: 'linear-gradient(90deg, #1D44BF, #E8B84B)',
-        margin: '12px auto 0',
-        borderRadius: 2,
-        animation: animate ? 'fadeUp 0.7s 0.3s ease both' : undefined,
-      }} />
+    <div style={{ animation: animate ? 'fadeUp 0.7s ease both' : undefined }}>
+      <BrandLogo layout="stacked" markHeight={76} markColor="#FFFFFF" />
     </div>
   );
 }
@@ -58,7 +25,7 @@ function LoadingOverlay() {
     <div style={{
       position: 'fixed',
       inset: 0,
-      background: '#1A1C2E',
+      background: '#0B0D17',
       zIndex: 9999,
       display: 'flex',
       flexDirection: 'column',
@@ -75,7 +42,7 @@ function LoadingOverlay() {
         @keyframes drawIn  { from { stroke-dashoffset: 220 } to { stroke-dashoffset: 0 } }
       `}</style>
 
-      <EmpireLogo animate />
+      <AnimatedBrandLogo animate />
 
       {/* Spinner ring */}
       <div style={{ position: 'relative', width: 56, height: 56 }}>
@@ -93,8 +60,8 @@ function LoadingOverlay() {
           />
           <defs>
             <linearGradient id="spinGrad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#1D44BF" />
-              <stop offset="100%" stopColor="#E8B84B" />
+              <stop offset="0%" stopColor="#1B4DE6" />
+              <stop offset="100%" stopColor="#F58A1F" />
             </linearGradient>
           </defs>
         </svg>
@@ -167,7 +134,7 @@ export default function LoginPage() {
         @keyframes fadeIn   { from { opacity: 0 } to { opacity: 1 } }
         @keyframes shimmer  { 0%,100% { opacity: 0.5 } 50% { opacity: 1 } }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: #1A1C2E !important; }
+        body { background: #0B0D17 !important; }
 
         .login-input {
           width: 100%;
@@ -182,13 +149,13 @@ export default function LoginPage() {
           transition: border-color 0.2s;
         }
         .login-input::placeholder { color: rgba(255,255,255,0.28); }
-        .login-input:focus { border-color: #1D44BF; background: rgba(29,68,191,0.08); }
+        .login-input:focus { border-color: #1B4DE6; background: rgba(27,77,230,0.08); }
 
         .login-btn {
           width: 100%;
           padding: 14px;
-          background: #E8B84B;
-          color: #1A1C2E;
+          background: #1B4DE6;
+          color: #FFFFFF;
           border: none;
           border-radius: 8px;
           font-size: 14px;
@@ -196,17 +163,23 @@ export default function LoginPage() {
           letter-spacing: 0.12em;
           text-transform: uppercase;
           cursor: pointer;
-          transition: background 0.18s, transform 0.12s;
+          transition: background 0.18s, transform 0.12s, box-shadow 0.18s;
           font-family: inherit;
+          box-shadow: 0 4px 16px rgba(27,77,230,0.30);
         }
-        .login-btn:hover:not(:disabled) { background: #F0C55A; transform: translateY(-1px); }
+        .login-btn:hover:not(:disabled) { background: #2488F0; transform: translateY(-1px); box-shadow: 0 6px 22px rgba(27,77,230,0.42); }
         .login-btn:active:not(:disabled) { transform: translateY(0); }
-        .login-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+        .login-btn:disabled { opacity: 0.6; cursor: not-allowed; box-shadow: none; }
+
+        @media (max-width: 480px) {
+          .login-card { padding: 32px 20px 28px !important; }
+          .login-logo { margin-bottom: 20px !important; }
+        }
       `}</style>
 
       <div style={{
         minHeight: '100vh',
-        background: '#1A1C2E',
+        background: '#0B0D17',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -221,8 +194,8 @@ export default function LoginPage() {
           position: 'absolute',
           inset: 0,
           backgroundImage: `
-            linear-gradient(rgba(29,68,191,0.04) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(29,68,191,0.04) 1px, transparent 1px)
+            linear-gradient(rgba(27,77,230,0.04) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(27,77,230,0.04) 1px, transparent 1px)
           `,
           backgroundSize: '40px 40px',
           pointerEvents: 'none',
@@ -233,19 +206,19 @@ export default function LoginPage() {
           position: 'absolute',
           top: '15%', left: '20%',
           width: 400, height: 400,
-          background: 'radial-gradient(circle, rgba(29,68,191,0.12) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(27,77,230,0.16) 0%, transparent 70%)',
           pointerEvents: 'none',
         }} />
         <div style={{
           position: 'absolute',
           bottom: '15%', right: '20%',
           width: 300, height: 300,
-          background: 'radial-gradient(circle, rgba(232,184,75,0.08) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(245,138,31,0.10) 0%, transparent 70%)',
           pointerEvents: 'none',
         }} />
 
         {/* Card */}
-        <div style={{
+        <div className="login-card" style={{
           position: 'relative',
           width: '100%',
           maxWidth: 420,
@@ -258,8 +231,8 @@ export default function LoginPage() {
         }}>
 
           {/* Logo */}
-          <div style={{ marginBottom: 36 }}>
-            <EmpireLogo />
+          <div className="login-logo" style={{ marginBottom: 28, display: 'flex', justifyContent: 'center' }}>
+            <BrandLogo layout="stacked" markHeight={68} markColor="#FFFFFF" />
           </div>
 
           {/* Tagline */}
@@ -271,8 +244,8 @@ export default function LoginPage() {
             marginBottom: 32,
             lineHeight: 1.5,
           }}>
-            Financial Intelligence Platform<br />
-            <span style={{ color: 'rgba(232,184,75,0.6)', fontWeight: 600 }}>Meritage Partners · Private Access</span>
+            Business Intelligence Platform<br />
+            <span style={{ color: 'rgba(79,168,255,0.85)', fontWeight: 600 }}>783 Partners · Private Access</span>
           </div>
 
           {/* Form */}
@@ -355,7 +328,7 @@ export default function LoginPage() {
           letterSpacing: '0.06em',
           textAlign: 'center',
         }}>
-          Powered by Empire Builder OS · 783 Capital Partners
+          Powered by 783 OS · 783 Partners
         </div>
       </div>
     </>

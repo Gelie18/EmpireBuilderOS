@@ -567,7 +567,7 @@ export default function AiForecastPage() {
 
       {/* Methodology note */}
       <div className="px-4 py-3 leading-relaxed"
-        style={{ background: 'rgba(29,68,191,0.07)', borderLeft: '3px solid var(--color-blue)', color: 'var(--color-muted)', fontSize: 13 }}>
+        style={{ background: 'rgba(27,77,230,0.07)', borderLeft: '3px solid var(--color-blue)', color: 'var(--color-muted)', fontSize: 13 }}>
         <strong style={{ color: 'var(--color-blue)' }}>Baseline methodology:</strong> 3.1% MoM revenue growth (trailing 6-month avg), 54.9% COGS ratio, 35.1% OpEx ratio — adjusted for outdoor-apparel seasonal patterns (peak: Jul–Oct, trough: Dec–Feb). Actuals locked through April 2026.
       </div>
 
@@ -618,17 +618,17 @@ export default function AiForecastPage() {
             <ComposedChart data={chartData} margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
               <defs>
                 <linearGradient id="aifRevGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%"  stopColor="#1D44BF" stopOpacity={0.2} />
-                  <stop offset="95%" stopColor="#1D44BF" stopOpacity={0} />
+                  <stop offset="5%"  stopColor="#1B4DE6" stopOpacity={0.2} />
+                  <stop offset="95%" stopColor="#1B4DE6" stopOpacity={0} />
                 </linearGradient>
                 <linearGradient id="aifNiGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%"  stopColor="#E8B84B" stopOpacity={0.2} />
-                  <stop offset="95%" stopColor="#E8B84B" stopOpacity={0} />
+                  <stop offset="5%"  stopColor="#F58A1F" stopOpacity={0.2} />
+                  <stop offset="95%" stopColor="#F58A1F" stopOpacity={0} />
                 </linearGradient>
               </defs>
-              <CartesianGrid stroke="rgba(255,255,255,0.06)" strokeDasharray="3 3" />
-              <XAxis dataKey="period" tick={{ fill: 'rgba(255,255,255,0.50)', fontSize: 10 }} axisLine={false} tickLine={false} />
-              <YAxis tickFormatter={(v) => `$${(v / 1000).toFixed(0)}K`} tick={{ fill: 'rgba(255,255,255,0.50)', fontSize: 10 }} axisLine={false} tickLine={false} width={55} />
+              <CartesianGrid stroke="var(--color-chart-grid)" strokeDasharray="3 3" />
+              <XAxis dataKey="period" tick={{ fill: 'var(--color-chart-text)', fontSize: 10 }} axisLine={false} tickLine={false} />
+              <YAxis tickFormatter={(v) => `$${(v / 1000).toFixed(0)}K`} tick={{ fill: 'var(--color-chart-text)', fontSize: 10 }} axisLine={false} tickLine={false} width={55} />
               <Tooltip
                 contentStyle={TOOLTIP_STYLE}
                 formatter={(val, name, props) => {
@@ -637,12 +637,12 @@ export default function AiForecastPage() {
                   return [`$${Number(val).toLocaleString()}${suffix}`, String(name)];
                 }}
               />
-              <ReferenceLine x="Apr '26" stroke="rgba(255,255,255,0.20)" strokeDasharray="4 3"
-                label={{ value: 'Today', fill: 'rgba(255,255,255,0.50)', fontSize: 9, position: 'top' }} />
-              <Legend wrapperStyle={{ fontSize: 11, color: 'rgba(255,255,255,0.50)' }} />
-              <Area type="monotone" dataKey="Revenue" stroke="#1D44BF" fill="url(#aifRevGrad)"
+              <ReferenceLine x="Apr '26" stroke="var(--color-chart-grid)" strokeDasharray="4 3"
+                label={{ value: 'Today', fill: 'var(--color-chart-text)', fontSize: 9, position: 'top' }} />
+              <Legend wrapperStyle={{ fontSize: 11, color: 'var(--color-chart-text)' }} />
+              <Area type="monotone" dataKey="Revenue" stroke="#1B4DE6" fill="url(#aifRevGrad)"
                 strokeWidth={2} dot={false} strokeDasharray="none" />
-              <Area type="monotone" dataKey="Net Income" stroke="#E8B84B" fill="url(#aifNiGrad)"
+              <Area type="monotone" dataKey="Net Income" stroke="#F58A1F" fill="url(#aifNiGrad)"
                 strokeWidth={2} dot={false} />
             </ComposedChart>
           </ResponsiveContainer>
@@ -707,7 +707,7 @@ export default function AiForecastPage() {
       {/* Processing indicator — only visible while applying an assumption */}
       {isProcessing && (
         <div className="px-4 py-3 flex items-center gap-2.5"
-          style={{ background: 'rgba(29,68,191,0.06)', borderLeft: '3px solid var(--color-blue)' }}>
+          style={{ background: 'rgba(27,77,230,0.06)', borderLeft: '3px solid var(--color-blue)' }}>
           <div className="flex gap-1.5">
             {[0, 1, 2].map((i) => (
               <span key={i} className="w-1.5 h-1.5 rounded-full"
@@ -857,7 +857,7 @@ export default function AiForecastPage() {
                     style={{
                       borderBottom: '1px solid var(--color-border)',
                       opacity: m.isActual ? 1 : 0.8,
-                      background: m.isAdjusted ? 'rgba(194,122,16,0.05)' : m.isActual ? 'rgba(29,68,191,0.04)' : undefined,
+                      background: m.isAdjusted ? 'rgba(194,122,16,0.05)' : m.isActual ? 'rgba(27,77,230,0.04)' : undefined,
                     }}>
                     <td className="px-3 py-3 font-semibold" style={{ fontFamily: 'var(--font-condensed)', fontSize: 14 }}>
                       {m.period}

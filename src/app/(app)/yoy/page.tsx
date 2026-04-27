@@ -183,7 +183,7 @@ export default function YoYPage() {
         <Label>Monthly Revenue — Jan–Apr 2026 vs Jan–Apr 2023</Label>
         <ResponsiveContainer width="100%" height={220}>
           <BarChart data={revenueData} barGap={3} barCategoryGap="28%">
-            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--color-chart-grid)" vertical={false} />
             <XAxis
               dataKey="month"
               tick={{ fill: 'var(--color-muted)', fontSize: 12, fontFamily: 'var(--font-condensed)' }}
@@ -200,7 +200,7 @@ export default function YoYPage() {
             <Tooltip
               contentStyle={TOOLTIP_STYLE}
               formatter={(val) => [`$${Number(val).toLocaleString()}`, '']}
-              cursor={{ fill: 'rgba(29,68,191,0.06)' }}
+              cursor={{ fill: 'rgba(27,77,230,0.06)' }}
             />
             <Legend
               wrapperStyle={{ fontSize: 12, color: 'var(--color-muted)', fontFamily: 'var(--font-condensed)' }}
@@ -247,7 +247,7 @@ export default function YoYPage() {
                     key={m.month}
                     style={{
                       borderBottom: '1px solid var(--color-border)',
-                      background: isLast ? 'rgba(29,68,191,0.06)' : 'transparent',
+                      background: isLast ? 'rgba(27,77,230,0.06)' : 'transparent',
                     }}
                   >
                     <td

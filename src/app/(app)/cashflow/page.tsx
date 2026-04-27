@@ -306,24 +306,24 @@ export default function CashFlowPage() {
           </div>
         </div>
         <div style={{ padding: '16px 20px' }}>
-          <ResponsiveContainer width="100%" height={160}>
+          <ResponsiveContainer width="100%" height={300}>
             <AreaChart data={chartData} margin={{ top: 4, right: 4, left: 4, bottom: 0 }}>
               <defs>
                 <linearGradient id="cashGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%"  stopColor="#1D44BF" stopOpacity={0.28} />
-                  <stop offset="95%" stopColor="#1D44BF" stopOpacity={0} />
+                  <stop offset="5%"  stopColor="#1B4DE6" stopOpacity={0.28} />
+                  <stop offset="95%" stopColor="#1B4DE6" stopOpacity={0} />
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--color-chart-grid)" />
               <XAxis
                 dataKey="date"
-                tick={{ fill: 'rgba(255,255,255,0.50)', fontSize: 10 }}
+                tick={{ fill: 'var(--color-chart-text)', fontSize: 10 }}
                 axisLine={false}
                 tickLine={false}
               />
               <YAxis
                 tickFormatter={(v) => `$${(v / 1000).toFixed(0)}K`}
-                tick={{ fill: 'rgba(255,255,255,0.50)', fontSize: 10 }}
+                tick={{ fill: 'var(--color-chart-text)', fontSize: 10 }}
                 axisLine={false}
                 tickLine={false}
                 width={52}
@@ -335,7 +335,7 @@ export default function CashFlowPage() {
               <Area
                 type="monotone"
                 dataKey="Cash"
-                stroke="#1D44BF"
+                stroke="#1B4DE6"
                 strokeWidth={2.5}
                 fill="url(#cashGrad)"
                 dot={false}

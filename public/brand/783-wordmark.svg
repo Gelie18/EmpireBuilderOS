@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 438.79 523.31">
+  <defs>
+    <style>
+      .cls-1 {
+        font-size: 182px;
+      }
+
+      .cls-1, .cls-2 {
+        font-family: Aeonik-Bold, Aeonik;
+        font-weight: 700;
+      }
+
+      .cls-2 {
+        font-size: 420px;
+      }
+    </style>
+  </defs>
+  <text class="cls-2" transform="translate(0 357)"><tspan x="0" y="0">7</tspan></text>
+  <text class="cls-1" transform="translate(222.17 191.7)"><tspan x="0" y="0">8</tspan></text>
+  <text class="cls-1" transform="translate(331.77 191.7)"><tspan x="0" y="0">3</tspan></text>
+</svg>

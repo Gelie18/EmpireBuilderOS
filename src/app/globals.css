@@ -1,53 +1,37 @@
 @import "tailwindcss";
 
+/* ── Aeonik (brand typeface) ─────────────────────────────────────────────────── */
+@font-face { font-family: 'Aeonik'; src: url('/fonts/aeonik-light.otf')    format('opentype'); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Aeonik'; src: url('/fonts/aeonik-regular.otf')  format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Aeonik'; src: url('/fonts/aeonik-medium.otf')   format('opentype'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Aeonik'; src: url('/fonts/aeonik-semibold.otf') format('opentype'); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Aeonik'; src: url('/fonts/aeonik-bold.otf')     format('opentype'); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Aeonik'; src: url('/fonts/aeonik-black.otf')    format('opentype'); font-weight: 900; font-style: normal; font-display: swap; }
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   783 OS — Global Design System
+   ───────────────────────────────────────────────────────────────────────────────
+   Palette driven by 2026 brand guidelines (Pantone 2171 C primary blue on
+   a near-black canvas). Product accents use brighter tints of the same blue
+   family — no warm secondary.
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
 @theme {
-  /* ── Empire Builder — Dark Theme ── */
-
-  /* Page / shell backgrounds */
-  --color-bg:       #1A1C2E;   /* main page background */
-  --color-surf:     #1E2236;   /* card surface */
-  --color-surf2:    #242840;   /* card inner / hover */
-  --color-surf3:    #2A2F4A;   /* highest surface */
-
-  /* Borders */
-  --color-border:   rgba(255,255,255,0.08);
-  --color-border2:  rgba(29,68,191,0.28);
-
-  /* Text */
-  --color-text:     #FFFFFF;
-  --color-muted:    rgba(255,255,255,0.50);
-  --color-subtle:   rgba(255,255,255,0.28);
-
-  /* Cobalt blue — "EMPIRE" */
-  --color-blue:     #1D44BF;
-  --color-blue-lt:  #3B62D6;
-  --color-blue-dk:  #162E8A;
-  --color-blue-d:   rgba(29,68,191,0.15);
-
-  /* Warm gold — "BUILDER" */
-  --color-gold:     #E8B84B;
-  --color-gold-dk:  #C9962A;
-  --color-gold-d:   rgba(232,184,75,0.14);
-
-  /* Status */
-  --color-green:    #0EA572;
-  --color-green-d:  rgba(14,165,114,0.14);
-  --color-red:      #E05454;
-  --color-red-d:    rgba(224,84,84,0.14);
-  --color-orange:   #F0A030;
-  --color-orange-d: rgba(240,160,48,0.14);
-
-  --font-body:      'DM Sans', system-ui, -apple-system, sans-serif;
-  --font-headline:  'Manrope', 'DM Sans', system-ui, sans-serif;
-  --font-condensed: 'DM Sans', system-ui, -apple-system, sans-serif;
+  /* ── Fonts ── */
+  --font-body:      'Aeonik', 'Inter', 'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-headline:  'Aeonik', 'Inter', 'Manrope', system-ui, sans-serif;
+  --font-display:   'Aeonik', 'Inter', system-ui, sans-serif;
+  --font-condensed: 'Aeonik', 'Inter', 'DM Sans', system-ui, -apple-system, sans-serif;
   --font-serif:     Georgia, 'Times New Roman', serif;
 
+  /* ── Radii ── */
   --radius-xs: 3px;
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 14px;
 }
 
+/* ── BASE RESET ──────────────────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 html, body { height: 100%; }
 body {
@@ -61,18 +45,20 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* ── SCROLLBAR ───────────────────────────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 3px; height: 3px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.10); border-radius: 2px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(29,68,191,0.50); }
+::-webkit-scrollbar-thumb { background: rgba(27,77,230,0.18); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(27,77,230,0.55); }
 
-::selection { background: rgba(29,68,191,0.30); color: #FFFFFF; }
+::selection { background: rgba(27,77,230,0.28); color: inherit; }
 
-@keyframes fadeUp  { from { opacity: 0; transform: translateY(6px); }  to { opacity: 1; transform: translateY(0); } }
-@keyframes fadeIn  { from { opacity: 0; }                               to { opacity: 1; } }
-@keyframes slideInRight { from { opacity: 0; transform: translateX(8px); } to { opacity: 1; transform: translateX(0); } }
-@keyframes blink   { 0%, 100% { opacity: 0.25; } 50% { opacity: 1; } }
-@keyframes aif-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.15; } }
+/* ── ANIMATIONS ──────────────────────────────────────────────────────────────── */
+@keyframes fadeUp        { from { opacity: 0; transform: translateY(6px); }  to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn        { from { opacity: 0; }                               to { opacity: 1; } }
+@keyframes slideInRight  { from { opacity: 0; transform: translateX(8px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes blink         { 0%, 100% { opacity: 0.25; } 50% { opacity: 1; } }
+@keyframes aif-blink     { 0%, 100% { opacity: 1; } 50% { opacity: 0.15; } }
 
 .animate-fade-up  { animation: fadeUp       0.3s ease both; }
 .animate-fade-in  { animation: fadeIn       0.25s ease both; }
@@ -81,68 +67,258 @@ body {
 .condensed    { font-family: var(--font-condensed); }
 .tabular-nums { font-variant-numeric: tabular-nums; }
 
+/* ══════════════════════════════════════════════════════════════════════════════
+   DEFAULT THEME — 783 Light
+   Applied when data-theme="light" OR no theme set
+   ══════════════════════════════════════════════════════════════════════════════ */
 :root {
-  --card-radius: 10px;
-  --card-shadow: 0 1px 4px rgba(0,0,0,0.30), 0 4px 20px rgba(0,0,0,0.25);
-  --card-shadow-hover: 0 2px 8px rgba(0,0,0,0.35), 0 8px 32px rgba(0,0,0,0.30);
+  /* Page surfaces */
+  --color-bg:       #F5F7FB;
+  --color-surf:     #FFFFFF;
+  --color-surf2:    #EEF1F9;
+  --color-surf3:    #E4E8F3;
+
+  /* Borders */
+  --color-border:   rgba(27,77,230,0.10);
+  --color-border2:  rgba(27,77,230,0.32);
+
+  /* Text */
+  --color-text:     #0B0D17;
+  --color-muted:    rgba(11,13,23,0.58);
+  --color-subtle:   rgba(11,13,23,0.36);
+
+  /* Primary — Pantone 2171 C blue (brand action color) */
+  --color-blue:     #1B4DE6;
+  --color-blue-lt:  #4C78F0;
+  --color-blue-dk:  #0F37B3;
+  --color-blue-d:   rgba(27,77,230,0.10);
+
+  /* Accent — bright sky blue (secondary mark color, 783 barcode highlight) */
+  --color-accent:   #4FA8FF;
+  --color-accent-dk:#2488F0;
+  --color-accent-d: rgba(79,168,255,0.14);
+
+  /* Gold alias — preserved for chart/data distinction (maps to brand orange) */
+  --color-gold:     #F58A1F;
+  --color-gold-dk:  #D9700F;
+  --color-gold-d:   rgba(245,138,31,0.16);
+
+  /* Status colors */
+  --color-green:    #2DB47A;
+  --color-green-d:  rgba(45,180,122,0.14);
+  --color-red:      #E05454;
+  --color-red-d:    rgba(224,84,84,0.14);
+  --color-orange:   #F58A1F;
+  --color-orange-d: rgba(245,138,31,0.14);
+
+  /* Shell — header (WHITE) */
+  --color-shell:    #FFFFFF;
+  --color-menu:     #FFFFFF;
+  --color-on-shell: #0B0D17;
+  --color-on-shell-muted: rgba(11,13,23,0.50);
+
+  /* Sidebar — ALWAYS DARK 783 canvas */
+  --color-shell-2:      #070911;
+  --color-sidebar-text: #FFFFFF;
+  --color-sidebar-muted:rgba(255,255,255,0.52);
+  --color-sidebar-subtle:rgba(255,255,255,0.30);
+  --color-sidebar-active:#1B4DE6;
+  --color-sidebar-active-border: rgba(27,77,230,0.55);
+  --color-sidebar-hover: rgba(255,255,255,0.06);
+  --color-sidebar-section:rgba(255,255,255,0.38);
+  --color-divider:  rgba(27,77,230,0.10);
+  --color-sidebar-divider: rgba(255,255,255,0.10);
+
+  /* Subco theming */
+  --subco-primary:     #1B4DE6;
+  --subco-primary-rgb: 27, 77, 230;
+  --subco-accent:      #4FA8FF;
+  --subco-accent-rgb:  79, 168, 255;
+
+  /* Cards */
+  --card-radius:  10px;
+  --card-shadow:  0 1px 3px rgba(27,77,230,0.06), 0 4px 16px rgba(27,77,230,0.05);
+  --card-shadow-hover: 0 2px 8px rgba(27,77,230,0.12), 0 8px 28px rgba(27,77,230,0.08);
+
+  /* Chart text */
+  --color-chart-text:  rgba(11,13,23,0.55);
+  --color-chart-text2: rgba(11,13,23,0.35);
+  --color-chart-grid:  rgba(11,13,23,0.07);
 }
 
+/* ══════════════════════════════════════════════════════════════════════════════
+   DARK THEME — deep 783 canvas
+   ══════════════════════════════════════════════════════════════════════════════ */
+:root[data-theme="dark"] {
+  /* Page surfaces */
+  --color-bg:       #0B0D17;
+  --color-surf:     #141827;
+  --color-surf2:    #1B2034;
+  --color-surf3:    #232942;
+
+  /* Borders */
+  --color-border:   rgba(255,255,255,0.08);
+  --color-border2:  rgba(27,77,230,0.35);
+
+  /* Text */
+  --color-text:     #FFFFFF;
+  --color-muted:    rgba(255,255,255,0.55);
+  --color-subtle:   rgba(255,255,255,0.30);
+
+  /* Primary */
+  --color-blue:     #1B4DE6;
+  --color-blue-lt:  #4C78F0;
+  --color-blue-dk:  #0F37B3;
+  --color-blue-d:   rgba(27,77,230,0.15);
+
+  /* Accent */
+  --color-accent:   #4FA8FF;
+  --color-accent-dk:#2488F0;
+  --color-accent-d: rgba(79,168,255,0.16);
+
+  /* Gold (charts) — maps to brand orange */
+  --color-gold:     #F58A1F;
+  --color-gold-dk:  #D9700F;
+  --color-gold-d:   rgba(245,138,31,0.16);
+
+  /* Status */
+  --color-green:    #2DB47A;
+  --color-green-d:  rgba(45,180,122,0.15);
+  --color-red:      #E05454;
+  --color-red-d:    rgba(224,84,84,0.15);
+  --color-orange:   #F58A1F;
+  --color-orange-d: rgba(245,138,31,0.16);
+
+  /* Shell — header (DARK) */
+  --color-shell:    #0B0D17;
+  --color-menu:     #0F1220;
+  --color-on-shell: #FFFFFF;
+  --color-on-shell-muted: rgba(255,255,255,0.45);
+
+  /* Sidebar — stays dark 783 */
+  --color-shell-2:       #070911;
+  --color-sidebar-text:  #FFFFFF;
+  --color-sidebar-muted: rgba(255,255,255,0.52);
+  --color-sidebar-subtle:rgba(255,255,255,0.30);
+  --color-sidebar-active:#1B4DE6;
+  --color-sidebar-active-border: rgba(27,77,230,0.55);
+  --color-sidebar-hover:  rgba(255,255,255,0.06);
+  --color-sidebar-section:rgba(255,255,255,0.38);
+  --color-divider:        rgba(255,255,255,0.08);
+  --color-sidebar-divider:rgba(255,255,255,0.10);
+
+  /* Subco */
+  --subco-primary:     #1B4DE6;
+  --subco-primary-rgb: 27, 77, 230;
+  --subco-accent:      #4FA8FF;
+  --subco-accent-rgb:  79, 168, 255;
+
+  /* Cards */
+  --card-shadow:        0 1px 4px rgba(0,0,0,0.30), 0 4px 20px rgba(0,0,0,0.25);
+  --card-shadow-hover:  0 2px 8px rgba(0,0,0,0.35), 0 8px 32px rgba(0,0,0,0.30);
+
+  /* Chart text */
+  --color-chart-text:  rgba(255,255,255,0.45);
+  --color-chart-text2: rgba(255,255,255,0.25);
+  --color-chart-grid:  rgba(255,255,255,0.05);
+}
+
+/* ── Scrollbar dark mode ─────────────────────────────────────────────────────── */
+:root[data-theme="dark"] ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.10); }
+:root[data-theme="dark"] ::-webkit-scrollbar-thumb:hover { background: rgba(27,77,230,0.55); }
+
+/* ── Card ────────────────────────────────────────────────────────────────────── */
 .card {
   background:    var(--color-surf);
   border-radius: var(--card-radius);
   box-shadow:    var(--card-shadow);
   border:        1px solid var(--color-border);
 }
-.card:hover {
-  box-shadow: var(--card-shadow-hover);
-}
+.card:hover { box-shadow: var(--card-shadow-hover); }
 
-/* Badges */
+/* ── Badges ──────────────────────────────────────────────────────────────────── */
 .badge-pos { background: var(--color-green-d); color: var(--color-green); font-weight: 700; font-size: 11px; padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(14,165,114,0.22); }
 .badge-neg { background: var(--color-red-d);   color: var(--color-red);   font-weight: 700; font-size: 11px; padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(224,84,84,0.22); }
-.badge-neu { background: var(--color-orange-d);color: var(--color-orange);font-weight: 700; font-size: 11px; padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(240,160,48,0.22); }
+.badge-neu { background: var(--color-orange-d);color: var(--color-orange);font-weight: 700; font-size: 11px; padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(240,130,10,0.22); }
 
-/* KPI card left-border accent */
+/* ── KPI card ────────────────────────────────────────────────────────────────── */
 .kpi-card {
   background: var(--color-surf);
   border-radius: var(--card-radius);
   border: 1px solid var(--color-border);
-  position: relative;
-  overflow: hidden;
+  position: relative; overflow: hidden;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
-.kpi-card:hover {
-  transform: translateY(-1px);
-  box-shadow: var(--card-shadow-hover);
-}
+.kpi-card:hover { transform: translateY(-1px); box-shadow: var(--card-shadow-hover); }
 .kpi-card::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 3px;
-  border-radius: 10px 0 0 10px;
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+  width: 3px; border-radius: 10px 0 0 10px;
 }
 .kpi-card.accent-blue::before   { background: var(--color-blue); }
 .kpi-card.accent-green::before  { background: var(--color-green); }
 .kpi-card.accent-red::before    { background: var(--color-red); }
 .kpi-card.accent-gold::before   { background: var(--color-gold); }
 
-/* Glass panel (cobalt-tinted) */
+/* ── Glass panel ─────────────────────────────────────────────────────────────── */
 .glass-panel {
-  background: rgba(29,68,191,0.07);
+  background: rgba(27,77,230,0.06);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(29,68,191,0.20);
+  border: 1px solid rgba(27,77,230,0.20);
   border-radius: var(--card-radius);
 }
 
-/* Recharts dark tooltip */
+/* ══════════════════════════════════════════════════════════════════════════════
+   RECHARTS — theme-aware chart text
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+.recharts-cartesian-axis-tick text,
+.recharts-text.recharts-cartesian-axis-tick-value,
+.recharts-polar-angle-axis-tick text,
+.recharts-polar-radius-axis-tick text {
+  fill: var(--color-chart-text) !important;
+}
+
+.recharts-label,
+.recharts-label-list text,
+.recharts-text {
+  fill: var(--color-chart-text) !important;
+}
+
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: var(--color-chart-grid) !important;
+}
+
+.recharts-legend-item-text {
+  color: var(--color-chart-text) !important;
+}
+
+.recharts-legend-item .recharts-legend-icon { opacity: 1; }
+
+.recharts-reference-line line {
+  stroke: var(--color-chart-grid) !important;
+}
+
+.recharts-tooltip-wrapper .recharts-default-tooltip,
 .chart-tooltip {
-  background: #1E2236 !important;
+  background: #141827 !important;
   border: 1px solid rgba(255,255,255,0.10) !important;
   border-radius: 8px !important;
   color: #FFFFFF !important;
   font-size: 12px !important;
   box-shadow: 0 4px 20px rgba(0,0,0,0.40) !important;
 }
+.recharts-tooltip-wrapper .recharts-default-tooltip .recharts-tooltip-label {
+  color: rgba(255,255,255,0.65) !important;
+  margin-bottom: 4px !important;
+}
+
+.recharts-tooltip-item {
+  color: rgba(255,255,255,0.90) !important;
+  padding: 2px 0 !important;
+}
+.recharts-tooltip-item-name      { color: rgba(255,255,255,0.75) !important; }
+.recharts-tooltip-item-separator { color: rgba(255,255,255,0.40) !important; }
+.recharts-tooltip-item-value     { color: #FFFFFF !important; font-weight: 600 !important; }
 
 table { border-collapse: collapse; }

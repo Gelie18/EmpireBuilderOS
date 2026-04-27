@@ -1,5 +1,5 @@
 // AI CFO static responses — keyword matched, used when no API key is set.
-// Written from a CFO perspective reviewing April 2026 for Apex Industrial Group.
+// Written from a CFO perspective reviewing April 2026 for 783 Partners.
 // Formatting: \n\n = paragraph break, ● = bullet, **text** = bold
 
 export const STATIC_RESPONSES: Record<string, string> = {
@@ -150,7 +150,7 @@ export const STATIC_RESPONSES: Record<string, string> = {
     "**What a subscription model looks like for this business:**\n\nThree viable structures:\n\n**Model A — Maintenance subscription ($89–149/month per unit)**\nIncludes: annual inspection, priority parts pricing, 48-hour response SLA. Target: 30% attach rate on installed base. Revenue: **$45–75K MRR** within 18 months.\n\n**Model B — Parts auto-replenishment ($299–599/quarter)**\nPredetermined consumable bundle shipped quarterly. No order friction, ~15% margin premium vs à la carte. Target accounts: Scheels-tier wholesale buyers with high unit density.\n\n**Model C — Intelligence subscription ($250/month per facility)**\nEquipment utilization reports, predictive replacement alerts, spend benchmarking vs peer facilities. Built on data we already capture. Near-zero marginal cost.\n\nStart with Model A. It has the fastest payback, requires no new tech, and builds the customer touchpoint that makes Model C viable in 18–24 months.",
 
   'default':
-    "I'm your AI CFO for **Apex Industrial Group**, trained on April 2026 financials.\n\nI can dig into:\n● Net income miss and marketing overage root cause\n● Cash position, runway, AR/AP analysis\n● EBITDA, break-even, and margin drivers\n● OpEx breakdown and cost reduction opportunities\n● Q4 outlook and Q1 2027 planning\n● Board talking points and executive summary\n● Customer concentration, pipeline health\n● WIP, financial backlog, and billing bottlenecks\n● Hiring, pricing, and inventory decisions\n● 💡 Creative growth levers and unconventional strategies\n\nJust ask — or pick a quick question below.",
+    "I'm your AI CFO for **783 Partners**, trained on April 2026 financials.\n\nI can dig into:\n● Net income miss and marketing overage root cause\n● Cash position, runway, AR/AP analysis\n● EBITDA, break-even, and margin drivers\n● OpEx breakdown and cost reduction opportunities\n● Q4 outlook and Q1 2027 planning\n● Board talking points and executive summary\n● Customer concentration, pipeline health\n● WIP, financial backlog, and billing bottlenecks\n● Hiring, pricing, and inventory decisions\n● 💡 Creative growth levers and unconventional strategies\n\nJust ask — or pick a quick question below.",
 };
 
 export function getStaticResponse(text: string): string {

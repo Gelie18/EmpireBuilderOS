@@ -214,22 +214,22 @@ export default function ScenariosPage() {
         <div className="p-4">
           <ResponsiveContainer width="100%" height={280}>
             <LineChart data={chartData} margin={{ top: 5, right: 10, left: 5, bottom: 5 }}>
-              <CartesianGrid stroke="rgba(255,255,255,0.06)" strokeDasharray="3 3" />
+              <CartesianGrid stroke="var(--color-chart-grid)" strokeDasharray="3 3" />
               <XAxis
                 dataKey="month"
-                tick={{ fill: 'rgba(255,255,255,0.50)', fontSize: 11 }}
+                tick={{ fill: 'var(--color-chart-text)', fontSize: 11 }}
                 axisLine={false} tickLine={false}
               />
               <YAxis
                 tickFormatter={(v) => `$${(v / 1000).toFixed(0)}K`}
-                tick={{ fill: 'rgba(255,255,255,0.50)', fontSize: 11 }}
+                tick={{ fill: 'var(--color-chart-text)', fontSize: 11 }}
                 axisLine={false} tickLine={false} width={60}
               />
               <Tooltip
                 contentStyle={TOOLTIP_STYLE}
                 formatter={(val) => [`$${Number(val).toLocaleString()}`, '']}
               />
-              <Legend wrapperStyle={{ fontSize: 12, color: 'rgba(255,255,255,0.50)' }} />
+              <Legend wrapperStyle={{ fontSize: 12, color: 'var(--color-chart-text)' }} />
               {active.map((s) => (
                 <Line
                   key={s.id}

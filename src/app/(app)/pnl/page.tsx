@@ -9,7 +9,7 @@ import PeriodSelector, { type PeriodKey, PERIOD_OPTIONS } from '@/components/ui/
 const GREEN  = '#0A8A5C';
 const RED    = '#C13333';
 const ORANGE = '#C27A10';
-const BLUE   = '#1D44BF';
+const BLUE   = '#1B4DE6';
 
 function fmt(n: number, compact = false): string {
   if (compact) {

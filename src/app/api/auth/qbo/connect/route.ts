@@ -7,7 +7,7 @@ export async function GET() {
 
     const authUri = oauthClient.authorizeUri({
       scope: [OAuthClient.scopes.Accounting],
-      state: 'financeos-auth',
+      state: 'bases-loaded-auth',
     });
 
     return NextResponse.redirect(authUri);

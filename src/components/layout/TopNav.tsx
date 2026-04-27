@@ -1,52 +1,31 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import type { ReactNode } from 'react';
+import BLCircleLogo from '@/components/brand/BLCircleLogo';
+import { useSubco } from '@/contexts/SubcoContext';
+import { useTheme } from '@/contexts/ThemeContext';
 
 interface TopNavProps {
-  companyName: string;
+  companyName?: string;
+  product?: string;
+  rightSlot?: ReactNode;
 }
 
-/**
- * Empire Builder logo — simple EMPIRE / BUILDER wordmark.
- * EMPIRE in cobalt blue, BUILDER in warm gold.
- */
-function EmpireBuilderLogo() {
-  return (
-    <div className="flex flex-col leading-none select-none flex-shrink-0" aria-label="Empire Builder">
-      <span
-        style={{
-          fontFamily: '"DM Sans", system-ui, sans-serif',
-          fontWeight: 900,
-          fontSize: 15,
-          color: '#1D44BF',
-          letterSpacing: '0.12em',
-          lineHeight: 1,
-          textTransform: 'uppercase',
-        }}
-      >
-        Empire
-      </span>
-      <span
-        style={{
-          fontFamily: '"DM Sans", system-ui, sans-serif',
-          fontWeight: 900,
-          fontSize: 10,
-          color: '#E8B84B',
-          letterSpacing: '0.22em',
-          lineHeight: 1,
-          marginTop: 2,
-          textTransform: 'uppercase',
-        }}
-      >
-        Builder
-      </span>
-    </div>
-  );
-}
-
-export default function TopNav({ companyName }: TopNavProps) {
+export default function TopNav({ companyName, product = 'Finance OS', rightSlot }: TopNavProps) {
   const isLive  = process.env.NEXT_PUBLIC_MODE === 'live';
   const router  = useRouter();
+  const { subco, isConsolidated } = useSubco();
+  const { theme, toggleTheme } = useTheme();
+  const isDark = theme === 'dark';
+
+  const displayCompanyName = companyName ?? (
+    isConsolidated
+      ? 'Consolidated · All Portcos'
+      : subco.id === 'bases-loaded'
+        ? '783 Partners · Holdco'
+        : `${subco.name} · 783 Partners`
+  );
 
   const handleLogout = () => {
     document.cookie = 'eb-auth=; path=/; max-age=0';
@@ -57,46 +36,79 @@ export default function TopNav({ companyName }: TopNavProps) {
     <header
       className="h-[52px] flex-shrink-0 sticky top-0 z-50 flex items-center justify-between px-4 md:px-6"
       style={{
-        background: '#1A1C2E',
-        borderBottom: '1px solid rgba(255,255,255,0.08)',
-        boxShadow: '0 1px 0 0 rgba(0,0,0,0.12)',
+        background: 'var(--color-shell)',
+        borderBottom: isDark
+          ? '1px solid var(--color-divider)'
+          : '2px solid #4FA8FF',
+        boxShadow: isDark ? '0 1px 0 0 rgba(0,0,0,0.08)' : 'none',
       }}
     >
-      {/* Left: logo + divider + product name */}
+      {/* Left: logo + divider + product label */}
       <div className="flex items-center gap-3 min-w-0">
-        <EmpireBuilderLogo />
+        <BLCircleLogo size={34} />
 
-        <div className="w-px h-6 flex-shrink-0" style={{ background: 'rgba(255,255,255,0.15)' }} />
+        <div
+          className="w-px h-6 flex-shrink-0"
+          style={{ background: isDark ? 'var(--color-divider)' : 'rgba(79,168,255,0.15)' }}
+        />
 
         <div className="flex flex-col justify-center min-w-0">
           <span
-            className="text-[11px] font-bold uppercase tracking-[0.10em] leading-none"
-            style={{ color: '#E8B84B' }}
+            className="text-[11px] font-bold uppercase tracking-[0.14em] leading-none"
+            style={{ color: isDark ? 'var(--color-accent)' : '#1B4DE6' }}
           >
-            FinanceOS
+            {product}
           </span>
           <span
             className="text-[10px] uppercase tracking-[0.07em] leading-none mt-0.5 hidden sm:block truncate"
-            style={{ color: 'rgba(255,255,255,0.45)', fontWeight: 500 }}
+            style={{ color: 'var(--color-on-shell-muted)', fontWeight: 500 }}
           >
-            {companyName}
+            {displayCompanyName}
           </span>
         </div>
       </div>
 
-      {/* Right: badges + status */}
+      {/* Right: slot + controls */}
       <div className="flex items-center gap-3 flex-shrink-0">
+
+        {rightSlot && <div className="hidden sm:flex items-center">{rightSlot}</div>}
+
+        {/* Theme toggle */}
+        <button
+          onClick={toggleTheme}
+          aria-label={`Switch to ${isDark ? 'light' : 'dark'} theme`}
+          className="flex items-center justify-center cursor-pointer transition-opacity hover:opacity-80"
+          style={{
+            background: 'transparent',
+            border: `1px solid ${isDark ? 'var(--color-divider)' : 'rgba(79,168,255,0.18)'}`,
+            borderRadius: 6,
+            padding: 6,
+            color: 'var(--color-on-shell-muted)',
+            width: 30, height: 30,
+          }}
+        >
+          {isDark ? (
+            <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" strokeLinecap="round" />
+            </svg>
+          ) : (
+            <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          )}
+        </button>
 
         {/* Exit Demo */}
         <button
           onClick={() => router.push('/demo-hub')}
           className="hidden sm:flex items-center gap-1.5 cursor-pointer transition-opacity hover:opacity-80"
           style={{
-            background: 'rgba(232,184,75,0.10)',
-            border: '1px solid rgba(232,184,75,0.28)',
+            background: isDark ? 'rgba(27,77,230,0.12)' : 'rgba(27,77,230,0.08)',
+            border: '1px solid rgba(27,77,230,0.30)',
             borderRadius: 6,
             padding: '5px 10px',
-            color: '#E8B84B',
+            color: '#1B4DE6',
             fontSize: 11,
             fontWeight: 700,
             letterSpacing: '0.06em',
@@ -108,52 +120,42 @@ export default function TopNav({ companyName }: TopNavProps) {
           </svg>
           <span className="hidden md:inline">Exit Demo</span>
         </button>
-        <div
-          className="hidden sm:flex items-center px-2.5 py-1 rounded"
-          style={{
-            background: 'rgba(232,184,75,0.15)',
-            border: '1px solid rgba(232,184,75,0.30)',
-          }}
-        >
+
+        {/* Live/Demo status */}
+        <div className="hidden sm:flex items-center gap-2">
+          <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: '#0A8A5C' }} />
           <span
-            className="text-[10px] font-bold uppercase tracking-[0.08em]"
-            style={{ color: '#E8B84B' }}
+            className="text-[11px] font-medium"
+            style={{ color: 'var(--color-on-shell-muted)' }}
           >
-            Apr 2026
+            {isLive ? 'Live · QBO' : 'Demo · Apr 2026'}
           </span>
         </div>
 
-        {isLive && (
+        {isLive && product === 'Finance OS' && (
           <a
             href="/api/auth/qbo/connect"
             className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.05em] no-underline rounded transition-opacity hover:opacity-70"
             style={{
-              color: '#E8B84B',
-              border: '1px solid rgba(232,184,75,0.4)',
-              background: 'rgba(232,184,75,0.10)',
+              color: '#4FA8FF',
+              border: '1px solid rgba(79,168,255,0.35)',
+              background: 'rgba(79,168,255,0.08)',
             }}
           >
             Connect QBO
           </a>
         )}
 
-        <div className="flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: '#0A8A5C' }} />
-          <span className="hidden sm:block text-[11px] font-medium" style={{ color: 'rgba(255,255,255,0.45)' }}>
-            {isLive ? 'Live · QBO' : 'Demo · Apr 2026'}
-          </span>
-        </div>
-
-        {/* Logout */}
+        {/* Log Out */}
         <button
           onClick={handleLogout}
           className="hidden sm:flex items-center gap-1.5 cursor-pointer transition-opacity hover:opacity-70"
           style={{
             background: 'transparent',
-            border: '1px solid rgba(255,255,255,0.12)',
+            border: `1px solid ${isDark ? 'var(--color-divider)' : 'rgba(79,168,255,0.18)'}`,
             borderRadius: 6,
             padding: '5px 10px',
-            color: 'rgba(255,255,255,0.40)',
+            color: 'var(--color-on-shell-muted)',
             fontSize: 11,
             fontWeight: 600,
             letterSpacing: '0.06em',

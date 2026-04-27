@@ -3,6 +3,8 @@
 import { useState, useMemo } from 'react';
 import { getDemoForecast } from '@/lib/data/demo-data';
 import { formatCurrency } from '@/lib/utils';
+import { useSubco } from '@/contexts/SubcoContext';
+import { ALL_SUBCOS, ALL_PORTFOLIO_SUBCOS, CONSOLIDATED_VIEW } from '@/lib/subcos';
 import {
   ResponsiveContainer, AreaChart, Area, XAxis, YAxis,
   Tooltip, CartesianGrid, ReferenceLine,
@@ -16,6 +18,11 @@ const COST_PER_HEAD = 4_790;
 
 // The last actual month — all projections compound from here
 const LAST_ACTUAL_MONTH = "Apr '26";
+
+// Sum of all portfolio subco revenues — used to derive each subco's proportion
+// of the consolidated actuals.
+const SUBCO_TOTAL_REVENUE = ALL_PORTFOLIO_SUBCOS
+  .reduce((sum, s) => sum + s.annualRevenue, 0);
 
 const CARD: React.CSSProperties = {
   background:   'var(--color-surf)',
@@ -60,6 +67,7 @@ const SCENARIOS = [
 
 export default function ForecastPage() {
   const baseForecast = getDemoForecast();
+  const { subco, setSubcoId, isConsolidated } = useSubco();
   const [drivers, setDrivers] = useState(baseForecast.drivers);
   const [activeScenario, setActiveScenario] = useState<string | null>(null);
 
@@ -69,6 +77,16 @@ export default function ForecastPage() {
     {}
   );
 
+  // Scaling factor: consolidated = 1.0, specific portco = its share of total revenue.
+  // This keeps the forecast actuals tied to the subco dropdown: switch to SSK and
+  // the $1.31M Apr actual becomes ~$0.95M, etc. Consolidated view stays at $1.31M.
+  const subcoScale = useMemo(() => {
+    if (isConsolidated) return 1;
+    // 783 Partners (holdco entity) uses full scale too
+    if (subco.id === 'bases-loaded') return 1;
+    return subco.annualRevenue / SUBCO_TOTAL_REVENUE;
+  }, [isConsolidated, subco.id, subco.annualRevenue]);
+
   // ── The actual months are FROZEN — never recalculated ──
   // ── Only projected months (isActual === false) are recomputed ──
   const months = useMemo(() => {
@@ -77,24 +95,37 @@ export default function ForecastPage() {
     const nonPayrollPct = (drivers.find((d) => d.id === 'opex-pct')?.value    ?? 19.8) / 100;
     const headcount     =  drivers.find((d) => d.id === 'headcount')?.value   ?? 42;
 
-    // Lock in the last actual's revenue as the compounding base
+    // Apply subco scaling to actuals so forecast values match the rest of the app
+    // (the dashboard, revenue intel, etc. are all subco-scoped).
     const actuals = baseForecast.months.filter((m) => m.isActual);
-    const lastActualRevenue = actuals[actuals.length - 1].revenue; // Apr '26 = $1,311,600
+    const lastActualRevenue = actuals[actuals.length - 1].revenue * subcoScale;
+
+    // Payroll + non-payroll OpEx also scale with subco size (headcount stays
+    // topco-level since the model's headcount slider represents the whole org,
+    // but payroll dollars apportion pro-rata for display in projections).
+    const scaledPayroll = headcount * COST_PER_HEAD * subcoScale;
 
     let projIndex = 0; // counts only projected months (1, 2, 3 …)
 
     return baseForecast.months.map((m) => {
-      // ── ACTUAL: return exactly as stored — no driver touches it ──
-      if (m.isActual) return m;
+      // ── ACTUAL: return with subco scaling applied ──
+      if (m.isActual) {
+        const rev  = Math.round(m.revenue * subcoScale);
+        const cogs = Math.round(m.cogs * subcoScale);
+        const gp   = Math.round(m.grossProfit * subcoScale);
+        const opex = Math.round(m.opex * subcoScale);
+        const ni   = Math.round(m.netIncome * subcoScale);
+        return { ...m, revenue: rev, cogs, grossProfit: gp, opex, netIncome: ni };
+      }
 
-      // ── PROJECTED: recompute from drivers ──
+      // ── PROJECTED: recompute from drivers (already scaled via lastActualRevenue) ──
       projIndex++;
 
       const rev          = Math.round(lastActualRevenue * Math.pow(1 + revGrowth, projIndex));
       const cogs         = Math.round(rev * cogsPct);
       const gp           = rev - cogs;
-      const payrollOpEx  = headcount * COST_PER_HEAD;           // headcount × $/head
-      const nonPayrollOpEx = Math.round(rev * nonPayrollPct);   // mktg + tech + G&A
+      const payrollOpEx  = Math.round(scaledPayroll);
+      const nonPayrollOpEx = Math.round(rev * nonPayrollPct);
       const totalOpEx    = payrollOpEx + nonPayrollOpEx;
       const ni           = gp - totalOpEx;
 
@@ -105,11 +136,48 @@ export default function ForecastPage() {
         grossProfit: gp,
         opex: totalOpEx,
         netIncome: ni,
-        // store breakdown for tooltip / table
         _payroll: payrollOpEx,
         _nonPayroll: nonPayrollOpEx,
       };
     });
+  }, [drivers, baseForecast.months, subcoScale]);
+
+  // Per-subco exit run-rate projections for the consolidated breakdown card.
+  // Computed with the same drivers but scaled per subco's share.
+  const perSubcoProjection = useMemo(() => {
+    const revGrowth     = (drivers.find((d) => d.id === 'rev-growth')?.value  ?? 3)    / 100;
+    const cogsPct       = (drivers.find((d) => d.id === 'cogs-pct')?.value    ?? 54.9) / 100;
+    const nonPayrollPct = (drivers.find((d) => d.id === 'opex-pct')?.value    ?? 19.8) / 100;
+    const headcount     =  drivers.find((d) => d.id === 'headcount')?.value   ?? 42;
+
+    const lastActualTopco = baseForecast.months.filter((m) => m.isActual).slice(-1)[0].revenue;
+    const projMonths = baseForecast.months.filter((m) => !m.isActual).length;
+
+    return ALL_PORTFOLIO_SUBCOS
+      .map((s) => {
+        const share = s.annualRevenue / SUBCO_TOTAL_REVENUE;
+        const baseRev = lastActualTopco * share;
+        const exitRev = baseRev * Math.pow(1 + revGrowth, projMonths);
+        const fwdRev  = Array.from({ length: projMonths }, (_, i) =>
+          baseRev * Math.pow(1 + revGrowth, i + 1),
+        ).reduce((a, b) => a + b, 0);
+
+        const fwdCogs    = fwdRev * cogsPct;
+        const fwdGp      = fwdRev - fwdCogs;
+        const fwdPayroll = headcount * COST_PER_HEAD * share * projMonths;
+        const fwdNonPay  = fwdRev * nonPayrollPct;
+        const fwdNi      = fwdGp - fwdPayroll - fwdNonPay;
+
+        return {
+          subco: s,
+          share,
+          currentMonthRev: baseRev,
+          exitRevAnnualized: exitRev * 12,
+          fwd6mRev: fwdRev,
+          fwd6mNi: fwdNi,
+        };
+      })
+      .sort((a, b) => b.exitRevAnnualized - a.exitRevAnnualized);
   }, [drivers, baseForecast.months]);
 
   const updateDriver = (id: string, value: number) => {
@@ -142,6 +210,10 @@ export default function ForecastPage() {
       {/* ── Header ── */}
       <div className="flex items-center justify-between flex-wrap gap-2">
         <div>
+          <div className="text-[11px] font-bold uppercase tracking-[0.12em] mb-1"
+            style={{ color: subco.colors.accent }}>
+            {isConsolidated ? 'Consolidated · All Portcos' : `${subco.shortName} · ${subco.id === 'bases-loaded' ? 'Holdco' : 'Portco'} Forecast`}
+          </div>
           <div className="text-[22px] font-black uppercase tracking-[0.04em]"
             style={{ fontFamily: 'var(--font-condensed)', color: 'var(--color-text)' }}>
             Driver Model — 12-Month Forecast
@@ -189,7 +261,8 @@ export default function ForecastPage() {
         <div className="text-[11px] leading-snug" style={{ color: 'var(--color-muted)' }}>
           <strong style={{ color: 'var(--color-green)' }}>Actuals locked</strong> — November 2025 through April 2026 are real P&L data and are never recalculated.
           Sliders only affect the <strong style={{ color: 'var(--color-orange)' }}>6 projected months</strong> (May 2026 – Oct 2026),
-          compounding from Apr's actual revenue of <strong style={{ color: 'var(--color-blue)' }}>$1,311,600</strong>.
+          compounding from Apr's actual revenue of <strong style={{ color: 'var(--color-blue)' }}>{formatCurrency(Math.round(1_311_600 * subcoScale))}</strong>
+          {!isConsolidated && subco.id !== 'bases-loaded' && <> ({subco.shortName} share: {(subcoScale * 100).toFixed(1)}%)</>}.
         </div>
       </div>
 
@@ -301,13 +374,13 @@ export default function ForecastPage() {
                   padding: '14px 16px',
                   cursor: 'pointer',
                   textAlign: 'left',
-                  border: isActive ? '2px solid #1D44BF' : '1px solid var(--color-border)',
+                  border: isActive ? '2px solid #1B4DE6' : '1px solid var(--color-border)',
                   background: isActive ? 'var(--color-blue-d)' : 'var(--color-surf)',
                   transition: 'border-color 0.15s, background 0.15s',
                 }}
                 onMouseEnter={(e) => {
                   if (!isActive) {
-                    e.currentTarget.style.borderColor = '#1D44BF';
+                    e.currentTarget.style.borderColor = '#1B4DE6';
                     e.currentTarget.style.background = 'var(--color-blue-d)';
                   }
                 }}
@@ -319,7 +392,7 @@ export default function ForecastPage() {
                 }}
               >
                 <div className="text-[13px] font-bold mb-1"
-                  style={{ fontFamily: 'var(--font-condensed)', color: isActive ? '#1D44BF' : 'var(--color-text)' }}>
+                  style={{ fontFamily: 'var(--font-condensed)', color: isActive ? '#1B4DE6' : 'var(--color-text)' }}>
                   {scenario.label}
                 </div>
                 <div className="text-[11px]" style={{ color: 'var(--color-muted)', lineHeight: 1.4 }}>
@@ -330,6 +403,102 @@ export default function ForecastPage() {
           })}
         </div>
       </div>
+
+      {/* ── Per-portco breakdown (consolidated view only) ── */}
+      {isConsolidated && (
+        <div style={{ ...CARD, padding: 0, overflow: 'hidden' }}>
+          <div className="px-4 py-2.5 border-b flex items-center justify-between flex-wrap gap-2"
+            style={{ borderColor: 'var(--color-border)', background: 'var(--color-surf2)' }}>
+            <div>
+              <span className="text-[13px] font-bold uppercase tracking-[0.10em]"
+                style={{ fontFamily: 'var(--font-condensed)', color: 'var(--color-text)' }}>
+                Forecast by Portco
+              </span>
+              <span className="text-[11px] ml-3" style={{ color: 'var(--color-muted)' }}>
+                Click a row to filter the entire app to that subco.
+              </span>
+            </div>
+            <span className="text-[10px] font-bold uppercase tracking-[0.10em]"
+              style={{ color: CONSOLIDATED_VIEW.colors.accent }}>
+              {perSubcoProjection.length} subsidiaries · same drivers applied
+            </span>
+          </div>
+          <div style={{ padding: '4px 0' }}>
+            {perSubcoProjection.map((p, idx) => {
+              const isLast = idx === perSubcoProjection.length - 1;
+              return (
+                <button
+                  key={p.subco.id}
+                  type="button"
+                  onClick={() => setSubcoId(p.subco.id)}
+                  className="w-full text-left"
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'auto 1fr auto auto auto auto',
+                    alignItems: 'center',
+                    gap: 14,
+                    padding: '14px 18px',
+                    background: 'transparent',
+                    border: 'none',
+                    borderBottom: isLast ? 'none' : '1px solid var(--color-border)',
+                    cursor: 'pointer',
+                    transition: 'background 0.12s',
+                    fontFamily: 'inherit',
+                  }}
+                  onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = `rgba(${p.subco.colors.primaryRgb}, 0.08)`; }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = 'transparent'; }}
+                >
+                  <span style={{
+                    background: p.subco.colors.primary,
+                    color: '#FFFFFF',
+                    borderRadius: 4,
+                    padding: '4px 8px',
+                    fontSize: 10, fontWeight: 900,
+                    minWidth: 40, textAlign: 'center',
+                  }}>
+                    {p.subco.monogram}
+                  </span>
+                  <div style={{ minWidth: 0 }}>
+                    <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--color-text)' }}>
+                      {p.subco.name}
+                    </div>
+                    <div style={{ fontSize: 11, color: 'var(--color-muted)', marginTop: 2 }}>
+                      {p.subco.tagline}
+                    </div>
+                  </div>
+                  <div style={{ textAlign: 'right', minWidth: 100 }}>
+                    <div style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'var(--color-muted)' }}>
+                      Share
+                    </div>
+                    <div style={{ fontSize: 13, fontWeight: 800, color: 'var(--color-text)', fontFamily: 'var(--font-condensed)' }}>
+                      {(p.share * 100).toFixed(1)}%
+                    </div>
+                  </div>
+                  <div style={{ textAlign: 'right', minWidth: 120 }}>
+                    <div style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'var(--color-muted)' }}>
+                      6M Fwd Rev
+                    </div>
+                    <div style={{ fontSize: 13, fontWeight: 800, color: 'var(--color-blue)', fontFamily: 'var(--font-condensed)' }}>
+                      {formatCurrency(p.fwd6mRev, true)}
+                    </div>
+                  </div>
+                  <div style={{ textAlign: 'right', minWidth: 120 }}>
+                    <div style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'var(--color-muted)' }}>
+                      Exit Run-Rate
+                    </div>
+                    <div style={{ fontSize: 13, fontWeight: 800, color: 'var(--color-text)', fontFamily: 'var(--font-condensed)' }}>
+                      {formatCurrency(p.exitRevAnnualized, true)}
+                    </div>
+                  </div>
+                  <div style={{ textAlign: 'right', minWidth: 60, fontSize: 11, fontWeight: 700, color: p.subco.colors.accent, letterSpacing: '0.06em' }}>
+                    OPEN →
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
       {/* ── Chart ── */}
       <div className="border overflow-hidden" style={{ background: 'var(--color-surf)', borderColor: 'var(--color-border)', borderRadius: 'var(--card-radius)', boxShadow: 'var(--card-shadow)' }}>
@@ -350,19 +519,19 @@ export default function ForecastPage() {
             <AreaChart data={months} margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
               <defs>
                 <linearGradient id="revGradF" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%"  stopColor="#1D44BF" stopOpacity={0.25} />
-                  <stop offset="95%" stopColor="#1D44BF" stopOpacity={0} />
+                  <stop offset="5%"  stopColor="#1B4DE6" stopOpacity={0.25} />
+                  <stop offset="95%" stopColor="#1B4DE6" stopOpacity={0} />
                 </linearGradient>
                 <linearGradient id="niGradF" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%"  stopColor="#E8B84B" stopOpacity={0.25} />
-                  <stop offset="95%" stopColor="#E8B84B" stopOpacity={0} />
+                  <stop offset="5%"  stopColor="#F58A1F" stopOpacity={0.25} />
+                  <stop offset="95%" stopColor="#F58A1F" stopOpacity={0} />
                 </linearGradient>
               </defs>
-              <CartesianGrid stroke="rgba(255,255,255,0.06)" strokeDasharray="3 3" />
-              <XAxis dataKey="label" tick={{ fill: 'rgba(255,255,255,0.50)', fontSize: 10 }} axisLine={false} tickLine={false} />
+              <CartesianGrid stroke="var(--color-chart-grid)" strokeDasharray="3 3" />
+              <XAxis dataKey="label" tick={{ fill: 'var(--color-chart-text)', fontSize: 10 }} axisLine={false} tickLine={false} />
               <YAxis
                 tickFormatter={(v) => `$${(v / 1000).toFixed(0)}K`}
-                tick={{ fill: 'rgba(255,255,255,0.50)', fontSize: 10 }}
+                tick={{ fill: 'var(--color-chart-text)', fontSize: 10 }}
                 axisLine={false} tickLine={false} width={55}
               />
               <Tooltip
@@ -379,8 +548,8 @@ export default function ForecastPage() {
                 strokeDasharray="4 3"
                 label={{ value: '← Actual | Projected →', fill: '#D97706', fontSize: 9, position: 'top' }}
               />
-              <Area type="monotone" dataKey="revenue"   stroke="#1D44BF" fill="url(#revGradF)" strokeWidth={2} dot={false} />
-              <Area type="monotone" dataKey="netIncome" stroke="#E8B84B" fill="url(#niGradF)"  strokeWidth={2} dot={false} />
+              <Area type="monotone" dataKey="revenue"   stroke="#1B4DE6" fill="url(#revGradF)" strokeWidth={2} dot={false} />
+              <Area type="monotone" dataKey="netIncome" stroke="#F58A1F" fill="url(#niGradF)"  strokeWidth={2} dot={false} />
             </AreaChart>
           </ResponsiveContainer>
         </div>

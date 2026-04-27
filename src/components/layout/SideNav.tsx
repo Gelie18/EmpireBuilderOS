@@ -2,15 +2,35 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import BrandMark from '@/components/brand/BrandMark';
+import { useDecisions } from '@/contexts/DecisionsContext';
 
 const NAV_GROUPS = [
   {
+    label: 'CEO',
+    items: [
+      { href: '/dashboard',     label: 'CEO Dashboard',
+        icon: <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path d="M4 4h12a2 2 0 0 1 2 2v14l-4-3-3 3-3-3-4 3V6a2 2 0 0 1 2-2z" strokeLinejoin="round"/><path d="M8 9h8M8 13h5" strokeLinecap="round"/></svg> },
+      { href: '/inbox',         label: 'Decision Inbox', badgeKey: 'pending',
+        icon: <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path d="M3 7h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/><path d="M3 7l9 6 9-6" strokeLinecap="round" strokeLinejoin="round"/></svg> },
+    ],
+  },
+  {
     label: 'Overview',
     items: [
-      { href: '/dashboard',     label: 'Dashboard',
-        icon: <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg> },
       { href: '/revenue',       label: 'Revenue Intel',
         icon: <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17" strokeLinecap="round" strokeLinejoin="round"/><polyline points="16 7 22 7 22 13" strokeLinecap="round" strokeLinejoin="round"/></svg> },
+    ],
+  },
+  {
+    label: 'Portfolio',
+    items: [
+      { href: '/consolidation', label: 'Consolidation',
+        icon: <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path d="M3 12h4l3-9 4 18 3-9h4" strokeLinecap="round" strokeLinejoin="round"/></svg> },
+      { href: '/sku-rationalization', label: 'SKU Rationalization',
+        icon: <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14l7 7M21 14l-7 7" strokeLinecap="round"/></svg> },
+      { href: '/channel-mix',   label: 'Channel Mix',
+        icon: <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6L5.6 18.4" strokeLinecap="round" opacity="0.6"/></svg> },
     ],
   },
   {
@@ -56,31 +76,33 @@ const NAV_GROUPS = [
 
 export default function SideNav() {
   const pathname = usePathname();
+  const { pending } = useDecisions();
+  const pendingCount = pending.length;
 
   return (
     <nav
       className="hidden md:flex flex-col flex-shrink-0 overflow-y-auto"
       style={{
         width: 220,
-        background: '#0F1120',
-        borderRight: '1px solid rgba(255,255,255,0.06)',
+        background: 'var(--color-shell-2)',
+        borderRight: '1px solid var(--color-sidebar-divider)',
       }}
     >
       {/* Wordmark */}
-      <div style={{ padding: '20px 16px 16px', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-        <div style={{ fontFamily: '"DM Sans", system-ui', fontWeight: 900, fontSize: 16, color: '#1D44BF', letterSpacing: '0.12em', textTransform: 'uppercase', lineHeight: 1 }}>
-          Empire
+      <div style={{ padding: '20px 16px 16px', borderBottom: '1px solid var(--color-sidebar-divider)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <BrandMark color="#FFFFFF" height={26} />
+          <div style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 11, color: 'rgba(255,255,255,0.90)', letterSpacing: '0.20em', textTransform: 'uppercase' }}>
+            OS
+          </div>
         </div>
-        <div style={{ fontFamily: '"DM Sans", system-ui', fontWeight: 900, fontSize: 10, color: '#E8B84B', letterSpacing: '0.28em', textTransform: 'uppercase', lineHeight: 1, marginTop: 3 }}>
-          Builder
-        </div>
-        <div style={{ width: 28, height: 2, background: 'linear-gradient(90deg,#1D44BF,#E8B84B)', borderRadius: 2, marginTop: 8 }} />
-        <div style={{ marginTop: 10, fontSize: 9.5, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.10em', color: 'rgba(255,255,255,0.28)', lineHeight: 1.3 }}>
-          Finance OS · Meritage Partners
+        <div style={{ width: 28, height: 2, background: 'linear-gradient(90deg,#1B4DE6,rgba(27,77,230,0.40))', borderRadius: 2, marginTop: 10 }} />
+        <div style={{ marginTop: 10, fontSize: 9.5, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.10em', color: 'var(--color-sidebar-muted)', lineHeight: 1.3 }}>
+          Finance OS · 783 Partners
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 10 }}>
-          <span style={{ background: 'rgba(232,184,75,0.12)', border: '1px solid rgba(232,184,75,0.28)', color: '#E8B84B', fontSize: 9, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', padding: '2px 7px', borderRadius: 3 }}>Apr 2026</span>
-          <span style={{ background: 'rgba(14,165,114,0.12)', border: '1px solid rgba(14,165,114,0.25)', color: '#0EA572', fontSize: 9, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', padding: '2px 7px', borderRadius: 3 }}>Demo</span>
+          <span style={{ background: 'rgba(27,77,230,0.22)', border: '1px solid rgba(27,77,230,0.45)', color: 'rgba(255,255,255,0.80)', fontSize: 9, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', padding: '2px 7px', borderRadius: 3 }}>Apr 2026</span>
+          <span style={{ background: 'rgba(45,180,122,0.15)', border: '1px solid rgba(45,180,122,0.30)', color: '#2DB47A', fontSize: 9, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', padding: '2px 7px', borderRadius: 3 }}>Live</span>
         </div>
       </div>
 
@@ -89,7 +111,7 @@ export default function SideNav() {
         {NAV_GROUPS.map((group) => (
           <div key={group.label} style={{ marginBottom: 4 }}>
             {/* Group label */}
-            <div style={{ padding: '8px 16px 4px', fontSize: 9.5, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.14em', color: 'rgba(255,255,255,0.25)' }}>
+            <div style={{ padding: '8px 16px 4px', fontSize: 9.5, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.14em', color: 'var(--color-sidebar-section)' }}>
               {group.label}
             </div>
 
@@ -110,35 +132,47 @@ export default function SideNav() {
                       gap: 9,
                       padding: '7px 10px',
                       borderRadius: 7,
-                      background: active ? 'rgba(29,68,191,0.18)' : 'transparent',
-                      color: active ? '#FFFFFF' : 'rgba(255,255,255,0.45)',
-                      border: active ? '1px solid rgba(29,68,191,0.30)' : '1px solid transparent',
+                      background: active ? 'rgba(27,77,230,0.22)' : 'transparent',
+                      color: active ? '#FFFFFF' : 'var(--color-sidebar-muted)',
+                      border: active ? '1px solid rgba(27,77,230,0.50)' : '1px solid transparent',
                       transition: 'background 0.12s, color 0.12s',
                       position: 'relative',
                     }}
                     onMouseEnter={(e) => {
                       if (!active) {
-                        (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.05)';
-                        (e.currentTarget as HTMLElement).style.color = '#FFFFFF';
+                        (e.currentTarget as HTMLElement).style.background = 'var(--color-sidebar-hover)';
+                        (e.currentTarget as HTMLElement).style.color = 'var(--color-sidebar-text)';
                       }
                     }}
                     onMouseLeave={(e) => {
                       if (!active) {
                         (e.currentTarget as HTMLElement).style.background = 'transparent';
-                        (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.45)';
+                        (e.currentTarget as HTMLElement).style.color = 'var(--color-sidebar-muted)';
                       }
                     }}
                   >
                     {/* Active left bar */}
                     {active && (
-                      <div style={{ position: 'absolute', left: 0, top: '20%', height: '60%', width: 2.5, borderRadius: 2, background: '#1D44BF' }} />
+                      <div style={{ position: 'absolute', left: 0, top: '20%', height: '60%', width: 2.5, borderRadius: 2, background: '#1B4DE6' }} />
                     )}
-                    <span style={{ display: 'flex', alignItems: 'center', flexShrink: 0, color: active ? '#1D44BF' : 'inherit', opacity: active ? 1 : 0.6 }}>
+                    <span style={{ display: 'flex', alignItems: 'center', flexShrink: 0, color: active ? '#FFFFFF' : 'var(--color-sidebar-muted)', opacity: active ? 1 : 0.75 }}>
                       {item.icon}
                     </span>
-                    <span style={{ fontSize: 13, fontWeight: active ? 700 : 500, lineHeight: 1 }}>
+                    <span style={{ fontSize: 13, fontWeight: active ? 700 : 500, lineHeight: 1, flex: 1 }}>
                       {item.label}
                     </span>
+                    {'badgeKey' in item && item.badgeKey === 'pending' && pendingCount > 0 && (
+                      <span
+                        style={{
+                          fontSize: 10, fontWeight: 800, minWidth: 18, textAlign: 'center',
+                          padding: '2px 6px', borderRadius: 9,
+                          background: '#1B4DE6', color: '#FFFFFF',
+                          lineHeight: 1,
+                        }}
+                      >
+                        {pendingCount}
+                      </span>
+                    )}
                   </div>
                 </Link>
               );
@@ -147,32 +181,75 @@ export default function SideNav() {
         ))}
       </div>
 
+      {/* HR OS section */}
+      <div style={{ padding: '10px 8px 8px', borderTop: '1px solid var(--color-sidebar-divider)' }}>
+        <div style={{ padding: '6px 8px 4px', fontSize: 9.5, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.14em', color: 'var(--color-sidebar-section)' }}>
+          HR OS
+        </div>
+        <Link
+          href="/hr/chat"
+          className="no-underline block"
+          style={{ padding: '2px 0' }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 9,
+              padding: '7px 10px',
+              borderRadius: 7,
+              background: 'rgba(255,255,255,0.06)',
+              border: '1px solid rgba(255,255,255,0.14)',
+              color: 'var(--color-sidebar-text)',
+              transition: 'background 0.12s',
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.12)';
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.06)';
+            }}
+          >
+            <span style={{ display: 'flex', alignItems: 'center', flexShrink: 0, color: 'var(--color-sidebar-muted)' }}>
+              <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
+            </span>
+            <span style={{ fontSize: 13, fontWeight: 600, lineHeight: 1, flex: 1, color: 'var(--color-sidebar-text)' }}>HR Chat</span>
+            <svg width="11" height="11" fill="none" stroke="var(--color-sidebar-subtle)" strokeWidth="2.5" viewBox="0 0 24 24">
+              <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
+        </Link>
+      </div>
+
       {/* AI CFO button */}
-      <div style={{ padding: '10px 10px 16px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+      <div style={{ padding: '10px 10px 16px', borderTop: '1px solid var(--color-sidebar-divider)' }}>
         <button
           onClick={() => window.dispatchEvent(new CustomEvent('open-chat'))}
           style={{
             width: '100%', display: 'flex', alignItems: 'center', gap: 10, padding: '10px 14px',
-            background: '#E8B84B', border: 'none', borderRadius: 8, cursor: 'pointer',
-            boxShadow: '0 2px 12px rgba(232,184,75,0.28)',
-            transition: 'filter 0.15s',
+            background: 'linear-gradient(135deg, #1B4DE6 0%, #F58A1F 100%)', border: 'none', borderRadius: 8, cursor: 'pointer',
+            boxShadow: '0 2px 14px rgba(27,77,230,0.40)',
+            transition: 'filter 0.15s, box-shadow 0.15s',
           }}
-          onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.filter = 'brightness(1.08)'; }}
+          onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.filter = 'brightness(1.12)'; }}
           onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.filter = 'brightness(1)'; }}
         >
-          <svg width="15" height="15" fill="none" stroke="#1A1C2E" strokeWidth="2" viewBox="0 0 24 24" style={{ flexShrink: 0 }}>
+          <svg width="15" height="15" fill="none" stroke="#FFFFFF" strokeWidth="2" viewBox="0 0 24 24" style={{ flexShrink: 0 }}>
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
           </svg>
           <div style={{ flex: 1, textAlign: 'left' }}>
-            <div style={{ fontSize: 11, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.10em', color: '#1A1C2E', lineHeight: 1 }}>AI CFO</div>
-            <div style={{ fontSize: 10, color: 'rgba(26,28,46,0.60)', marginTop: 2 }}>Ask anything</div>
+            <div style={{ fontSize: 11, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.10em', color: '#FFFFFF', lineHeight: 1 }}>AI CFO</div>
+            <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.75)', marginTop: 2 }}>Ask anything</div>
           </div>
-          <svg width="11" height="11" fill="none" stroke="rgba(26,28,46,0.5)" strokeWidth="2.5" viewBox="0 0 24 24" style={{ flexShrink: 0 }}>
+          <svg width="11" height="11" fill="none" stroke="rgba(255,255,255,0.75)" strokeWidth="2.5" viewBox="0 0 24 24" style={{ flexShrink: 0 }}>
             <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </button>
-        <div style={{ marginTop: 10, fontSize: 9, textTransform: 'uppercase', letterSpacing: '0.12em', color: 'rgba(255,255,255,0.18)', textAlign: 'center' }}>
-          Empire Builder v1.0
+        <div style={{ marginTop: 10, fontSize: 9, textTransform: 'uppercase', letterSpacing: '0.12em', color: 'var(--color-sidebar-muted)', textAlign: 'center' }}>
+          783 OS v1.0
         </div>
       </div>
     </nav>

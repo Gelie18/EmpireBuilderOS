@@ -68,7 +68,7 @@ export default function CashForecastChart({ data }: CashForecastChartProps) {
         {todayDate && (
           <ReferenceLine
             x={todayDate}
-            stroke="rgba(255,255,255,0.2)"
+            stroke="var(--color-chart-grid)"
             strokeDasharray="3 3"
             label={{ value: 'Today', fill: '#7a7870', fontSize: 10, position: 'top' }}
           />

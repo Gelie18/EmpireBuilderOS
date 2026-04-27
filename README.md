@@ -1,12 +1,17 @@
-# FinanceOS — AI-Powered FP&A Platform
+# Bases Loaded OS — AI-Powered Business Operating System
 
-Built for **783 Capital Partners** · Powered by Claude AI + QuickBooks Online
+Built for **Bases Loaded** · Powered by Claude AI
+
+Three product modules under one roof:
+- **Finance OS** — AI-augmented FP&A, live P&L, cash flow, AI CFO (QuickBooks-connected in live mode)
+- **HR OS** — Employee-facing AI HR advisor with live HRMS, payroll, benefits, and 401k context
+- **Ops OS** — (Coming Soon) Status rollups, vendor tracking, SOP assistant
 
 ---
 
 ## Overview
 
-FinanceOS is a modern financial intelligence platform that gives executives and finance teams a real-time, AI-augmented view of their business. It runs in two modes:
+Finance OS is a modern financial intelligence platform that gives executives and finance teams a real-time, AI-augmented view of their business. It runs in two modes:
 
 | Mode | Description |
 |------|-------------|
@@ -44,8 +49,8 @@ FinanceOS is a modern financial intelligence platform that gives executives and 
 ### 1. Clone and install
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/financeos.git
-cd financeos
+git clone https://github.com/YOUR_USERNAME/bases-loaded.git
+cd bases-loaded
 npm install
 ```
 
@@ -100,7 +105,7 @@ With `NEXT_PUBLIC_MODE=demo` (the default), the app runs entirely on synthetic d
 
 ### One-click deploy
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/YOUR_USERNAME/financeos)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/YOUR_USERNAME/bases-loaded)
 
 ### Manual deploy
 
@@ -165,4 +170,4 @@ src/
 
 ---
 
-*Built with Claude Code · 783 Capital Partners*
+*Built with Claude Code · Bases Loaded*

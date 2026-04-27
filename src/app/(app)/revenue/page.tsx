@@ -17,8 +17,8 @@ import PeriodSelector, { type PeriodKey } from '@/components/ui/PeriodSelector';
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
-const BLUE   = '#1D44BF';
-const GOLD   = '#E8B84B';
+const BLUE   = '#1B4DE6';
+const GOLD   = '#F58A1F';
 const GREEN  = '#0A8A5C';
 const RED    = '#C13333';
 const ORANGE = '#D97706';
@@ -86,7 +86,7 @@ const CARD_HEADER: React.CSSProperties = {
 const CARD_HEADER_TITLE: React.CSSProperties = {
   fontSize:   13,
   fontWeight: 600,
-  color:      '#FFFFFF',
+  color:      'var(--color-text)',
   margin:     0,
   textTransform: 'uppercase',
   letterSpacing: '0.05em',
@@ -177,7 +177,7 @@ function KpiStrip({ period }: { period: PeriodKey }) {
               style={{
                 fontSize:      34,
                 fontWeight:    800,
-                color:         '#FFFFFF',
+                color:         'var(--color-text)',
                 letterSpacing: '-0.02em',
                 lineHeight:    1.1,
               }}
@@ -210,11 +210,11 @@ function ProductLineSection() {
               data={barData}
               margin={{ top: 0, right: 16, bottom: 0, left: 8 }}
             >
-              <CartesianGrid horizontal={false} strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
+              <CartesianGrid horizontal={false} strokeDasharray="3 3" stroke="var(--color-chart-grid)" />
               <XAxis
                 type="number"
                 tickFormatter={(v: number) => `$${(v / 1000).toFixed(0)}K`}
-                tick={{ fill: 'rgba(255,255,255,0.50)', fontSize: 11 }}
+                tick={{ fill: 'var(--color-chart-text)', fontSize: 11 }}
                 axisLine={false}
                 tickLine={false}
               />
@@ -290,10 +290,10 @@ function ProductLineSection() {
                           flexShrink:   0,
                         }}
                       />
-                      <span style={{ fontWeight: 500, color: '#FFFFFF' }}>{p.name}</span>
+                      <span style={{ fontWeight: 500, color: 'var(--color-text)' }}>{p.name}</span>
                     </div>
                   </td>
-                  <td style={{ padding: '10px 14px', textAlign: 'right', fontWeight: 600, color: '#FFFFFF' }}>
+                  <td style={{ padding: '10px 14px', textAlign: 'right', fontWeight: 600, color: 'var(--color-text)' }}>
                     {fmtUSD(p.revenue)}
                   </td>
                   <td style={{ padding: '10px 14px', textAlign: 'right', color: GRAY }}>
@@ -411,7 +411,7 @@ function CustomerSection() {
                     {c.name}
                   </span>
                 </td>
-                <td style={{ padding: '10px 16px', textAlign: 'right', fontWeight: 600, color: '#FFFFFF' }}>
+                <td style={{ padding: '10px 16px', textAlign: 'right', fontWeight: 600, color: 'var(--color-text)' }}>
                   {fmtUSD(c.oct)}
                 </td>
                 <td style={{ padding: '10px 16px' }}>
@@ -552,12 +552,12 @@ function RecurringSection() {
           <div style={{ padding: '20px 20px 24px' }}>
             <div className="grid grid-cols-2 gap-4" style={{ marginBottom: 20 }}>
               <div>
-                <div style={{ fontSize: 11, fontWeight: 600, color: 'rgba(255,255,255,0.50)', textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 4 }}>MRR</div>
-                <div style={{ fontSize: 26, fontWeight: 800, color: '#FFFFFF', letterSpacing: '-0.02em' }}>$297,600</div>
+                <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--color-chart-text)', textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 4 }}>MRR</div>
+                <div style={{ fontSize: 26, fontWeight: 800, color: 'var(--color-text)', letterSpacing: '-0.02em' }}>$297,600</div>
               </div>
               <div>
-                <div style={{ fontSize: 11, fontWeight: 600, color: 'rgba(255,255,255,0.50)', textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 4 }}>ARR</div>
-                <div style={{ fontSize: 26, fontWeight: 800, color: '#FFFFFF', letterSpacing: '-0.02em' }}>$3,571,200</div>
+                <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--color-chart-text)', textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 4 }}>ARR</div>
+                <div style={{ fontSize: 26, fontWeight: 800, color: 'var(--color-text)', letterSpacing: '-0.02em' }}>$3,571,200</div>
               </div>
             </div>
             <div
@@ -588,9 +588,9 @@ function RecurringSection() {
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                     <div style={{ width: 8, height: 8, borderRadius: '50%', background: GREEN, flexShrink: 0 }} />
-                    <span style={{ fontSize: 13, color: '#FFFFFF' }}>{item.label}</span>
+                    <span style={{ fontSize: 13, color: 'var(--color-text)' }}>{item.label}</span>
                   </div>
-                  <span style={{ fontSize: 13, fontWeight: 600, color: '#FFFFFF' }}>{item.value}</span>
+                  <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--color-text)' }}>{item.value}</span>
                 </div>
               ))}
             </div>
@@ -604,8 +604,8 @@ function RecurringSection() {
           </div>
           <div style={{ padding: '20px 20px 24px' }}>
             <div style={{ marginBottom: 20 }}>
-              <div style={{ fontSize: 11, fontWeight: 600, color: 'rgba(255,255,255,0.50)', textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 4 }}>Total One-Time</div>
-              <div style={{ fontSize: 34, fontWeight: 800, color: '#FFFFFF', letterSpacing: '-0.02em' }}>$1,014,000</div>
+              <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--color-chart-text)', textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 4 }}>Total One-Time</div>
+              <div style={{ fontSize: 34, fontWeight: 800, color: 'var(--color-text)', letterSpacing: '-0.02em' }}>$1,014,000</div>
             </div>
             <div
               style={{
@@ -614,7 +614,7 @@ function RecurringSection() {
                 borderRadius: 20,
                 fontSize:     12,
                 fontWeight:   700,
-                background:   'rgba(29,68,191,0.10)',
+                background:   'rgba(27,77,230,0.10)',
                 color:        BLUE,
                 marginBottom: 16,
               }}
@@ -635,9 +635,9 @@ function RecurringSection() {
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                     <div style={{ width: 8, height: 8, borderRadius: '50%', background: BLUE, flexShrink: 0 }} />
-                    <span style={{ fontSize: 13, color: '#FFFFFF' }}>{item.label}</span>
+                    <span style={{ fontSize: 13, color: 'var(--color-text)' }}>{item.label}</span>
                   </div>
-                  <span style={{ fontSize: 13, fontWeight: 600, color: '#FFFFFF' }}>{item.value}</span>
+                  <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--color-text)' }}>{item.value}</span>
                 </div>
               ))}
             </div>
@@ -659,16 +659,16 @@ function TrendSection() {
       <div style={{ padding: '24px 24px 20px' }}>
         <ResponsiveContainer width="100%" height={260}>
           <LineChart data={TREND_DATA} margin={{ top: 8, right: 24, bottom: 0, left: 8 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--color-chart-grid)" vertical={false} />
             <XAxis
               dataKey="month"
-              tick={{ fill: 'rgba(255,255,255,0.50)', fontSize: 12 }}
+              tick={{ fill: 'var(--color-chart-text)', fontSize: 12 }}
               axisLine={false}
               tickLine={false}
             />
             <YAxis
               tickFormatter={(v: number) => `$${(v / 1_000_000).toFixed(2)}M`}
-              tick={{ fill: 'rgba(255,255,255,0.50)', fontSize: 12 }}
+              tick={{ fill: 'var(--color-chart-text)', fontSize: 12 }}
               axisLine={false}
               tickLine={false}
               domain={[1_100_000, 1_400_000]}
@@ -699,13 +699,13 @@ function TrendSection() {
           }}
         >
           {[
-            { label: 'May Baseline', value: '$1.19M', color: 'rgba(255,255,255,0.50)' },
+            { label: 'May Baseline', value: '$1.19M', color: 'var(--color-chart-text)' },
             { label: 'Apr Actual',   value: '$1.31M', color: BLUE },
             { label: '6-Mo Growth',  value: '+10.2%', color: GREEN },
-            { label: '6-Mo Avg',     value: '$1.26M', color: 'rgba(255,255,255,0.50)' },
+            { label: '6-Mo Avg',     value: '$1.26M', color: 'var(--color-chart-text)' },
           ].map((s) => (
             <div key={s.label} style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.50)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 3 }}>
+              <div style={{ fontSize: 11, color: 'var(--color-chart-text)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 3 }}>
                 {s.label}
               </div>
               <div style={{ fontSize: 20, fontWeight: 800, color: s.color, letterSpacing: '-0.02em' }}>
@@ -725,7 +725,7 @@ export default function RevenuePage() {
   const [period, setPeriod] = useState<PeriodKey>('current');
 
   return (
-    <div style={{ background: '#1A1C2E', minHeight: '100vh', padding: '28px 28px 48px' }}>
+    <div style={{ background: '#0B0D17', minHeight: '100vh', padding: '28px 28px 48px' }}>
       {/* Page header */}
       <div style={{ marginBottom: 28 }}>
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
@@ -735,7 +735,7 @@ export default function RevenuePage() {
                 style={{
                   fontSize:      22,
                   fontWeight:    800,
-                  color:         '#FFFFFF',
+                  color:         'var(--color-text)',
                   margin:        0,
                   letterSpacing: '-0.01em',
                 }}
@@ -744,8 +744,8 @@ export default function RevenuePage() {
               </h1>
               <PeriodSelector value={period} onChange={setPeriod} />
             </div>
-            <p style={{ margin: '4px 0 0', fontSize: 13, color: 'rgba(255,255,255,0.50)' }}>
-              Apex Industrial Group &nbsp;·&nbsp; {PERIOD_REV[period].label}
+            <p style={{ margin: '4px 0 0', fontSize: 13, color: 'var(--color-muted)' }}>
+              783 Partners &nbsp;·&nbsp; {PERIOD_REV[period].label}
             </p>
           </div>
           <div

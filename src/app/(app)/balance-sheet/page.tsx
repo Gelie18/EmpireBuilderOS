@@ -151,9 +151,9 @@ function BSRow({ label, value, type, insight }: { label: string; value: number |
         style={{
           borderTop: isTotal ? '1px solid var(--color-border2)' : undefined,
           background: isTotal
-            ? 'rgba(29,68,191,0.06)'
+            ? 'rgba(27,77,230,0.06)'
             : hovered && isClickable
-            ? 'rgba(29,68,191,0.04)'
+            ? 'rgba(27,77,230,0.04)'
             : undefined,
           cursor: isClickable ? 'pointer' : undefined,
           transition: 'background 0.12s',
@@ -187,7 +187,7 @@ function BSRow({ label, value, type, insight }: { label: string; value: number |
             {isClickable && (
               <span style={{
                 fontSize: 10,
-                color: '#1D44BF',
+                color: '#1B4DE6',
                 opacity: 0.7,
                 display: 'inline-block',
                 transform: open ? 'rotate(90deg)' : 'rotate(0deg)',
@@ -202,13 +202,13 @@ function BSRow({ label, value, type, insight }: { label: string; value: number |
           <td colSpan={2} style={{ padding: 0, borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
             <div style={{
               padding: '10px 20px 10px 32px',
-              background: 'rgba(29,68,191,0.08)',
-              borderLeft: '3px solid #1D44BF',
+              background: 'rgba(27,77,230,0.08)',
+              borderLeft: '3px solid #1B4DE6',
               fontSize: 13,
               lineHeight: 1.6,
-              color: 'rgba(255,255,255,0.70)',
+              color: 'var(--color-chart-text)',
             }}>
-              <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#1D44BF', display: 'block', marginBottom: 4 }}>AI CFO Insight</span>
+              <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#1B4DE6', display: 'block', marginBottom: 4 }}>AI CFO Insight</span>
               {insight}
             </div>
           </td>
@@ -249,7 +249,7 @@ export default function BalanceSheetPage() {
             {/* Total Assets */}
             <span style={{
               display: 'inline-flex', alignItems: 'center', gap: 6,
-              background: 'var(--color-blue-d)', border: '1px solid rgba(29,68,191,0.20)',
+              background: 'var(--color-blue-d)', border: '1px solid rgba(27,77,230,0.20)',
               borderRadius: 8, padding: '6px 14px',
               fontFamily: 'var(--font-condensed)', fontSize: 13, fontWeight: 700,
               color: 'var(--color-blue)', letterSpacing: '0.04em',
@@ -401,13 +401,13 @@ export default function BalanceSheetPage() {
                     padding: '10px 20px', textAlign: 'left', fontSize: 11, fontWeight: 700,
                     fontFamily: 'var(--font-condensed)', color: 'var(--color-blue)',
                     letterSpacing: '0.08em', textTransform: 'uppercase',
-                    background: 'rgba(29,68,191,0.07)', borderBottom: '1px solid var(--color-border)',
+                    background: 'rgba(27,77,230,0.07)', borderBottom: '1px solid var(--color-border)',
                   }}>Assets</th>
                   <th style={{
                     padding: '10px 20px', textAlign: 'right', fontSize: 11, fontWeight: 700,
                     fontFamily: 'var(--font-condensed)', color: 'var(--color-muted)',
                     letterSpacing: '0.06em', textTransform: 'uppercase',
-                    background: 'rgba(29,68,191,0.07)', borderBottom: '1px solid var(--color-border)',
+                    background: 'rgba(27,77,230,0.07)', borderBottom: '1px solid var(--color-border)',
                   }}>Amount</th>
                 </tr>
               </thead>
@@ -454,7 +454,7 @@ export default function BalanceSheetPage() {
         }}>
           Cash — 6-Month Trend
         </div>
-        <ResponsiveContainer width="100%" height={160}>
+        <ResponsiveContainer width="100%" height={300}>
           <AreaChart data={CASH_TREND} margin={{ top: 4, right: 8, left: 4, bottom: 0 }}>
             <defs>
               <linearGradient id="cashGrad" x1="0" y1="0" x2="0" y2="1">
@@ -462,7 +462,7 @@ export default function BalanceSheetPage() {
                 <stop offset="95%" stopColor="var(--color-blue)" stopOpacity={0.03} />
               </linearGradient>
             </defs>
-            <CartesianGrid stroke="rgba(255,255,255,0.06)" strokeDasharray="4 4" />
+            <CartesianGrid stroke="var(--color-chart-grid)" strokeDasharray="4 4" />
             <XAxis
               dataKey="label"
               tick={{ fill: 'var(--color-muted)', fontSize: 11, fontFamily: 'var(--font-condensed)' }}
