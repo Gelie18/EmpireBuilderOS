@@ -56,7 +56,7 @@ export default function SplashScreen({ product = 'Finance OS' }: SplashScreenPro
 
         {/* BL Circle Logo */}
         <div style={{ animation: 'bl-logoIn 0.55s ease both', position: 'relative' }}>
-          <BLCircleLogo size={96} />
+          <BLCircleLogo size={96} theme="dark" />
         </div>
 
         {/* Product label */}

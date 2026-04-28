@@ -45,7 +45,7 @@ export default function TopNav({ companyName, product = 'Finance OS', rightSlot 
     >
       {/* Left: logo + divider + product label */}
       <div className="flex items-center gap-3 min-w-0">
-        <BLCircleLogo size={34} />
+        <BLCircleLogo size={34} theme="dark" />
 
         <div
           className="w-px h-6 flex-shrink-0"

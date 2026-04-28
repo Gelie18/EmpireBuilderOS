@@ -91,7 +91,7 @@ export default function SideNav() {
       {/* Wordmark */}
       <div style={{ padding: '20px 16px 16px', borderBottom: '1px solid var(--color-sidebar-divider)' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <BrandMark color="#FFFFFF" height={26} />
+          <BrandMark theme="dark" height={26} />
           <div style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 11, color: 'rgba(255,255,255,0.90)', letterSpacing: '0.20em', textTransform: 'uppercase' }}>
             OS
           </div>

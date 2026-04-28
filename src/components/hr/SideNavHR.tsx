@@ -122,7 +122,7 @@ export default function SideNavHR() {
       {/* Header */}
       <div style={{ padding: '18px 16px 14px', borderBottom: '1px solid var(--color-sidebar-divider)' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <BLCircleLogo size={32} />
+          <BLCircleLogo size={32} theme="dark" />
           <div>
             <div style={{ fontWeight: 800, fontSize: 11, color: 'var(--color-sidebar-text)', letterSpacing: '0.18em', textTransform: 'uppercase', lineHeight: 1 }}>
               HR OS
