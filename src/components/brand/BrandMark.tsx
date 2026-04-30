@@ -28,11 +28,12 @@ export default function BrandMark({
   className,
   style,
 }: BrandMarkProps) {
-  // light pages: invert white→black; mix-blend-mode removes the dark bg halo
-  // dark  pages: show the logo as-is (white on dark)
+  // light pages: brightness(0) turns white strokes → black; transparent stays transparent
+  // dark  pages: show as-is (white on dark) — no filter needed
+  // Note: mix-blend-mode was removed — it breaks on mobile Safari
   const filterStyle: React.CSSProperties =
     theme === 'light'
-      ? { filter: 'invert(1)', mixBlendMode: 'multiply' }
+      ? { filter: 'brightness(0)' }
       : {};
 
   return (
