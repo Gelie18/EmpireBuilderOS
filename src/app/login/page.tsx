@@ -6,7 +6,8 @@ import BrandLogo from '@/components/brand/BrandLogo';
 
 // ── Valid credentials ─────────────────────────────────────────────────────────
 const CREDENTIALS = [
-  { username: 'empire', password: 'demo2026' },
+  { username: 'empire',  password: 'demo2026'    },
+  { username: 'demo',    password: 'builder2026'  },
 ];
 
 function AnimatedBrandLogo({ animate = false }: { animate?: boolean }) {
