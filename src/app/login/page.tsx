@@ -286,6 +286,20 @@ export default function LoginPage() {
               </div>
             )}
 
+            {/* Demo credentials hint */}
+            <div style={{
+              padding: '10px 14px',
+              background: 'rgba(29,68,191,0.05)',
+              border: '1px solid rgba(29,68,191,0.15)',
+              borderRadius: 7,
+              fontSize: 12,
+              color: 'rgba(0,0,0,0.55)',
+              lineHeight: 1.6,
+            }}>
+              <span style={{ fontWeight: 700, color: '#1D44BF' }}>Demo access:</span>
+              &nbsp; Username: <strong>demo</strong> &nbsp;·&nbsp; Password: <strong>builder2026</strong>
+            </div>
+
             <div style={{ marginTop: 6 }}>
               <button className="login-btn" type="submit" disabled={loading || !username || !password}>
                 {loading ? 'Signing in…' : 'Log In'}
